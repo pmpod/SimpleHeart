@@ -1,0 +1,483 @@
+\hypertarget{class_diffusion_painter}{\section{Diffusion\+Painter Class Reference}
+\label{class_diffusion_painter}\index{Diffusion\+Painter@{Diffusion\+Painter}}
+}
+
+
+{\ttfamily \#include $<$Diffusion\+Painter.\+h$>$}
+
+Inheritance diagram for Diffusion\+Painter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_diffusion_painter}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_diffusion_painter_a2c914637778dac04b998f66084bf68c2}{set\+X\+Rotation} (int angle)
+\begin{DoxyCompactList}\small\item\em \mbox{[}5\mbox{]} \end{DoxyCompactList}\item 
+void \hyperlink{class_diffusion_painter_a14bfd44d0c65a6b8a70121a65d25f5fa}{set\+Y\+Rotation} (int angle)
+\begin{DoxyCompactList}\small\item\em \mbox{[}5\mbox{]} \end{DoxyCompactList}\item 
+void \hyperlink{class_diffusion_painter_a3a33e4601571657252b56fada7ed0a80}{set\+Z\+Rotation} (int angle)
+\item 
+void \hyperlink{class_diffusion_painter_a45977cebc1e59c5067c00f6179899be5}{set\+Current\+Painter\+\_\+\+Diffusion} ()
+\item 
+void \hyperlink{class_diffusion_painter_af6c1819f308806fef7583efcc1999f1c}{set\+Current\+Painter\+\_\+\+Selector} ()
+\item 
+void \hyperlink{class_diffusion_painter_ab7f54b0f193a334bf9e34df65560bffa}{set\+Current\+Painter\+\_\+\+Bezier1} ()
+\item 
+void \hyperlink{class_diffusion_painter_a8c88f685894a212dad8d1719d8753d2f}{set\+Current\+Painter\+\_\+\+Bezier2} ()
+\item 
+void \hyperlink{class_diffusion_painter_af00f71174aaa3bb3d7e7c6273d5cacb9}{set\+Current\+Painter\+\_\+\+Anisotrophy} ()
+\item 
+void \hyperlink{class_diffusion_painter_acf3d7da78c5ffb2b129d951ec80e1bc6}{set\+Sigma} (int value)
+\item 
+void \hyperlink{class_diffusion_painter_a8d4c6a4de96dae6b77cbf7cf21e0fe59}{set\+Upper\+Limit} (double value)
+\item 
+void \hyperlink{class_diffusion_painter_a2c1af0a12e7a22b239fa0fa7587babe9}{set\+Lower\+Limit} (double value)
+\item 
+void \hyperlink{class_diffusion_painter_abaa3b7e44c4494471bc22117661ba51f}{set\+Amplitude} (int value)
+\item 
+void \hyperlink{class_diffusion_painter_af5b4e33b0f9b840e2c510283d4dba68b}{update\+Canvas} ()
+\begin{DoxyCompactList}\small\item\em \mbox{[}10\mbox{]} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_diffusion_painter_a9599253ac2faec4e4fcde0bddc4f2739}{x\+Rotation\+Changed} (int angle)
+\item 
+void \hyperlink{class_diffusion_painter_a327e74a49eb97c73639588de45ef7cc1}{y\+Rotation\+Changed} (int angle)
+\item 
+void \hyperlink{class_diffusion_painter_a30c98779110e1e02e9a6d0541a66c5a6}{z\+Rotation\+Changed} (int angle)
+\item 
+void \hyperlink{class_diffusion_painter_ad5ca1a51002b96b7aae86de9176acb02}{selected\+Node} (int, int)
+\item 
+void \hyperlink{class_diffusion_painter_a7f0ef90d74b5eb4630164bd350722ac8}{position\+Elektrode} (int, int, int)
+\item 
+void \hyperlink{class_diffusion_painter_a5ae021b66810c160b95dd4eb3dfd67fb}{emit\+Width} (double)
+\item 
+void \hyperlink{class_diffusion_painter_abde8585db92da4b64d350d61c827339f}{found\+Point} (int, int)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_diffusion_painter_a171b9c615611e9f225187f81807c00cf}{Diffusion\+Painter} (\hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$grid, \hyperlink{class_diffusion_matrix}{Diffusion\+Matrix} $\ast$pixelmap, \hyperlink{class_diffusion_matrix}{Diffusion\+Matrix} $\ast$anisotrophy, Q\+Widget $\ast$parent=0)
+\begin{DoxyCompactList}\small\item\em \mbox{[}0\mbox{]} \end{DoxyCompactList}\item 
+\hyperlink{class_diffusion_painter_a4e93ad45e684e622a6923bbf9871d04e}{$\sim$\+Diffusion\+Painter} ()
+\item 
+void \hyperlink{class_diffusion_painter_a32a09b7f3f568fff71b881ddcb729963}{init\+Painter} (\hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$grid, \hyperlink{class_diffusion_matrix}{Diffusion\+Matrix} $\ast$pixelmap)
+\item 
+void \hyperlink{class_diffusion_painter_a08714d5fcd525bb6a1451229e44e5cb2}{init\+Probes} (int e1\+\_\+x, int e1\+\_\+y, int e2\+\_\+x, int e2\+\_\+y, int e3\+\_\+x, int e3\+\_\+y)
+\item 
+void \hyperlink{class_diffusion_painter_ab71f8ba7699d9caf7927e21914c6303c}{destroy\+Painter} ()
+\item 
+Q\+Size \hyperlink{class_diffusion_painter_a37a27acb926fa7963fab1b8fe6763542}{minimum\+Size\+Hint} () const 
+\item 
+Q\+Size \hyperlink{class_diffusion_painter_a9ce48c2feffb9bcca38227cf930891ff}{size\+Hint} () const 
+\begin{DoxyCompactList}\small\item\em \mbox{[}2\mbox{]} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_c_camera}{C\+Camera} \hyperlink{class_diffusion_painter_a1e66d5dd4118326a1e1a7bb45efac9f0}{obj\+Camera}
+\item 
+\hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$ \hyperlink{class_diffusion_painter_ad405e9e83988d4e31abc060c7fa53f58}{m\+\_\+grid}
+\item 
+\hyperlink{class_random_generator}{Random\+Generator} $\ast$ \hyperlink{class_diffusion_painter_a899e223882748c213c482f298ed2cc6a}{rand\+Machine}
+\item 
+\hyperlink{class_diffusion_matrix}{Diffusion\+Matrix} $\ast$ \hyperlink{class_diffusion_painter_a6a402014322aadca9e82bcf419d9b0c7}{m\+\_\+pixelmap}
+\item 
+\hyperlink{class_diffusion_matrix}{Diffusion\+Matrix} $\ast$ \hyperlink{class_diffusion_painter_a41a28924c03b3be5a3f7e4bee530345b}{m\+\_\+anisotrophy}
+\item 
+\hyperlink{class_probe}{Probe} $\ast$ \hyperlink{class_diffusion_painter_aaad25aaf3a5a9bd133a903f4e5afa109}{probe1}
+\item 
+\hyperlink{class_probe}{Probe} $\ast$ \hyperlink{class_diffusion_painter_a7e1f6b5119f36b87b2f6a6de6df14865}{probe2}
+\item 
+\hyperlink{class_probe}{Probe} $\ast$ \hyperlink{class_diffusion_painter_a977dd52f37fe18bac0c3c3f33e5aafa4}{probe3}
+\item 
+bool \hyperlink{class_diffusion_painter_a296bff01cbabce25cdf1f57a3b65b98c}{probe1on}
+\item 
+bool \hyperlink{class_diffusion_painter_a7a436a62915aff0201b9b5e742ca9a62}{probe2on}
+\item 
+bool \hyperlink{class_diffusion_painter_ad923bf9dfbf4a10b8231037cf3070831}{probe3on}
+\item 
+int \hyperlink{class_diffusion_painter_a9ea99ac669bf6661a46ea41dbabc7521}{current\+Moover}
+\item 
+\hyperlink{class_pix}{Pix} $\ast$ \hyperlink{class_diffusion_painter_aa57b223dd919193fe1ac1b38ddeee4a4}{currently\+Pressed} \mbox{[}3\mbox{]}
+\item 
+double \hyperlink{class_diffusion_painter_a7884d552b7170c5e9573aa661c16ca44}{m\+\_\+pixel\+Size}
+\item 
+double \hyperlink{class_diffusion_painter_a09984e636cac8045cb45271593a042c4}{m\+\_\+sigma}
+\item 
+double \hyperlink{class_diffusion_painter_a7a6623d01ae04592e1aca9d07120d0be}{m\+\_\+amplitude}
+\item 
+double \hyperlink{class_diffusion_painter_a242c4d131a57f225a9065328f8983e31}{m\+\_\+move\+\_\+diminisher}
+\item 
+double \hyperlink{class_diffusion_painter_acd61d99ea11dfc944dd587e06aee12f3}{m\+\_\+upper\+Limit}
+\item 
+double \hyperlink{class_diffusion_painter_a4403369545b46ea79445e7fd71d85616}{m\+\_\+lower\+Limit}
+\item 
+int \hyperlink{class_diffusion_painter_a30867ab87333582db17ae21e586adc36}{work\+Mode}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_diffusion_painter_a55b1412158c32feaa3449225ab440f61}{initialize\+G\+L} ()
+\begin{DoxyCompactList}\small\item\em \mbox{[}1\mbox{]} \end{DoxyCompactList}\item 
+void \hyperlink{class_diffusion_painter_a4b876a03a2175a83fdbc5d01cc09adb5}{paint\+G\+L} ()
+\begin{DoxyCompactList}\small\item\em \mbox{[}6\mbox{]} \end{DoxyCompactList}\item 
+void \hyperlink{class_diffusion_painter_a0d1b9ab8c76b65993e58aae112c05d26}{resize\+G\+L} (int width, int height)
+\begin{DoxyCompactList}\small\item\em \mbox{[}7\mbox{]} \end{DoxyCompactList}\item 
+void \hyperlink{class_diffusion_painter_aa9ba23c0677c1322a10b7e408790ecca}{mouse\+Press\+Event} (Q\+Mouse\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em \mbox{[}8\mbox{]} \end{DoxyCompactList}\item 
+void \hyperlink{class_diffusion_painter_afc66b6fca1954ad337c7a7b312c48b02}{mouse\+Move\+Event} (Q\+Mouse\+Event $\ast$event)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_diffusion_painter_a171b9c615611e9f225187f81807c00cf}{\index{Diffusion\+Painter@{Diffusion\+Painter}!Diffusion\+Painter@{Diffusion\+Painter}}
+\index{Diffusion\+Painter@{Diffusion\+Painter}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{Diffusion\+Painter}]{\setlength{\rightskip}{0pt plus 5cm}Diffusion\+Painter\+::\+Diffusion\+Painter (
+\begin{DoxyParamCaption}
+\item[{{\bf Cardiac\+Mesh} $\ast$}]{grid, }
+\item[{{\bf Diffusion\+Matrix} $\ast$}]{pixelmap, }
+\item[{{\bf Diffusion\+Matrix} $\ast$}]{anisotrophy, }
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_diffusion_painter_a171b9c615611e9f225187f81807c00cf}
+
+
+\mbox{[}0\mbox{]} 
+
+\hypertarget{class_diffusion_painter_a4e93ad45e684e622a6923bbf9871d04e}{\index{Diffusion\+Painter@{Diffusion\+Painter}!````~Diffusion\+Painter@{$\sim$\+Diffusion\+Painter}}
+\index{````~Diffusion\+Painter@{$\sim$\+Diffusion\+Painter}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{$\sim$\+Diffusion\+Painter}]{\setlength{\rightskip}{0pt plus 5cm}Diffusion\+Painter\+::$\sim$\+Diffusion\+Painter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_diffusion_painter_a4e93ad45e684e622a6923bbf9871d04e}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_diffusion_painter_ab71f8ba7699d9caf7927e21914c6303c}{\index{Diffusion\+Painter@{Diffusion\+Painter}!destroy\+Painter@{destroy\+Painter}}
+\index{destroy\+Painter@{destroy\+Painter}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{destroy\+Painter}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::destroy\+Painter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_diffusion_painter_ab71f8ba7699d9caf7927e21914c6303c}
+\hypertarget{class_diffusion_painter_a5ae021b66810c160b95dd4eb3dfd67fb}{\index{Diffusion\+Painter@{Diffusion\+Painter}!emit\+Width@{emit\+Width}}
+\index{emit\+Width@{emit\+Width}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{emit\+Width}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::emit\+Width (
+\begin{DoxyParamCaption}
+\item[{double}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_diffusion_painter_a5ae021b66810c160b95dd4eb3dfd67fb}
+\hypertarget{class_diffusion_painter_abde8585db92da4b64d350d61c827339f}{\index{Diffusion\+Painter@{Diffusion\+Painter}!found\+Point@{found\+Point}}
+\index{found\+Point@{found\+Point}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{found\+Point}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::found\+Point (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_diffusion_painter_abde8585db92da4b64d350d61c827339f}
+\hypertarget{class_diffusion_painter_a55b1412158c32feaa3449225ab440f61}{\index{Diffusion\+Painter@{Diffusion\+Painter}!initialize\+G\+L@{initialize\+G\+L}}
+\index{initialize\+G\+L@{initialize\+G\+L}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{initialize\+G\+L}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::initialize\+G\+L (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_diffusion_painter_a55b1412158c32feaa3449225ab440f61}
+
+
+\mbox{[}1\mbox{]} 
+
+\mbox{[}6\mbox{]}
+
+\mbox{[}2\mbox{]} \hypertarget{class_diffusion_painter_a32a09b7f3f568fff71b881ddcb729963}{\index{Diffusion\+Painter@{Diffusion\+Painter}!init\+Painter@{init\+Painter}}
+\index{init\+Painter@{init\+Painter}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{init\+Painter}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::init\+Painter (
+\begin{DoxyParamCaption}
+\item[{{\bf Cardiac\+Mesh} $\ast$}]{grid, }
+\item[{{\bf Diffusion\+Matrix} $\ast$}]{pixelmap}
+\end{DoxyParamCaption}
+)}}\label{class_diffusion_painter_a32a09b7f3f568fff71b881ddcb729963}
+\hypertarget{class_diffusion_painter_a08714d5fcd525bb6a1451229e44e5cb2}{\index{Diffusion\+Painter@{Diffusion\+Painter}!init\+Probes@{init\+Probes}}
+\index{init\+Probes@{init\+Probes}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{init\+Probes}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::init\+Probes (
+\begin{DoxyParamCaption}
+\item[{int}]{e1\+\_\+x, }
+\item[{int}]{e1\+\_\+y, }
+\item[{int}]{e2\+\_\+x, }
+\item[{int}]{e2\+\_\+y, }
+\item[{int}]{e3\+\_\+x, }
+\item[{int}]{e3\+\_\+y}
+\end{DoxyParamCaption}
+)}}\label{class_diffusion_painter_a08714d5fcd525bb6a1451229e44e5cb2}
+\hypertarget{class_diffusion_painter_a37a27acb926fa7963fab1b8fe6763542}{\index{Diffusion\+Painter@{Diffusion\+Painter}!minimum\+Size\+Hint@{minimum\+Size\+Hint}}
+\index{minimum\+Size\+Hint@{minimum\+Size\+Hint}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{minimum\+Size\+Hint}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Size Diffusion\+Painter\+::minimum\+Size\+Hint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_diffusion_painter_a37a27acb926fa7963fab1b8fe6763542}
+\hypertarget{class_diffusion_painter_afc66b6fca1954ad337c7a7b312c48b02}{\index{Diffusion\+Painter@{Diffusion\+Painter}!mouse\+Move\+Event@{mouse\+Move\+Event}}
+\index{mouse\+Move\+Event@{mouse\+Move\+Event}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{mouse\+Move\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::mouse\+Move\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_diffusion_painter_afc66b6fca1954ad337c7a7b312c48b02}
+\hypertarget{class_diffusion_painter_aa9ba23c0677c1322a10b7e408790ecca}{\index{Diffusion\+Painter@{Diffusion\+Painter}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{mouse\+Press\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::mouse\+Press\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_diffusion_painter_aa9ba23c0677c1322a10b7e408790ecca}
+
+
+\mbox{[}8\mbox{]} 
+
+\mbox{[}9\mbox{]} \hypertarget{class_diffusion_painter_a4b876a03a2175a83fdbc5d01cc09adb5}{\index{Diffusion\+Painter@{Diffusion\+Painter}!paint\+G\+L@{paint\+G\+L}}
+\index{paint\+G\+L@{paint\+G\+L}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{paint\+G\+L}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::paint\+G\+L (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_diffusion_painter_a4b876a03a2175a83fdbc5d01cc09adb5}
+
+
+\mbox{[}6\mbox{]} 
+
+\mbox{[}7\mbox{]} \hypertarget{class_diffusion_painter_a7f0ef90d74b5eb4630164bd350722ac8}{\index{Diffusion\+Painter@{Diffusion\+Painter}!position\+Elektrode@{position\+Elektrode}}
+\index{position\+Elektrode@{position\+Elektrode}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{position\+Elektrode}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::position\+Elektrode (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{int}]{, }
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_diffusion_painter_a7f0ef90d74b5eb4630164bd350722ac8}
+\hypertarget{class_diffusion_painter_a0d1b9ab8c76b65993e58aae112c05d26}{\index{Diffusion\+Painter@{Diffusion\+Painter}!resize\+G\+L@{resize\+G\+L}}
+\index{resize\+G\+L@{resize\+G\+L}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{resize\+G\+L}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::resize\+G\+L (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_diffusion_painter_a0d1b9ab8c76b65993e58aae112c05d26}
+
+
+\mbox{[}7\mbox{]} 
+
+\mbox{[}8\mbox{]} \hypertarget{class_diffusion_painter_ad5ca1a51002b96b7aae86de9176acb02}{\index{Diffusion\+Painter@{Diffusion\+Painter}!selected\+Node@{selected\+Node}}
+\index{selected\+Node@{selected\+Node}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{selected\+Node}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::selected\+Node (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_diffusion_painter_ad5ca1a51002b96b7aae86de9176acb02}
+\hypertarget{class_diffusion_painter_abaa3b7e44c4494471bc22117661ba51f}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Amplitude@{set\+Amplitude}}
+\index{set\+Amplitude@{set\+Amplitude}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Amplitude}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Amplitude (
+\begin{DoxyParamCaption}
+\item[{int}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_abaa3b7e44c4494471bc22117661ba51f}
+\hypertarget{class_diffusion_painter_af00f71174aaa3bb3d7e7c6273d5cacb9}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Current\+Painter\+\_\+\+Anisotrophy@{set\+Current\+Painter\+\_\+\+Anisotrophy}}
+\index{set\+Current\+Painter\+\_\+\+Anisotrophy@{set\+Current\+Painter\+\_\+\+Anisotrophy}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Current\+Painter\+\_\+\+Anisotrophy}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Current\+Painter\+\_\+\+Anisotrophy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_af00f71174aaa3bb3d7e7c6273d5cacb9}
+\hypertarget{class_diffusion_painter_ab7f54b0f193a334bf9e34df65560bffa}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Current\+Painter\+\_\+\+Bezier1@{set\+Current\+Painter\+\_\+\+Bezier1}}
+\index{set\+Current\+Painter\+\_\+\+Bezier1@{set\+Current\+Painter\+\_\+\+Bezier1}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Current\+Painter\+\_\+\+Bezier1}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Current\+Painter\+\_\+\+Bezier1 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_ab7f54b0f193a334bf9e34df65560bffa}
+\hypertarget{class_diffusion_painter_a8c88f685894a212dad8d1719d8753d2f}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Current\+Painter\+\_\+\+Bezier2@{set\+Current\+Painter\+\_\+\+Bezier2}}
+\index{set\+Current\+Painter\+\_\+\+Bezier2@{set\+Current\+Painter\+\_\+\+Bezier2}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Current\+Painter\+\_\+\+Bezier2}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Current\+Painter\+\_\+\+Bezier2 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_a8c88f685894a212dad8d1719d8753d2f}
+\hypertarget{class_diffusion_painter_a45977cebc1e59c5067c00f6179899be5}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Current\+Painter\+\_\+\+Diffusion@{set\+Current\+Painter\+\_\+\+Diffusion}}
+\index{set\+Current\+Painter\+\_\+\+Diffusion@{set\+Current\+Painter\+\_\+\+Diffusion}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Current\+Painter\+\_\+\+Diffusion}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Current\+Painter\+\_\+\+Diffusion (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_a45977cebc1e59c5067c00f6179899be5}
+\hypertarget{class_diffusion_painter_af6c1819f308806fef7583efcc1999f1c}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Current\+Painter\+\_\+\+Selector@{set\+Current\+Painter\+\_\+\+Selector}}
+\index{set\+Current\+Painter\+\_\+\+Selector@{set\+Current\+Painter\+\_\+\+Selector}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Current\+Painter\+\_\+\+Selector}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Current\+Painter\+\_\+\+Selector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_af6c1819f308806fef7583efcc1999f1c}
+\hypertarget{class_diffusion_painter_a2c1af0a12e7a22b239fa0fa7587babe9}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Lower\+Limit@{set\+Lower\+Limit}}
+\index{set\+Lower\+Limit@{set\+Lower\+Limit}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Lower\+Limit}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Lower\+Limit (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_a2c1af0a12e7a22b239fa0fa7587babe9}
+\hypertarget{class_diffusion_painter_acf3d7da78c5ffb2b129d951ec80e1bc6}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Sigma@{set\+Sigma}}
+\index{set\+Sigma@{set\+Sigma}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Sigma}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Sigma (
+\begin{DoxyParamCaption}
+\item[{int}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_acf3d7da78c5ffb2b129d951ec80e1bc6}
+\hypertarget{class_diffusion_painter_a8d4c6a4de96dae6b77cbf7cf21e0fe59}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Upper\+Limit@{set\+Upper\+Limit}}
+\index{set\+Upper\+Limit@{set\+Upper\+Limit}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Upper\+Limit}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Upper\+Limit (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_a8d4c6a4de96dae6b77cbf7cf21e0fe59}
+\hypertarget{class_diffusion_painter_a2c914637778dac04b998f66084bf68c2}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+X\+Rotation@{set\+X\+Rotation}}
+\index{set\+X\+Rotation@{set\+X\+Rotation}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+X\+Rotation}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+X\+Rotation (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_a2c914637778dac04b998f66084bf68c2}
+
+
+\mbox{[}5\mbox{]} 
+
+\hypertarget{class_diffusion_painter_a14bfd44d0c65a6b8a70121a65d25f5fa}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Y\+Rotation@{set\+Y\+Rotation}}
+\index{set\+Y\+Rotation@{set\+Y\+Rotation}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Y\+Rotation}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Y\+Rotation (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_a14bfd44d0c65a6b8a70121a65d25f5fa}
+
+
+\mbox{[}5\mbox{]} 
+
+\hypertarget{class_diffusion_painter_a3a33e4601571657252b56fada7ed0a80}{\index{Diffusion\+Painter@{Diffusion\+Painter}!set\+Z\+Rotation@{set\+Z\+Rotation}}
+\index{set\+Z\+Rotation@{set\+Z\+Rotation}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{set\+Z\+Rotation}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::set\+Z\+Rotation (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_a3a33e4601571657252b56fada7ed0a80}
+\hypertarget{class_diffusion_painter_a9ce48c2feffb9bcca38227cf930891ff}{\index{Diffusion\+Painter@{Diffusion\+Painter}!size\+Hint@{size\+Hint}}
+\index{size\+Hint@{size\+Hint}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{size\+Hint}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Size Diffusion\+Painter\+::size\+Hint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_diffusion_painter_a9ce48c2feffb9bcca38227cf930891ff}
+
+
+\mbox{[}2\mbox{]} 
+
+\mbox{[}3\mbox{]} \mbox{[}3\mbox{]} //! \mbox{[}4\mbox{]} \hypertarget{class_diffusion_painter_af5b4e33b0f9b840e2c510283d4dba68b}{\index{Diffusion\+Painter@{Diffusion\+Painter}!update\+Canvas@{update\+Canvas}}
+\index{update\+Canvas@{update\+Canvas}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{update\+Canvas}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::update\+Canvas (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_diffusion_painter_af5b4e33b0f9b840e2c510283d4dba68b}
+
+
+\mbox{[}10\mbox{]} 
+
+\hypertarget{class_diffusion_painter_a9599253ac2faec4e4fcde0bddc4f2739}{\index{Diffusion\+Painter@{Diffusion\+Painter}!x\+Rotation\+Changed@{x\+Rotation\+Changed}}
+\index{x\+Rotation\+Changed@{x\+Rotation\+Changed}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{x\+Rotation\+Changed}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::x\+Rotation\+Changed (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_diffusion_painter_a9599253ac2faec4e4fcde0bddc4f2739}
+\hypertarget{class_diffusion_painter_a327e74a49eb97c73639588de45ef7cc1}{\index{Diffusion\+Painter@{Diffusion\+Painter}!y\+Rotation\+Changed@{y\+Rotation\+Changed}}
+\index{y\+Rotation\+Changed@{y\+Rotation\+Changed}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{y\+Rotation\+Changed}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::y\+Rotation\+Changed (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_diffusion_painter_a327e74a49eb97c73639588de45ef7cc1}
+\hypertarget{class_diffusion_painter_a30c98779110e1e02e9a6d0541a66c5a6}{\index{Diffusion\+Painter@{Diffusion\+Painter}!z\+Rotation\+Changed@{z\+Rotation\+Changed}}
+\index{z\+Rotation\+Changed@{z\+Rotation\+Changed}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{z\+Rotation\+Changed}]{\setlength{\rightskip}{0pt plus 5cm}void Diffusion\+Painter\+::z\+Rotation\+Changed (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_diffusion_painter_a30c98779110e1e02e9a6d0541a66c5a6}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_diffusion_painter_aa57b223dd919193fe1ac1b38ddeee4a4}{\index{Diffusion\+Painter@{Diffusion\+Painter}!currently\+Pressed@{currently\+Pressed}}
+\index{currently\+Pressed@{currently\+Pressed}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{currently\+Pressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pix}$\ast$ Diffusion\+Painter\+::currently\+Pressed\mbox{[}3\mbox{]}}}\label{class_diffusion_painter_aa57b223dd919193fe1ac1b38ddeee4a4}
+\hypertarget{class_diffusion_painter_a9ea99ac669bf6661a46ea41dbabc7521}{\index{Diffusion\+Painter@{Diffusion\+Painter}!current\+Moover@{current\+Moover}}
+\index{current\+Moover@{current\+Moover}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{current\+Moover}]{\setlength{\rightskip}{0pt plus 5cm}int Diffusion\+Painter\+::current\+Moover}}\label{class_diffusion_painter_a9ea99ac669bf6661a46ea41dbabc7521}
+\hypertarget{class_diffusion_painter_a7a6623d01ae04592e1aca9d07120d0be}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+amplitude@{m\+\_\+amplitude}}
+\index{m\+\_\+amplitude@{m\+\_\+amplitude}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+amplitude}]{\setlength{\rightskip}{0pt plus 5cm}double Diffusion\+Painter\+::m\+\_\+amplitude}}\label{class_diffusion_painter_a7a6623d01ae04592e1aca9d07120d0be}
+\hypertarget{class_diffusion_painter_a41a28924c03b3be5a3f7e4bee530345b}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+anisotrophy@{m\+\_\+anisotrophy}}
+\index{m\+\_\+anisotrophy@{m\+\_\+anisotrophy}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+anisotrophy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Diffusion\+Matrix}$\ast$ Diffusion\+Painter\+::m\+\_\+anisotrophy}}\label{class_diffusion_painter_a41a28924c03b3be5a3f7e4bee530345b}
+\hypertarget{class_diffusion_painter_ad405e9e83988d4e31abc060c7fa53f58}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+grid@{m\+\_\+grid}}
+\index{m\+\_\+grid@{m\+\_\+grid}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+grid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cardiac\+Mesh}$\ast$ Diffusion\+Painter\+::m\+\_\+grid}}\label{class_diffusion_painter_ad405e9e83988d4e31abc060c7fa53f58}
+\hypertarget{class_diffusion_painter_a4403369545b46ea79445e7fd71d85616}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+lower\+Limit@{m\+\_\+lower\+Limit}}
+\index{m\+\_\+lower\+Limit@{m\+\_\+lower\+Limit}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+lower\+Limit}]{\setlength{\rightskip}{0pt plus 5cm}double Diffusion\+Painter\+::m\+\_\+lower\+Limit}}\label{class_diffusion_painter_a4403369545b46ea79445e7fd71d85616}
+\hypertarget{class_diffusion_painter_a242c4d131a57f225a9065328f8983e31}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+move\+\_\+diminisher@{m\+\_\+move\+\_\+diminisher}}
+\index{m\+\_\+move\+\_\+diminisher@{m\+\_\+move\+\_\+diminisher}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+move\+\_\+diminisher}]{\setlength{\rightskip}{0pt plus 5cm}double Diffusion\+Painter\+::m\+\_\+move\+\_\+diminisher}}\label{class_diffusion_painter_a242c4d131a57f225a9065328f8983e31}
+\hypertarget{class_diffusion_painter_a6a402014322aadca9e82bcf419d9b0c7}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+pixelmap@{m\+\_\+pixelmap}}
+\index{m\+\_\+pixelmap@{m\+\_\+pixelmap}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+pixelmap}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Diffusion\+Matrix}$\ast$ Diffusion\+Painter\+::m\+\_\+pixelmap}}\label{class_diffusion_painter_a6a402014322aadca9e82bcf419d9b0c7}
+\hypertarget{class_diffusion_painter_a7884d552b7170c5e9573aa661c16ca44}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+pixel\+Size@{m\+\_\+pixel\+Size}}
+\index{m\+\_\+pixel\+Size@{m\+\_\+pixel\+Size}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+pixel\+Size}]{\setlength{\rightskip}{0pt plus 5cm}double Diffusion\+Painter\+::m\+\_\+pixel\+Size}}\label{class_diffusion_painter_a7884d552b7170c5e9573aa661c16ca44}
+\hypertarget{class_diffusion_painter_a09984e636cac8045cb45271593a042c4}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+sigma@{m\+\_\+sigma}}
+\index{m\+\_\+sigma@{m\+\_\+sigma}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+sigma}]{\setlength{\rightskip}{0pt plus 5cm}double Diffusion\+Painter\+::m\+\_\+sigma}}\label{class_diffusion_painter_a09984e636cac8045cb45271593a042c4}
+\hypertarget{class_diffusion_painter_acd61d99ea11dfc944dd587e06aee12f3}{\index{Diffusion\+Painter@{Diffusion\+Painter}!m\+\_\+upper\+Limit@{m\+\_\+upper\+Limit}}
+\index{m\+\_\+upper\+Limit@{m\+\_\+upper\+Limit}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{m\+\_\+upper\+Limit}]{\setlength{\rightskip}{0pt plus 5cm}double Diffusion\+Painter\+::m\+\_\+upper\+Limit}}\label{class_diffusion_painter_acd61d99ea11dfc944dd587e06aee12f3}
+\hypertarget{class_diffusion_painter_a1e66d5dd4118326a1e1a7bb45efac9f0}{\index{Diffusion\+Painter@{Diffusion\+Painter}!obj\+Camera@{obj\+Camera}}
+\index{obj\+Camera@{obj\+Camera}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{obj\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+Camera} Diffusion\+Painter\+::obj\+Camera}}\label{class_diffusion_painter_a1e66d5dd4118326a1e1a7bb45efac9f0}
+\hypertarget{class_diffusion_painter_aaad25aaf3a5a9bd133a903f4e5afa109}{\index{Diffusion\+Painter@{Diffusion\+Painter}!probe1@{probe1}}
+\index{probe1@{probe1}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{probe1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Probe}$\ast$ Diffusion\+Painter\+::probe1}}\label{class_diffusion_painter_aaad25aaf3a5a9bd133a903f4e5afa109}
+\hypertarget{class_diffusion_painter_a296bff01cbabce25cdf1f57a3b65b98c}{\index{Diffusion\+Painter@{Diffusion\+Painter}!probe1on@{probe1on}}
+\index{probe1on@{probe1on}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{probe1on}]{\setlength{\rightskip}{0pt plus 5cm}bool Diffusion\+Painter\+::probe1on}}\label{class_diffusion_painter_a296bff01cbabce25cdf1f57a3b65b98c}
+\hypertarget{class_diffusion_painter_a7e1f6b5119f36b87b2f6a6de6df14865}{\index{Diffusion\+Painter@{Diffusion\+Painter}!probe2@{probe2}}
+\index{probe2@{probe2}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{probe2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Probe}$\ast$ Diffusion\+Painter\+::probe2}}\label{class_diffusion_painter_a7e1f6b5119f36b87b2f6a6de6df14865}
+\hypertarget{class_diffusion_painter_a7a436a62915aff0201b9b5e742ca9a62}{\index{Diffusion\+Painter@{Diffusion\+Painter}!probe2on@{probe2on}}
+\index{probe2on@{probe2on}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{probe2on}]{\setlength{\rightskip}{0pt plus 5cm}bool Diffusion\+Painter\+::probe2on}}\label{class_diffusion_painter_a7a436a62915aff0201b9b5e742ca9a62}
+\hypertarget{class_diffusion_painter_a977dd52f37fe18bac0c3c3f33e5aafa4}{\index{Diffusion\+Painter@{Diffusion\+Painter}!probe3@{probe3}}
+\index{probe3@{probe3}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{probe3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Probe}$\ast$ Diffusion\+Painter\+::probe3}}\label{class_diffusion_painter_a977dd52f37fe18bac0c3c3f33e5aafa4}
+\hypertarget{class_diffusion_painter_ad923bf9dfbf4a10b8231037cf3070831}{\index{Diffusion\+Painter@{Diffusion\+Painter}!probe3on@{probe3on}}
+\index{probe3on@{probe3on}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{probe3on}]{\setlength{\rightskip}{0pt plus 5cm}bool Diffusion\+Painter\+::probe3on}}\label{class_diffusion_painter_ad923bf9dfbf4a10b8231037cf3070831}
+\hypertarget{class_diffusion_painter_a899e223882748c213c482f298ed2cc6a}{\index{Diffusion\+Painter@{Diffusion\+Painter}!rand\+Machine@{rand\+Machine}}
+\index{rand\+Machine@{rand\+Machine}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{rand\+Machine}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Random\+Generator}$\ast$ Diffusion\+Painter\+::rand\+Machine}}\label{class_diffusion_painter_a899e223882748c213c482f298ed2cc6a}
+\hypertarget{class_diffusion_painter_a30867ab87333582db17ae21e586adc36}{\index{Diffusion\+Painter@{Diffusion\+Painter}!work\+Mode@{work\+Mode}}
+\index{work\+Mode@{work\+Mode}!Diffusion\+Painter@{Diffusion\+Painter}}
+\subsubsection[{work\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}int Diffusion\+Painter\+::work\+Mode}}\label{class_diffusion_painter_a30867ab87333582db17ae21e586adc36}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_diffusion_painter_8h}{Diffusion\+Painter.\+h}\item 
+\hyperlink{_diffusion_painter_8cpp}{Diffusion\+Painter.\+cpp}\end{DoxyCompactItemize}

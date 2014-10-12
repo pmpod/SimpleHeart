@@ -1,0 +1,28 @@
+var classio_handler =
+[
+    [ "ioHandler", "classio_handler.html#aa57cd18c3ae379dbc508d2942ee553fa", null ],
+    [ "~ioHandler", "classio_handler.html#a030878327dcdc71c410e2b3184538aed", null ],
+    [ "filePrefix", "classio_handler.html#aaf8038bd0ff5a184504cf4622411fd51", null ],
+    [ "getDefaultParameters", "classio_handler.html#ac9eac90b6bdc44e46d3802e884034abe", null ],
+    [ "getParametersFromFile", "classio_handler.html#a32fc5c3861951f75c7ffbf62ed44e3e3", null ],
+    [ "intToStr", "classio_handler.html#a7d65ecb912b15cbeff8ecaa3f3a33f7b", null ],
+    [ "readDiffusionFromFile", "classio_handler.html#ab23bb54a388784e6397575fdb5e1a836", null ],
+    [ "readStructureFromFile", "classio_handler.html#a436429bf34fe5f838137ffd536e6859b", null ],
+    [ "readStructureFromFile", "classio_handler.html#a8e799f96c1e1056d5c59f621945a64c6", null ],
+    [ "saveAsBmp", "classio_handler.html#a472e8932c9769f3a577d11ea7c0e224d", null ],
+    [ "saveDiffusionToFile", "classio_handler.html#a8e39ebabd54b939c91b8d70bc7234e8c", null ],
+    [ "savePotentialPlot", "classio_handler.html#a3ce2a07edc23ff12d084e64b85416954", null ],
+    [ "saveRRPlot_1", "classio_handler.html#aa05a5e6a55ac70333479724c48d09a42", null ],
+    [ "saveRRPlot_2", "classio_handler.html#aee153e33abd373472c856467563d4c7d", null ],
+    [ "saveRRPlot_3", "classio_handler.html#a2de36fdfa99f28b20c6fe1b2069b75ad", null ],
+    [ "saveStructureToFile", "classio_handler.html#a91de29843e2894a8b778de65a557562a", null ],
+    [ "setBmp", "classio_handler.html#a8b295df2cd4f85f178935c310f6dad34", null ],
+    [ "strToInt", "classio_handler.html#a24088c5418729764793ad2ff055d4de8", null ],
+    [ "writeParametersToFile", "classio_handler.html#a0549d597c8da9195fd764044cb4c5a63", null ],
+    [ "backupParameters", "classio_handler.html#a3dde6edac5ac86c95b1651faafd8b418", null ],
+    [ "inputParameters", "classio_handler.html#a9eb908a81637ccd23846b8722f89a3c3", null ],
+    [ "m_handle", "classio_handler.html#a69a16636ea31e6b2c16a447cc69c9d40", null ],
+    [ "m_prefix", "classio_handler.html#a80e45be220c886422df536b4714e4b94", null ],
+    [ "paramFilename", "classio_handler.html#aa997341357b4da444f481ab43f455f9b", null ],
+    [ "pathParameters", "classio_handler.html#a18b3ace510b075e81a08a4a3ed9d00a2", null ]
+];

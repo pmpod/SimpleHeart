@@ -1,0 +1,129 @@
+\hypertarget{class_allexandre_strategy}{\section{Allexandre\+Strategy Class Reference}
+\label{class_allexandre_strategy}\index{Allexandre\+Strategy@{Allexandre\+Strategy}}
+}
+
+
+{\ttfamily \#include $<$Allexandre\+Strategy.\+h$>$}
+
+Inheritance diagram for Allexandre\+Strategy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_allexandre_strategy}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_allexandre_strategy_ac14cc10857d943bd555f828fd3c8004d}{Allexandre\+Strategy} (\hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$oscillators)
+\item 
+\hyperlink{class_allexandre_strategy_ac8783c05bbc6e3fea1a99b6ff657fb0d}{$\sim$\+Allexandre\+Strategy} ()
+\item 
+double \hyperlink{class_allexandre_strategy_a25fe69b84aed988807d10e4b72890d26}{step\+Modified\+Backward\+Euler} (\hyperlink{class_oscillator}{Oscillator} $\ast$osc)
+\item 
+double \hyperlink{class_allexandre_strategy_a418e280a746b6105eb609cbee6ea99fc}{next\+Step} ()
+\item 
+void \hyperlink{class_allexandre_strategy_a8f657c6d14d76cef3a312fc862c400f7}{reset} ()
+\item 
+void \hyperlink{class_allexandre_strategy_a19227368bd05ee1d3df2f655387a2dda}{construct\+Update\+Time\+Tree} ()
+\item 
+void \hyperlink{class_allexandre_strategy_a194aa637bdd931c1f0541cc11e450c79}{construct\+Timestep\+Tree} ()
+\item 
+double \hyperlink{class_allexandre_strategy_a9ae2720bb39eeb2044a9192a64e0fa95}{guard\+Cell\+Update} ()
+\item 
+double \hyperlink{class_allexandre_strategy_aae541b33a9b2183437624ba5ecc083a8}{get\+Delta\+Timestep\+Inc} (double \&v\+\_\+prim)
+\item 
+double \hyperlink{class_allexandre_strategy_adbcde09e77b6c3091fc972ca135d05d4}{get\+Max\+Timestep\+\_\+\+Method2b} (const double \&v\+\_\+prim, const double \&fast\+\_\+prim, const double \&Kd)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_allexandre_strategy_ac14cc10857d943bd555f828fd3c8004d}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\index{Allexandre\+Strategy@{Allexandre\+Strategy}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{Allexandre\+Strategy}]{\setlength{\rightskip}{0pt plus 5cm}Allexandre\+Strategy\+::\+Allexandre\+Strategy (
+\begin{DoxyParamCaption}
+\item[{{\bf Cardiac\+Mesh} $\ast$}]{oscillators}
+\end{DoxyParamCaption}
+)}}\label{class_allexandre_strategy_ac14cc10857d943bd555f828fd3c8004d}
+\hypertarget{class_allexandre_strategy_ac8783c05bbc6e3fea1a99b6ff657fb0d}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!````~Allexandre\+Strategy@{$\sim$\+Allexandre\+Strategy}}
+\index{````~Allexandre\+Strategy@{$\sim$\+Allexandre\+Strategy}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{$\sim$\+Allexandre\+Strategy}]{\setlength{\rightskip}{0pt plus 5cm}Allexandre\+Strategy\+::$\sim$\+Allexandre\+Strategy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_allexandre_strategy_ac8783c05bbc6e3fea1a99b6ff657fb0d}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_allexandre_strategy_a194aa637bdd931c1f0541cc11e450c79}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!construct\+Timestep\+Tree@{construct\+Timestep\+Tree}}
+\index{construct\+Timestep\+Tree@{construct\+Timestep\+Tree}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{construct\+Timestep\+Tree}]{\setlength{\rightskip}{0pt plus 5cm}void Allexandre\+Strategy\+::construct\+Timestep\+Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_allexandre_strategy_a194aa637bdd931c1f0541cc11e450c79}
+\hypertarget{class_allexandre_strategy_a19227368bd05ee1d3df2f655387a2dda}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!construct\+Update\+Time\+Tree@{construct\+Update\+Time\+Tree}}
+\index{construct\+Update\+Time\+Tree@{construct\+Update\+Time\+Tree}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{construct\+Update\+Time\+Tree}]{\setlength{\rightskip}{0pt plus 5cm}void Allexandre\+Strategy\+::construct\+Update\+Time\+Tree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_allexandre_strategy_a19227368bd05ee1d3df2f655387a2dda}
+\hypertarget{class_allexandre_strategy_aae541b33a9b2183437624ba5ecc083a8}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!get\+Delta\+Timestep\+Inc@{get\+Delta\+Timestep\+Inc}}
+\index{get\+Delta\+Timestep\+Inc@{get\+Delta\+Timestep\+Inc}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{get\+Delta\+Timestep\+Inc}]{\setlength{\rightskip}{0pt plus 5cm}double Allexandre\+Strategy\+::get\+Delta\+Timestep\+Inc (
+\begin{DoxyParamCaption}
+\item[{double \&}]{v\+\_\+prim}
+\end{DoxyParamCaption}
+)}}\label{class_allexandre_strategy_aae541b33a9b2183437624ba5ecc083a8}
+\hypertarget{class_allexandre_strategy_adbcde09e77b6c3091fc972ca135d05d4}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!get\+Max\+Timestep\+\_\+\+Method2b@{get\+Max\+Timestep\+\_\+\+Method2b}}
+\index{get\+Max\+Timestep\+\_\+\+Method2b@{get\+Max\+Timestep\+\_\+\+Method2b}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{get\+Max\+Timestep\+\_\+\+Method2b}]{\setlength{\rightskip}{0pt plus 5cm}double Allexandre\+Strategy\+::get\+Max\+Timestep\+\_\+\+Method2b (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{v\+\_\+prim, }
+\item[{const double \&}]{fast\+\_\+prim, }
+\item[{const double \&}]{Kd}
+\end{DoxyParamCaption}
+)}}\label{class_allexandre_strategy_adbcde09e77b6c3091fc972ca135d05d4}
+\hypertarget{class_allexandre_strategy_a9ae2720bb39eeb2044a9192a64e0fa95}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!guard\+Cell\+Update@{guard\+Cell\+Update}}
+\index{guard\+Cell\+Update@{guard\+Cell\+Update}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{guard\+Cell\+Update}]{\setlength{\rightskip}{0pt plus 5cm}double Allexandre\+Strategy\+::guard\+Cell\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_allexandre_strategy_a9ae2720bb39eeb2044a9192a64e0fa95}
+\hypertarget{class_allexandre_strategy_a418e280a746b6105eb609cbee6ea99fc}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!next\+Step@{next\+Step}}
+\index{next\+Step@{next\+Step}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{next\+Step}]{\setlength{\rightskip}{0pt plus 5cm}double Allexandre\+Strategy\+::next\+Step (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_allexandre_strategy_a418e280a746b6105eb609cbee6ea99fc}
+
+
+Implements \hyperlink{class_numeric_strategy_aeab387274e9d0ebf46a0e5ad5a5fe73f}{Numeric\+Strategy}.
+
+\hypertarget{class_allexandre_strategy_a8f657c6d14d76cef3a312fc862c400f7}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!reset@{reset}}
+\index{reset@{reset}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Allexandre\+Strategy\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_allexandre_strategy_a8f657c6d14d76cef3a312fc862c400f7}
+
+
+Implements \hyperlink{class_numeric_strategy_a81a1a510394e88edc2705e565d30f017}{Numeric\+Strategy}.
+
+\hypertarget{class_allexandre_strategy_a25fe69b84aed988807d10e4b72890d26}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!step\+Modified\+Backward\+Euler@{step\+Modified\+Backward\+Euler}}
+\index{step\+Modified\+Backward\+Euler@{step\+Modified\+Backward\+Euler}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{step\+Modified\+Backward\+Euler}]{\setlength{\rightskip}{0pt plus 5cm}double Allexandre\+Strategy\+::step\+Modified\+Backward\+Euler (
+\begin{DoxyParamCaption}
+\item[{{\bf Oscillator} $\ast$}]{osc}
+\end{DoxyParamCaption}
+)}}\label{class_allexandre_strategy_a25fe69b84aed988807d10e4b72890d26}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Numeric\+Strategy/\hyperlink{_allexandre_strategy_8h}{Allexandre\+Strategy.\+h}\item 
+Numeric\+Strategy/\hyperlink{_allexandre_strategy_8cpp}{Allexandre\+Strategy.\+cpp}\end{DoxyCompactItemize}

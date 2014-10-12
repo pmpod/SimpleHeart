@@ -1,6 +1,6 @@
 #include "AtrialMachine2d.h"
-#include "ForwardEulerStrategy.h"
-#include "AllexandreStrategy.h"
+#include "NumericStrategy\ForwardEulerStrategy.h"
+#include "NumericStrategy\AllexandreStrategy.h"
 #include <boost\foreach.hpp>
 #define CYLINDER 0
 #define ELECTROGRAMMM 1

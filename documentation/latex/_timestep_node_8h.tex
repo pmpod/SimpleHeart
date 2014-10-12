@@ -1,0 +1,57 @@
+\hypertarget{_timestep_node_8h}{\section{Numeric\+Strategy/\+Timestep\+Node.h File Reference}
+\label{_timestep_node_8h}\index{Numeric\+Strategy/\+Timestep\+Node.\+h@{Numeric\+Strategy/\+Timestep\+Node.\+h}}
+}
+{\ttfamily \#include \char`\"{}Model\textbackslash{}\+Oscillator.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$boost/heap/fibonacci\+\_\+heap.\+hpp$>$}\\*
+{\ttfamily \#include $<$boost/heap/d\+\_\+ary\+\_\+heap.\+hpp$>$}\\*
+{\ttfamily \#include $<$boost/heap/pairing\+\_\+heap.\+hpp$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_timestep_node}{Timestep\+Node}
+\item 
+struct \hyperlink{structcompare___timestep_node}{compare\+\_\+\+Timestep\+Node}
+\item 
+struct \hyperlink{structoscillator_to_timestep_handle}{oscillator\+To\+Timestep\+Handle}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \\*
+boost\+::heap\+::pairing\+\_\+heap\\*
+$<$ \hyperlink{struct_timestep_node}{Timestep\+Node} \\*
+$\ast$, boost\+::heap\+::compare\\*
+$<$ \hyperlink{structcompare___timestep_node}{compare\+\_\+\+Timestep\+Node} $>$ $>$ \hyperlink{_timestep_node_8h_ab41b35c3bca830f82085ff819d510b7c}{stp\+Heap}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_timestep_node}{Timestep\+Node} $\ast$ \hyperlink{_timestep_node_8h_a7eac9d2d8d7129243de44f7444971e67}{new\+Timestep\+Node\+P} (\hyperlink{class_oscillator}{Oscillator} $\ast$osc=nullptr, const double \&new\+Timestep=0.\+2)
+\item 
+\hyperlink{struct_timestep_node}{Timestep\+Node} \hyperlink{_timestep_node_8h_a9df2383fc48caeada08ecf42eb92ff58}{new\+Timestep\+Node} (\hyperlink{class_oscillator}{Oscillator} $\ast$osc=nullptr, const double \&new\+Timestep=0.\+2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{_timestep_node_8h_ab41b35c3bca830f82085ff819d510b7c}{\index{Timestep\+Node.\+h@{Timestep\+Node.\+h}!stp\+Heap@{stp\+Heap}}
+\index{stp\+Heap@{stp\+Heap}!Timestep\+Node.\+h@{Timestep\+Node.\+h}}
+\subsubsection[{stp\+Heap}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::heap\+::pairing\+\_\+heap$<${\bf Timestep\+Node}$\ast$, boost\+::heap\+::compare$<${\bf compare\+\_\+\+Timestep\+Node}$>$ $>$ {\bf stp\+Heap}}}\label{_timestep_node_8h_ab41b35c3bca830f82085ff819d510b7c}
+
+
+\subsection{Function Documentation}
+\hypertarget{_timestep_node_8h_a9df2383fc48caeada08ecf42eb92ff58}{\index{Timestep\+Node.\+h@{Timestep\+Node.\+h}!new\+Timestep\+Node@{new\+Timestep\+Node}}
+\index{new\+Timestep\+Node@{new\+Timestep\+Node}!Timestep\+Node.\+h@{Timestep\+Node.\+h}}
+\subsubsection[{new\+Timestep\+Node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Timestep\+Node} new\+Timestep\+Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Oscillator} $\ast$}]{osc = {\ttfamily nullptr}, }
+\item[{const double \&}]{new\+Timestep = {\ttfamily 0.2}}
+\end{DoxyParamCaption}
+)}}\label{_timestep_node_8h_a9df2383fc48caeada08ecf42eb92ff58}
+\hypertarget{_timestep_node_8h_a7eac9d2d8d7129243de44f7444971e67}{\index{Timestep\+Node.\+h@{Timestep\+Node.\+h}!new\+Timestep\+Node\+P@{new\+Timestep\+Node\+P}}
+\index{new\+Timestep\+Node\+P@{new\+Timestep\+Node\+P}!Timestep\+Node.\+h@{Timestep\+Node.\+h}}
+\subsubsection[{new\+Timestep\+Node\+P}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Timestep\+Node}$\ast$ new\+Timestep\+Node\+P (
+\begin{DoxyParamCaption}
+\item[{{\bf Oscillator} $\ast$}]{osc = {\ttfamily nullptr}, }
+\item[{const double \&}]{new\+Timestep = {\ttfamily 0.2}}
+\end{DoxyParamCaption}
+)}}\label{_timestep_node_8h_a7eac9d2d8d7129243de44f7444971e67}
