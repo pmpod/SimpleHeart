@@ -114,6 +114,9 @@ $(document).ready(function(){initNavTree('class_numeric_strategy.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> is a main interface class for the numerical integration of the model's equations. It provides the interface for numerical schemes like Forward Euler Scheme, modified Backward Euler Scheme, Allexandre&amp;Otani scheme etc.  
+ <a href="class_numeric_strategy.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_numeric_strategy_8h_source.html">NumericStrategy.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for NumericStrategy:</div>
@@ -129,10 +132,13 @@ Inheritance diagram for NumericStrategy:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f4a5e5be06427098e3a9b3635658786"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a8f4a5e5be06427098e3a9b3635658786">NumericStrategy</a> (<a class="el" href="class_cardiac_mesh.html">CardiacMesh</a> *oscillators)</td></tr>
+<tr class="memdesc:a8f4a5e5be06427098e3a9b3635658786"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> constructor.  <a href="#a8f4a5e5be06427098e3a9b3635658786">More...</a><br /></td></tr>
 <tr class="separator:a8f4a5e5be06427098e3a9b3635658786"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac167251a4c6409131a1be21ce3104870"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#ac167251a4c6409131a1be21ce3104870">~NumericStrategy</a> ()</td></tr>
+<tr class="memdesc:ac167251a4c6409131a1be21ce3104870"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> destructor.  <a href="#ac167251a4c6409131a1be21ce3104870">More...</a><br /></td></tr>
 <tr class="separator:ac167251a4c6409131a1be21ce3104870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeab387274e9d0ebf46a0e5ad5a5fe73f"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#aeab387274e9d0ebf46a0e5ad5a5fe73f">nextStep</a> ()=0</td></tr>
+<tr class="memdesc:aeab387274e9d0ebf46a0e5ad5a5fe73f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function.  <a href="#aeab387274e9d0ebf46a0e5ad5a5fe73f">More...</a><br /></td></tr>
 <tr class="separator:aeab387274e9d0ebf46a0e5ad5a5fe73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81a1a510394e88edc2705e565d30f017"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a81a1a510394e88edc2705e565d30f017">reset</a> ()=0</td></tr>
 <tr class="separator:a81a1a510394e88edc2705e565d30f017"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,7 +148,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a2ca52f550fd3f1cc26c65aec0cacf2f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cardiac_mesh.html">CardiacMesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a2ca52f550fd3f1cc26c65aec0cacf2f6">m_mesh</a></td></tr>
 <tr class="separator:a2ca52f550fd3f1cc26c65aec0cacf2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> is a main interface class for the numerical integration of the model's equations. It provides the interface for numerical schemes like Forward Euler Scheme, modified Backward Euler Scheme, Allexandre&amp;Otani scheme etc. </p>
+<p>The classes that implement a concrete numerical calculation strategy should implement this. The XXX AtrialMachine Class uses this to call the concrete numerical scheme to integrate electrophysiological equations of a given model. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a8f4a5e5be06427098e3a9b3635658786"></a>
 <div class="memitem">
 <div class="memproto">
@@ -156,6 +165,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>A <a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oscillators</td><td>- a pointer to the already initialized <a class="el" href="class_cardiac_mesh.html">CardiacMesh</a> model </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -171,6 +188,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>A <a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> destructor. </p>
 
 </div>
 </div>
@@ -195,6 +214,8 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Main function. </p>
 
 <p>Implemented in <a class="el" href="class_allexandre_strategy.html#a418e280a746b6105eb609cbee6ea99fc">AllexandreStrategy</a>, and <a class="el" href="class_forward_euler_strategy.html#a3a382585c2d87ffaf370c07c37737a28">ForwardEulerStrategy</a>.</p>
 
@@ -248,7 +269,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_numeric_strategy.html">NumericStrategy</a></li>
-    <li class="footer">Generated on Sun Oct 12 2014 19:35:40 for Simple Heart by
+    <li class="footer">Generated on Sun Oct 12 2014 20:03:20 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

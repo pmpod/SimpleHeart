@@ -53,10 +53,10 @@ endobj
 <?adobe-xap-filters esc="CRLF"?>
 <x:xmpmeta xmlns:x='adobe:ns:meta/' x:xmptk='XMP toolkit 2.9.1-13, framework 1.6'>
 <rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:iX='http://ns.adobe.com/iX/1.0/'>
-<rdf:Description rdf:about='af98cf99-5491-11e4-0000-82a51981f245' xmlns:pdf='http://ns.adobe.com/pdf/1.3/' pdf:Producer='MiKTeX GPL Ghostscript 8.60'/>
-<rdf:Description rdf:about='af98cf99-5491-11e4-0000-82a51981f245' xmlns:xap='http://ns.adobe.com/xap/1.0/' xap:ModifyDate='2014-10-12T17:35:41Z' xap:CreateDate='2014-10-12T17:35:41Z'><xap:CreatorTool>Doxygen</xap:CreatorTool></rdf:Description>
-<rdf:Description rdf:about='af98cf99-5491-11e4-0000-82a51981f245' xmlns:xapMM='http://ns.adobe.com/xap/1.0/mm/' xapMM:DocumentID='af98cf99-5491-11e4-0000-82a51981f245'/>
-<rdf:Description rdf:about='af98cf99-5491-11e4-0000-82a51981f245' xmlns:dc='http://purl.org/dc/elements/1.1/' dc:format='application/pdf'><dc:title><rdf:Alt><rdf:li xml:lang='x-default'>ClassName</rdf:li></rdf:Alt></dc:title><dc:creator><rdf:Seq><rdf:li>()</rdf:li></rdf:Seq></dc:creator></rdf:Description>
+<rdf:Description rdf:about='8da14c2a-5495-11e4-0000-82a51981f245' xmlns:pdf='http://ns.adobe.com/pdf/1.3/' pdf:Producer='MiKTeX GPL Ghostscript 8.60'/>
+<rdf:Description rdf:about='8da14c2a-5495-11e4-0000-82a51981f245' xmlns:xap='http://ns.adobe.com/xap/1.0/' xap:ModifyDate='2014-10-12T18:03:22Z' xap:CreateDate='2014-10-12T18:03:22Z'><xap:CreatorTool>Doxygen</xap:CreatorTool></rdf:Description>
+<rdf:Description rdf:about='8da14c2a-5495-11e4-0000-82a51981f245' xmlns:xapMM='http://ns.adobe.com/xap/1.0/mm/' xapMM:DocumentID='8da14c2a-5495-11e4-0000-82a51981f245'/>
+<rdf:Description rdf:about='8da14c2a-5495-11e4-0000-82a51981f245' xmlns:dc='http://purl.org/dc/elements/1.1/' dc:format='application/pdf'><dc:title><rdf:Alt><rdf:li xml:lang='x-default'>ClassName</rdf:li></rdf:Alt></dc:title><dc:creator><rdf:Seq><rdf:li>()</rdf:li></rdf:Seq></dc:creator></rdf:Description>
 </rdf:RDF>
 </x:xmpmeta>
                                                                         
@@ -66,8 +66,8 @@ endstream
 endobj
 2 0 obj
 <</Producer(MiKTeX GPL Ghostscript 8.60)
-/CreationDate(D:20141012173541Z)
-/ModDate(D:20141012173541Z)
+/CreationDate(D:20141012180322Z)
+/ModDate(D:20141012180322Z)
 /Title(ClassName)
 /Creator(Doxygen)
 /Author()>>endobj
@@ -87,7 +87,7 @@ xref
 0000000817 00000 n 
 trailer
 << /Size 12 /Root 1 0 R /Info 2 0 R
-/ID [<57054BAA5C3D88013058E9A0016B34F0><57054BAA5C3D88013058E9A0016B34F0>]
+/ID [<22E06072B52DB50A6FB09CE1F2A3024A><22E06072B52DB50A6FB09CE1F2A3024A>]
 >>
 startxref
 2395

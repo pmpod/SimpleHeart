@@ -86,7 +86,7 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>D:\Solutions\Qt-src-4.7.1\lib\qtmain.lib;D:\Solutions\Qt-src-4.7.1\lib\QtCore4.lib;D:\Solutions\Qt-src-4.7.1\lib\QtGui4.lib;D:\Solutions\Qt-src-4.7.1\lib\QtOpenGL4.lib;opengl32.lib;glu32.lib;D:\Solutions\qwt-6.0.0\lib\qwt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
-      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
