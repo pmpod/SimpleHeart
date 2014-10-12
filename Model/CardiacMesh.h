@@ -1,10 +1,10 @@
 #pragma once
 #include <QObject>
 #include <vector>
-#include "Oscillator.h"
-#include "v3model.h"
+#include "Model\Oscillator.h"
+#include "Model\v3model.h"
 #include "heartDefines.h"
-#include "TimeTree.h"
+#include "NumericStrategy\TimeTree.h"
 #include <set>
 class CardiacMesh : public QObject
 {

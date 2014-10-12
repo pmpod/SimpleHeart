@@ -1,4 +1,4 @@
-#include "ForwardEulerStrategy.h"
+#include "NumericStrategy\ForwardEulerStrategy.h"
 
 
 ForwardEulerStrategy::ForwardEulerStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)

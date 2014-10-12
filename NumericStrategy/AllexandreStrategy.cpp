@@ -1,4 +1,4 @@
-#include "AllexandreStrategy.h"
+#include "NumericStrategy\AllexandreStrategy.h"
 #include <algorithm>
 
 AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)

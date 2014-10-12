@@ -1,5 +1,5 @@
 #pragma once
-#include "Oscillator.h"
+#include "Model\Oscillator.h"
 
 struct oscillatorToUpdateNode
 {

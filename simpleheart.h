@@ -7,7 +7,7 @@
 #include "AtrialMachine2d.h"
 #include "DiffusionMatrix.h"
 #include "DiffusionPainter.h"
-#include "CardiacMesh.h"
+#include "Model\CardiacMesh.h"
 #include "timePlot.h"
 #include "rrPlot.h"
 #include "ioHandler.h"

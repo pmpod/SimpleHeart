@@ -1,6 +1,6 @@
 #pragma once
-#include "NumericStrategy.h"
-#include "NumericStrategy.h"
+#include "NumericStrategy\NumericStrategy.h"
+
 class ForwardEulerStrategy :
 	public NumericStrategy
 {

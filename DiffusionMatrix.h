@@ -3,8 +3,8 @@
 #include <QPoint>
 #include <vector>
 #include "heartDefines.h"
-#include "cartesianGrid.h"
-#include "CardiacMesh.h"
+#include "Model\cartesianGrid.h"
+#include "Model\CardiacMesh.h"
 class Pix
 {
 public:

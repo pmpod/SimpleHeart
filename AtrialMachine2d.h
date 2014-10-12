@@ -1,21 +1,20 @@
 #pragma once
-#include "CartesianGrid.h"
 #include <QObject>
 #include <vector>
 #include <cmath>
 #include <QtGui/QMessageBox>
 #include "RRcalculator.h"
-#include "Oscillator.h"
-#include "vanDerGru.h"
-#include "v3model.h"
-#include "FitzHughNagumo.h"
+#include "Model\Oscillator.h"
+#include "Model\vanDerGru.h"
+#include "Model\v3model.h"
+#include "Model\FitzHughNagumo.h"
 #include <fstream>
 #include <ctime>
 #include <sstream>
 #include "RandomGenerator.h"
 #include "atrialParameters.h"
-#include "CardiacMesh.h"
-#include "NumericStrategy.h"
+#include "Model\CardiacMesh.h"
+#include "NumericStrategy\NumericStrategy.h"
 
 class burster
 {

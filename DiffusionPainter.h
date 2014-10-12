@@ -4,10 +4,10 @@
 #include <QGLWidget>
 #include "Probe.h"
 #include "heartDefines.h"
-#include "cartesianGrid.h"
+#include "Model\cartesianGrid.h"
 #include "RandomGenerator.h"
 #include "DiffusionMatrix.h"
-#include "CardiacMesh.h"
+#include "Model\CardiacMesh.h"
 
 #include "GLfunc.h"
 #include <assert.h>

@@ -1,5 +1,5 @@
 #pragma once
-#include "CardiacMesh.h"
+#include "Model\CardiacMesh.h"
 
 class NumericStrategy
 {

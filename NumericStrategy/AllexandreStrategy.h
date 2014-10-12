@@ -1,6 +1,6 @@
 #pragma once
-#include "NumericStrategy.h"
-#include "TimestepNode.h"
+#include "NumericStrategy\NumericStrategy.h"
+#include "NumericStrategy\TimestepNode.h"
 
 //struct timestepNodesss
 //{

@@ -1,4 +1,4 @@
-#include "TimestepNode.h"
+#include "NumericStrategy\TimestepNode.h"
 
 \
 TimestepNode *newTimestepNodeP(Oscillator *osc, const double&  newTimestep)

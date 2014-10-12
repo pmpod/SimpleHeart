@@ -33,14 +33,14 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Numeric Strategy">
-      <UniqueIdentifier>{4cfa67b5-85d9-498e-bf08-01b2dabddb28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Model">
       <UniqueIdentifier>{4d0394f3-3a62-448f-a075-cf12b75f9fdb}</UniqueIdentifier>
     </Filter>
     <Filter Include="View">
       <UniqueIdentifier>{eec8846a-1246-455c-864e-8c5d7e8126bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NumericStrategy">
+      <UniqueIdentifier>{4cfa67b5-85d9-498e-bf08-01b2dabddb28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +95,6 @@
     <ClCompile Include="atrialParameters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cartesianGrid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CurveData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -108,9 +105,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DiffusionPainter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FitzHughNagumo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GLcamera.cpp">
@@ -138,9 +132,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="timePlot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vanDerGru.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_v3model.cpp">
@@ -194,34 +185,43 @@
     <ClCompile Include="GeneratedFiles\Release\moc_cardiacMesh.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="NumericStrategy.cpp">
-      <Filter>Numeric Strategy</Filter>
-    </ClCompile>
-    <ClCompile Include="AllexandreStrategy.cpp">
-      <Filter>Numeric Strategy</Filter>
-    </ClCompile>
-    <ClCompile Include="CardiacMesh.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="AtrialMachine2d.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="v3model.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Oscillator.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
     <ClCompile Include="glAtrium.cpp">
       <Filter>View</Filter>
     </ClCompile>
-    <ClCompile Include="ForwardEulerStrategy.cpp">
-      <Filter>Numeric Strategy</Filter>
+    <ClCompile Include="NumericStrategy\AllexandreStrategy.cpp">
+      <Filter>NumericStrategy</Filter>
     </ClCompile>
-    <ClCompile Include="TimeTree.cpp">
-      <Filter>Numeric Strategy</Filter>
+    <ClCompile Include="NumericStrategy\ForwardEulerStrategy.cpp">
+      <Filter>NumericStrategy</Filter>
     </ClCompile>
-    <ClCompile Include="TimestepNode.cpp">
+    <ClCompile Include="NumericStrategy\NumericStrategy.cpp">
+      <Filter>NumericStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="NumericStrategy\TimestepNode.cpp">
+      <Filter>NumericStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="NumericStrategy\TimeTree.cpp">
+      <Filter>NumericStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\CardiacMesh.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\cartesianGrid.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\FitzHughNagumo.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Oscillator.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\v3model.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\vanDerGru.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="AtrialMachine2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -238,16 +238,10 @@
     <CustomBuild Include="atrialParameters.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="cartesianGrid.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="defaultPlot.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="DiffusionPainter.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="FitzHughNagumo.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="ioHandler.h">
@@ -262,108 +256,107 @@
     <CustomBuild Include="timePlot.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="vanDerGru.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="AtrialMachine2d.h">
-      <Filter>Model</Filter>
-    </CustomBuild>
-    <CustomBuild Include="v3model.h">
-      <Filter>Model</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Oscillator.h">
-      <Filter>Model</Filter>
-    </CustomBuild>
     <CustomBuild Include="glAtrium.h">
       <Filter>View</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CurveData.h">
+    <CustomBuild Include="CurveData.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DiffusionMatrix.h">
+    </CustomBuild>
+    <CustomBuild Include="DiffusionMatrix.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="heartDefines.h">
+    </CustomBuild>
+    <CustomBuild Include="heartDefines.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Probe.h">
+    </CustomBuild>
+    <CustomBuild Include="Probe.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomGenerator.h">
+    </CustomBuild>
+    <CustomBuild Include="RandomGenerator.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
+    </CustomBuild>
+    <CustomBuild Include="resource.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AllexandreStrategy.h">
-      <Filter>Numeric Strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="NumericStrategy.h">
-      <Filter>Numeric Strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="CardiacMesh.h">
+    </CustomBuild>
+    <CustomBuild Include="atrium.struc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="coronarysinus.struc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="cylinder.struc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="InstrukcjaSimpleHeart.pdf">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="pacing_recording.struc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="parameters.inf">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="parametersDefault.inf">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\darkorange.stylesheet">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SimpleHeart.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tissueStrip.struc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="two_bars.struc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="wholeHeart.struc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Model\CardiacMesh.h">
       <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="GLcamera.h">
+    </CustomBuild>
+    <CustomBuild Include="Model\cartesianGrid.h">
+      <Filter>Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Model\FitzHughNagumo.h">
+      <Filter>Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Model\Oscillator.h">
+      <Filter>Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Model\v3model.h">
+      <Filter>Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Model\vanDerGru.h">
+      <Filter>Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GLcamera.h">
       <Filter>View</Filter>
-    </ClInclude>
-    <ClInclude Include="GLfunc.h">
+    </CustomBuild>
+    <CustomBuild Include="GLfunc.h">
       <Filter>View</Filter>
-    </ClInclude>
-    <ClInclude Include="ForwardEulerStrategy.h">
-      <Filter>Numeric Strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeTree.h">
-      <Filter>Numeric Strategy</Filter>
-    </ClInclude>
-    <ClInclude Include="fastonebigheader.h">
+    </CustomBuild>
+    <CustomBuild Include="NumericStrategy\AllexandreStrategy.h">
+      <Filter>NumericStrategy</Filter>
+    </CustomBuild>
+    <CustomBuild Include="NumericStrategy\ForwardEulerStrategy.h">
+      <Filter>NumericStrategy</Filter>
+    </CustomBuild>
+    <CustomBuild Include="NumericStrategy\NumericStrategy.h">
+      <Filter>NumericStrategy</Filter>
+    </CustomBuild>
+    <CustomBuild Include="NumericStrategy\TimestepNode.h">
+      <Filter>NumericStrategy</Filter>
+    </CustomBuild>
+    <CustomBuild Include="NumericStrategy\TimeTree.h">
+      <Filter>NumericStrategy</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AtrialMachine2d.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TimestepNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SimpleHeart.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="InstrukcjaSimpleHeart.pdf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="SimpleHeart.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="parameters.inf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="parametersDefault.inf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="atrium.struc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="coronarysinus.struc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="cylinder.struc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="pacing_recording.struc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="tissueStrip.struc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="two_bars.struc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="wholeHeart.struc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\darkorange.stylesheet">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

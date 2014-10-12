@@ -1,4 +1,4 @@
-#include "NumericStrategy.h"
+#include "NumericStrategy\NumericStrategy.h"
 
 
 NumericStrategy::NumericStrategy(CardiacMesh* oscillators)

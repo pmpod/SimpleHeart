@@ -1,5 +1,5 @@
 #pragma once
-#include "Oscillator.h"
+#include "Model\Oscillator.h"
 #include <boost/heap/fibonacci_heap.hpp>
 #include <boost/heap/d_ary_heap.hpp>
 #include <boost/heap/pairing_heap.hpp>

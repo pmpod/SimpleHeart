@@ -8,7 +8,7 @@
 
 #include "AtrialMachine2d.h"
 #include "heartDefines.h"
-#include "cartesianGrid.h"
+#include "Model\cartesianGrid.h"
 #include "DiffusionPainter.h"
 #include "GLfunc.h"
 
