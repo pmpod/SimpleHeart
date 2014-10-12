@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="SimpleHeart">
+    <file>Resources/darkorange.stylesheet</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,46 @@
+# Data input file for Heart Dynamics
+# Prepared:9_10_14h14m42s
+# Data input file for Heart Dynamics
+
+SIMULATION
+step 	0.2
+skip 	15
+maxdiff 	1.5
+ectosizeX 	40
+ectosizeY 	2
+ectoamp 	3
+ectoperiodS1 	200
+ectoperiodS2 	70
+ectolength 	2
+tau 	2
+winsize 	50
+binsize 	5
+!END
+
+SA_NODE
+alpha 	0.1
+v1 	0.2
+v2 	-1
+e 	1.6
+d 	2.1
+f 	0.0008
+!END
+
+ATRIUM
+beta 	0.6
+gamma 	0.5
+ni 	0.05
+alpha 	0.05
+C1 	0.92
+C2 	0.08
+!END
+
+AV_NODE
+alpha 	0.1
+v1 	0.2
+v2 	-1
+e 	1.3
+d 	2.1
+f 	0.0008
+!END
+

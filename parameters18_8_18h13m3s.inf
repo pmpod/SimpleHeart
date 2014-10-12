@@ -1,0 +1,37 @@
+# Data input file for Heart Dynamics
+# Prepared:18_8_18h13m3s
+# Data input file for Heart Dynamics
+
+SIMULATION
+step 	0.25
+skip 	10
+maxdiff 	0.3
+!END
+
+SA_NODE
+alpha 	0.1
+v1 	1
+v2 	-1
+e 	4.3
+d 	3
+f 	5e-005
+!END
+
+ATRIUM
+beta 	0.2
+gamma 	1.2
+ni 	0.06
+alpha 	0.3
+C1 	0.12
+C2 	0.9
+!END
+
+AV_NODE
+alpha 	0.2
+v1 	1
+v2 	-1
+e 	3.3
+d 	3
+f 	5e-005
+!END
+
