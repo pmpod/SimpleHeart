@@ -8,30 +8,22 @@
 #include "Support\Vectors.h"
 #include "Support\Matrices.h"
 
-//TODO Update to OpenGL 3.0
+///TODO Update to OpenGL 3.0
 class glAtrium: public QGLWidget
 {
 	Q_OBJECT
 
 public:
-	glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, DiffusionMatrix *pixelmap, QWidget *parent = 0);
+	glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent = 0);
 	~glAtrium(void);
-
-	CCamera objCamera;
-
+	
     QSize minimumSizeHint() const;
     QSize sizeHint() const;
-	Vector3 screenToWorld(double x, double y, double width, double height);
 
-	bool m_controlable;
-	int m_palette;
 
-	
-    DiffusionMatrix *m_pixelmap;
-	int workMode;
-//! [0]
 
-//! [1]
+private:
+
 public slots:
     void setXRotation(int angle);
     void setYRotation(int angle);
@@ -40,14 +32,9 @@ public slots:
 	void setSide1();
 	void setSide2();
 
-	void changeColor(double value);
 	void setPaletteHSV();
 	void setPaletteGray();
 
-
-	void setCurrentPainter_Diffusion();
-	void setCurrentPainter_Selector();
-	void setCurrentPainter_Normal();
 
 signals:
     void xRotationChanged(int angle);
@@ -65,56 +52,57 @@ protected:
 	void mouseReleaseEvent(QMouseEvent *event);
 	void wheelEvent(QWheelEvent *event);
 
+	Vector3 screenToWorld(double x, double y, double width, double height);
+	int itemAt(double xx, double yy, double zz);
+
 
 //! [2]
 
 //! [3]
 private:
+	AtrialMachine2d *linkToMachine;		///Link to the Controller
+	const CardiacMesh *linkToMesh;		///Link to the Model
 
-	std::pair<int, int> itemAt(const QPoint &pos);
-	int itemAt(double xx, double yy, double zz);
 
-    GLuint makeObject();
-    void quad(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2,
-              GLdouble x3, GLdouble y3, GLdouble x4, GLdouble y4);
-    void extrude(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2);
-    void normalizeAngle(int *angle);
 
-	//void paintGround();
-	//void paintOrigin();
-	void paintPotential();
-	QColor colorek;
-    GLuint object;
+
+	//Model view properties:
+	float viewWidth;
+	float viewHeight;
+	GLfloat m[16];
+	Matrix4 modelMatrix;
+
+	float distanceToCamera;
+	int m_palette;
+	float rotationSpeed;
+	float zoomingSpeed;
     int xRot;
     int yRot;
-    int zRot;
-
-	float pixelSize;
+	int zRot;
 	int gridSize;
-    QPoint lastPos;
-    QColor qtGreen;
-    QColor qtPurple;
 
-	AtrialMachine2d *linkToMachine;
-	const CardiacMesh *linkToMesh;
+	//Event handling properties
+	bool m_controlable;
+	int workMode;
+    QPoint lastPos;
+
 
 	//World properities
+	QColor backgroundColor;
 	GLfloat LightAmbient[4]; 
 	GLfloat LightDiffuse[4];
 	GLfloat LightPosition[4];
 
 	//Raycasting handling
-	double fov;
-	double frustrumSize;
-	float nearClippingPlaneDistance;
-	bool paintRay;
-
-	Vector3 direction;
-	Vector3 testProbe;
 	vector<Vector4> pointRays;
+	Vector3 directionRay;
+	float fov;
+	float frustrumSize;
+	float nearClippingPlaneDistance;
+	float farClippingPlaneDistance;
 
-	float distanceToCamera;
+	//Debug handling
+	bool paintRay;
+	Vector3 testProbe;
 
-
-	double tempZoom;
 };

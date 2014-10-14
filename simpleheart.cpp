@@ -87,7 +87,7 @@ void SimpleHeart::init()
 	m_anisotrophy = new DiffusionMatrix(m_grid);
 
 	Machine2d = new AtrialMachine2d(simpleParameters, m_grid);
-	glGraph = new glAtrium(m_grid,Machine2d, m_matrix, ui.displayMain);
+	glGraph = new glAtrium(m_grid,Machine2d, ui.displayMain);
 
 	diffusionPainter = new DiffusionPainter(m_grid, m_matrix,m_anisotrophy, ui.displayDiffusion);
 	//--------------------

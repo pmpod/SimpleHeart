@@ -25,6 +25,13 @@ void paintGround(float deltaX,float deltaY, int CellsX, int CellsY) {
 		glLineWidth(f[0]);
 	}
 
+void normalizeAngle(int &angle)
+{
+	while (angle < 0)
+		angle += 360 * 16;
+	while (angle > 360 * 16)
+		angle -= 360 * 16;
+}
 void paintCell(int CellsX, int CellsY, float deltaX,float deltaY,float coloura,float colourb,float colourc) {
 
 		float f[1];
@@ -180,14 +187,12 @@ void paintCellTriangle(float x1, float y1, float z1, float color1,
 }
 void paintTheRay(float x, float y, float z)
 {
+	//Multiply to achieve length 50
 	x = x * 50;
 	y = y * 50;
 	z = z * 50;
 	glBegin(GL_TRIANGLES);
 
-	//glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
-	//			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
-	//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
 	GLfloat col1[] = { 1.0, 1.0, 1.0, 1.f };
 
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
@@ -644,7 +649,7 @@ bool invertMatrix(const GLfloat m[16], double invOut[16])
 	return true;
 }
 
-void drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg) {
+void drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb) {
 	int i, j;
 	for (i = 0; i <= lats; i++) {
 		double lat0 = M_PI * (-0.5 + (double)(i - 1) / lats);
@@ -655,7 +660,7 @@ void drawSphere(double r, int lats, int longs, double xorg, double yorg, double 
 		double z1 = r*  sin(lat1);
 		double zr1 = r*  cos(lat1);
 		//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
-		GLfloat col1[] = { 1.0, 1.0, 1.0, 1.f };
+		GLfloat col1[] = { rr, gg, bb, 1.f };
 
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
 		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);

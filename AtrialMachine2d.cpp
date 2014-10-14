@@ -62,9 +62,9 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 
 	defibrillate();
 
-	probeOscillator[0] = m_grid->m_mesh[0];
-	probeOscillator[1] = m_grid->m_mesh[2000];
-	probeOscillator[2] = m_grid->m_mesh[5000];
+	probeOscillator.push_back(m_grid->m_mesh[0]);
+	probeOscillator.push_back(m_grid->m_mesh[2000]);
+	probeOscillator.push_back(m_grid->m_mesh[5000]);
 
 	//m_strategy = new ForwardEulerStrategy(m_grid);
 	m_strategy = new AllexandreStrategy(m_grid);

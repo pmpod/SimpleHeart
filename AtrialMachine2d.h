@@ -55,7 +55,7 @@ public:
 	RRcalculator*		RRcalc_3;			// maszyna licz¹ca rr-y
 	RRcalculator*		RRcalc_4;			// maszyna licz¹ca rr-y
 	Oscillator*			probeRR_4;
-	Oscillator			*probeOscillator[3];
+	std::vector<Oscillator*> probeOscillator;
 
 	//std::vector<std::vector<Oscillator*>> m_oscillators;
 	std::vector<std::vector<double>> m_diffusionCoefficients;
