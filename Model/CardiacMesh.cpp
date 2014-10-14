@@ -79,59 +79,59 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - x]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + x]); //dodaje s¹siedni oscylator
-			//grid->m_mesh[j]->m_type = SOLID_WALL;
+			grid->m_mesh[j]->m_type = SOLID_WALL;
 		}
 		else if (idx == x-1 && idy > 0 && idy < y-1)
 		{
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - x]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + x]); //dodaje s¹siedni oscylator
-			//grid->m_mesh[j]->m_type = SOLID_WALL;
+			grid->m_mesh[j]->m_type = SOLID_WALL;
 		}
 		else if (idx > 0 && idx < x-1  && idy == 0 )
 		{
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + x]); //dodaje s¹siedni oscylator
-			//grid->m_mesh[j]->m_type = SOLID_WALL;
+			grid->m_mesh[j]->m_type = SOLID_WALL;
 		}
 		else if (idx > 0 && idx < x-1  && idy == y-1)
 		{
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - x]); //dodaje s¹siedni oscylator
-			//grid->m_mesh[j]->m_type = SOLID_WALL;
+			grid->m_mesh[j]->m_type = SOLID_WALL;
 		}
 		else if (idx == 0 && idy == 0)
 		{
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + x]); //dodaje s¹siedni oscylator
-			//grid->m_mesh[j]->m_type = SOLID_WALL;
+			grid->m_mesh[j]->m_type = SOLID_WALL;
 		}
 		else if (idx == x-1 && idy == y-1)
 		{
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - x]); //dodaje s¹siedni oscylator
-			//grid->m_mesh[j]->m_type = SOLID_WALL;
+			grid->m_mesh[j]->m_type = SOLID_WALL;
 		}
 		else if (idx == x-1 && idy == 0)
 		{
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + x]); //dodaje s¹siedni oscylator
-			//grid->m_mesh[j]->m_type = SOLID_WALL;
+			grid->m_mesh[j]->m_type = SOLID_WALL;
 		}
 		else if (idx == 0 && idy == y-1)
 		{
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j + 1]); //dodaje s¹siedni oscylator
 			grid->m_mesh[j]->addNeighbour(grid->m_mesh[j - x]); //dodaje s¹siedni oscylator
-			//grid->m_mesh[j]->m_type = SOLID_WALL;
+			grid->m_mesh[j]->m_type = SOLID_WALL;
 		}
 
 	}
 
 	grid->setVertexTriangleList(false);
 	grid->calculateCenter();
-
+	grid->setWallCells();
 	return grid;
 }
 CardiacMesh* CardiacMesh::constructCylindricalGrid(int x, int y, double dx, double dy)
@@ -145,6 +145,29 @@ CardiacMesh* CardiacMesh::importGrid()
 	return grid;
 }
 
+
+void CardiacMesh::setWallCells()
+{
+	m_wallCells.clear();
+	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
+	{
+		if (m_mesh[currentOsc]->m_type == SOLID_WALL)
+		{
+			Oscillator* neigh;
+			for (int currentNeighbour = 0; currentNeighbour < m_mesh[currentOsc]->m_neighbours.size(); ++currentNeighbour)
+			{
+				neigh = m_mesh[currentOsc]->m_neighbours[currentNeighbour];
+				if (neigh->getCellType() != SOLID_WALL &&
+					neigh->getCellType() != NONE)
+				{
+					m_wallCells.push_back(make_pair(m_mesh[currentOsc], neigh));
+					break;
+				}
+			}
+		}
+		
+	}
+}
 void CardiacMesh::destroyGrid()
 {
 	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();

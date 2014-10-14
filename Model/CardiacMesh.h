@@ -43,6 +43,7 @@ public:
 
 	std::vector<Oscillator*> m_mesh;
 	std::vector<Oscillator*> m_underStimulation;
+	std::vector<std::pair<Oscillator*, Oscillator*>> m_wallCells;
 
 	double m_minimumDistance;
 	double m_maximumDistance;

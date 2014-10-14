@@ -16,7 +16,8 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
     xRot = 0;
     yRot = 0;
     zRot = 0;
-	rotationSpeed = 1000.0f;
+	rotationSpeed = 500.0f;
+	zoomingSpeed = 10.0f;
 	m_palette = 0;
 
 	backgroundColor = QColor(50, 50, 50);
@@ -26,8 +27,8 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 
 	workMode=3;
 	
-	m_controlable = true;
-	paintRay = true;
+	m_controlable = false;
+	paintRay = false;
 	frustrumSize = 1.0f;
 	nearClippingPlaneDistance = 2.0;
 	farClippingPlaneDistance = 80.0;
@@ -179,8 +180,8 @@ void glAtrium::paintGL()
 		paintTheRay(directionRay.x, directionRay.y, directionRay.z);
 		//for (unsigned int j = 0; j < pointRays.size(); ++j)
 		//{
-		//	paintTheRay(pointRays[j].x , pointRays[j].y , pointRays[j].z );
-		//	drawSphere(0.2, 10, 10, pointRays[j].x, pointRays[j].y, pointRays[j].z);
+			//paintTheRay(pointRays[j].x , pointRays[j].y , pointRays[j].z );
+			//drawSphere(0.2, 10, 10, pointRays[j].x, pointRays[j].y, pointRays[j].z);
 		//}
 	}
 
@@ -203,10 +204,10 @@ void glAtrium::paintGL()
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, (0.3 + (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram()) / 2.0),
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, (0.3 + (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->getElectrogram()) / 2.0),
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, (0.3 + (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram()) / 2.0),
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, (0.3 + (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->getElectrogram()) / 2.0),
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, (0.3 + (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram()) / 2.0),
 				m_palette);
 		}
 		else
@@ -304,7 +305,7 @@ void glAtrium::wheelEvent(QWheelEvent *event)
 	double numDegrees = static_cast<double>(event->delta()) / 350.0;
 
 
-	distanceToCamera -= numDegrees;
+	distanceToCamera -= zoomingSpeed*numDegrees;
 	//if (distanceToCamera <nearClippingPlaneDistance) distanceToCamera = nearClippingPlaneDistance;
 
 	////if (event->orientation() == Qt::Horizontal) {
@@ -335,7 +336,10 @@ void glAtrium::mousePressEvent(QMouseEvent *event)
 	{
 		double 	y = event->pos().y();
 		double 	x = event->pos().x();
-		directionRay = screenToWorld(x, y, viewWidth, viewHeight);
+		double height = static_cast<double>(this->height());
+		double width = static_cast<double>(this->width());
+
+		directionRay = screenToWorld(x, y, width, height);
 
 		int item = itemAt(directionRay.x, directionRay.y, directionRay.z);
 		if (item != -1)
@@ -395,10 +399,17 @@ void glAtrium::mouseMoveEvent(QMouseEvent *event)
 
 		Vector3 next = screenToWorld(event->x(), event->y(), viewWidth, viewHeight);
 		Vector3 previous = screenToWorld(lastPos.x(), lastPos.y(), viewWidth, viewHeight);
+		Vector3 diff = next - previous;
 
-		setYRotation(yRot + rotationSpeed * (next.x - previous.x));
-		setZRotation(zRot + rotationSpeed * (next.y - previous.y));
-		setXRotation(xRot + rotationSpeed * (next.z - previous.z));
+		setXRotation(xRot + rotationSpeed * (diff.y));
+		setYRotation(yRot + rotationSpeed * (diff.x));
+	//	setZRotation(zRot + rotationSpeed * (next.y - previous.y));
+
+		//setYRotation(yRot + rotationSpeed * (next.x - previous.x));
+		//setZRotation(zRot + rotationSpeed * (next.y - previous.y));
+		//setXRotation(xRot + rotationSpeed * (next.z - previous.z));
+	//	float rotX = -1 * GLKMathDegreesToRadians(diff.y / 2.0);
+	//	float rotY = -1 * GLKMathDegreesToRadians(diff.x / 2.0);
 
 		lastPos = event->pos();
 	}
