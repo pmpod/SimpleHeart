@@ -80,6 +80,7 @@ public:
 	//double m_calculationTable[3];
 	//double* potentialo;
 	int m_whichFlag;
+	int m_stimulationID;
 //--------------------------------------
 	HEART_FUNCTION currentFunction;
 	SW_ALGORITHMS currentAlgorithm;

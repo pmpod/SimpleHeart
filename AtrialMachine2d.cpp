@@ -489,7 +489,7 @@ void AtrialMachine2d::processStep()
 	int meshWidth = m_grid->getSize();//m_skip
 	if (m_definitions->m_ectopicActivity && m_grid->stimulationBegun == false)
 	{
-		m_grid->setStimulation(m_grid->m_mesh[m_definitions->m_ectopicY*meshWidth + m_definitions->m_ectopicX], 5);
+		m_grid->setStimulation(m_grid->m_mesh[m_stimulationID], 5);
 		//m_grid->stimulationBegun = true;
 	}
 

@@ -112,6 +112,178 @@ void paintProbe(int CellsX, int CellsY, float deltaX,float deltaY,float coloura,
 		glLineWidth(f[0]);
 	}
 //------------------------------------------------------------
+//------------------------------------------------------------
+void paintCellTriangle(float x1, float y1, float z1, float color1,
+	float x2, float y2, float z2, float color2,
+	float x3, float y3, float z3, float color3, int palette)
+{
+	double rr = color1;
+	double gg = color1;
+	double bb = color1;
+
+
+	float f[1];
+	glGetFloatv(GL_LINE_WIDTH, f);
+	glLineWidth(1.0f);
+	glLineStipple(1, (short)2);
+
+	if (palette == 0)
+	{
+		glBegin(GL_TRIANGLES);
+
+		//glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
+		//			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
+		//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
+
+		glNormal3d(x1, y1, z1);
+
+		HSVtoRGB(1 - sqrt(color1), 1.0, 0.2 + 0.8*color1, &rr, &gg, &bb);
+		//glColor3f(rr, gg, bb);
+		GLfloat col1[] = { rr, gg, bb, 1.f };
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+		glVertex3f(x1, y1, z1);
+		HSVtoRGB(1 - sqrt(color2), 1.0, 0.2 + 0.8*color2, &rr, &gg, &bb);
+		col1[0] = rr;
+		col1[1] = gg;
+		col1[2] = bb;
+		col1[3] = 1.f;
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+		//glColor3f(rr, gg, bb);
+		glNormal3d(x2, y2, z2);
+		glVertex3f(x2, y2, z2);
+		HSVtoRGB(1 - sqrt(color3), 1.0, 0.2 + 0.8*color3, &rr, &gg, &bb);
+		col1[0] = rr;
+		col1[1] = gg;
+		col1[2] = bb;
+		col1[3] = 1.f;
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+		//glColor3f(rr, gg, bb);
+		glNormal3d(x3, y3, z3);
+		glVertex3f(x3, y3, z3);
+		glEnd();
+	}
+	else
+	{
+		glColor3f(rr, rr, rr);
+
+		glBegin(GL_TRIANGLES);
+		glVertex3f(x1, y1, z1);
+		glVertex3f(x2, y2, z2);
+		glVertex3f(x3, y3, z3);
+		glEnd();
+	}
+	glLineWidth(f[0]);
+
+}
+void paintTheRay(float x, float y, float z)
+{
+	x = x * 50;
+	y = y * 50;
+	z = z * 50;
+	glBegin(GL_TRIANGLES);
+
+	//glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
+	//			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
+	//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
+	GLfloat col1[] = { 1.0, 1.0, 1.0, 1.f };
+
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+	glNormal3d(0.02, 0.02, 0);
+	glVertex3f(0.02, 0.02, 0.0);
+
+	glNormal3d(x, y, z);
+	glVertex3f(x, y, z);
+
+	glNormal3d(0.03, 0, 0);
+	glVertex3f(0.03, 0, 0);
+
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+
+	//glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
+	//			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
+	//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
+
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+	glNormal3d(0.02, -0.02, 0);
+	glVertex3f(0.02, -0.02, 0.0);
+
+	glNormal3d(x, y, z);
+	glVertex3f(x, y, z);
+
+	glNormal3d(0.03, 0, 0);
+	glVertex3f(0.03, 0, 0);
+
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+
+	//glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
+	//			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
+	//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
+
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+	glNormal3d(-0.02, -0.02, 0);
+	glVertex3f(-0.02, -0.02, 0.0);
+
+	glNormal3d(x, y, z);
+	glVertex3f(x, y, z);
+
+	glNormal3d(0.03, 0, 0);
+	glVertex3f(0.03, 0, 0);
+
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+
+	//glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
+	//			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
+	//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
+
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+	glNormal3d(-0.02, 0.02, 0);
+	glVertex3f(-0.02, 0.02, 0.0);
+
+	glNormal3d(x, y, z);
+	glVertex3f(x, y, z);
+
+	glNormal3d(0.03, 0, 0);
+	glVertex3f(0.03, 0, 0);
+
+	glEnd();
+
+}
+void paintCellTriangleFull(float x1, float y1, float z1, QColor color1,
+	float x2, float y2, float z2, QColor color2,
+	float x3, float y3, float z3, QColor color3)
+{
+
+	float f[1];
+	glGetFloatv(GL_LINE_WIDTH, f);
+	glLineWidth(1.0f);
+	glLineStipple(1, (short)2);
+
+	glBegin(GL_TRIANGLES);
+	glColor3f(color1.redF(), color1.greenF(), color1.blueF());
+	glVertex3f(x1, y1, z1);
+	glColor3f(color2.redF(), color2.greenF(), color2.blueF());
+	glVertex3f(x2, y2, z2);
+	glColor3f(color3.redF(), color3.greenF(), color3.blueF());
+	glVertex3f(x3, y3, z3);
+	glEnd();
+
+
+	glLineWidth(f[0]);
+
+}
 void paintCellPoint(int CellsX, int CellsY, float deltaX,float deltaY, 
 					float colour1, float colour2,float colour3,float colour4,  int palette)
 {
@@ -215,20 +387,42 @@ void paintPixelB(int CellsX, int CellsY, float deltaX,float deltaY, QColor colou
 
 }
 //------------------------------------------------------------------------
-void paintOrigin() {
-		float f[1];
-		glGetFloatv(GL_LINE_WIDTH, f);
-		glLineWidth(3.0f);
-		glBegin(GL_LINES);
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(0.3f, 0.0f, 0.0f);
-			glColor3f(0.0f,1.0f,0.0f);
-			glVertex3f(0.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 0.3f, 0.0f);
-		glEnd();
-		glLineWidth(f[0]);
-	}
+void paintOrigin(float frustrumSize, float scale)
+{
+	float f[1];
+	GLfloat length = frustrumSize*scale;
+	GLfloat col1[] = { 1.0, 0.0, 0.0, 1.f };
+	GLfloat col2[] = { 0.0, 1.0, 0.0, 1.f };
+	GLfloat col3[] = { 0.0, 0.0, 1.0, 1.f };
+	glGetFloatv(GL_LINE_WIDTH, f);
+	glLineWidth(1.0f);
+	glBegin(GL_LINES);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(length, 0.0f, 0.0f);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col2);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, -length, 0.0f);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col3);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, length);
+	glEnd();
+	glLineWidth(f[0]);
+}
+//{
+//		float f[1];
+//		glGetFloatv(GL_LINE_WIDTH, f);
+//		glLineWidth(3.0f);
+//		glBegin(GL_LINES);
+//			glColor3f(1.0f, 0.0f, 0.0f);
+//			glVertex3f(0.0f, 0.0f, 0.0f);
+//			glVertex3f(0.3f, 0.0f, 0.0f);
+//			glColor3f(0.0f,1.0f,0.0f);
+//			glVertex3f(0.0f, 0.0f, 0.0f);
+//			glVertex3f(0.0f, 0.3f, 0.0f);
+//		glEnd();
+//		glLineWidth(f[0]);
+//	}
 
 //------------------------------------------------------------------------
 //void initGL(FXGLCanvas *glcanvas, FXGLVisual *glvisual)
@@ -319,3 +513,164 @@ void HSVtoRGB(double h, double s, double v, double* r, double* g, double* b)
   }
 }
 
+
+bool invertMatrix(const GLfloat m[16], double invOut[16])
+{
+	double inv[16], det;
+	int i;
+
+	inv[0] = m[5] * m[10] * m[15] -
+		m[5] * m[11] * m[14] -
+		m[9] * m[6] * m[15] +
+		m[9] * m[7] * m[14] +
+		m[13] * m[6] * m[11] -
+		m[13] * m[7] * m[10];
+
+	inv[4] = -m[4] * m[10] * m[15] +
+		m[4] * m[11] * m[14] +
+		m[8] * m[6] * m[15] -
+		m[8] * m[7] * m[14] -
+		m[12] * m[6] * m[11] +
+		m[12] * m[7] * m[10];
+
+	inv[8] = m[4] * m[9] * m[15] -
+		m[4] * m[11] * m[13] -
+		m[8] * m[5] * m[15] +
+		m[8] * m[7] * m[13] +
+		m[12] * m[5] * m[11] -
+		m[12] * m[7] * m[9];
+
+	inv[12] = -m[4] * m[9] * m[14] +
+		m[4] * m[10] * m[13] +
+		m[8] * m[5] * m[14] -
+		m[8] * m[6] * m[13] -
+		m[12] * m[5] * m[10] +
+		m[12] * m[6] * m[9];
+
+	inv[1] = -m[1] * m[10] * m[15] +
+		m[1] * m[11] * m[14] +
+		m[9] * m[2] * m[15] -
+		m[9] * m[3] * m[14] -
+		m[13] * m[2] * m[11] +
+		m[13] * m[3] * m[10];
+
+	inv[5] = m[0] * m[10] * m[15] -
+		m[0] * m[11] * m[14] -
+		m[8] * m[2] * m[15] +
+		m[8] * m[3] * m[14] +
+		m[12] * m[2] * m[11] -
+		m[12] * m[3] * m[10];
+
+	inv[9] = -m[0] * m[9] * m[15] +
+		m[0] * m[11] * m[13] +
+		m[8] * m[1] * m[15] -
+		m[8] * m[3] * m[13] -
+		m[12] * m[1] * m[11] +
+		m[12] * m[3] * m[9];
+
+	inv[13] = m[0] * m[9] * m[14] -
+		m[0] * m[10] * m[13] -
+		m[8] * m[1] * m[14] +
+		m[8] * m[2] * m[13] +
+		m[12] * m[1] * m[10] -
+		m[12] * m[2] * m[9];
+
+	inv[2] = m[1] * m[6] * m[15] -
+		m[1] * m[7] * m[14] -
+		m[5] * m[2] * m[15] +
+		m[5] * m[3] * m[14] +
+		m[13] * m[2] * m[7] -
+		m[13] * m[3] * m[6];
+
+	inv[6] = -m[0] * m[6] * m[15] +
+		m[0] * m[7] * m[14] +
+		m[4] * m[2] * m[15] -
+		m[4] * m[3] * m[14] -
+		m[12] * m[2] * m[7] +
+		m[12] * m[3] * m[6];
+
+	inv[10] = m[0] * m[5] * m[15] -
+		m[0] * m[7] * m[13] -
+		m[4] * m[1] * m[15] +
+		m[4] * m[3] * m[13] +
+		m[12] * m[1] * m[7] -
+		m[12] * m[3] * m[5];
+
+	inv[14] = -m[0] * m[5] * m[14] +
+		m[0] * m[6] * m[13] +
+		m[4] * m[1] * m[14] -
+		m[4] * m[2] * m[13] -
+		m[12] * m[1] * m[6] +
+		m[12] * m[2] * m[5];
+
+	inv[3] = -m[1] * m[6] * m[11] +
+		m[1] * m[7] * m[10] +
+		m[5] * m[2] * m[11] -
+		m[5] * m[3] * m[10] -
+		m[9] * m[2] * m[7] +
+		m[9] * m[3] * m[6];
+
+	inv[7] = m[0] * m[6] * m[11] -
+		m[0] * m[7] * m[10] -
+		m[4] * m[2] * m[11] +
+		m[4] * m[3] * m[10] +
+		m[8] * m[2] * m[7] -
+		m[8] * m[3] * m[6];
+
+	inv[11] = -m[0] * m[5] * m[11] +
+		m[0] * m[7] * m[9] +
+		m[4] * m[1] * m[11] -
+		m[4] * m[3] * m[9] -
+		m[8] * m[1] * m[7] +
+		m[8] * m[3] * m[5];
+
+	inv[15] = m[0] * m[5] * m[10] -
+		m[0] * m[6] * m[9] -
+		m[4] * m[1] * m[10] +
+		m[4] * m[2] * m[9] +
+		m[8] * m[1] * m[6] -
+		m[8] * m[2] * m[5];
+
+	det = m[0] * inv[0] + m[1] * inv[4] + m[2] * inv[8] + m[3] * inv[12];
+
+	if (det == 0)
+		return false;
+
+	det = 1.0 / det;
+
+	for (i = 0; i < 16; i++)
+		invOut[i] = inv[i] * det;
+
+	return true;
+}
+
+void drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg) {
+	int i, j;
+	for (i = 0; i <= lats; i++) {
+		double lat0 = M_PI * (-0.5 + (double)(i - 1) / lats);
+		double z0 = r* sin(lat0);
+		double zr0 = r*  cos(lat0);
+
+		double lat1 = M_PI * (-0.5 + (double)i / lats);
+		double z1 = r*  sin(lat1);
+		double zr1 = r*  cos(lat1);
+		//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
+		GLfloat col1[] = { 1.0, 1.0, 1.0, 1.f };
+
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+
+		glBegin(GL_QUAD_STRIP);
+		for (j = 0; j <= longs; j++) {
+			double lng = 2 * M_PI * (double)(j - 1) / longs;
+			double x = cos(lng);
+			double y = sin(lng);
+
+			glNormal3f(x * zr0 + xorg, y * zr0 + yorg, z0 + zorg);
+			glVertex3f(x * zr0 + xorg, y * zr0 + yorg, z0 + zorg);
+			glNormal3f(x * zr1*xorg, y * zr1 + yorg, z1 + zorg);
+			glVertex3f(x * zr1 + xorg, y * zr1 + yorg, z1 + zorg);
+		}
+		glEnd();
+	}
+}

@@ -5,7 +5,15 @@
 #include "Model\v3model.h"
 #include "heartDefines.h"
 #include "NumericStrategy\TimeTree.h"
-#include <set>
+#include "Support\Vectors.h"
+
+struct VertexTriangle
+{
+	int id_1;
+	int id_2;
+	int id_3;
+};
+
 class CardiacMesh : public QObject
 {
 	Q_OBJECT
@@ -18,6 +26,8 @@ public:
 	static CardiacMesh *constructCartesianGrid(int x, int y, double dx, double dy, CELL_TYPE type);
 	static CardiacMesh *constructCylindricalGrid(int x, int y, double dx, double dy);
 	static CardiacMesh *importGrid();
+	void setWallCells();
+	void setVertexTriangleList(bool doublesided);
 
 	void destroyGrid();
 	int getSize();
@@ -40,7 +50,16 @@ public:
 
 	int m_size;
 
+
+	//3d
+
+	void calculateCenter();
+	double m_radius;
+	std::vector<VertexTriangle*> m_vertexList;
+	Vector3 centerGeom;
+
 	public slots:
 	int	changeNode(int x, int y, CELL_TYPE m_type);
+
 
 };

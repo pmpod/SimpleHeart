@@ -81,13 +81,13 @@ void SimpleHeart::init()
 	simpleParameters = new atrialParameters();
 
 
-	m_grid = CardiacMesh::constructCartesianGrid(200,200, 0.4, 0.4, ATRIAL_V3);
+	m_grid = CardiacMesh::constructCartesianGrid(100,100, 0.4, 0.4, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	m_matrix = new DiffusionMatrix(m_grid);
 	m_anisotrophy = new DiffusionMatrix(m_grid);
 
 	Machine2d = new AtrialMachine2d(simpleParameters, m_grid);
-	glGraph = new glAtrium( Machine2d, m_matrix, ui.displayMain );
+	glGraph = new glAtrium(m_grid,Machine2d, m_matrix, ui.displayMain);
 
 	diffusionPainter = new DiffusionPainter(m_grid, m_matrix,m_anisotrophy, ui.displayDiffusion);
 	//--------------------
@@ -148,6 +148,8 @@ void SimpleHeart::init()
     plotEnt_el3->setAxisScale(QwtPlot::xBottom, 0, 99);
 	plotEnt_el3->setMinimumHeight(2);
 	plotEnt_el3->d_curve.back()->setPen(QPen(Qt::green));
+
+	
 //vis tab-----------------------------
 	layout_Visualisation->addWidget( glGraph );
 	ui.displayMain->setLayout(layout_Visualisation);

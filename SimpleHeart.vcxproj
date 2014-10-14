@@ -179,6 +179,7 @@
     <ClCompile Include="RRcalculator.cpp" />
     <ClCompile Include="rrPlot.cpp" />
     <ClCompile Include="simpleheart.cpp" />
+    <ClCompile Include="Support\Matrices.cpp" />
     <ClCompile Include="timePlot.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -288,78 +289,60 @@
       </AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Model\CardiacMesh.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Solutions\qwt-6.0.0\src" -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Model\cartesianGrid.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Solutions\qwt-6.0.0\src" -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Model\FitzHughNagumo.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Solutions\qwt-6.0.0\src" -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Model\Oscillator.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Solutions\qwt-6.0.0\src" -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Model\v3model.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Solutions\qwt-6.0.0\src" -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Model\vanDerGru.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Solutions\qwt-6.0.0\src" -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
@@ -790,7 +773,15 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." "-ID:\Solutions\qwt-6.0.0\src" -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"D:\Solutions\Qt-src-4.7.1\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-ID:\Solutions\Qt-src-4.7.1\include" "-ID:\Solutions\Qt-src-4.7.1\include\QtCore" "-ID:\Solutions\Qt-src-4.7.1\include\QtGui" "-ID:\Solutions\Qt-src-4.7.1\include\qtmain" "-ID:\Solutions\Qt-src-4.7.1\include\QtOpenGL" "-I." "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Solutions\Qt-src-4.7.1\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Support\Matrices.h" />
+    <ClInclude Include="Support\Vectors.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

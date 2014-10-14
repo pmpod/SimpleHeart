@@ -5,7 +5,6 @@
 
 CardiacMesh::CardiacMesh()
 {
-
 	m_maximumCV = 1; // [cm/ms]
 	stimulationBegun = false;
 }
@@ -130,6 +129,8 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 
 	}
 
+	grid->setVertexTriangleList(false);
+	grid->calculateCenter();
 
 	return grid;
 }
@@ -192,4 +193,95 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 	osc->setElectrogram(ele_val);
 	return ele_val;
 	//END ELECTROGRAM
+}
+
+//-----------------------------------------------------------
+void CardiacMesh::setVertexTriangleList(bool doublesided)
+{
+	m_vertexList.clear();
+	Vector3 first;
+	Vector3 second;
+	for (int currentVertex = 0; currentVertex < m_mesh.size(); ++currentVertex)
+	{
+		int index = 0;
+		bool ckeckNeighbours = true;
+		for (int k = 0; k < m_vertexList.size(); ++k)
+		{
+			if (currentVertex == m_vertexList[k]->id_2 || currentVertex == m_vertexList[k]->id_3 || currentVertex == m_vertexList[k]->id_1)
+			{
+				ckeckNeighbours = false;
+			}
+		}
+		if (ckeckNeighbours)
+		{
+			for (int currentNeighbour = 0; currentNeighbour < m_mesh[currentVertex]->m_neighbours.size(); ++currentNeighbour)
+			{
+
+				for (int i = currentNeighbour + 1; i < m_mesh[currentVertex]->m_neighbours.size(); ++i)
+				{
+					VertexTriangle *tr = new VertexTriangle;
+					bool isok = true;
+					tr->id_1 = currentVertex;
+					tr->id_2 = m_mesh[currentVertex]->m_neighbours[currentNeighbour]->oscillatorID;
+					tr->id_3 = m_mesh[currentVertex]->m_neighbours[i]->oscillatorID;
+
+					first.x = m_mesh[tr->id_2]->m_x - m_mesh[tr->id_1]->m_x;
+					first.y = m_mesh[tr->id_2]->m_y - m_mesh[tr->id_1]->m_y;
+					first.z = m_mesh[tr->id_2]->m_z - m_mesh[tr->id_1]->m_z;
+					second.x = m_mesh[tr->id_3]->m_x - m_mesh[tr->id_1]->m_x;
+					second.y = m_mesh[tr->id_3]->m_y - m_mesh[tr->id_1]->m_y;
+					second.z = m_mesh[tr->id_3]->m_z - m_mesh[tr->id_1]->m_z;
+
+					if (first.normalize().dot(second.normalize()) < -0.99)
+					{
+						isok = false;
+					}
+
+					if (isok == true)
+					{
+						VertexTriangle *tr2 = new VertexTriangle;
+						tr2->id_1 = currentVertex;
+						tr2->id_2 = m_mesh[currentVertex]->m_neighbours[i]->oscillatorID;
+						tr2->id_3 = m_mesh[currentVertex]->m_neighbours[currentNeighbour]->oscillatorID;
+						if (doublesided)
+						{
+							m_vertexList.push_back(tr2);
+							m_vertexList.push_back(tr);
+						}
+						else
+						{
+							if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr2);
+							if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr);
+							if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr);
+							if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr2);
+							if (first.cross(second).normalize().z >-0.05 && first.cross(second).normalize().z <0.05)
+							{
+								m_vertexList.push_back(tr);
+								m_vertexList.push_back(tr2);
+							}
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
+void CardiacMesh::calculateCenter()
+{
+	centerGeom.x = 0;
+	centerGeom.y = 0;
+	centerGeom.z = 0;
+
+	for (int currentVertex = 0; currentVertex < m_mesh.size(); ++currentVertex)
+	{
+		centerGeom.x += m_mesh[currentVertex]->getPositionX();
+		centerGeom.y += m_mesh[currentVertex]->getPositionY();
+		centerGeom.z += m_mesh[currentVertex]->getPositionZ();
+	}
+	centerGeom.x /= m_mesh.size();
+	centerGeom.y /= m_mesh.size();
+	centerGeom.z /= m_mesh.size();
 }

@@ -42,6 +42,9 @@
     <Filter Include="NumericStrategy">
       <UniqueIdentifier>{4cfa67b5-85d9-498e-bf08-01b2dabddb28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Support">
+      <UniqueIdentifier>{deec2b3c-70a8-422c-9185-a3040e265c1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -108,9 +111,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GLcamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GLfunc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="heartDefines.cpp">
@@ -223,6 +223,12 @@
     </ClCompile>
     <ClCompile Include="AtrialMachine2d.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Support\Matrices.cpp">
+      <Filter>Support</Filter>
+    </ClCompile>
+    <ClCompile Include="GLfunc.cpp">
+      <Filter>View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,5 +364,13 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SimpleHeart.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Support\Matrices.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Support\Vectors.h">
+      <Filter>Support</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
