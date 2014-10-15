@@ -120,19 +120,18 @@ void paintProbe(int CellsX, int CellsY, float deltaX,float deltaY,float coloura,
 	}
 //------------------------------------------------------------
 //------------------------------------------------------------
-void paintCellTriangle(float x1, float y1, float z1, float color1,
-	float x2, float y2, float z2, float color2,
-	float x3, float y3, float z3, float color3, int palette)
+void paintCellTriangle(double& x1, double& y1, double& z1, double color1,
+	double& x2, double& y2, double& z2, double color2,
+	double& x3, double& y3, double& z3, double color3, int palette)
 {
-	double rr = color1;
-	double gg = color1;
-	double bb = color1;
+	double rr = 0.3 + color1 / 2.0;
+	double gg = 0.3 + color1 / 2.0;
+	double bb = 0.3 + color1 / 2.0;
 
-
-	float f[1];
-	glGetFloatv(GL_LINE_WIDTH, f);
-	glLineWidth(1.0f);
-	glLineStipple(1, (short)2);
+	//float f[1];
+	//glGetFloatv(GL_LINE_WIDTH, f);
+	//glLineWidth(1.0f);
+	//glLineStipple(1, (short)2);
 
 	if (palette == 0)
 	{
@@ -182,7 +181,7 @@ void paintCellTriangle(float x1, float y1, float z1, float color1,
 		glVertex3f(x3, y3, z3);
 		glEnd();
 	}
-	glLineWidth(f[0]);
+	//glLineWidth(f[0]);
 
 }
 void paintTheRay(float x, float y, float z)

@@ -195,29 +195,30 @@ void glAtrium::paintGL()
 
 	glPushMatrix();
 
-	for (unsigned int j = 0; j < linkToMesh->m_vertexList.size(); ++j)
+	int vertexNumber = linkToMesh->m_vertexList.size();
+	for (unsigned int j = 0; j < vertexNumber; ++j)
 	{
 		if (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_type != SOLID_WALL)
 		{
 			paintCellTriangle(linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, (0.3 + (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram()) / 2.0),
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram(),
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, (0.3 + (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram()) / 2.0),
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram(),
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, (0.3 + (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram()) / 2.0),
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram(),
 				m_palette);
 		}
 		else
 		{
 			paintCellTriangle(linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, 0,
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, 0.0,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, 0,
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, 0.0,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, 0,

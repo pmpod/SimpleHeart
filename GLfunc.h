@@ -12,9 +12,9 @@ void paintCell(int CellsX, int CellsY, float deltaX,float deltaY, float coloura,
 void paintProbe(int CellsX, int CellsY, float deltaX,float deltaY, float coloura,float colourb,float colourc);
 void paintCellPoint(int CellsX, int CellsY, float deltaX,float deltaY, 
 					float colour1, float colour2,float colour3,float colour4, int palette);
-void paintCellTriangle(float x1, float y1, float z1, float color1,
-	float x2, float y2, float z2, float color2,
-	float x3, float y3, float z3, float color3, int palette);
+void paintCellTriangle(double& x1, double& y1, double& z1, double color1,
+	double& x2, double& y2, double& z2, double color2,
+	double& x3, double& y3, double& z3, double color3, int palette);
 void paintCellTriangleFull(float x1, float y1, float z1, QColor color1,
 	float x2, float y2, float z2, QColor color2,
 	float x3, float y3, float z3, QColor color3);

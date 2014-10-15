@@ -57,6 +57,7 @@ double ForwardEulerStrategy::nextStep()
 	}
 
 	//border walls
+	int wallSize = m_mesh->m_wallCells.size();
 	for (int i = 0; i < m_mesh->m_wallCells.size(); ++i)
 	{
 		m_mesh->m_wallCells[i].first->setPotential(m_mesh->m_wallCells[i].second->getPotential());

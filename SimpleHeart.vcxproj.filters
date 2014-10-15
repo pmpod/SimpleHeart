@@ -337,9 +337,6 @@
     <CustomBuild Include="Model\vanDerGru.h">
       <Filter>Model</Filter>
     </CustomBuild>
-    <CustomBuild Include="GLcamera.h">
-      <Filter>View</Filter>
-    </CustomBuild>
     <CustomBuild Include="GLfunc.h">
       <Filter>View</Filter>
     </CustomBuild>
