@@ -32,9 +32,6 @@ void AllexandreStrategy::reset()
 AllexandreStrategy::~AllexandreStrategy()
 {
 	clear(m_updateTimeTree);
-	//Clear the dictionary:
-	//      for( std::vector<Oscillator*>::iterator it2 = it->begin(); it2 != it->end(); ++it2)
-	//delete *it2;  
 }
 //---------------------------------------------------------------------------------
 double AllexandreStrategy::nextStep()

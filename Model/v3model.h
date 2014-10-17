@@ -21,7 +21,7 @@ public:
 	double get_J_fi();
 	double get_tau_v_minus();
 	double get_J_so();
-	double get_J_si();
+	double get_J_si();  
 
 public slots:
     void setParameter(double value, OSC_PARAMETER parameter);
