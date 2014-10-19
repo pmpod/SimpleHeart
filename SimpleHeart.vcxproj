@@ -767,6 +767,9 @@
     <ClInclude Include="Support\Matrices.h" />
     <ClInclude Include="Support\Vectors.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleHeart.doxyfile" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

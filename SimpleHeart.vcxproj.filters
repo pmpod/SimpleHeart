@@ -45,6 +45,9 @@
     <Filter Include="Support">
       <UniqueIdentifier>{deec2b3c-70a8-422c-9185-a3040e265c1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{9aa8637e-e457-434a-8fe9-8b3e4e99e74a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -369,5 +372,10 @@
     <ClInclude Include="Support\Vectors.h">
       <Filter>Support</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleHeart.doxyfile">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
