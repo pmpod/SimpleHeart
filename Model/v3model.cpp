@@ -1,5 +1,4 @@
 #include "v3model.h"
-#include "fastonebigheader.h"
 
 v3model::v3model(void) : Oscillator()
 {
@@ -85,7 +84,7 @@ double v3model::get_J_so()
 }
 double v3model::get_J_si( )
 {
-	return (-m_v_current[1])*(1 + fasttanh(k*(m_v_potential - u_cs1))) / (2 * tau_s1);
+	return (-m_v_current[1])*(1 + tanh(k*(m_v_potential - u_cs1))) / (2 * tau_s1);
 }
 //-------------------------------------------------------------
 void v3model::setParameter(double value, OSC_PARAMETER parameter)

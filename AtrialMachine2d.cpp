@@ -66,8 +66,8 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 	probeOscillator.push_back(m_grid->m_mesh[2000]);
 	probeOscillator.push_back(m_grid->m_mesh[5000]);
 
-	m_strategy = new ForwardEulerStrategy(m_grid);
-	//m_strategy = new AllexandreStrategy(m_grid);
+	//m_strategy = new ForwardEulerStrategy(m_grid);
+	m_strategy = new AllexandreStrategy(m_grid);
 }
 //-------------------------------------------------------------------------
 AtrialMachine2d::~AtrialMachine2d(void)
@@ -463,43 +463,23 @@ void AtrialMachine2d::editDiffusionCoefficients()
 	}
 
 }
-//--------------------
-//double AtrialMachine2d::integrationFunction( double t, double y, Oscillator* osc )
-//{
-//	if (currentFunction == OSC_CURRENT)
-//	{
-//		return osc->getCurrentPrim(t,y, m_whichFlag);
-//	}
-//	if (currentFunction == OSC_CURRENT_2)
-//	{
-//		return osc->getCurrentPrim_2(t,y, m_whichFlag);
-//	}
-//	if (currentFunction == OSC_POTENTIAL)
-//	{
-//		return osc->getPotentialPrim(y, t, m_whichFlag);
-//	}
-//	else
-//		return -1;
-//}
-//----------------
-
+//---------------------------------------------------------------------------------------
 void AtrialMachine2d::processStep() 
 {
+	
 	int meshSize = m_grid->m_mesh.size();
 	int meshWidth = m_grid->getSize();//m_skip
 	if (m_definitions->m_ectopicActivity && m_grid->stimulationBegun == false)
 	{
 		m_grid->setStimulation(m_grid->m_mesh[m_stimulationID], 5);
-		//m_grid->stimulationBegun = true;
 	}
 
 	else if (!m_definitions->m_ectopicActivity && m_grid->stimulationBegun == true)
 	{
-		//m_grid->stimulationBegun = false;
 		m_grid->stopStimulation();
 	}
 
-	for (int kk = 0; kk <= 20; ++kk)
+	for (int kk = 0; kk <= meshSize; ++kk)
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}

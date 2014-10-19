@@ -31,6 +31,8 @@ double ForwardEulerStrategy::nextStep()
 
 		if (osc->getCellType() != SOLID_WALL)
 		{
+			nextTime = (osc->getCurrentTime()) + nextTimestep;
+			osc->setCurrentTime(nextTime);
 
 			if (osc->m_underStimulation == false)
 			{
@@ -48,10 +50,9 @@ double ForwardEulerStrategy::nextStep()
 			{
 				osc->setPreviousPotential(osc->m_v_potential);
 				osc->setPotential(m_mesh->m_ectopicAmplitude);
+				osc->setElectrogram(osc->m_v_potential);
 			}
 
-			nextTime = (osc->getCurrentTime()) + nextTimestep;
-			osc->setCurrentTime(nextTime);
 		}
 
 	}
