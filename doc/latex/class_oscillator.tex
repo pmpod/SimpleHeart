@@ -1,0 +1,553 @@
+\hypertarget{class_oscillator}{\section{Oscillator Class Reference}
+\label{class_oscillator}\index{Oscillator@{Oscillator}}
+}
+
+
+{\ttfamily \#include $<$Oscillator.\+h$>$}
+
+Inheritance diagram for Oscillator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_oscillator}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_oscillator_a56140e76f42036dc6d7a4cd989917edc}{set\+Parameter} (double value, \hyperlink{heart_defines_8h_a79395aba577c2bc57e7ca211ff3476a6}{O\+S\+C\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R} parameter)
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_oscillator_a065af90ddd004f7af4e1d7489b4ea5d6}{new\+Potential\+Value} (double pot\+Value)
+\item 
+void \hyperlink{class_oscillator_aa48179145afe4bad7b757eefecb6053a}{new\+State} (double pot\+Value, double cur\+Value)
+\item 
+void \hyperlink{class_oscillator_a949a6e88a1e5b7037ba93d6a9c927b4f}{new\+Potential\+Time} (double time, double pot\+Value)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_oscillator_aad43fa7eeffdeb0cbc4767f2de538d80}{Oscillator} (void)
+\item 
+\hyperlink{class_oscillator_accb2f4ecc6604b2c38a7fd9973578360}{$\sim$\+Oscillator} (void)
+\item 
+void \hyperlink{class_oscillator_abc5d43aeb061d97dd58749baf2b8f82d}{state\+Calculated} (double a, double b, int which)
+\item 
+double \& \hyperlink{class_oscillator_a6d6d8ef3c022f6fd8c31c3e50987a822}{get\+Ref\+Potential} ()
+\item 
+double \& \hyperlink{class_oscillator_a734d7375586e9982a6419d1f08b63c57}{get\+Ref\+Previous\+Potential} ()
+\item 
+double \& \hyperlink{class_oscillator_ac82b2732257e64c0f84f5b520ef16704}{get\+Ref\+Current\+Time} ()
+\item 
+double \hyperlink{class_oscillator_a2dcfd98ad9d0c6e03cc07f84dd5f054a}{get\+Current} (const int \&which)
+\item 
+double \hyperlink{class_oscillator_a6ababfb0cb31e5dbf26b4d60a0d0bb16}{get\+Potential} ()
+\item 
+double \hyperlink{class_oscillator_a6272096989cb47a1cf43fd3aee78fdf5}{get\+Previous\+Potential} ()
+\item 
+virtual double \hyperlink{class_oscillator_a6132c7be8737a5686d64629b68b81743}{get\+Current\+Prim} (const int \&which)
+\item 
+virtual double \hyperlink{class_oscillator_a932fda2705d851fbe28c569547f4b4f1}{get\+Potential\+Prim} ()
+\item 
+double \hyperlink{class_oscillator_a6e403f6aa9e2cd9ff8aea1aefdb9459c}{get\+Current\+Time} ()
+\item 
+double \hyperlink{class_oscillator_a0768ee28a72db7e13e14fb717408292c}{get\+Previous\+Time} ()
+\item 
+\hyperlink{heart_defines_8h_a2f059cd81f362503874790462d535f5b}{C\+E\+L\+L\+\_\+\+T\+Y\+P\+E} \hyperlink{class_oscillator_aa0ae5ca40fa136d70b145d490646b8aa}{get\+Cell\+Type} ()
+\item 
+double \hyperlink{class_oscillator_a2eb50a29aeac6a63b4b8212d1b4cc097}{get\+Electrogram} ()
+\item 
+double \hyperlink{class_oscillator_a5051ab41b5036cb775faaa5f97e2c182}{get\+Extrapolated\+Neighbour\+Source} ()
+\item 
+double \hyperlink{class_oscillator_a38ec1c04097cceea46f4712fca7169e2}{get\+Uniform\+Timestep\+Current\+Source} ()
+\item 
+double \hyperlink{class_oscillator_ae0af6d579f485bc7ffbff790c145b388}{get\+Last\+Current\+Source} ()
+\item 
+double \hyperlink{class_oscillator_ad2be11901d2b0055a48890643db3350d}{get\+Position\+X} ()
+\item 
+double \hyperlink{class_oscillator_aaa999e4824d4e4007c0541ae78f60e6c}{get\+Position\+Y} ()
+\item 
+double \hyperlink{class_oscillator_a6f21f66ca4ca7a163d6b3d84eda3b8db}{get\+Position\+Z} ()
+\item 
+int \hyperlink{class_oscillator_a115350abaf2f6ddbf9c06027b8faa1e6}{get\+Number\+Of\+Currents} ()
+\item 
+void \hyperlink{class_oscillator_a672b578b643936b3b0b42371b6d339d9}{set\+Position\+X} (const double \&pos)
+\item 
+void \hyperlink{class_oscillator_aecfc7c140beecd6a82ab6d414892632d}{set\+Position\+Y} (const double \&pos)
+\item 
+void \hyperlink{class_oscillator_a597c5025182c90571804c6dc81f33e70}{set\+Position\+Z} (const double \&pos)
+\item 
+void \hyperlink{class_oscillator_acdee83b452a76ee20b48248cd4ba45cc}{set\+Type} (\hyperlink{heart_defines_8h_a2f059cd81f362503874790462d535f5b}{C\+E\+L\+L\+\_\+\+T\+Y\+P\+E} type)
+\item 
+void \hyperlink{class_oscillator_af5cd9a1f69c6e31748d54128a68628f8}{add\+Neighbour} (\hyperlink{class_oscillator}{Oscillator} $\ast$neighbour)
+\item 
+void \hyperlink{class_oscillator_a5e4ecacba9fc577660c1643c1e50e0bb}{set\+Current} (const double \&current, const int \&which)
+\item 
+void \hyperlink{class_oscillator_a42171f7e11ac041ab982d055ba389352}{set\+Electrogram} (const double \&electrogram)
+\item 
+void \hyperlink{class_oscillator_a91b56c7ed7c11f30109e8b1db296b2a6}{set\+Potential} (const double \&potential)
+\item 
+void \hyperlink{class_oscillator_a3e24a7637ed5aaf05101f3e115ea8e9c}{set\+Previous\+Potential} (const double \&potential)
+\item 
+void \hyperlink{class_oscillator_ae4fdf768b4fc00f6830c295cdc2f3e62}{set\+Current\+Time} (const double \&time)
+\item 
+void \hyperlink{class_oscillator_a549fcc8c0dc9a0789a062a0b1062610b}{set\+Sigma} (double s\+X, double s\+Y, double s\+Z)
+\item 
+void \hyperlink{class_oscillator_a8d4b8d2c8eb200afbbb4d4d999f068ab}{set\+Connexins} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{heart_defines_8h_a2f059cd81f362503874790462d535f5b}{C\+E\+L\+L\+\_\+\+T\+Y\+P\+E} \hyperlink{class_oscillator_a7553dcea69896c2f3ff2bc8bda1d05cc}{m\+\_\+type}
+\item 
+int \hyperlink{class_oscillator_acfc962cfc0b6c92fc8ae8d7254346bef}{oscillator\+I\+D}
+\item 
+double \hyperlink{class_oscillator_a44d11f6d153d4a061fc1bbb6785ddc18}{m\+\_\+v\+\_\+potential}
+\item 
+double \hyperlink{class_oscillator_a2a1649ababe43b1de3dbd6d5f24db703}{m\+\_\+previous\+\_\+potential}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_oscillator_a344928736ed0deb40bc1c73d50af5d33}{m\+\_\+v\+\_\+current}
+\item 
+double \hyperlink{class_oscillator_aedf0974c19ea8428e3702f267cf45465}{m\+\_\+potential\+P\+R\+I\+M}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_oscillator_aef644a4e5faf78fa338a7a5e739f267c}{m\+\_\+current\+P\+R\+I\+M}
+\item 
+double \hyperlink{class_oscillator_ab65a59d93c248616facbd1f01b3c2b87}{m\+\_\+v\+\_\+electrogram}
+\item 
+double \hyperlink{class_oscillator_aae4aa22ad331c19871be91d7cc5ceafa}{m\+\_\+v\+\_\+scaled\+Potential}
+\item 
+double \hyperlink{class_oscillator_a45a1214b84b342e4ee078d218112f001}{m\+\_\+previous\+\_\+scaled\+Potential}
+\item 
+double \hyperlink{class_oscillator_abe68e99fc990a44b9bd234751eec0f24}{m\+\_\+current\+Time}
+\item 
+double \hyperlink{class_oscillator_ab97f31715485a24f49c98a01caa9f2d8}{m\+\_\+previous\+Time}
+\item 
+double \hyperlink{class_oscillator_a4db30c0516d078b69426aad65bf13022}{guard\+Timestep}
+\item 
+bool \hyperlink{class_oscillator_aeaa03f804f9d13f27635b94ea7a6bd32}{m\+\_\+under\+Stimulation}
+\item 
+double \hyperlink{class_oscillator_a968627d069d5f0c44d8134718a01237f}{\+\_\+source\+A}
+\item 
+double \hyperlink{class_oscillator_a5a144fd5dd7cbcbfc47d7c9013d330b8}{\+\_\+source\+B}
+\item 
+double \hyperlink{class_oscillator_a766694982f9a1f8ed7013828089587f7}{m\+\_\+current\+Source}
+\item 
+double \hyperlink{class_oscillator_abd8b2a7267f85cae787a0bc77d1f5a5a}{m\+\_\+x}
+\item 
+double \hyperlink{class_oscillator_a6936c789a75680f0486c817af4fce202}{m\+\_\+y}
+\item 
+double \hyperlink{class_oscillator_ae00491a4783797fb6edb9c3d5317a6ad}{m\+\_\+z}
+\item 
+double \hyperlink{class_oscillator_aa0fe6259ca35433e3bd0dbac2d0ead65}{m\+\_\+sigma\+X}
+\item 
+double \hyperlink{class_oscillator_a253c7652df4789833c9f940c3278036d}{m\+\_\+sigma\+Y}
+\item 
+double \hyperlink{class_oscillator_af8ba90eb71c73ac1c789d569e7e2f92f}{m\+\_\+sigma\+Z}
+\item 
+double \hyperlink{class_oscillator_a952e781ffe848b06b7b511c54f1d090c}{m\+\_\+\+Connexin\+Sum}
+\item 
+std\+::vector$<$ \hyperlink{class_oscillator}{Oscillator} $\ast$ $>$ \hyperlink{class_oscillator_ac6add7bad19c62071ad1ce651b815e4e}{m\+\_\+neighbours}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_oscillator_a7031173912bc2225997a3ab6f9995fec}{m\+\_\+neighbours\+Distance}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_oscillator_a94d86971a2a425d2e2492962491dc01b}{m\+\_\+connexin}
+\item 
+double \hyperlink{class_oscillator_a80a2b0beda0d17f549160fbbd456243b}{m\+\_\+hormonal\+Activity}
+\item 
+double \hyperlink{class_oscillator_a43006eaf9a5a3b50a8f6a2a95ce47231}{vmax}
+\item 
+double \hyperlink{class_oscillator_a8912b5faff383dcc1a33554d2bcc5844}{vmin}
+\item 
+double \hyperlink{class_oscillator_af6886099dfca8ec732676f4f89935651}{vzero}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_oscillator_aad43fa7eeffdeb0cbc4767f2de538d80}{\index{Oscillator@{Oscillator}!Oscillator@{Oscillator}}
+\index{Oscillator@{Oscillator}!Oscillator@{Oscillator}}
+\subsubsection[{Oscillator}]{\setlength{\rightskip}{0pt plus 5cm}Oscillator\+::\+Oscillator (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_aad43fa7eeffdeb0cbc4767f2de538d80}
+\hypertarget{class_oscillator_accb2f4ecc6604b2c38a7fd9973578360}{\index{Oscillator@{Oscillator}!````~Oscillator@{$\sim$\+Oscillator}}
+\index{````~Oscillator@{$\sim$\+Oscillator}!Oscillator@{Oscillator}}
+\subsubsection[{$\sim$\+Oscillator}]{\setlength{\rightskip}{0pt plus 5cm}Oscillator\+::$\sim$\+Oscillator (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_accb2f4ecc6604b2c38a7fd9973578360}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_oscillator_af5cd9a1f69c6e31748d54128a68628f8}{\index{Oscillator@{Oscillator}!add\+Neighbour@{add\+Neighbour}}
+\index{add\+Neighbour@{add\+Neighbour}!Oscillator@{Oscillator}}
+\subsubsection[{add\+Neighbour}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::add\+Neighbour (
+\begin{DoxyParamCaption}
+\item[{{\bf Oscillator} $\ast$}]{neighbour}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_af5cd9a1f69c6e31748d54128a68628f8}
+\hypertarget{class_oscillator_aa0ae5ca40fa136d70b145d490646b8aa}{\index{Oscillator@{Oscillator}!get\+Cell\+Type@{get\+Cell\+Type}}
+\index{get\+Cell\+Type@{get\+Cell\+Type}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Cell\+Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+E\+L\+L\+\_\+\+T\+Y\+P\+E} Oscillator\+::get\+Cell\+Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_aa0ae5ca40fa136d70b145d490646b8aa}
+\hypertarget{class_oscillator_a2dcfd98ad9d0c6e03cc07f84dd5f054a}{\index{Oscillator@{Oscillator}!get\+Current@{get\+Current}}
+\index{get\+Current@{get\+Current}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Current}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Current (
+\begin{DoxyParamCaption}
+\item[{const int \&}]{which}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a2dcfd98ad9d0c6e03cc07f84dd5f054a}
+\hypertarget{class_oscillator_a6132c7be8737a5686d64629b68b81743}{\index{Oscillator@{Oscillator}!get\+Current\+Prim@{get\+Current\+Prim}}
+\index{get\+Current\+Prim@{get\+Current\+Prim}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Current\+Prim}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Current\+Prim (
+\begin{DoxyParamCaption}
+\item[{const int \&}]{which}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_oscillator_a6132c7be8737a5686d64629b68b81743}
+
+
+Reimplemented in \hyperlink{classv3model_a14957985c821508b7a5985a423d0c942}{v3model}.
+
+\hypertarget{class_oscillator_a6e403f6aa9e2cd9ff8aea1aefdb9459c}{\index{Oscillator@{Oscillator}!get\+Current\+Time@{get\+Current\+Time}}
+\index{get\+Current\+Time@{get\+Current\+Time}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Current\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Current\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a6e403f6aa9e2cd9ff8aea1aefdb9459c}
+\hypertarget{class_oscillator_a2eb50a29aeac6a63b4b8212d1b4cc097}{\index{Oscillator@{Oscillator}!get\+Electrogram@{get\+Electrogram}}
+\index{get\+Electrogram@{get\+Electrogram}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Electrogram}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Electrogram (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a2eb50a29aeac6a63b4b8212d1b4cc097}
+\hypertarget{class_oscillator_a5051ab41b5036cb775faaa5f97e2c182}{\index{Oscillator@{Oscillator}!get\+Extrapolated\+Neighbour\+Source@{get\+Extrapolated\+Neighbour\+Source}}
+\index{get\+Extrapolated\+Neighbour\+Source@{get\+Extrapolated\+Neighbour\+Source}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Extrapolated\+Neighbour\+Source}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Extrapolated\+Neighbour\+Source (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a5051ab41b5036cb775faaa5f97e2c182}
+\hypertarget{class_oscillator_ae0af6d579f485bc7ffbff790c145b388}{\index{Oscillator@{Oscillator}!get\+Last\+Current\+Source@{get\+Last\+Current\+Source}}
+\index{get\+Last\+Current\+Source@{get\+Last\+Current\+Source}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Last\+Current\+Source}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Last\+Current\+Source (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_ae0af6d579f485bc7ffbff790c145b388}
+\hypertarget{class_oscillator_a115350abaf2f6ddbf9c06027b8faa1e6}{\index{Oscillator@{Oscillator}!get\+Number\+Of\+Currents@{get\+Number\+Of\+Currents}}
+\index{get\+Number\+Of\+Currents@{get\+Number\+Of\+Currents}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Number\+Of\+Currents}]{\setlength{\rightskip}{0pt plus 5cm}int Oscillator\+::get\+Number\+Of\+Currents (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a115350abaf2f6ddbf9c06027b8faa1e6}
+\hypertarget{class_oscillator_ad2be11901d2b0055a48890643db3350d}{\index{Oscillator@{Oscillator}!get\+Position\+X@{get\+Position\+X}}
+\index{get\+Position\+X@{get\+Position\+X}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Position\+X}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Position\+X (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_ad2be11901d2b0055a48890643db3350d}
+\hypertarget{class_oscillator_aaa999e4824d4e4007c0541ae78f60e6c}{\index{Oscillator@{Oscillator}!get\+Position\+Y@{get\+Position\+Y}}
+\index{get\+Position\+Y@{get\+Position\+Y}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Position\+Y}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Position\+Y (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_aaa999e4824d4e4007c0541ae78f60e6c}
+\hypertarget{class_oscillator_a6f21f66ca4ca7a163d6b3d84eda3b8db}{\index{Oscillator@{Oscillator}!get\+Position\+Z@{get\+Position\+Z}}
+\index{get\+Position\+Z@{get\+Position\+Z}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Position\+Z}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Position\+Z (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a6f21f66ca4ca7a163d6b3d84eda3b8db}
+\hypertarget{class_oscillator_a6ababfb0cb31e5dbf26b4d60a0d0bb16}{\index{Oscillator@{Oscillator}!get\+Potential@{get\+Potential}}
+\index{get\+Potential@{get\+Potential}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Potential (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a6ababfb0cb31e5dbf26b4d60a0d0bb16}
+\hypertarget{class_oscillator_a932fda2705d851fbe28c569547f4b4f1}{\index{Oscillator@{Oscillator}!get\+Potential\+Prim@{get\+Potential\+Prim}}
+\index{get\+Potential\+Prim@{get\+Potential\+Prim}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Potential\+Prim}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Potential\+Prim (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_oscillator_a932fda2705d851fbe28c569547f4b4f1}
+
+
+Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3model}, \hyperlink{class_fitz_hugh_nagumo_ae4d4e8c1c3b9905a0e6aaa5ae0c2f2ed}{Fitz\+Hugh\+Nagumo}, and \hyperlink{classvan_der_gru_afe764c0c671b5a1f7cbf21f87f5eb936}{van\+Der\+Gru}.
+
+\hypertarget{class_oscillator_a6272096989cb47a1cf43fd3aee78fdf5}{\index{Oscillator@{Oscillator}!get\+Previous\+Potential@{get\+Previous\+Potential}}
+\index{get\+Previous\+Potential@{get\+Previous\+Potential}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Previous\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Previous\+Potential (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a6272096989cb47a1cf43fd3aee78fdf5}
+\hypertarget{class_oscillator_a0768ee28a72db7e13e14fb717408292c}{\index{Oscillator@{Oscillator}!get\+Previous\+Time@{get\+Previous\+Time}}
+\index{get\+Previous\+Time@{get\+Previous\+Time}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Previous\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Previous\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a0768ee28a72db7e13e14fb717408292c}
+\hypertarget{class_oscillator_ac82b2732257e64c0f84f5b520ef16704}{\index{Oscillator@{Oscillator}!get\+Ref\+Current\+Time@{get\+Ref\+Current\+Time}}
+\index{get\+Ref\+Current\+Time@{get\+Ref\+Current\+Time}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Ref\+Current\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double \& Oscillator\+::get\+Ref\+Current\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_ac82b2732257e64c0f84f5b520ef16704}
+\hypertarget{class_oscillator_a6d6d8ef3c022f6fd8c31c3e50987a822}{\index{Oscillator@{Oscillator}!get\+Ref\+Potential@{get\+Ref\+Potential}}
+\index{get\+Ref\+Potential@{get\+Ref\+Potential}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Ref\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double \& Oscillator\+::get\+Ref\+Potential (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a6d6d8ef3c022f6fd8c31c3e50987a822}
+\hypertarget{class_oscillator_a734d7375586e9982a6419d1f08b63c57}{\index{Oscillator@{Oscillator}!get\+Ref\+Previous\+Potential@{get\+Ref\+Previous\+Potential}}
+\index{get\+Ref\+Previous\+Potential@{get\+Ref\+Previous\+Potential}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Ref\+Previous\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double \& Oscillator\+::get\+Ref\+Previous\+Potential (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a734d7375586e9982a6419d1f08b63c57}
+\hypertarget{class_oscillator_a38ec1c04097cceea46f4712fca7169e2}{\index{Oscillator@{Oscillator}!get\+Uniform\+Timestep\+Current\+Source@{get\+Uniform\+Timestep\+Current\+Source}}
+\index{get\+Uniform\+Timestep\+Current\+Source@{get\+Uniform\+Timestep\+Current\+Source}!Oscillator@{Oscillator}}
+\subsubsection[{get\+Uniform\+Timestep\+Current\+Source}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Uniform\+Timestep\+Current\+Source (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a38ec1c04097cceea46f4712fca7169e2}
+\hypertarget{class_oscillator_a949a6e88a1e5b7037ba93d6a9c927b4f}{\index{Oscillator@{Oscillator}!new\+Potential\+Time@{new\+Potential\+Time}}
+\index{new\+Potential\+Time@{new\+Potential\+Time}!Oscillator@{Oscillator}}
+\subsubsection[{new\+Potential\+Time}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::new\+Potential\+Time (
+\begin{DoxyParamCaption}
+\item[{double}]{time, }
+\item[{double}]{pot\+Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_oscillator_a949a6e88a1e5b7037ba93d6a9c927b4f}
+\hypertarget{class_oscillator_a065af90ddd004f7af4e1d7489b4ea5d6}{\index{Oscillator@{Oscillator}!new\+Potential\+Value@{new\+Potential\+Value}}
+\index{new\+Potential\+Value@{new\+Potential\+Value}!Oscillator@{Oscillator}}
+\subsubsection[{new\+Potential\+Value}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::new\+Potential\+Value (
+\begin{DoxyParamCaption}
+\item[{double}]{pot\+Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_oscillator_a065af90ddd004f7af4e1d7489b4ea5d6}
+\hypertarget{class_oscillator_aa48179145afe4bad7b757eefecb6053a}{\index{Oscillator@{Oscillator}!new\+State@{new\+State}}
+\index{new\+State@{new\+State}!Oscillator@{Oscillator}}
+\subsubsection[{new\+State}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::new\+State (
+\begin{DoxyParamCaption}
+\item[{double}]{pot\+Value, }
+\item[{double}]{cur\+Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_oscillator_aa48179145afe4bad7b757eefecb6053a}
+\hypertarget{class_oscillator_a8d4b8d2c8eb200afbbb4d4d999f068ab}{\index{Oscillator@{Oscillator}!set\+Connexins@{set\+Connexins}}
+\index{set\+Connexins@{set\+Connexins}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Connexins}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Connexins (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a8d4b8d2c8eb200afbbb4d4d999f068ab}
+\hypertarget{class_oscillator_a5e4ecacba9fc577660c1643c1e50e0bb}{\index{Oscillator@{Oscillator}!set\+Current@{set\+Current}}
+\index{set\+Current@{set\+Current}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Current}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Current (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{current, }
+\item[{const int \&}]{which}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a5e4ecacba9fc577660c1643c1e50e0bb}
+\hypertarget{class_oscillator_ae4fdf768b4fc00f6830c295cdc2f3e62}{\index{Oscillator@{Oscillator}!set\+Current\+Time@{set\+Current\+Time}}
+\index{set\+Current\+Time@{set\+Current\+Time}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Current\+Time}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Current\+Time (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{time}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_ae4fdf768b4fc00f6830c295cdc2f3e62}
+\hypertarget{class_oscillator_a42171f7e11ac041ab982d055ba389352}{\index{Oscillator@{Oscillator}!set\+Electrogram@{set\+Electrogram}}
+\index{set\+Electrogram@{set\+Electrogram}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Electrogram}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Electrogram (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{electrogram}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a42171f7e11ac041ab982d055ba389352}
+\hypertarget{class_oscillator_a56140e76f42036dc6d7a4cd989917edc}{\index{Oscillator@{Oscillator}!set\+Parameter@{set\+Parameter}}
+\index{set\+Parameter@{set\+Parameter}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Parameter}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Parameter (
+\begin{DoxyParamCaption}
+\item[{double}]{value, }
+\item[{{\bf O\+S\+C\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R}}]{parameter}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [slot]}}}\label{class_oscillator_a56140e76f42036dc6d7a4cd989917edc}
+\hypertarget{class_oscillator_a672b578b643936b3b0b42371b6d339d9}{\index{Oscillator@{Oscillator}!set\+Position\+X@{set\+Position\+X}}
+\index{set\+Position\+X@{set\+Position\+X}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Position\+X}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Position\+X (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a672b578b643936b3b0b42371b6d339d9}
+\hypertarget{class_oscillator_aecfc7c140beecd6a82ab6d414892632d}{\index{Oscillator@{Oscillator}!set\+Position\+Y@{set\+Position\+Y}}
+\index{set\+Position\+Y@{set\+Position\+Y}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Position\+Y}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Position\+Y (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_aecfc7c140beecd6a82ab6d414892632d}
+\hypertarget{class_oscillator_a597c5025182c90571804c6dc81f33e70}{\index{Oscillator@{Oscillator}!set\+Position\+Z@{set\+Position\+Z}}
+\index{set\+Position\+Z@{set\+Position\+Z}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Position\+Z}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Position\+Z (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a597c5025182c90571804c6dc81f33e70}
+\hypertarget{class_oscillator_a91b56c7ed7c11f30109e8b1db296b2a6}{\index{Oscillator@{Oscillator}!set\+Potential@{set\+Potential}}
+\index{set\+Potential@{set\+Potential}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Potential (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{potential}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a91b56c7ed7c11f30109e8b1db296b2a6}
+\hypertarget{class_oscillator_a3e24a7637ed5aaf05101f3e115ea8e9c}{\index{Oscillator@{Oscillator}!set\+Previous\+Potential@{set\+Previous\+Potential}}
+\index{set\+Previous\+Potential@{set\+Previous\+Potential}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Previous\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Previous\+Potential (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{potential}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a3e24a7637ed5aaf05101f3e115ea8e9c}
+\hypertarget{class_oscillator_a549fcc8c0dc9a0789a062a0b1062610b}{\index{Oscillator@{Oscillator}!set\+Sigma@{set\+Sigma}}
+\index{set\+Sigma@{set\+Sigma}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Sigma}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Sigma (
+\begin{DoxyParamCaption}
+\item[{double}]{s\+X, }
+\item[{double}]{s\+Y, }
+\item[{double}]{s\+Z}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_a549fcc8c0dc9a0789a062a0b1062610b}
+\hypertarget{class_oscillator_acdee83b452a76ee20b48248cd4ba45cc}{\index{Oscillator@{Oscillator}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!Oscillator@{Oscillator}}
+\subsubsection[{set\+Type}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Type (
+\begin{DoxyParamCaption}
+\item[{{\bf C\+E\+L\+L\+\_\+\+T\+Y\+P\+E}}]{type}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_acdee83b452a76ee20b48248cd4ba45cc}
+\hypertarget{class_oscillator_abc5d43aeb061d97dd58749baf2b8f82d}{\index{Oscillator@{Oscillator}!state\+Calculated@{state\+Calculated}}
+\index{state\+Calculated@{state\+Calculated}!Oscillator@{Oscillator}}
+\subsubsection[{state\+Calculated}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::state\+Calculated (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{int}]{which}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_abc5d43aeb061d97dd58749baf2b8f82d}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_oscillator_a968627d069d5f0c44d8134718a01237f}{\index{Oscillator@{Oscillator}!\+\_\+source\+A@{\+\_\+source\+A}}
+\index{\+\_\+source\+A@{\+\_\+source\+A}!Oscillator@{Oscillator}}
+\subsubsection[{\+\_\+source\+A}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::\+\_\+source\+A}}\label{class_oscillator_a968627d069d5f0c44d8134718a01237f}
+\hypertarget{class_oscillator_a5a144fd5dd7cbcbfc47d7c9013d330b8}{\index{Oscillator@{Oscillator}!\+\_\+source\+B@{\+\_\+source\+B}}
+\index{\+\_\+source\+B@{\+\_\+source\+B}!Oscillator@{Oscillator}}
+\subsubsection[{\+\_\+source\+B}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::\+\_\+source\+B}}\label{class_oscillator_a5a144fd5dd7cbcbfc47d7c9013d330b8}
+\hypertarget{class_oscillator_a4db30c0516d078b69426aad65bf13022}{\index{Oscillator@{Oscillator}!guard\+Timestep@{guard\+Timestep}}
+\index{guard\+Timestep@{guard\+Timestep}!Oscillator@{Oscillator}}
+\subsubsection[{guard\+Timestep}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::guard\+Timestep}}\label{class_oscillator_a4db30c0516d078b69426aad65bf13022}
+\hypertarget{class_oscillator_a94d86971a2a425d2e2492962491dc01b}{\index{Oscillator@{Oscillator}!m\+\_\+connexin@{m\+\_\+connexin}}
+\index{m\+\_\+connexin@{m\+\_\+connexin}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+connexin}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Oscillator\+::m\+\_\+connexin}}\label{class_oscillator_a94d86971a2a425d2e2492962491dc01b}
+\hypertarget{class_oscillator_a952e781ffe848b06b7b511c54f1d090c}{\index{Oscillator@{Oscillator}!m\+\_\+\+Connexin\+Sum@{m\+\_\+\+Connexin\+Sum}}
+\index{m\+\_\+\+Connexin\+Sum@{m\+\_\+\+Connexin\+Sum}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+\+Connexin\+Sum}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+\+Connexin\+Sum}}\label{class_oscillator_a952e781ffe848b06b7b511c54f1d090c}
+\hypertarget{class_oscillator_aef644a4e5faf78fa338a7a5e739f267c}{\index{Oscillator@{Oscillator}!m\+\_\+current\+P\+R\+I\+M@{m\+\_\+current\+P\+R\+I\+M}}
+\index{m\+\_\+current\+P\+R\+I\+M@{m\+\_\+current\+P\+R\+I\+M}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+current\+P\+R\+I\+M}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Oscillator\+::m\+\_\+current\+P\+R\+I\+M}}\label{class_oscillator_aef644a4e5faf78fa338a7a5e739f267c}
+\hypertarget{class_oscillator_a766694982f9a1f8ed7013828089587f7}{\index{Oscillator@{Oscillator}!m\+\_\+current\+Source@{m\+\_\+current\+Source}}
+\index{m\+\_\+current\+Source@{m\+\_\+current\+Source}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+current\+Source}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+current\+Source}}\label{class_oscillator_a766694982f9a1f8ed7013828089587f7}
+\hypertarget{class_oscillator_abe68e99fc990a44b9bd234751eec0f24}{\index{Oscillator@{Oscillator}!m\+\_\+current\+Time@{m\+\_\+current\+Time}}
+\index{m\+\_\+current\+Time@{m\+\_\+current\+Time}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+current\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+current\+Time}}\label{class_oscillator_abe68e99fc990a44b9bd234751eec0f24}
+\hypertarget{class_oscillator_a80a2b0beda0d17f549160fbbd456243b}{\index{Oscillator@{Oscillator}!m\+\_\+hormonal\+Activity@{m\+\_\+hormonal\+Activity}}
+\index{m\+\_\+hormonal\+Activity@{m\+\_\+hormonal\+Activity}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+hormonal\+Activity}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+hormonal\+Activity}}\label{class_oscillator_a80a2b0beda0d17f549160fbbd456243b}
+\hypertarget{class_oscillator_ac6add7bad19c62071ad1ce651b815e4e}{\index{Oscillator@{Oscillator}!m\+\_\+neighbours@{m\+\_\+neighbours}}
+\index{m\+\_\+neighbours@{m\+\_\+neighbours}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+neighbours}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Oscillator}$\ast$$>$ Oscillator\+::m\+\_\+neighbours}}\label{class_oscillator_ac6add7bad19c62071ad1ce651b815e4e}
+\hypertarget{class_oscillator_a7031173912bc2225997a3ab6f9995fec}{\index{Oscillator@{Oscillator}!m\+\_\+neighbours\+Distance@{m\+\_\+neighbours\+Distance}}
+\index{m\+\_\+neighbours\+Distance@{m\+\_\+neighbours\+Distance}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+neighbours\+Distance}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Oscillator\+::m\+\_\+neighbours\+Distance}}\label{class_oscillator_a7031173912bc2225997a3ab6f9995fec}
+\hypertarget{class_oscillator_aedf0974c19ea8428e3702f267cf45465}{\index{Oscillator@{Oscillator}!m\+\_\+potential\+P\+R\+I\+M@{m\+\_\+potential\+P\+R\+I\+M}}
+\index{m\+\_\+potential\+P\+R\+I\+M@{m\+\_\+potential\+P\+R\+I\+M}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+potential\+P\+R\+I\+M}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+potential\+P\+R\+I\+M}}\label{class_oscillator_aedf0974c19ea8428e3702f267cf45465}
+\hypertarget{class_oscillator_a2a1649ababe43b1de3dbd6d5f24db703}{\index{Oscillator@{Oscillator}!m\+\_\+previous\+\_\+potential@{m\+\_\+previous\+\_\+potential}}
+\index{m\+\_\+previous\+\_\+potential@{m\+\_\+previous\+\_\+potential}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+previous\+\_\+potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+previous\+\_\+potential}}\label{class_oscillator_a2a1649ababe43b1de3dbd6d5f24db703}
+\hypertarget{class_oscillator_a45a1214b84b342e4ee078d218112f001}{\index{Oscillator@{Oscillator}!m\+\_\+previous\+\_\+scaled\+Potential@{m\+\_\+previous\+\_\+scaled\+Potential}}
+\index{m\+\_\+previous\+\_\+scaled\+Potential@{m\+\_\+previous\+\_\+scaled\+Potential}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+previous\+\_\+scaled\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+previous\+\_\+scaled\+Potential}}\label{class_oscillator_a45a1214b84b342e4ee078d218112f001}
+\hypertarget{class_oscillator_ab97f31715485a24f49c98a01caa9f2d8}{\index{Oscillator@{Oscillator}!m\+\_\+previous\+Time@{m\+\_\+previous\+Time}}
+\index{m\+\_\+previous\+Time@{m\+\_\+previous\+Time}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+previous\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+previous\+Time}}\label{class_oscillator_ab97f31715485a24f49c98a01caa9f2d8}
+\hypertarget{class_oscillator_aa0fe6259ca35433e3bd0dbac2d0ead65}{\index{Oscillator@{Oscillator}!m\+\_\+sigma\+X@{m\+\_\+sigma\+X}}
+\index{m\+\_\+sigma\+X@{m\+\_\+sigma\+X}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+sigma\+X}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+sigma\+X}}\label{class_oscillator_aa0fe6259ca35433e3bd0dbac2d0ead65}
+\hypertarget{class_oscillator_a253c7652df4789833c9f940c3278036d}{\index{Oscillator@{Oscillator}!m\+\_\+sigma\+Y@{m\+\_\+sigma\+Y}}
+\index{m\+\_\+sigma\+Y@{m\+\_\+sigma\+Y}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+sigma\+Y}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+sigma\+Y}}\label{class_oscillator_a253c7652df4789833c9f940c3278036d}
+\hypertarget{class_oscillator_af8ba90eb71c73ac1c789d569e7e2f92f}{\index{Oscillator@{Oscillator}!m\+\_\+sigma\+Z@{m\+\_\+sigma\+Z}}
+\index{m\+\_\+sigma\+Z@{m\+\_\+sigma\+Z}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+sigma\+Z}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+sigma\+Z}}\label{class_oscillator_af8ba90eb71c73ac1c789d569e7e2f92f}
+\hypertarget{class_oscillator_a7553dcea69896c2f3ff2bc8bda1d05cc}{\index{Oscillator@{Oscillator}!m\+\_\+type@{m\+\_\+type}}
+\index{m\+\_\+type@{m\+\_\+type}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf C\+E\+L\+L\+\_\+\+T\+Y\+P\+E} Oscillator\+::m\+\_\+type}}\label{class_oscillator_a7553dcea69896c2f3ff2bc8bda1d05cc}
+\hypertarget{class_oscillator_aeaa03f804f9d13f27635b94ea7a6bd32}{\index{Oscillator@{Oscillator}!m\+\_\+under\+Stimulation@{m\+\_\+under\+Stimulation}}
+\index{m\+\_\+under\+Stimulation@{m\+\_\+under\+Stimulation}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+under\+Stimulation}]{\setlength{\rightskip}{0pt plus 5cm}bool Oscillator\+::m\+\_\+under\+Stimulation}}\label{class_oscillator_aeaa03f804f9d13f27635b94ea7a6bd32}
+\hypertarget{class_oscillator_a344928736ed0deb40bc1c73d50af5d33}{\index{Oscillator@{Oscillator}!m\+\_\+v\+\_\+current@{m\+\_\+v\+\_\+current}}
+\index{m\+\_\+v\+\_\+current@{m\+\_\+v\+\_\+current}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+v\+\_\+current}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Oscillator\+::m\+\_\+v\+\_\+current}}\label{class_oscillator_a344928736ed0deb40bc1c73d50af5d33}
+\hypertarget{class_oscillator_ab65a59d93c248616facbd1f01b3c2b87}{\index{Oscillator@{Oscillator}!m\+\_\+v\+\_\+electrogram@{m\+\_\+v\+\_\+electrogram}}
+\index{m\+\_\+v\+\_\+electrogram@{m\+\_\+v\+\_\+electrogram}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+v\+\_\+electrogram}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+v\+\_\+electrogram}}\label{class_oscillator_ab65a59d93c248616facbd1f01b3c2b87}
+\hypertarget{class_oscillator_a44d11f6d153d4a061fc1bbb6785ddc18}{\index{Oscillator@{Oscillator}!m\+\_\+v\+\_\+potential@{m\+\_\+v\+\_\+potential}}
+\index{m\+\_\+v\+\_\+potential@{m\+\_\+v\+\_\+potential}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+v\+\_\+potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+v\+\_\+potential}}\label{class_oscillator_a44d11f6d153d4a061fc1bbb6785ddc18}
+\hypertarget{class_oscillator_aae4aa22ad331c19871be91d7cc5ceafa}{\index{Oscillator@{Oscillator}!m\+\_\+v\+\_\+scaled\+Potential@{m\+\_\+v\+\_\+scaled\+Potential}}
+\index{m\+\_\+v\+\_\+scaled\+Potential@{m\+\_\+v\+\_\+scaled\+Potential}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+v\+\_\+scaled\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+v\+\_\+scaled\+Potential}}\label{class_oscillator_aae4aa22ad331c19871be91d7cc5ceafa}
+\hypertarget{class_oscillator_abd8b2a7267f85cae787a0bc77d1f5a5a}{\index{Oscillator@{Oscillator}!m\+\_\+x@{m\+\_\+x}}
+\index{m\+\_\+x@{m\+\_\+x}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+x}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+x}}\label{class_oscillator_abd8b2a7267f85cae787a0bc77d1f5a5a}
+\hypertarget{class_oscillator_a6936c789a75680f0486c817af4fce202}{\index{Oscillator@{Oscillator}!m\+\_\+y@{m\+\_\+y}}
+\index{m\+\_\+y@{m\+\_\+y}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+y}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+y}}\label{class_oscillator_a6936c789a75680f0486c817af4fce202}
+\hypertarget{class_oscillator_ae00491a4783797fb6edb9c3d5317a6ad}{\index{Oscillator@{Oscillator}!m\+\_\+z@{m\+\_\+z}}
+\index{m\+\_\+z@{m\+\_\+z}!Oscillator@{Oscillator}}
+\subsubsection[{m\+\_\+z}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+z}}\label{class_oscillator_ae00491a4783797fb6edb9c3d5317a6ad}
+\hypertarget{class_oscillator_acfc962cfc0b6c92fc8ae8d7254346bef}{\index{Oscillator@{Oscillator}!oscillator\+I\+D@{oscillator\+I\+D}}
+\index{oscillator\+I\+D@{oscillator\+I\+D}!Oscillator@{Oscillator}}
+\subsubsection[{oscillator\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}int Oscillator\+::oscillator\+I\+D}}\label{class_oscillator_acfc962cfc0b6c92fc8ae8d7254346bef}
+\hypertarget{class_oscillator_a43006eaf9a5a3b50a8f6a2a95ce47231}{\index{Oscillator@{Oscillator}!vmax@{vmax}}
+\index{vmax@{vmax}!Oscillator@{Oscillator}}
+\subsubsection[{vmax}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::vmax}}\label{class_oscillator_a43006eaf9a5a3b50a8f6a2a95ce47231}
+\hypertarget{class_oscillator_a8912b5faff383dcc1a33554d2bcc5844}{\index{Oscillator@{Oscillator}!vmin@{vmin}}
+\index{vmin@{vmin}!Oscillator@{Oscillator}}
+\subsubsection[{vmin}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::vmin}}\label{class_oscillator_a8912b5faff383dcc1a33554d2bcc5844}
+\hypertarget{class_oscillator_af6886099dfca8ec732676f4f89935651}{\index{Oscillator@{Oscillator}!vzero@{vzero}}
+\index{vzero@{vzero}!Oscillator@{Oscillator}}
+\subsubsection[{vzero}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::vzero}}\label{class_oscillator_af6886099dfca8ec732676f4f89935651}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model/\hyperlink{_oscillator_8h}{Oscillator.\+h}\item 
+Model/\hyperlink{_oscillator_8cpp}{Oscillator.\+cpp}\end{DoxyCompactItemize}

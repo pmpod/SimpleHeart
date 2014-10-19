@@ -1,0 +1,185 @@
+\hypertarget{class_r_rcalculator}{\section{R\+Rcalculator Class Reference}
+\label{class_r_rcalculator}\index{R\+Rcalculator@{R\+Rcalculator}}
+}
+
+
+{\ttfamily \#include $<$R\+Rcalculator.\+h$>$}
+
+Inheritance diagram for R\+Rcalculator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_r_rcalculator}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_r_rcalculator_affa5d0f172be4d9aa0601c8f1824aba7}{reset} ()
+\item 
+void \hyperlink{class_r_rcalculator_a06b4c617afcb01dc74c6c542ede4af05}{process\+New\+Time} (double time, double potential)
+\item 
+void \hyperlink{class_r_rcalculator_a91d3f4c5a7a4ca1f749a9ecada0b7d5c}{calculate\+Pat\+En} (double rr)
+\item 
+void \hyperlink{class_r_rcalculator_ac55486650721726e4193bdc77b2f6bbe}{calculate\+Var\+En} (double rr)
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_r_rcalculator_aa8fa57e1512d3883d321a2d8a85151c3}{next\+R\+R} (double rr)
+\item 
+void \hyperlink{class_r_rcalculator_aa0c89346708b0ec0b64b4256a0120c1f}{cur\+Index} (int i)
+\item 
+void \hyperlink{class_r_rcalculator_a43e47f2cb76a4463da74deacabbafb12}{next\+Pat\+En} (double value)
+\item 
+void \hyperlink{class_r_rcalculator_a95e6ec7b23c518a8e381e3c0ae65b628}{next\+Var\+En} (double value)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_r_rcalculator_ac612758f699b103d8deedf130dbc8cc9}{set\+Range\+Of\+Focus} (int range)
+\item 
+\hyperlink{class_r_rcalculator_a1c8424d714a284daa7a87f634b4f8c1e}{R\+Rcalculator} (\hyperlink{classatrial_parameters}{atrial\+Parameters} $\ast$definitions)
+\item 
+\hyperlink{class_r_rcalculator_a8af8b7c5cb9fd55b78757780ba8c3007}{$\sim$\+R\+Rcalculator} (void)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_r_rcalculator_a9c99b0abb14ec0a15edb6516202f1670}{intervals\+R\+R}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_r_rcalculator_abb337d30cfd2d443d7aa00e62f8d12a0}{intervals\+Potential}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_r_rcalculator_accf15b47a0f368de9dd5a1d758dac8a8}{intervals\+Saved}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_r_rcalculator_ad7f152f6ec71894388eca83acce27c82}{m\+\_\+histogram}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_r_rcalculator_a1a62706d3af65ec918550715e4748666}{m\+\_\+histogram\+\_\+0}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_r_rcalculator_a88044253bb67963b690efe03b4566461}{m\+\_\+histogram\+\_\+1t}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_r_rcalculator_a22fd8fedd28bf0b6455eb3a7ade48960}{m\+\_\+histogram\+\_\+2t}
+\item 
+double \hyperlink{class_r_rcalculator_ab2de224108c8ae0611b0a8b12cf9ce1f}{m\+\_\+pat\+En}
+\item 
+double \hyperlink{class_r_rcalculator_a94f0e6781def8bd5e38124e3144d3acc}{m\+\_\+var\+En}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_rcalculator_a1c8424d714a284daa7a87f634b4f8c1e}{\index{R\+Rcalculator@{R\+Rcalculator}!R\+Rcalculator@{R\+Rcalculator}}
+\index{R\+Rcalculator@{R\+Rcalculator}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{R\+Rcalculator}]{\setlength{\rightskip}{0pt plus 5cm}R\+Rcalculator\+::\+R\+Rcalculator (
+\begin{DoxyParamCaption}
+\item[{{\bf atrial\+Parameters} $\ast$}]{definitions}
+\end{DoxyParamCaption}
+)}}\label{class_r_rcalculator_a1c8424d714a284daa7a87f634b4f8c1e}
+\hypertarget{class_r_rcalculator_a8af8b7c5cb9fd55b78757780ba8c3007}{\index{R\+Rcalculator@{R\+Rcalculator}!````~R\+Rcalculator@{$\sim$\+R\+Rcalculator}}
+\index{````~R\+Rcalculator@{$\sim$\+R\+Rcalculator}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{$\sim$\+R\+Rcalculator}]{\setlength{\rightskip}{0pt plus 5cm}R\+Rcalculator\+::$\sim$\+R\+Rcalculator (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{class_r_rcalculator_a8af8b7c5cb9fd55b78757780ba8c3007}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_rcalculator_a91d3f4c5a7a4ca1f749a9ecada0b7d5c}{\index{R\+Rcalculator@{R\+Rcalculator}!calculate\+Pat\+En@{calculate\+Pat\+En}}
+\index{calculate\+Pat\+En@{calculate\+Pat\+En}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{calculate\+Pat\+En}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::calculate\+Pat\+En (
+\begin{DoxyParamCaption}
+\item[{double}]{rr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_r_rcalculator_a91d3f4c5a7a4ca1f749a9ecada0b7d5c}
+\hypertarget{class_r_rcalculator_ac55486650721726e4193bdc77b2f6bbe}{\index{R\+Rcalculator@{R\+Rcalculator}!calculate\+Var\+En@{calculate\+Var\+En}}
+\index{calculate\+Var\+En@{calculate\+Var\+En}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{calculate\+Var\+En}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::calculate\+Var\+En (
+\begin{DoxyParamCaption}
+\item[{double}]{rr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_r_rcalculator_ac55486650721726e4193bdc77b2f6bbe}
+\hypertarget{class_r_rcalculator_aa0c89346708b0ec0b64b4256a0120c1f}{\index{R\+Rcalculator@{R\+Rcalculator}!cur\+Index@{cur\+Index}}
+\index{cur\+Index@{cur\+Index}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{cur\+Index}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::cur\+Index (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_r_rcalculator_aa0c89346708b0ec0b64b4256a0120c1f}
+\hypertarget{class_r_rcalculator_a43e47f2cb76a4463da74deacabbafb12}{\index{R\+Rcalculator@{R\+Rcalculator}!next\+Pat\+En@{next\+Pat\+En}}
+\index{next\+Pat\+En@{next\+Pat\+En}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{next\+Pat\+En}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::next\+Pat\+En (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_r_rcalculator_a43e47f2cb76a4463da74deacabbafb12}
+\hypertarget{class_r_rcalculator_aa8fa57e1512d3883d321a2d8a85151c3}{\index{R\+Rcalculator@{R\+Rcalculator}!next\+R\+R@{next\+R\+R}}
+\index{next\+R\+R@{next\+R\+R}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{next\+R\+R}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::next\+R\+R (
+\begin{DoxyParamCaption}
+\item[{double}]{rr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_r_rcalculator_aa8fa57e1512d3883d321a2d8a85151c3}
+\hypertarget{class_r_rcalculator_a95e6ec7b23c518a8e381e3c0ae65b628}{\index{R\+Rcalculator@{R\+Rcalculator}!next\+Var\+En@{next\+Var\+En}}
+\index{next\+Var\+En@{next\+Var\+En}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{next\+Var\+En}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::next\+Var\+En (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_r_rcalculator_a95e6ec7b23c518a8e381e3c0ae65b628}
+\hypertarget{class_r_rcalculator_a06b4c617afcb01dc74c6c542ede4af05}{\index{R\+Rcalculator@{R\+Rcalculator}!process\+New\+Time@{process\+New\+Time}}
+\index{process\+New\+Time@{process\+New\+Time}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{process\+New\+Time}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::process\+New\+Time (
+\begin{DoxyParamCaption}
+\item[{double}]{time, }
+\item[{double}]{potential}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_r_rcalculator_a06b4c617afcb01dc74c6c542ede4af05}
+\hypertarget{class_r_rcalculator_affa5d0f172be4d9aa0601c8f1824aba7}{\index{R\+Rcalculator@{R\+Rcalculator}!reset@{reset}}
+\index{reset@{reset}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_r_rcalculator_affa5d0f172be4d9aa0601c8f1824aba7}
+\hypertarget{class_r_rcalculator_ac612758f699b103d8deedf130dbc8cc9}{\index{R\+Rcalculator@{R\+Rcalculator}!set\+Range\+Of\+Focus@{set\+Range\+Of\+Focus}}
+\index{set\+Range\+Of\+Focus@{set\+Range\+Of\+Focus}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{set\+Range\+Of\+Focus}]{\setlength{\rightskip}{0pt plus 5cm}void R\+Rcalculator\+::set\+Range\+Of\+Focus (
+\begin{DoxyParamCaption}
+\item[{int}]{range}
+\end{DoxyParamCaption}
+)}}\label{class_r_rcalculator_ac612758f699b103d8deedf130dbc8cc9}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_r_rcalculator_abb337d30cfd2d443d7aa00e62f8d12a0}{\index{R\+Rcalculator@{R\+Rcalculator}!intervals\+Potential@{intervals\+Potential}}
+\index{intervals\+Potential@{intervals\+Potential}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{intervals\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ R\+Rcalculator\+::intervals\+Potential}}\label{class_r_rcalculator_abb337d30cfd2d443d7aa00e62f8d12a0}
+\hypertarget{class_r_rcalculator_a9c99b0abb14ec0a15edb6516202f1670}{\index{R\+Rcalculator@{R\+Rcalculator}!intervals\+R\+R@{intervals\+R\+R}}
+\index{intervals\+R\+R@{intervals\+R\+R}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{intervals\+R\+R}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ R\+Rcalculator\+::intervals\+R\+R}}\label{class_r_rcalculator_a9c99b0abb14ec0a15edb6516202f1670}
+\hypertarget{class_r_rcalculator_accf15b47a0f368de9dd5a1d758dac8a8}{\index{R\+Rcalculator@{R\+Rcalculator}!intervals\+Saved@{intervals\+Saved}}
+\index{intervals\+Saved@{intervals\+Saved}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{intervals\+Saved}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ R\+Rcalculator\+::intervals\+Saved}}\label{class_r_rcalculator_accf15b47a0f368de9dd5a1d758dac8a8}
+\hypertarget{class_r_rcalculator_ad7f152f6ec71894388eca83acce27c82}{\index{R\+Rcalculator@{R\+Rcalculator}!m\+\_\+histogram@{m\+\_\+histogram}}
+\index{m\+\_\+histogram@{m\+\_\+histogram}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{m\+\_\+histogram}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ R\+Rcalculator\+::m\+\_\+histogram}}\label{class_r_rcalculator_ad7f152f6ec71894388eca83acce27c82}
+\hypertarget{class_r_rcalculator_a1a62706d3af65ec918550715e4748666}{\index{R\+Rcalculator@{R\+Rcalculator}!m\+\_\+histogram\+\_\+0@{m\+\_\+histogram\+\_\+0}}
+\index{m\+\_\+histogram\+\_\+0@{m\+\_\+histogram\+\_\+0}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{m\+\_\+histogram\+\_\+0}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ R\+Rcalculator\+::m\+\_\+histogram\+\_\+0}}\label{class_r_rcalculator_a1a62706d3af65ec918550715e4748666}
+\hypertarget{class_r_rcalculator_a88044253bb67963b690efe03b4566461}{\index{R\+Rcalculator@{R\+Rcalculator}!m\+\_\+histogram\+\_\+1t@{m\+\_\+histogram\+\_\+1t}}
+\index{m\+\_\+histogram\+\_\+1t@{m\+\_\+histogram\+\_\+1t}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{m\+\_\+histogram\+\_\+1t}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ R\+Rcalculator\+::m\+\_\+histogram\+\_\+1t}}\label{class_r_rcalculator_a88044253bb67963b690efe03b4566461}
+\hypertarget{class_r_rcalculator_a22fd8fedd28bf0b6455eb3a7ade48960}{\index{R\+Rcalculator@{R\+Rcalculator}!m\+\_\+histogram\+\_\+2t@{m\+\_\+histogram\+\_\+2t}}
+\index{m\+\_\+histogram\+\_\+2t@{m\+\_\+histogram\+\_\+2t}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{m\+\_\+histogram\+\_\+2t}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ R\+Rcalculator\+::m\+\_\+histogram\+\_\+2t}}\label{class_r_rcalculator_a22fd8fedd28bf0b6455eb3a7ade48960}
+\hypertarget{class_r_rcalculator_ab2de224108c8ae0611b0a8b12cf9ce1f}{\index{R\+Rcalculator@{R\+Rcalculator}!m\+\_\+pat\+En@{m\+\_\+pat\+En}}
+\index{m\+\_\+pat\+En@{m\+\_\+pat\+En}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{m\+\_\+pat\+En}]{\setlength{\rightskip}{0pt plus 5cm}double R\+Rcalculator\+::m\+\_\+pat\+En}}\label{class_r_rcalculator_ab2de224108c8ae0611b0a8b12cf9ce1f}
+\hypertarget{class_r_rcalculator_a94f0e6781def8bd5e38124e3144d3acc}{\index{R\+Rcalculator@{R\+Rcalculator}!m\+\_\+var\+En@{m\+\_\+var\+En}}
+\index{m\+\_\+var\+En@{m\+\_\+var\+En}!R\+Rcalculator@{R\+Rcalculator}}
+\subsubsection[{m\+\_\+var\+En}]{\setlength{\rightskip}{0pt plus 5cm}double R\+Rcalculator\+::m\+\_\+var\+En}}\label{class_r_rcalculator_a94f0e6781def8bd5e38124e3144d3acc}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_r_rcalculator_8h}{R\+Rcalculator.\+h}\item 
+\hyperlink{_r_rcalculator_8cpp}{R\+Rcalculator.\+cpp}\end{DoxyCompactItemize}

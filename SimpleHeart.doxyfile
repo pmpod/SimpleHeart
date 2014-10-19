@@ -58,7 +58,7 @@ PROJECT_LOGO           = D:/Solutions/Simulations/SimpleHeart2014/SimpleHeart/sh
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = D:/Solutions/Simulations/SimpleHeart2014/SimpleHeart/documentation/
+OUTPUT_DIRECTORY       = D:/Solutions/Simulations/SimpleHeart2014/SimpleHeart/doc/
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and

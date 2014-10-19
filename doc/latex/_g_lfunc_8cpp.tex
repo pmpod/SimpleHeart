@@ -1,0 +1,241 @@
+\hypertarget{_g_lfunc_8cpp}{\section{G\+Lfunc.\+cpp File Reference}
+\label{_g_lfunc_8cpp}\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+}
+{\ttfamily \#include \char`\"{}G\+Lfunc.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{_g_lfunc_8cpp_a953c01dae88ddcd4a07906532b13b0da}{paint\+Ground} (float delta\+X, float delta\+Y, int Cells\+X, int Cells\+Y)
+\item 
+void \hyperlink{_g_lfunc_8cpp_a560a8eed9a045531cc64c22081a991c6}{normalize\+Angle} (int \&angle)
+\item 
+void \hyperlink{_g_lfunc_8cpp_a72977a8e144924cd6b747ff79c09e29d}{paint\+Cell} (int Cells\+X, int Cells\+Y, float delta\+X, float delta\+Y, float coloura, float colourb, float colourc)
+\item 
+void \hyperlink{_g_lfunc_8cpp_a4c049ee72792efa1f90a7445f3275e62}{paint\+Probe} (int Cells\+X, int Cells\+Y, float delta\+X, float delta\+Y, float coloura, float colourb, float colourc)
+\item 
+void \hyperlink{_g_lfunc_8cpp_a74a8f4db298c8a354d62ab5f8449bb0e}{paint\+Cell\+Triangle} (double \&x1, double \&y1, double \&z1, double color1, double \&x2, double \&y2, double \&z2, double color2, double \&x3, double \&y3, double \&z3, double color3, int palette)
+\item 
+void \hyperlink{_g_lfunc_8cpp_a091655d1bca2a1f81adacb4c720371c1}{paint\+The\+Ray} (float x, float y, float z)
+\item 
+void \hyperlink{_g_lfunc_8cpp_ad7488fcc14badc528876d75ac0a02f08}{paint\+Cell\+Triangle\+Full} (float x1, float y1, float z1, Q\+Color color1, float x2, float y2, float z2, Q\+Color color2, float x3, float y3, float z3, Q\+Color color3)
+\item 
+void \hyperlink{_g_lfunc_8cpp_a4733a84e2fc93367a9ea01aaa926c10b}{paint\+Cell\+Point} (int Cells\+X, int Cells\+Y, float delta\+X, float delta\+Y, float colour1, float colour2, float colour3, float colour4, int palette)
+\item 
+void \hyperlink{_g_lfunc_8cpp_aca1ec173d6107f7aa871af5f8e22e09a}{paint\+Pixel} (int Cells\+X, int Cells\+Y, float delta\+X, float delta\+Y, Q\+Color colour)
+\item 
+void \hyperlink{_g_lfunc_8cpp_a6a636249486aa2a7b8617deb3aeac3cf}{paint\+Pixel\+B} (int Cells\+X, int Cells\+Y, float delta\+X, float delta\+Y, Q\+Color colour)
+\item 
+void \hyperlink{_g_lfunc_8cpp_ae2feab2f67a3e4cea38ac3ebe12ce57a}{paint\+Origin} (float frustrum\+Size, float scale)
+\item 
+void \hyperlink{_g_lfunc_8cpp_adb638195ebb714dd5a18934580a762eb}{rotate\+G\+L} (int coord, int angle\+\_\+\+X, int angle\+\_\+\+Y, int angle\+\_\+\+Z)
+\item 
+void \hyperlink{_g_lfunc_8cpp_ad64ca355f7963c6544305a810df9c4dc}{H\+S\+Vto\+R\+G\+B} (double h, double s, double v, double $\ast$r, double $\ast$g, double $\ast$b)
+\item 
+bool \hyperlink{_g_lfunc_8cpp_a760ddd322067db6e7c27679e8d4af390}{invert\+Matrix} (const G\+Lfloat m\mbox{[}16\mbox{]}, double inv\+Out\mbox{[}16\mbox{]})
+\item 
+void \hyperlink{_g_lfunc_8cpp_a306c59756ffdd5e758330dfb1fe7a190}{draw\+Sphere} (double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{_g_lfunc_8cpp_abc05a24561b1eb6da21cd77033c194d5}{C\+O\+O\+R\+D\+\_\+\+X} = 1
+\item 
+const int \hyperlink{_g_lfunc_8cpp_a6c026b461309ba4fe647349faf8719da}{C\+O\+O\+R\+D\+\_\+\+Y} = 2
+\item 
+const int \hyperlink{_g_lfunc_8cpp_ad35f542babc3114a3e26a5798eb7975b}{C\+O\+O\+R\+D\+\_\+\+Z} = 3
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{_g_lfunc_8cpp_a306c59756ffdd5e758330dfb1fe7a190}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!draw\+Sphere@{draw\+Sphere}}
+\index{draw\+Sphere@{draw\+Sphere}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{draw\+Sphere}]{\setlength{\rightskip}{0pt plus 5cm}void draw\+Sphere (
+\begin{DoxyParamCaption}
+\item[{double}]{r, }
+\item[{int}]{lats, }
+\item[{int}]{longs, }
+\item[{double}]{xorg, }
+\item[{double}]{yorg, }
+\item[{double}]{zorg, }
+\item[{float}]{rr, }
+\item[{float}]{gg, }
+\item[{float}]{bb}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a306c59756ffdd5e758330dfb1fe7a190}
+\hypertarget{_g_lfunc_8cpp_ad64ca355f7963c6544305a810df9c4dc}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!H\+S\+Vto\+R\+G\+B@{H\+S\+Vto\+R\+G\+B}}
+\index{H\+S\+Vto\+R\+G\+B@{H\+S\+Vto\+R\+G\+B}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{H\+S\+Vto\+R\+G\+B}]{\setlength{\rightskip}{0pt plus 5cm}void H\+S\+Vto\+R\+G\+B (
+\begin{DoxyParamCaption}
+\item[{double}]{h, }
+\item[{double}]{s, }
+\item[{double}]{v, }
+\item[{double $\ast$}]{r, }
+\item[{double $\ast$}]{g, }
+\item[{double $\ast$}]{b}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_ad64ca355f7963c6544305a810df9c4dc}
+\hypertarget{_g_lfunc_8cpp_a760ddd322067db6e7c27679e8d4af390}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!invert\+Matrix@{invert\+Matrix}}
+\index{invert\+Matrix@{invert\+Matrix}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{invert\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}bool invert\+Matrix (
+\begin{DoxyParamCaption}
+\item[{const G\+Lfloat}]{m\mbox{[}16\mbox{]}, }
+\item[{double}]{inv\+Out\mbox{[}16\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a760ddd322067db6e7c27679e8d4af390}
+\hypertarget{_g_lfunc_8cpp_a560a8eed9a045531cc64c22081a991c6}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!normalize\+Angle@{normalize\+Angle}}
+\index{normalize\+Angle@{normalize\+Angle}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{normalize\+Angle}]{\setlength{\rightskip}{0pt plus 5cm}void normalize\+Angle (
+\begin{DoxyParamCaption}
+\item[{int \&}]{angle}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a560a8eed9a045531cc64c22081a991c6}
+\hypertarget{_g_lfunc_8cpp_a72977a8e144924cd6b747ff79c09e29d}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Cell@{paint\+Cell}}
+\index{paint\+Cell@{paint\+Cell}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Cell (
+\begin{DoxyParamCaption}
+\item[{int}]{Cells\+X, }
+\item[{int}]{Cells\+Y, }
+\item[{float}]{delta\+X, }
+\item[{float}]{delta\+Y, }
+\item[{float}]{coloura, }
+\item[{float}]{colourb, }
+\item[{float}]{colourc}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a72977a8e144924cd6b747ff79c09e29d}
+\hypertarget{_g_lfunc_8cpp_a4733a84e2fc93367a9ea01aaa926c10b}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Cell\+Point@{paint\+Cell\+Point}}
+\index{paint\+Cell\+Point@{paint\+Cell\+Point}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Cell\+Point}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Cell\+Point (
+\begin{DoxyParamCaption}
+\item[{int}]{Cells\+X, }
+\item[{int}]{Cells\+Y, }
+\item[{float}]{delta\+X, }
+\item[{float}]{delta\+Y, }
+\item[{float}]{colour1, }
+\item[{float}]{colour2, }
+\item[{float}]{colour3, }
+\item[{float}]{colour4, }
+\item[{int}]{palette}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a4733a84e2fc93367a9ea01aaa926c10b}
+\hypertarget{_g_lfunc_8cpp_a74a8f4db298c8a354d62ab5f8449bb0e}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Cell\+Triangle@{paint\+Cell\+Triangle}}
+\index{paint\+Cell\+Triangle@{paint\+Cell\+Triangle}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Cell\+Triangle}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Cell\+Triangle (
+\begin{DoxyParamCaption}
+\item[{double \&}]{x1, }
+\item[{double \&}]{y1, }
+\item[{double \&}]{z1, }
+\item[{double}]{color1, }
+\item[{double \&}]{x2, }
+\item[{double \&}]{y2, }
+\item[{double \&}]{z2, }
+\item[{double}]{color2, }
+\item[{double \&}]{x3, }
+\item[{double \&}]{y3, }
+\item[{double \&}]{z3, }
+\item[{double}]{color3, }
+\item[{int}]{palette}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a74a8f4db298c8a354d62ab5f8449bb0e}
+\hypertarget{_g_lfunc_8cpp_ad7488fcc14badc528876d75ac0a02f08}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Cell\+Triangle\+Full@{paint\+Cell\+Triangle\+Full}}
+\index{paint\+Cell\+Triangle\+Full@{paint\+Cell\+Triangle\+Full}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Cell\+Triangle\+Full}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Cell\+Triangle\+Full (
+\begin{DoxyParamCaption}
+\item[{float}]{x1, }
+\item[{float}]{y1, }
+\item[{float}]{z1, }
+\item[{Q\+Color}]{color1, }
+\item[{float}]{x2, }
+\item[{float}]{y2, }
+\item[{float}]{z2, }
+\item[{Q\+Color}]{color2, }
+\item[{float}]{x3, }
+\item[{float}]{y3, }
+\item[{float}]{z3, }
+\item[{Q\+Color}]{color3}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_ad7488fcc14badc528876d75ac0a02f08}
+\hypertarget{_g_lfunc_8cpp_a953c01dae88ddcd4a07906532b13b0da}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Ground@{paint\+Ground}}
+\index{paint\+Ground@{paint\+Ground}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Ground}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Ground (
+\begin{DoxyParamCaption}
+\item[{float}]{delta\+X, }
+\item[{float}]{delta\+Y, }
+\item[{int}]{Cells\+X, }
+\item[{int}]{Cells\+Y}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a953c01dae88ddcd4a07906532b13b0da}
+\hypertarget{_g_lfunc_8cpp_ae2feab2f67a3e4cea38ac3ebe12ce57a}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Origin@{paint\+Origin}}
+\index{paint\+Origin@{paint\+Origin}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Origin}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Origin (
+\begin{DoxyParamCaption}
+\item[{float}]{frustrum\+Size, }
+\item[{float}]{scale}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_ae2feab2f67a3e4cea38ac3ebe12ce57a}
+\hypertarget{_g_lfunc_8cpp_aca1ec173d6107f7aa871af5f8e22e09a}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Pixel@{paint\+Pixel}}
+\index{paint\+Pixel@{paint\+Pixel}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Pixel}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Pixel (
+\begin{DoxyParamCaption}
+\item[{int}]{Cells\+X, }
+\item[{int}]{Cells\+Y, }
+\item[{float}]{delta\+X, }
+\item[{float}]{delta\+Y, }
+\item[{Q\+Color}]{colour}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_aca1ec173d6107f7aa871af5f8e22e09a}
+\hypertarget{_g_lfunc_8cpp_a6a636249486aa2a7b8617deb3aeac3cf}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Pixel\+B@{paint\+Pixel\+B}}
+\index{paint\+Pixel\+B@{paint\+Pixel\+B}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Pixel\+B}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Pixel\+B (
+\begin{DoxyParamCaption}
+\item[{int}]{Cells\+X, }
+\item[{int}]{Cells\+Y, }
+\item[{float}]{delta\+X, }
+\item[{float}]{delta\+Y, }
+\item[{Q\+Color}]{colour}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a6a636249486aa2a7b8617deb3aeac3cf}
+\hypertarget{_g_lfunc_8cpp_a4c049ee72792efa1f90a7445f3275e62}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+Probe@{paint\+Probe}}
+\index{paint\+Probe@{paint\+Probe}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+Probe}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+Probe (
+\begin{DoxyParamCaption}
+\item[{int}]{Cells\+X, }
+\item[{int}]{Cells\+Y, }
+\item[{float}]{delta\+X, }
+\item[{float}]{delta\+Y, }
+\item[{float}]{coloura, }
+\item[{float}]{colourb, }
+\item[{float}]{colourc}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a4c049ee72792efa1f90a7445f3275e62}
+\hypertarget{_g_lfunc_8cpp_a091655d1bca2a1f81adacb4c720371c1}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!paint\+The\+Ray@{paint\+The\+Ray}}
+\index{paint\+The\+Ray@{paint\+The\+Ray}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{paint\+The\+Ray}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+The\+Ray (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{float}]{z}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_a091655d1bca2a1f81adacb4c720371c1}
+\hypertarget{_g_lfunc_8cpp_adb638195ebb714dd5a18934580a762eb}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!rotate\+G\+L@{rotate\+G\+L}}
+\index{rotate\+G\+L@{rotate\+G\+L}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{rotate\+G\+L}]{\setlength{\rightskip}{0pt plus 5cm}void rotate\+G\+L (
+\begin{DoxyParamCaption}
+\item[{int}]{coord, }
+\item[{int}]{angle\+\_\+\+X, }
+\item[{int}]{angle\+\_\+\+Y, }
+\item[{int}]{angle\+\_\+\+Z}
+\end{DoxyParamCaption}
+)}}\label{_g_lfunc_8cpp_adb638195ebb714dd5a18934580a762eb}
+
+
+\subsection{Variable Documentation}
+\hypertarget{_g_lfunc_8cpp_abc05a24561b1eb6da21cd77033c194d5}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!C\+O\+O\+R\+D\+\_\+\+X@{C\+O\+O\+R\+D\+\_\+\+X}}
+\index{C\+O\+O\+R\+D\+\_\+\+X@{C\+O\+O\+R\+D\+\_\+\+X}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{C\+O\+O\+R\+D\+\_\+\+X}]{\setlength{\rightskip}{0pt plus 5cm}const int C\+O\+O\+R\+D\+\_\+\+X = 1}}\label{_g_lfunc_8cpp_abc05a24561b1eb6da21cd77033c194d5}
+\hypertarget{_g_lfunc_8cpp_a6c026b461309ba4fe647349faf8719da}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!C\+O\+O\+R\+D\+\_\+\+Y@{C\+O\+O\+R\+D\+\_\+\+Y}}
+\index{C\+O\+O\+R\+D\+\_\+\+Y@{C\+O\+O\+R\+D\+\_\+\+Y}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{C\+O\+O\+R\+D\+\_\+\+Y}]{\setlength{\rightskip}{0pt plus 5cm}const int C\+O\+O\+R\+D\+\_\+\+Y = 2}}\label{_g_lfunc_8cpp_a6c026b461309ba4fe647349faf8719da}
+\hypertarget{_g_lfunc_8cpp_ad35f542babc3114a3e26a5798eb7975b}{\index{G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}!C\+O\+O\+R\+D\+\_\+\+Z@{C\+O\+O\+R\+D\+\_\+\+Z}}
+\index{C\+O\+O\+R\+D\+\_\+\+Z@{C\+O\+O\+R\+D\+\_\+\+Z}!G\+Lfunc.\+cpp@{G\+Lfunc.\+cpp}}
+\subsubsection[{C\+O\+O\+R\+D\+\_\+\+Z}]{\setlength{\rightskip}{0pt plus 5cm}const int C\+O\+O\+R\+D\+\_\+\+Z = 3}}\label{_g_lfunc_8cpp_ad35f542babc3114a3e26a5798eb7975b}

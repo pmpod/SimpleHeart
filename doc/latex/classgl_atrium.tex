@@ -1,0 +1,273 @@
+\hypertarget{classgl_atrium}{\section{gl\+Atrium Class Reference}
+\label{classgl_atrium}\index{gl\+Atrium@{gl\+Atrium}}
+}
+
+
+T\+O\+D\+O Update to Open\+G\+L 3.\+0.  
+
+
+
+
+{\ttfamily \#include $<$gl\+Atrium.\+h$>$}
+
+Inheritance diagram for gl\+Atrium\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classgl_atrium}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classgl_atrium_aa5afd6c2c43a3b9445e6821586671c36}{set\+X\+Rotation} (int angle)
+\item 
+void \hyperlink{classgl_atrium_a4b339e5080f2019dec3e916b4348f41c}{set\+Y\+Rotation} (int angle)
+\item 
+void \hyperlink{classgl_atrium_aab5b1212e320c13d3d3f30425f8e2028}{set\+Z\+Rotation} (int angle)
+\item 
+void \hyperlink{classgl_atrium_adb2aa7af154e4d83ca976bd7042726aa}{set\+Top} ()
+\item 
+void \hyperlink{classgl_atrium_a1ea5edb0605ee17d77d636c81dbc74a9}{set\+Side1} ()
+\item 
+void \hyperlink{classgl_atrium_aab139e009363e2a027e4f3a5e3f1e84b}{set\+Side2} ()
+\item 
+void \hyperlink{classgl_atrium_a5a67ffc011f4545b7ecf4d8a745a6c06}{set\+Palette\+H\+S\+V} ()
+\item 
+void \hyperlink{classgl_atrium_acf6258aaf1d7c1a8cd7afe558bfd8fa4}{set\+Palette\+Gray} ()
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classgl_atrium_add3c45ba71308914e62ac5f07d9dbce4}{x\+Rotation\+Changed} (int angle)
+\item 
+void \hyperlink{classgl_atrium_a12abcdbba73ff41ea8efdbbdcdbdcb6c}{y\+Rotation\+Changed} (int angle)
+\item 
+void \hyperlink{classgl_atrium_a71703a9bcfb404b9aa1bdab789573c7e}{z\+Rotation\+Changed} (int angle)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classgl_atrium_a68d308b0209b6111bbbcbb56b1a5e10c}{gl\+Atrium} (\hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$link\+Mesh, \hyperlink{class_atrial_machine2d}{Atrial\+Machine2d} $\ast$link, Q\+Widget $\ast$parent=0)
+\item 
+\hyperlink{classgl_atrium_aab01fe62e0f7734e3b91b42a11d32db7}{$\sim$gl\+Atrium} (void)
+\item 
+Q\+Size \hyperlink{classgl_atrium_acf3a401dfd3ca09d8dcb36886f306ba9}{minimum\+Size\+Hint} () const 
+\item 
+Q\+Size \hyperlink{classgl_atrium_a0e7fc813e7c9ae4d47317109815b9705}{size\+Hint} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classgl_atrium_a6fc7ea9064a492b562c0858eb3c44f86}{initialize\+G\+L} ()
+\begin{DoxyCompactList}\small\item\em \mbox{[}1\mbox{]} \end{DoxyCompactList}\item 
+void \hyperlink{classgl_atrium_a951d4caaef073f6762ddd47a409d2cf6}{paint\+G\+L} ()
+\item 
+void \hyperlink{classgl_atrium_a40cd7c018c743e5738560fdb4e4fea59}{resize\+G\+L} (int width, int height)
+\item 
+void \hyperlink{classgl_atrium_af0e47f4d5e0bc6d8cdcf16dd23c0487b}{mouse\+Press\+Event} (Q\+Mouse\+Event $\ast$event)
+\item 
+void \hyperlink{classgl_atrium_ad5af63d41d959d40d475d8e1aa0f6e9e}{mouse\+Move\+Event} (Q\+Mouse\+Event $\ast$event)
+\item 
+void \hyperlink{classgl_atrium_a3b2fff6d451823faa28b1b5f09aa384d}{mouse\+Release\+Event} (Q\+Mouse\+Event $\ast$event)
+\item 
+void \hyperlink{classgl_atrium_a5a4eb4614e6619d55a484cdfb733b2ea}{wheel\+Event} (Q\+Wheel\+Event $\ast$event)
+\item 
+Vector3 \hyperlink{classgl_atrium_a939d7c7a5289deeeea1763544e5be6b5}{screen\+To\+World} (double x, double y, double width, double height)
+\item 
+int \hyperlink{classgl_atrium_a02590feb7cd82c82cc67d0697136baf4}{item\+At} (double xx, double yy, double zz)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+T\+O\+D\+O Update to Open\+G\+L 3.\+0. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classgl_atrium_a68d308b0209b6111bbbcbb56b1a5e10c}{\index{gl\+Atrium@{gl\+Atrium}!gl\+Atrium@{gl\+Atrium}}
+\index{gl\+Atrium@{gl\+Atrium}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{gl\+Atrium}]{\setlength{\rightskip}{0pt plus 5cm}gl\+Atrium\+::gl\+Atrium (
+\begin{DoxyParamCaption}
+\item[{{\bf Cardiac\+Mesh} $\ast$}]{link\+Mesh, }
+\item[{{\bf Atrial\+Machine2d} $\ast$}]{link, }
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{classgl_atrium_a68d308b0209b6111bbbcbb56b1a5e10c}
+\hypertarget{classgl_atrium_aab01fe62e0f7734e3b91b42a11d32db7}{\index{gl\+Atrium@{gl\+Atrium}!````~gl\+Atrium@{$\sim$gl\+Atrium}}
+\index{````~gl\+Atrium@{$\sim$gl\+Atrium}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{$\sim$gl\+Atrium}]{\setlength{\rightskip}{0pt plus 5cm}gl\+Atrium\+::$\sim$gl\+Atrium (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{classgl_atrium_aab01fe62e0f7734e3b91b42a11d32db7}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classgl_atrium_a6fc7ea9064a492b562c0858eb3c44f86}{\index{gl\+Atrium@{gl\+Atrium}!initialize\+G\+L@{initialize\+G\+L}}
+\index{initialize\+G\+L@{initialize\+G\+L}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{initialize\+G\+L}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::initialize\+G\+L (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_a6fc7ea9064a492b562c0858eb3c44f86}
+
+
+\mbox{[}1\mbox{]} 
+
+\mbox{[}2\mbox{]} \hypertarget{classgl_atrium_a02590feb7cd82c82cc67d0697136baf4}{\index{gl\+Atrium@{gl\+Atrium}!item\+At@{item\+At}}
+\index{item\+At@{item\+At}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{item\+At}]{\setlength{\rightskip}{0pt plus 5cm}int gl\+Atrium\+::item\+At (
+\begin{DoxyParamCaption}
+\item[{double}]{xx, }
+\item[{double}]{yy, }
+\item[{double}]{zz}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_a02590feb7cd82c82cc67d0697136baf4}
+\hypertarget{classgl_atrium_acf3a401dfd3ca09d8dcb36886f306ba9}{\index{gl\+Atrium@{gl\+Atrium}!minimum\+Size\+Hint@{minimum\+Size\+Hint}}
+\index{minimum\+Size\+Hint@{minimum\+Size\+Hint}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{minimum\+Size\+Hint}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Size gl\+Atrium\+::minimum\+Size\+Hint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classgl_atrium_acf3a401dfd3ca09d8dcb36886f306ba9}
+\hypertarget{classgl_atrium_ad5af63d41d959d40d475d8e1aa0f6e9e}{\index{gl\+Atrium@{gl\+Atrium}!mouse\+Move\+Event@{mouse\+Move\+Event}}
+\index{mouse\+Move\+Event@{mouse\+Move\+Event}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{mouse\+Move\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::mouse\+Move\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_ad5af63d41d959d40d475d8e1aa0f6e9e}
+\hypertarget{classgl_atrium_af0e47f4d5e0bc6d8cdcf16dd23c0487b}{\index{gl\+Atrium@{gl\+Atrium}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{mouse\+Press\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::mouse\+Press\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_af0e47f4d5e0bc6d8cdcf16dd23c0487b}
+\hypertarget{classgl_atrium_a3b2fff6d451823faa28b1b5f09aa384d}{\index{gl\+Atrium@{gl\+Atrium}!mouse\+Release\+Event@{mouse\+Release\+Event}}
+\index{mouse\+Release\+Event@{mouse\+Release\+Event}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{mouse\+Release\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::mouse\+Release\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_a3b2fff6d451823faa28b1b5f09aa384d}
+\hypertarget{classgl_atrium_a951d4caaef073f6762ddd47a409d2cf6}{\index{gl\+Atrium@{gl\+Atrium}!paint\+G\+L@{paint\+G\+L}}
+\index{paint\+G\+L@{paint\+G\+L}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{paint\+G\+L}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::paint\+G\+L (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_a951d4caaef073f6762ddd47a409d2cf6}
+\hypertarget{classgl_atrium_a40cd7c018c743e5738560fdb4e4fea59}{\index{gl\+Atrium@{gl\+Atrium}!resize\+G\+L@{resize\+G\+L}}
+\index{resize\+G\+L@{resize\+G\+L}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{resize\+G\+L}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::resize\+G\+L (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_a40cd7c018c743e5738560fdb4e4fea59}
+\hypertarget{classgl_atrium_a939d7c7a5289deeeea1763544e5be6b5}{\index{gl\+Atrium@{gl\+Atrium}!screen\+To\+World@{screen\+To\+World}}
+\index{screen\+To\+World@{screen\+To\+World}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{screen\+To\+World}]{\setlength{\rightskip}{0pt plus 5cm}Vector3 gl\+Atrium\+::screen\+To\+World (
+\begin{DoxyParamCaption}
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{double}]{width, }
+\item[{double}]{height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_a939d7c7a5289deeeea1763544e5be6b5}
+\hypertarget{classgl_atrium_acf6258aaf1d7c1a8cd7afe558bfd8fa4}{\index{gl\+Atrium@{gl\+Atrium}!set\+Palette\+Gray@{set\+Palette\+Gray}}
+\index{set\+Palette\+Gray@{set\+Palette\+Gray}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{set\+Palette\+Gray}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::set\+Palette\+Gray (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classgl_atrium_acf6258aaf1d7c1a8cd7afe558bfd8fa4}
+\hypertarget{classgl_atrium_a5a67ffc011f4545b7ecf4d8a745a6c06}{\index{gl\+Atrium@{gl\+Atrium}!set\+Palette\+H\+S\+V@{set\+Palette\+H\+S\+V}}
+\index{set\+Palette\+H\+S\+V@{set\+Palette\+H\+S\+V}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{set\+Palette\+H\+S\+V}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::set\+Palette\+H\+S\+V (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classgl_atrium_a5a67ffc011f4545b7ecf4d8a745a6c06}
+\hypertarget{classgl_atrium_a1ea5edb0605ee17d77d636c81dbc74a9}{\index{gl\+Atrium@{gl\+Atrium}!set\+Side1@{set\+Side1}}
+\index{set\+Side1@{set\+Side1}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{set\+Side1}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::set\+Side1 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classgl_atrium_a1ea5edb0605ee17d77d636c81dbc74a9}
+\hypertarget{classgl_atrium_aab139e009363e2a027e4f3a5e3f1e84b}{\index{gl\+Atrium@{gl\+Atrium}!set\+Side2@{set\+Side2}}
+\index{set\+Side2@{set\+Side2}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{set\+Side2}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::set\+Side2 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classgl_atrium_aab139e009363e2a027e4f3a5e3f1e84b}
+\hypertarget{classgl_atrium_adb2aa7af154e4d83ca976bd7042726aa}{\index{gl\+Atrium@{gl\+Atrium}!set\+Top@{set\+Top}}
+\index{set\+Top@{set\+Top}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{set\+Top}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::set\+Top (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classgl_atrium_adb2aa7af154e4d83ca976bd7042726aa}
+\hypertarget{classgl_atrium_aa5afd6c2c43a3b9445e6821586671c36}{\index{gl\+Atrium@{gl\+Atrium}!set\+X\+Rotation@{set\+X\+Rotation}}
+\index{set\+X\+Rotation@{set\+X\+Rotation}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{set\+X\+Rotation}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::set\+X\+Rotation (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classgl_atrium_aa5afd6c2c43a3b9445e6821586671c36}
+\hypertarget{classgl_atrium_a4b339e5080f2019dec3e916b4348f41c}{\index{gl\+Atrium@{gl\+Atrium}!set\+Y\+Rotation@{set\+Y\+Rotation}}
+\index{set\+Y\+Rotation@{set\+Y\+Rotation}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{set\+Y\+Rotation}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::set\+Y\+Rotation (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classgl_atrium_a4b339e5080f2019dec3e916b4348f41c}
+\hypertarget{classgl_atrium_aab5b1212e320c13d3d3f30425f8e2028}{\index{gl\+Atrium@{gl\+Atrium}!set\+Z\+Rotation@{set\+Z\+Rotation}}
+\index{set\+Z\+Rotation@{set\+Z\+Rotation}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{set\+Z\+Rotation}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::set\+Z\+Rotation (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classgl_atrium_aab5b1212e320c13d3d3f30425f8e2028}
+\hypertarget{classgl_atrium_a0e7fc813e7c9ae4d47317109815b9705}{\index{gl\+Atrium@{gl\+Atrium}!size\+Hint@{size\+Hint}}
+\index{size\+Hint@{size\+Hint}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{size\+Hint}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Size gl\+Atrium\+::size\+Hint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classgl_atrium_a0e7fc813e7c9ae4d47317109815b9705}
+\hypertarget{classgl_atrium_a5a4eb4614e6619d55a484cdfb733b2ea}{\index{gl\+Atrium@{gl\+Atrium}!wheel\+Event@{wheel\+Event}}
+\index{wheel\+Event@{wheel\+Event}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{wheel\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::wheel\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Wheel\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classgl_atrium_a5a4eb4614e6619d55a484cdfb733b2ea}
+\hypertarget{classgl_atrium_add3c45ba71308914e62ac5f07d9dbce4}{\index{gl\+Atrium@{gl\+Atrium}!x\+Rotation\+Changed@{x\+Rotation\+Changed}}
+\index{x\+Rotation\+Changed@{x\+Rotation\+Changed}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{x\+Rotation\+Changed}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::x\+Rotation\+Changed (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classgl_atrium_add3c45ba71308914e62ac5f07d9dbce4}
+\hypertarget{classgl_atrium_a12abcdbba73ff41ea8efdbbdcdbdcb6c}{\index{gl\+Atrium@{gl\+Atrium}!y\+Rotation\+Changed@{y\+Rotation\+Changed}}
+\index{y\+Rotation\+Changed@{y\+Rotation\+Changed}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{y\+Rotation\+Changed}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::y\+Rotation\+Changed (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classgl_atrium_a12abcdbba73ff41ea8efdbbdcdbdcb6c}
+\hypertarget{classgl_atrium_a71703a9bcfb404b9aa1bdab789573c7e}{\index{gl\+Atrium@{gl\+Atrium}!z\+Rotation\+Changed@{z\+Rotation\+Changed}}
+\index{z\+Rotation\+Changed@{z\+Rotation\+Changed}!gl\+Atrium@{gl\+Atrium}}
+\subsubsection[{z\+Rotation\+Changed}]{\setlength{\rightskip}{0pt plus 5cm}void gl\+Atrium\+::z\+Rotation\+Changed (
+\begin{DoxyParamCaption}
+\item[{int}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classgl_atrium_a71703a9bcfb404b9aa1bdab789573c7e}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{gl_atrium_8h}{gl\+Atrium.\+h}\item 
+\hyperlink{gl_atrium_8cpp}{gl\+Atrium.\+cpp}\end{DoxyCompactItemize}
