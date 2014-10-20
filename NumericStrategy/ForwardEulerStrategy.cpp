@@ -3,12 +3,8 @@
 
 ForwardEulerStrategy::ForwardEulerStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)
 {
-	reset();
-}
-
-void ForwardEulerStrategy::reset()
-{
 	m_mainTimestep = 0.1;
+	reset();
 }
 
 double ForwardEulerStrategy::nextStep()

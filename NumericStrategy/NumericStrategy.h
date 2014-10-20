@@ -23,8 +23,26 @@ public:
 	~NumericStrategy();
 	 
 	virtual double nextStep() = 0;  ///< Main function
-	virtual void reset() = 0;
 
+
+	/**
+	* \brief Resets all the OScillators to the resting state and the time to 0
+	*/
+	void reset();
+
+	/**
+	* \brief Performs a defibrillation shot (under construction)
+	*/
+	void defibrillate();
+
+
+	/**
+	* \brief A pointer to the model
+	*/
 	CardiacMesh* m_mesh;
+
+
+
+	double m_initial_v;
 };
 

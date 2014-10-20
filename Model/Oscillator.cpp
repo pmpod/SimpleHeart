@@ -4,6 +4,19 @@
 Oscillator::Oscillator(void)
 {
 	m_type = NONE;
+	m_v_current.push_back(0.0);
+	m_currentPRIM.push_back(0.0);
+
+	reset();
+
+	vzero = 0; //[mV]
+	vmax = 1;  //[mV]
+	vmin = 0;  //[mV]
+	m_underStimulation = false;
+}
+
+void Oscillator::reset()
+{
 	m_v_potential = 0.0;
 	m_previous_potential = 0.0;
 	m_previous_scaledPotential = 0.0;
@@ -14,13 +27,13 @@ Oscillator::Oscillator(void)
 	_sourceA = 0.0;
 	_sourceB = 0.0;
 	guardTimestep = 0.4;
-	m_v_current.push_back(0.0);
-	m_currentPRIM.push_back(0.0);
-
-	vzero = 0; //[mV]
-	vmax = 1;  //[mV]
-	vmin = 0;  //[mV]
 	m_underStimulation = false;
+	for (short k = 0; k < m_v_current.size(); ++k)
+	{
+		m_v_current[k] = 0.0;
+	}
+	m_currentTime = 0.0;
+	m_previousTime = -0.1;
 }
 //--------------------------------------------------------------
 Oscillator::~Oscillator(void)

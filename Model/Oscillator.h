@@ -116,4 +116,5 @@ public:
 
 	void setSigma(double sX, double sY, double sZ);
 	void setConnexins();
+	void reset();
 };

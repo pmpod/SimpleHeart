@@ -2,6 +2,7 @@
 #define SIMPLEHEART_H
 
 #include <QtGui/QMainWindow>
+#include <QObject>
 #include "ui_simpleheart.h"
 #include "glAtrium.h"
 #include "AtrialMachine2d.h"

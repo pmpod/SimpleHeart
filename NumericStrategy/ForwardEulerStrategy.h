@@ -9,7 +9,6 @@ public:
 	~ForwardEulerStrategy();
 
 	double nextStep();
-	void reset();
 
 	double m_mainTimestep;
 };

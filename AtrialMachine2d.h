@@ -38,7 +38,6 @@ public:
 	AtrialMachine2d(atrialParameters* definitions, CardiacMesh *grid);
 	~AtrialMachine2d(void);
 	void init();
-	void reset(atrialParameters* definitions, CardiacMesh *grid);
 	void setAtrium(atrialParameters* definitions, CardiacMesh *grid);
 
 	void deleteAtrium();
@@ -108,12 +107,9 @@ signals:
 	void emitDebug( double);
 public slots:
 	void processStep();
-	void defibrillate();
-	void setAtrialStructure();
 	void setDiffusionCoefficients();
 	void editDiffusionCoefficients();
-	void resetAnisotrophyCoefficients();
-	void setWallCells();
+	void reset();
 //----------------simulation settings
 	void setSkip(int skip);
 

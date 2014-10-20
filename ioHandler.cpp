@@ -732,7 +732,6 @@ void ioHandler::readStructureFromFile( )
 		}
 		//m_handle->structurePainter->refreshPainter();
 		//m_handle->structurePainter->updateGL();
-		m_handle->Machine2d->setAtrialStructure();
 	}
 	inputStructure.close();
 	m_handle->ui.statusBar->showMessage("Ready");

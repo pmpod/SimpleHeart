@@ -196,7 +196,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_stop, SIGNAL(clicked()), this, SLOT(stopCalculation()));
 	//QObject::connect(ui.b_stop, SIGNAL(clicked()), m_ioHandler, SLOT(getParametersFromFile()));
 
-	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d, SLOT(defibrillate()));
+	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d, SLOT(reset()));
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), this, SLOT(reset()));
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentialE1, SLOT(clear()));
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentialE2, SLOT(clear()));
@@ -646,7 +646,6 @@ void SimpleHeart::setAtrialStructure()
 		}
 */
 		Machine2d->editDiffusionCoefficients();
-		Machine2d->resetAnisotrophyCoefficients();
 
 		diffusionPainter->updateCanvas();
 		diffusionPainter->updateGL();
