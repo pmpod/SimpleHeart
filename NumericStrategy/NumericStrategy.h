@@ -28,7 +28,7 @@ public:
 	/**
 	* \brief Resets all the OScillators to the resting state and the time to 0
 	*/
-	void reset();
+	virtual void reset();
 
 	/**
 	* \brief Performs a defibrillation shot (under construction)

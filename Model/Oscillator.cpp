@@ -20,6 +20,7 @@ void Oscillator::reset()
 	m_v_potential = 0.0;
 	m_previous_potential = 0.0;
 	m_previous_scaledPotential = 0.0;
+	m_potentialPRIM = 0.0;
 	m_v_electrogram = 0.0;
 	m_currentSource = 0.0;
 	m_previousTime = -0.1;
@@ -31,6 +32,7 @@ void Oscillator::reset()
 	for (short k = 0; k < m_v_current.size(); ++k)
 	{
 		m_v_current[k] = 0.0;
+		m_currentPRIM[k] = 0.0;
 	}
 	m_currentTime = 0.0;
 	m_previousTime = -0.1;
@@ -187,10 +189,10 @@ double Oscillator::getUniformTimestepCurrentSource()
 	double Vinterpol = 0;
 	for (unsigned int i = 0; i < m_neighbours.size(); ++i)
 	{
-		if (m_currentTime != (m_neighbours[i]->getCurrentTime()))
-			Vinterpol = m_neighbours[i]->m_v_potential;
-		else
-			Vinterpol = m_neighbours[i]->getPreviousPotential();
+		//if (m_currentTime == (m_neighbours[i]->getCurrentTime()))
+			Vinterpol = m_neighbours[i]->getPotential();
+		//else
+		//	Vinterpol = m_neighbours[i]->getPreviousPotential();
 
 		mixed += (Vinterpol - m_v_potential) *m_connexin[i];
 	}

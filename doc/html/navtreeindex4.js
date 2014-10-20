@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"simpleheart_8h.html":[2,0,35],
-"simpleheart_8h_source.html":[2,0,35],
 "struct_time_tree.html":[1,0,29],
 "struct_time_tree.html#a37fb85a78a8d379e61ffb910c0028597":[1,0,29,4],
 "struct_time_tree.html#a46ade43f75331b3d9582a3f0da6431c9":[1,0,29,0],

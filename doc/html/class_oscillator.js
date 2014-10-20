@@ -25,6 +25,7 @@ var class_oscillator =
     [ "newPotentialTime", "class_oscillator.html#a949a6e88a1e5b7037ba93d6a9c927b4f", null ],
     [ "newPotentialValue", "class_oscillator.html#a065af90ddd004f7af4e1d7489b4ea5d6", null ],
     [ "newState", "class_oscillator.html#aa48179145afe4bad7b757eefecb6053a", null ],
+    [ "reset", "class_oscillator.html#aa948fd93ed91ffedd873c6d50bba3898", null ],
     [ "setConnexins", "class_oscillator.html#a8d4b8d2c8eb200afbbb4d4d999f068ab", null ],
     [ "setCurrent", "class_oscillator.html#a5e4ecacba9fc577660c1643c1e50e0bb", null ],
     [ "setCurrentTime", "class_oscillator.html#ae4fdf768b4fc00f6830c295cdc2f3e62", null ],

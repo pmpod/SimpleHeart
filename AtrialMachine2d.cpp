@@ -63,8 +63,8 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 	probeOscillator.push_back(m_grid->m_mesh[2000]);
 	probeOscillator.push_back(m_grid->m_mesh[5000]);
 
-	//m_strategy = new ForwardEulerStrategy(m_grid);
-	m_strategy = new AllexandreStrategy(m_grid);
+	m_strategy = new ForwardEulerStrategy(m_grid);
+	//m_strategy = new AllexandreStrategy(m_grid);
 }
 //-------------------------------------------------------------------------
 AtrialMachine2d::~AtrialMachine2d(void)
@@ -143,14 +143,13 @@ void AtrialMachine2d::editDiffusionCoefficients()
 			m_diffusionCoefficients[ii][jj] * (1 - m_anisotrophyCoefficients[ii][jj]),
 			0);
 	}
-
 }
 //---------------------------------------------------------------------------------------
 void AtrialMachine2d::processStep() 
 {
 	
 	int meshSize = m_grid->m_mesh.size();
-	int meshWidth = m_grid->getSize();//m_skip
+	int meshWidth = m_grid->getSize();
 	if (m_definitions->m_ectopicActivity && m_grid->stimulationBegun == false)
 	{
 		m_grid->setStimulation(m_grid->m_mesh[m_stimulationID], 5);
@@ -161,7 +160,7 @@ void AtrialMachine2d::processStep()
 		m_grid->stopStimulation();
 	}
 
-	for (int kk = 0; kk <= meshSize; ++kk)
+	for (int kk = 0; kk <= 20; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}
@@ -183,9 +182,6 @@ void AtrialMachine2d::setEctoModTime()
 }
 //--------------------------------------------------------------------
 void AtrialMachine2d::setSkip(int skip) { 	m_skip = skip; }
-
-
-
 
 //-------------------------
 //void AtrialMachine2d::setSaGlobalAlpha(double value)
@@ -638,7 +634,6 @@ void AtrialMachine2d::setSkip(int skip) { 	m_skip = skip; }
 void AtrialMachine2d::setGlobalTime(double t)
 {
 	m_globalTime = t;
-
 }
 //void AtrialMachine2d::setAtriumV3multi(double value)
 //{

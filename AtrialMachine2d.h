@@ -44,9 +44,7 @@ public:
 //-----------------------------------------------
 	//FLAGS
 	bool m_hormonalToggle;
-//-----------------------------------------------------
-
-//-----------------------
+//-------------------------------------------------------------
 	atrialParameters*		m_definitions;
 	RandomGenerator		generator;
 	RRcalculator*		RRcalc_1;			// maszyna licz¹ca rr-y
@@ -63,7 +61,7 @@ public:
 
 	CardiacMesh* m_grid;
 	NumericStrategy* m_strategy;
-//-------------------------
+//-------------------------------------------------------------
 	double m_globalTime;
 	int	   m_skip;
 	double m_mainTimestep;
@@ -71,33 +69,9 @@ public:
 	double nextTime;
 	double nextPotential;
 	double nextCurrent[3];
-	//double m_h;
-	//double m_globalAccuracy;
-	double m_initial_v;
-	double m_initial_c;
-	double m_initial_c_2;
-	//double m_calculationTable[3];
-	//double* potentialo;
-	int m_whichFlag;
+
 	int m_stimulationID;
-//--------------------------------------
-	HEART_FUNCTION currentFunction;
-	SW_ALGORITHMS currentAlgorithm;
-	//double integrationFunction( double t, double y, Oscillator* osc);
-	double Euler( double t, double y[], double h, double y0, Oscillator* osc);
-	double Runge_Kutta( double *y, double x, double h, Oscillator* osc);
-	double DufortFrankl( double t, double y[], double h, double y0, Oscillator* osc);
-
-
-
-
-	double AtrialMachine2d::determineNextTimestep_Method2b(Oscillator*osc);
-	double AtrialMachine2d::guardCellUpdate(CardiacMesh *grid);
-
-	void processForwardEuler();
-	void setAlgorithm(SW_ALGORITHMS type);
-//---------------------------
-
+//-------------------------------------------------------------
 signals:
 	void stepFinished();
 	void currentHormonalActivity(double,double);

@@ -9,7 +9,7 @@ var searchData=
   ['defaultplot_2ecpp',['defaultPlot.cpp',['../default_plot_8cpp.html',1,'']]],
   ['defaultplot_2eh',['defaultPlot.h',['../default_plot_8h.html',1,'']]],
   ['defaults',['defaults',['../class_cartesian_grid.html#a2014b2b34c0f581f564bcbd1038d8d77',1,'CartesianGrid']]],
-  ['defibrillate',['defibrillate',['../class_atrial_machine2d.html#a3d3d6a6bf238cbfa164370f9670b2b52',1,'AtrialMachine2d']]],
+  ['defibrillate',['defibrillate',['../class_numeric_strategy.html#a0c081c97ced262ef0478daf66041ee05',1,'NumericStrategy']]],
   ['deleteatrium',['deleteAtrium',['../class_atrial_machine2d.html#a40366613671e5856d0c3cd0572398dc1',1,'AtrialMachine2d']]],
   ['destroy',['destroy',['../class_simple_heart.html#a6d53dfab003b56c23ac29b60c48795da',1,'SimpleHeart']]],
   ['destroygrid',['destroyGrid',['../class_cardiac_mesh.html#ac4e6a0774e1b1abf2ddbf2cc59434a92',1,'CardiacMesh::destroyGrid()'],['../class_cartesian_grid.html#a26c1bb3be5feca0f501d901000f2bbb4',1,'CartesianGrid::destroyGrid()']]],

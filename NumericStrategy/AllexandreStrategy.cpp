@@ -22,12 +22,14 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 //---------------------------------------------------------------------------------
 void AllexandreStrategy::reset()
 {
+	NumericStrategy::reset();
 	earliestTime = 0;
 	latestTime = 0;
 	lastGuardUpdate = -guardUpdateTimestep-1;
 	resetTime(m_updateTimeTree, 0.0);
 	//Reset timesteptree!
 	stimulationStateUpdate = false;
+	guardCellUpdate();
 }
 AllexandreStrategy::~AllexandreStrategy()
 {

@@ -3,6 +3,11 @@
 }
 
 
+Abstract class for cell implementation. Contains electrophysiology model (C\+E\+M) \& local geometrical properties \hyperlink{class_oscillator}{Oscillator} class is an abstract cell class, in which an electrophysiological model for the cell is implemented. The knowledge about the type of cell electrophysiology model is not relevant to other parts of the program and is encapsulated in the concrete impementation of the model. Any implementation of C\+E\+M should inherit from this calss.  
+
+
+
+
 {\ttfamily \#include $<$Oscillator.\+h$>$}
 
 Inheritance diagram for Oscillator\+:\begin{figure}[H]
@@ -15,27 +20,27 @@ Inheritance diagram for Oscillator\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 virtual void \hyperlink{class_oscillator_a56140e76f42036dc6d7a4cd989917edc}{set\+Parameter} (double value, \hyperlink{heart_defines_8h_a79395aba577c2bc57e7ca211ff3476a6}{O\+S\+C\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R} parameter)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Qt signal of new (scaled) potential \& time \mbox{[}ms\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Signals}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{class_oscillator_a065af90ddd004f7af4e1d7489b4ea5d6}{new\+Potential\+Value} (double pot\+Value)
-\item 
+\begin{DoxyCompactList}\small\item\em Qt emitter of full new state signal set. \end{DoxyCompactList}\item 
 void \hyperlink{class_oscillator_aa48179145afe4bad7b757eefecb6053a}{new\+State} (double pot\+Value, double cur\+Value)
-\item 
+\begin{DoxyCompactList}\small\item\em Qt signal of new (scaled) potential. \end{DoxyCompactList}\item 
 void \hyperlink{class_oscillator_a949a6e88a1e5b7037ba93d6a9c927b4f}{new\+Potential\+Time} (double time, double pot\+Value)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Qt signal of new (scaled) potential \& total current. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{class_oscillator_aad43fa7eeffdeb0cbc4767f2de538d80}{Oscillator} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Model scaling values -\/ V resting \mbox{[}m\+V\mbox{]}. \end{DoxyCompactList}\item 
 \hyperlink{class_oscillator_accb2f4ecc6604b2c38a7fd9973578360}{$\sim$\+Oscillator} (void)
 \item 
 void \hyperlink{class_oscillator_abc5d43aeb061d97dd58749baf2b8f82d}{state\+Calculated} (double a, double b, int which)
 \item 
 double \& \hyperlink{class_oscillator_a6d6d8ef3c022f6fd8c31c3e50987a822}{get\+Ref\+Potential} ()
-\item 
+\begin{DoxyCompactList}\small\item\em virtual function for parameter setting \end{DoxyCompactList}\item 
 double \& \hyperlink{class_oscillator_a734d7375586e9982a6419d1f08b63c57}{get\+Ref\+Previous\+Potential} ()
 \item 
 double \& \hyperlink{class_oscillator_ac82b2732257e64c0f84f5b520ef16704}{get\+Ref\+Current\+Time} ()
@@ -57,9 +62,9 @@ double \hyperlink{class_oscillator_a0768ee28a72db7e13e14fb717408292c}{get\+Previ
 \hyperlink{heart_defines_8h_a2f059cd81f362503874790462d535f5b}{C\+E\+L\+L\+\_\+\+T\+Y\+P\+E} \hyperlink{class_oscillator_aa0ae5ca40fa136d70b145d490646b8aa}{get\+Cell\+Type} ()
 \item 
 double \hyperlink{class_oscillator_a2eb50a29aeac6a63b4b8212d1b4cc097}{get\+Electrogram} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the current cell type. \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_a5051ab41b5036cb775faaa5f97e2c182}{get\+Extrapolated\+Neighbour\+Source} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the current electrogram value. \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_a38ec1c04097cceea46f4712fca7169e2}{get\+Uniform\+Timestep\+Current\+Source} ()
 \item 
 double \hyperlink{class_oscillator_ae0af6d579f485bc7ffbff790c145b388}{get\+Last\+Current\+Source} ()
@@ -95,6 +100,8 @@ void \hyperlink{class_oscillator_ae4fdf768b4fc00f6830c295cdc2f3e62}{set\+Current
 void \hyperlink{class_oscillator_a549fcc8c0dc9a0789a062a0b1062610b}{set\+Sigma} (double s\+X, double s\+Y, double s\+Z)
 \item 
 void \hyperlink{class_oscillator_a8d4b8d2c8eb200afbbb4d4d999f068ab}{set\+Connexins} ()
+\item 
+void \hyperlink{class_oscillator_aa948fd93ed91ffedd873c6d50bba3898}{reset} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -102,19 +109,19 @@ void \hyperlink{class_oscillator_a8d4b8d2c8eb200afbbb4d4d999f068ab}{set\+Connexi
 \hyperlink{heart_defines_8h_a2f059cd81f362503874790462d535f5b}{C\+E\+L\+L\+\_\+\+T\+Y\+P\+E} \hyperlink{class_oscillator_a7553dcea69896c2f3ff2bc8bda1d05cc}{m\+\_\+type}
 \item 
 int \hyperlink{class_oscillator_acfc962cfc0b6c92fc8ae8d7254346bef}{oscillator\+I\+D}
-\item 
+\begin{DoxyCompactList}\small\item\em Type of the cell (wall, non-\/wall, none, tissue, nodal, etc.) \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_a44d11f6d153d4a061fc1bbb6785ddc18}{m\+\_\+v\+\_\+potential}
 \item 
 double \hyperlink{class_oscillator_a2a1649ababe43b1de3dbd6d5f24db703}{m\+\_\+previous\+\_\+potential}
-\item 
+\begin{DoxyCompactList}\small\item\em Last cardiac potential V(t) -\/ in model units \mbox{[}model\mbox{]}. \end{DoxyCompactList}\item 
 std\+::vector$<$ double $>$ \hyperlink{class_oscillator_a344928736ed0deb40bc1c73d50af5d33}{m\+\_\+v\+\_\+current}
-\item 
+\begin{DoxyCompactList}\small\item\em Previous cardiac potential V(t-\/1) -\/ in model units \mbox{[}model\mbox{]}. \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_aedf0974c19ea8428e3702f267cf45465}{m\+\_\+potential\+P\+R\+I\+M}
-\item 
+\begin{DoxyCompactList}\small\item\em Vector of last cardiac currents/gating variables/model variables -\/ in model units \mbox{[}model\mbox{]}. \end{DoxyCompactList}\item 
 std\+::vector$<$ double $>$ \hyperlink{class_oscillator_aef644a4e5faf78fa338a7a5e739f267c}{m\+\_\+current\+P\+R\+I\+M}
-\item 
+\begin{DoxyCompactList}\small\item\em Last calculated value of d\+V/dt (T\+O\+D\+O check if necessary/useful??) \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_ab65a59d93c248616facbd1f01b3c2b87}{m\+\_\+v\+\_\+electrogram}
-\item 
+\begin{DoxyCompactList}\small\item\em Last calculated values of d\+C/dt (T\+O\+D\+O check if necessary/useful??) \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_aae4aa22ad331c19871be91d7cc5ceafa}{m\+\_\+v\+\_\+scaled\+Potential}
 \item 
 double \hyperlink{class_oscillator_a45a1214b84b342e4ee078d218112f001}{m\+\_\+previous\+\_\+scaled\+Potential}
@@ -150,18 +157,21 @@ double \hyperlink{class_oscillator_a952e781ffe848b06b7b511c54f1d090c}{m\+\_\+\+C
 std\+::vector$<$ \hyperlink{class_oscillator}{Oscillator} $\ast$ $>$ \hyperlink{class_oscillator_ac6add7bad19c62071ad1ce651b815e4e}{m\+\_\+neighbours}
 \item 
 std\+::vector$<$ double $>$ \hyperlink{class_oscillator_a7031173912bc2225997a3ab6f9995fec}{m\+\_\+neighbours\+Distance}
-\item 
+\begin{DoxyCompactList}\small\item\em Vector of pointers to neighbour oscillators. \end{DoxyCompactList}\item 
 std\+::vector$<$ double $>$ \hyperlink{class_oscillator_a94d86971a2a425d2e2492962491dc01b}{m\+\_\+connexin}
-\item 
+\begin{DoxyCompactList}\small\item\em Vector of pointers to distance to neighbour oscillators \mbox{[}mm\mbox{]}. \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_a80a2b0beda0d17f549160fbbd456243b}{m\+\_\+hormonal\+Activity}
-\item 
+\begin{DoxyCompactList}\small\item\em Vector of diffusion coefficients associated with neighbours. \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_a43006eaf9a5a3b50a8f6a2a95ce47231}{vmax}
 \item 
 double \hyperlink{class_oscillator_a8912b5faff383dcc1a33554d2bcc5844}{vmin}
-\item 
+\begin{DoxyCompactList}\small\item\em Model scaling values -\/ V maximum \mbox{[}m\+V\mbox{]}. \end{DoxyCompactList}\item 
 double \hyperlink{class_oscillator_af6886099dfca8ec732676f4f89935651}{vzero}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Model scaling values -\/ V minimum \mbox{[}m\+V\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Abstract class for cell implementation. Contains electrophysiology model (C\+E\+M) \& local geometrical properties \hyperlink{class_oscillator}{Oscillator} class is an abstract cell class, in which an electrophysiological model for the cell is implemented. The knowledge about the type of cell electrophysiology model is not relevant to other parts of the program and is encapsulated in the concrete impementation of the model. Any implementation of C\+E\+M should inherit from this calss. 
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{class_oscillator_aad43fa7eeffdeb0cbc4767f2de538d80}{\index{Oscillator@{Oscillator}!Oscillator@{Oscillator}}
@@ -171,6 +181,10 @@ double \hyperlink{class_oscillator_af6886099dfca8ec732676f4f89935651}{vzero}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}}\label{class_oscillator_aad43fa7eeffdeb0cbc4767f2de538d80}
+
+
+Model scaling values -\/ V resting \mbox{[}m\+V\mbox{]}. 
+
 \hypertarget{class_oscillator_accb2f4ecc6604b2c38a7fd9973578360}{\index{Oscillator@{Oscillator}!````~Oscillator@{$\sim$\+Oscillator}}
 \index{````~Oscillator@{$\sim$\+Oscillator}!Oscillator@{Oscillator}}
 \subsubsection[{$\sim$\+Oscillator}]{\setlength{\rightskip}{0pt plus 5cm}Oscillator\+::$\sim$\+Oscillator (
@@ -227,6 +241,10 @@ Reimplemented in \hyperlink{classv3model_a14957985c821508b7a5985a423d0c942}{v3mo
 {}
 \end{DoxyParamCaption}
 )}}\label{class_oscillator_a2eb50a29aeac6a63b4b8212d1b4cc097}
+
+
+Returns the current cell type. 
+
 \hypertarget{class_oscillator_a5051ab41b5036cb775faaa5f97e2c182}{\index{Oscillator@{Oscillator}!get\+Extrapolated\+Neighbour\+Source@{get\+Extrapolated\+Neighbour\+Source}}
 \index{get\+Extrapolated\+Neighbour\+Source@{get\+Extrapolated\+Neighbour\+Source}!Oscillator@{Oscillator}}
 \subsubsection[{get\+Extrapolated\+Neighbour\+Source}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Extrapolated\+Neighbour\+Source (
@@ -234,6 +252,10 @@ Reimplemented in \hyperlink{classv3model_a14957985c821508b7a5985a423d0c942}{v3mo
 {}
 \end{DoxyParamCaption}
 )}}\label{class_oscillator_a5051ab41b5036cb775faaa5f97e2c182}
+
+
+Returns the current electrogram value. 
+
 \hypertarget{class_oscillator_ae0af6d579f485bc7ffbff790c145b388}{\index{Oscillator@{Oscillator}!get\+Last\+Current\+Source@{get\+Last\+Current\+Source}}
 \index{get\+Last\+Current\+Source@{get\+Last\+Current\+Source}!Oscillator@{Oscillator}}
 \subsubsection[{get\+Last\+Current\+Source}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::get\+Last\+Current\+Source (
@@ -315,6 +337,10 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 {}
 \end{DoxyParamCaption}
 )}}\label{class_oscillator_a6d6d8ef3c022f6fd8c31c3e50987a822}
+
+
+virtual function for parameter setting 
+
 \hypertarget{class_oscillator_a734d7375586e9982a6419d1f08b63c57}{\index{Oscillator@{Oscillator}!get\+Ref\+Previous\+Potential@{get\+Ref\+Previous\+Potential}}
 \index{get\+Ref\+Previous\+Potential@{get\+Ref\+Previous\+Potential}!Oscillator@{Oscillator}}
 \subsubsection[{get\+Ref\+Previous\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double \& Oscillator\+::get\+Ref\+Previous\+Potential (
@@ -337,6 +363,10 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 \item[{double}]{pot\+Value}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_oscillator_a949a6e88a1e5b7037ba93d6a9c927b4f}
+
+
+Qt signal of new (scaled) potential \& total current. 
+
 \hypertarget{class_oscillator_a065af90ddd004f7af4e1d7489b4ea5d6}{\index{Oscillator@{Oscillator}!new\+Potential\+Value@{new\+Potential\+Value}}
 \index{new\+Potential\+Value@{new\+Potential\+Value}!Oscillator@{Oscillator}}
 \subsubsection[{new\+Potential\+Value}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::new\+Potential\+Value (
@@ -344,6 +374,10 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 \item[{double}]{pot\+Value}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_oscillator_a065af90ddd004f7af4e1d7489b4ea5d6}
+
+
+Qt emitter of full new state signal set. 
+
 \hypertarget{class_oscillator_aa48179145afe4bad7b757eefecb6053a}{\index{Oscillator@{Oscillator}!new\+State@{new\+State}}
 \index{new\+State@{new\+State}!Oscillator@{Oscillator}}
 \subsubsection[{new\+State}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::new\+State (
@@ -352,6 +386,17 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 \item[{double}]{cur\+Value}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_oscillator_aa48179145afe4bad7b757eefecb6053a}
+
+
+Qt signal of new (scaled) potential. 
+
+\hypertarget{class_oscillator_aa948fd93ed91ffedd873c6d50bba3898}{\index{Oscillator@{Oscillator}!reset@{reset}}
+\index{reset@{reset}!Oscillator@{Oscillator}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_oscillator_aa948fd93ed91ffedd873c6d50bba3898}
 \hypertarget{class_oscillator_a8d4b8d2c8eb200afbbb4d4d999f068ab}{\index{Oscillator@{Oscillator}!set\+Connexins@{set\+Connexins}}
 \index{set\+Connexins@{set\+Connexins}!Oscillator@{Oscillator}}
 \subsubsection[{set\+Connexins}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Connexins (
@@ -389,6 +434,10 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 \item[{{\bf O\+S\+C\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R}}]{parameter}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [slot]}}}\label{class_oscillator_a56140e76f42036dc6d7a4cd989917edc}
+
+
+Qt signal of new (scaled) potential \& time \mbox{[}ms\mbox{]}. 
+
 \hypertarget{class_oscillator_a672b578b643936b3b0b42371b6d339d9}{\index{Oscillator@{Oscillator}!set\+Position\+X@{set\+Position\+X}}
 \index{set\+Position\+X@{set\+Position\+X}!Oscillator@{Oscillator}}
 \subsubsection[{set\+Position\+X}]{\setlength{\rightskip}{0pt plus 5cm}void Oscillator\+::set\+Position\+X (
@@ -464,12 +513,20 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 \hypertarget{class_oscillator_a94d86971a2a425d2e2492962491dc01b}{\index{Oscillator@{Oscillator}!m\+\_\+connexin@{m\+\_\+connexin}}
 \index{m\+\_\+connexin@{m\+\_\+connexin}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+connexin}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Oscillator\+::m\+\_\+connexin}}\label{class_oscillator_a94d86971a2a425d2e2492962491dc01b}
+
+
+Vector of pointers to distance to neighbour oscillators \mbox{[}mm\mbox{]}. 
+
 \hypertarget{class_oscillator_a952e781ffe848b06b7b511c54f1d090c}{\index{Oscillator@{Oscillator}!m\+\_\+\+Connexin\+Sum@{m\+\_\+\+Connexin\+Sum}}
 \index{m\+\_\+\+Connexin\+Sum@{m\+\_\+\+Connexin\+Sum}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+\+Connexin\+Sum}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+\+Connexin\+Sum}}\label{class_oscillator_a952e781ffe848b06b7b511c54f1d090c}
 \hypertarget{class_oscillator_aef644a4e5faf78fa338a7a5e739f267c}{\index{Oscillator@{Oscillator}!m\+\_\+current\+P\+R\+I\+M@{m\+\_\+current\+P\+R\+I\+M}}
 \index{m\+\_\+current\+P\+R\+I\+M@{m\+\_\+current\+P\+R\+I\+M}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+current\+P\+R\+I\+M}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Oscillator\+::m\+\_\+current\+P\+R\+I\+M}}\label{class_oscillator_aef644a4e5faf78fa338a7a5e739f267c}
+
+
+Last calculated value of d\+V/dt (T\+O\+D\+O check if necessary/useful??) 
+
 \hypertarget{class_oscillator_a766694982f9a1f8ed7013828089587f7}{\index{Oscillator@{Oscillator}!m\+\_\+current\+Source@{m\+\_\+current\+Source}}
 \index{m\+\_\+current\+Source@{m\+\_\+current\+Source}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+current\+Source}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+current\+Source}}\label{class_oscillator_a766694982f9a1f8ed7013828089587f7}
@@ -479,18 +536,34 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 \hypertarget{class_oscillator_a80a2b0beda0d17f549160fbbd456243b}{\index{Oscillator@{Oscillator}!m\+\_\+hormonal\+Activity@{m\+\_\+hormonal\+Activity}}
 \index{m\+\_\+hormonal\+Activity@{m\+\_\+hormonal\+Activity}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+hormonal\+Activity}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+hormonal\+Activity}}\label{class_oscillator_a80a2b0beda0d17f549160fbbd456243b}
+
+
+Vector of diffusion coefficients associated with neighbours. 
+
 \hypertarget{class_oscillator_ac6add7bad19c62071ad1ce651b815e4e}{\index{Oscillator@{Oscillator}!m\+\_\+neighbours@{m\+\_\+neighbours}}
 \index{m\+\_\+neighbours@{m\+\_\+neighbours}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+neighbours}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Oscillator}$\ast$$>$ Oscillator\+::m\+\_\+neighbours}}\label{class_oscillator_ac6add7bad19c62071ad1ce651b815e4e}
 \hypertarget{class_oscillator_a7031173912bc2225997a3ab6f9995fec}{\index{Oscillator@{Oscillator}!m\+\_\+neighbours\+Distance@{m\+\_\+neighbours\+Distance}}
 \index{m\+\_\+neighbours\+Distance@{m\+\_\+neighbours\+Distance}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+neighbours\+Distance}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Oscillator\+::m\+\_\+neighbours\+Distance}}\label{class_oscillator_a7031173912bc2225997a3ab6f9995fec}
+
+
+Vector of pointers to neighbour oscillators. 
+
 \hypertarget{class_oscillator_aedf0974c19ea8428e3702f267cf45465}{\index{Oscillator@{Oscillator}!m\+\_\+potential\+P\+R\+I\+M@{m\+\_\+potential\+P\+R\+I\+M}}
 \index{m\+\_\+potential\+P\+R\+I\+M@{m\+\_\+potential\+P\+R\+I\+M}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+potential\+P\+R\+I\+M}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+potential\+P\+R\+I\+M}}\label{class_oscillator_aedf0974c19ea8428e3702f267cf45465}
+
+
+Vector of last cardiac currents/gating variables/model variables -\/ in model units \mbox{[}model\mbox{]}. 
+
 \hypertarget{class_oscillator_a2a1649ababe43b1de3dbd6d5f24db703}{\index{Oscillator@{Oscillator}!m\+\_\+previous\+\_\+potential@{m\+\_\+previous\+\_\+potential}}
 \index{m\+\_\+previous\+\_\+potential@{m\+\_\+previous\+\_\+potential}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+previous\+\_\+potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+previous\+\_\+potential}}\label{class_oscillator_a2a1649ababe43b1de3dbd6d5f24db703}
+
+
+Last cardiac potential V(t) -\/ in model units \mbox{[}model\mbox{]}. 
+
 \hypertarget{class_oscillator_a45a1214b84b342e4ee078d218112f001}{\index{Oscillator@{Oscillator}!m\+\_\+previous\+\_\+scaled\+Potential@{m\+\_\+previous\+\_\+scaled\+Potential}}
 \index{m\+\_\+previous\+\_\+scaled\+Potential@{m\+\_\+previous\+\_\+scaled\+Potential}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+previous\+\_\+scaled\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+previous\+\_\+scaled\+Potential}}\label{class_oscillator_a45a1214b84b342e4ee078d218112f001}
@@ -515,9 +588,17 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 \hypertarget{class_oscillator_a344928736ed0deb40bc1c73d50af5d33}{\index{Oscillator@{Oscillator}!m\+\_\+v\+\_\+current@{m\+\_\+v\+\_\+current}}
 \index{m\+\_\+v\+\_\+current@{m\+\_\+v\+\_\+current}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+v\+\_\+current}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Oscillator\+::m\+\_\+v\+\_\+current}}\label{class_oscillator_a344928736ed0deb40bc1c73d50af5d33}
+
+
+Previous cardiac potential V(t-\/1) -\/ in model units \mbox{[}model\mbox{]}. 
+
 \hypertarget{class_oscillator_ab65a59d93c248616facbd1f01b3c2b87}{\index{Oscillator@{Oscillator}!m\+\_\+v\+\_\+electrogram@{m\+\_\+v\+\_\+electrogram}}
 \index{m\+\_\+v\+\_\+electrogram@{m\+\_\+v\+\_\+electrogram}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+v\+\_\+electrogram}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+v\+\_\+electrogram}}\label{class_oscillator_ab65a59d93c248616facbd1f01b3c2b87}
+
+
+Last calculated values of d\+C/dt (T\+O\+D\+O check if necessary/useful??) 
+
 \hypertarget{class_oscillator_a44d11f6d153d4a061fc1bbb6785ddc18}{\index{Oscillator@{Oscillator}!m\+\_\+v\+\_\+potential@{m\+\_\+v\+\_\+potential}}
 \index{m\+\_\+v\+\_\+potential@{m\+\_\+v\+\_\+potential}!Oscillator@{Oscillator}}
 \subsubsection[{m\+\_\+v\+\_\+potential}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::m\+\_\+v\+\_\+potential}}\label{class_oscillator_a44d11f6d153d4a061fc1bbb6785ddc18}
@@ -536,15 +617,27 @@ Reimplemented in \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{v3mo
 \hypertarget{class_oscillator_acfc962cfc0b6c92fc8ae8d7254346bef}{\index{Oscillator@{Oscillator}!oscillator\+I\+D@{oscillator\+I\+D}}
 \index{oscillator\+I\+D@{oscillator\+I\+D}!Oscillator@{Oscillator}}
 \subsubsection[{oscillator\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}int Oscillator\+::oscillator\+I\+D}}\label{class_oscillator_acfc962cfc0b6c92fc8ae8d7254346bef}
+
+
+Type of the cell (wall, non-\/wall, none, tissue, nodal, etc.) 
+
 \hypertarget{class_oscillator_a43006eaf9a5a3b50a8f6a2a95ce47231}{\index{Oscillator@{Oscillator}!vmax@{vmax}}
 \index{vmax@{vmax}!Oscillator@{Oscillator}}
 \subsubsection[{vmax}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::vmax}}\label{class_oscillator_a43006eaf9a5a3b50a8f6a2a95ce47231}
 \hypertarget{class_oscillator_a8912b5faff383dcc1a33554d2bcc5844}{\index{Oscillator@{Oscillator}!vmin@{vmin}}
 \index{vmin@{vmin}!Oscillator@{Oscillator}}
 \subsubsection[{vmin}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::vmin}}\label{class_oscillator_a8912b5faff383dcc1a33554d2bcc5844}
+
+
+Model scaling values -\/ V maximum \mbox{[}m\+V\mbox{]}. 
+
 \hypertarget{class_oscillator_af6886099dfca8ec732676f4f89935651}{\index{Oscillator@{Oscillator}!vzero@{vzero}}
 \index{vzero@{vzero}!Oscillator@{Oscillator}}
 \subsubsection[{vzero}]{\setlength{\rightskip}{0pt plus 5cm}double Oscillator\+::vzero}}\label{class_oscillator_af6886099dfca8ec732676f4f89935651}
+
+
+Model scaling values -\/ V minimum \mbox{[}m\+V\mbox{]}. 
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

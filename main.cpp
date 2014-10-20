@@ -3,6 +3,7 @@
 #include <QPlastiqueStyle>
 #include <QWidget> 
 
+// /brief Main execution function for Simpleheart
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);

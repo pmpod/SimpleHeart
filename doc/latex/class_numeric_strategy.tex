@@ -25,12 +25,16 @@ Inheritance diagram for Numeric\+Strategy\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em A \hyperlink{class_numeric_strategy}{Numeric\+Strategy} destructor. \end{DoxyCompactList}\item 
 virtual double \hyperlink{class_numeric_strategy_aeab387274e9d0ebf46a0e5ad5a5fe73f}{next\+Step} ()=0
 \begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\item 
-virtual void \hyperlink{class_numeric_strategy_a81a1a510394e88edc2705e565d30f017}{reset} ()=0
-\end{DoxyCompactItemize}
+void \hyperlink{class_numeric_strategy_af85e11ad875a008cd1b6d8b288e3866c}{reset} ()
+\begin{DoxyCompactList}\small\item\em Resets all the O\+Scillators to the resting state and the time to 0. \end{DoxyCompactList}\item 
+void \hyperlink{class_numeric_strategy_a0c081c97ced262ef0478daf66041ee05}{defibrillate} ()
+\begin{DoxyCompactList}\small\item\em Performs a defibrillation shot (under construction) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$ \hyperlink{class_numeric_strategy_a2ca52f550fd3f1cc26c65aec0cacf2f6}{m\+\_\+mesh}
+\begin{DoxyCompactList}\small\item\em A pointer to the model. \end{DoxyCompactList}\item 
+double \hyperlink{class_numeric_strategy_a4ee8b2dbaa436c241384f959cc5fe54d}{m\+\_\+initial\+\_\+v}
 \end{DoxyCompactItemize}
 
 
@@ -70,6 +74,17 @@ A \hyperlink{class_numeric_strategy}{Numeric\+Strategy} destructor.
 
 
 \subsection{Member Function Documentation}
+\hypertarget{class_numeric_strategy_a0c081c97ced262ef0478daf66041ee05}{\index{Numeric\+Strategy@{Numeric\+Strategy}!defibrillate@{defibrillate}}
+\index{defibrillate@{defibrillate}!Numeric\+Strategy@{Numeric\+Strategy}}
+\subsubsection[{defibrillate}]{\setlength{\rightskip}{0pt plus 5cm}void Numeric\+Strategy\+::defibrillate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_numeric_strategy_a0c081c97ced262ef0478daf66041ee05}
+
+
+Performs a defibrillation shot (under construction) 
+
 \hypertarget{class_numeric_strategy_aeab387274e9d0ebf46a0e5ad5a5fe73f}{\index{Numeric\+Strategy@{Numeric\+Strategy}!next\+Step@{next\+Step}}
 \index{next\+Step@{next\+Step}!Numeric\+Strategy@{Numeric\+Strategy}}
 \subsubsection[{next\+Step}]{\setlength{\rightskip}{0pt plus 5cm}virtual double Numeric\+Strategy\+::next\+Step (
@@ -85,23 +100,30 @@ Main function.
 
 Implemented in \hyperlink{class_allexandre_strategy_a418e280a746b6105eb609cbee6ea99fc}{Allexandre\+Strategy}, and \hyperlink{class_forward_euler_strategy_a3a382585c2d87ffaf370c07c37737a28}{Forward\+Euler\+Strategy}.
 
-\hypertarget{class_numeric_strategy_a81a1a510394e88edc2705e565d30f017}{\index{Numeric\+Strategy@{Numeric\+Strategy}!reset@{reset}}
+\hypertarget{class_numeric_strategy_af85e11ad875a008cd1b6d8b288e3866c}{\index{Numeric\+Strategy@{Numeric\+Strategy}!reset@{reset}}
 \index{reset@{reset}!Numeric\+Strategy@{Numeric\+Strategy}}
-\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Numeric\+Strategy\+::reset (
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Numeric\+Strategy\+::reset (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_numeric_strategy_a81a1a510394e88edc2705e565d30f017}
+)}}\label{class_numeric_strategy_af85e11ad875a008cd1b6d8b288e3866c}
 
 
-Implemented in \hyperlink{class_allexandre_strategy_a8f657c6d14d76cef3a312fc862c400f7}{Allexandre\+Strategy}, and \hyperlink{class_forward_euler_strategy_aedd8186805189522eebfafce55617bb9}{Forward\+Euler\+Strategy}.
+Resets all the O\+Scillators to the resting state and the time to 0. 
 
 
 
 \subsection{Member Data Documentation}
+\hypertarget{class_numeric_strategy_a4ee8b2dbaa436c241384f959cc5fe54d}{\index{Numeric\+Strategy@{Numeric\+Strategy}!m\+\_\+initial\+\_\+v@{m\+\_\+initial\+\_\+v}}
+\index{m\+\_\+initial\+\_\+v@{m\+\_\+initial\+\_\+v}!Numeric\+Strategy@{Numeric\+Strategy}}
+\subsubsection[{m\+\_\+initial\+\_\+v}]{\setlength{\rightskip}{0pt plus 5cm}double Numeric\+Strategy\+::m\+\_\+initial\+\_\+v}}\label{class_numeric_strategy_a4ee8b2dbaa436c241384f959cc5fe54d}
 \hypertarget{class_numeric_strategy_a2ca52f550fd3f1cc26c65aec0cacf2f6}{\index{Numeric\+Strategy@{Numeric\+Strategy}!m\+\_\+mesh@{m\+\_\+mesh}}
 \index{m\+\_\+mesh@{m\+\_\+mesh}!Numeric\+Strategy@{Numeric\+Strategy}}
 \subsubsection[{m\+\_\+mesh}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cardiac\+Mesh}$\ast$ Numeric\+Strategy\+::m\+\_\+mesh}}\label{class_numeric_strategy_a2ca52f550fd3f1cc26c65aec0cacf2f6}
+
+
+A pointer to the model. 
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

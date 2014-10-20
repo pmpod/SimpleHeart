@@ -30,10 +30,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_allexandre_strategy_8cpp.html",
-"class_default_plot.html",
-"class_simple_heart.html#a14aebb9bb87be8bb0649bd8b67fff395",
-"classio_handler.html#a18b3ace510b075e81a08a4a3ed9d00a2",
-"simpleheart_8h.html"
+"class_default_plot.html#a154b2bb7e4528185f88ff204da70e4de",
+"class_simple_heart.html#a2261ed6808d375814ece785d02694acc",
+"classio_handler.html#a2de36fdfa99f28b20c6fe1b2069b75ad",
+"struct_time_tree.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

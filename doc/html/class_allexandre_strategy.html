@@ -155,12 +155,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac167251a4c6409131a1be21ce3104870 inherit pub_methods_class_numeric_strategy"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#ac167251a4c6409131a1be21ce3104870">~NumericStrategy</a> ()</td></tr>
 <tr class="memdesc:ac167251a4c6409131a1be21ce3104870 inherit pub_methods_class_numeric_strategy"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> destructor.  <a href="#ac167251a4c6409131a1be21ce3104870">More...</a><br /></td></tr>
 <tr class="separator:ac167251a4c6409131a1be21ce3104870 inherit pub_methods_class_numeric_strategy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85e11ad875a008cd1b6d8b288e3866c inherit pub_methods_class_numeric_strategy"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#af85e11ad875a008cd1b6d8b288e3866c">reset</a> ()</td></tr>
+<tr class="memdesc:af85e11ad875a008cd1b6d8b288e3866c inherit pub_methods_class_numeric_strategy"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets all the OScillators to the resting state and the time to 0.  <a href="#af85e11ad875a008cd1b6d8b288e3866c">More...</a><br /></td></tr>
+<tr class="separator:af85e11ad875a008cd1b6d8b288e3866c inherit pub_methods_class_numeric_strategy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c081c97ced262ef0478daf66041ee05 inherit pub_methods_class_numeric_strategy"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a0c081c97ced262ef0478daf66041ee05">defibrillate</a> ()</td></tr>
+<tr class="memdesc:a0c081c97ced262ef0478daf66041ee05 inherit pub_methods_class_numeric_strategy"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a defibrillation shot (under construction)  <a href="#a0c081c97ced262ef0478daf66041ee05">More...</a><br /></td></tr>
+<tr class="separator:a0c081c97ced262ef0478daf66041ee05 inherit pub_methods_class_numeric_strategy"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_attribs_class_numeric_strategy"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_numeric_strategy')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_numeric_strategy.html">NumericStrategy</a></td></tr>
 <tr class="memitem:a2ca52f550fd3f1cc26c65aec0cacf2f6 inherit pub_attribs_class_numeric_strategy"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cardiac_mesh.html">CardiacMesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a2ca52f550fd3f1cc26c65aec0cacf2f6">m_mesh</a></td></tr>
+<tr class="memdesc:a2ca52f550fd3f1cc26c65aec0cacf2f6 inherit pub_attribs_class_numeric_strategy"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the model.  <a href="#a2ca52f550fd3f1cc26c65aec0cacf2f6">More...</a><br /></td></tr>
 <tr class="separator:a2ca52f550fd3f1cc26c65aec0cacf2f6 inherit pub_attribs_class_numeric_strategy"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ee8b2dbaa436c241384f959cc5fe54d inherit pub_attribs_class_numeric_strategy"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a4ee8b2dbaa436c241384f959cc5fe54d">m_initial_v</a></td></tr>
+<tr class="separator:a4ee8b2dbaa436c241384f959cc5fe54d inherit pub_attribs_class_numeric_strategy"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac14cc10857d943bd555f828fd3c8004d"></a>
@@ -318,9 +327,6 @@ Additional Inherited Members</h2></td></tr>
 <a class="anchor" id="a8f657c6d14d76cef3a312fc862c400f7"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void AllexandreStrategy::reset </td>
@@ -329,14 +335,7 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-
-<p>Implements <a class="el" href="class_numeric_strategy.html#a81a1a510394e88edc2705e565d30f017">NumericStrategy</a>.</p>
 
 </div>
 </div>
@@ -366,7 +365,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_allexandre_strategy.html">AllexandreStrategy</a></li>
-    <li class="footer">Generated on Sun Oct 19 2014 16:47:05 for Simple Heart by
+    <li class="footer">Generated on Mon Oct 20 2014 19:29:02 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

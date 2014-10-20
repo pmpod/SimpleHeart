@@ -172,7 +172,7 @@ void CardiacMesh::destroyGrid()
 {
 	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();
 }
-
+//---------------------------------------------------------------------------
 void CardiacMesh::setStimulation(Oscillator* osc, const int& depth)
 {	// mo¿na opszeæ o sprawdzanie odleg³oœci 
 	if (!osc->m_underStimulation)
@@ -187,6 +187,7 @@ void CardiacMesh::setStimulation(Oscillator* osc, const int& depth)
 	}
 	stimulationBegun = true;
 }
+//---------------------------------------------------------------------------
 void CardiacMesh::stopStimulation()
 {
 	for (int j = 0; j < m_underStimulation.size(); ++j)
@@ -196,6 +197,7 @@ void CardiacMesh::stopStimulation()
 	m_underStimulation.clear();
 	stimulationBegun = false;
 }
+//---------------------------------------------------------------------------
 double CardiacMesh::calculateElectrogram(Oscillator* osc)
 {
 	int meshSize = m_mesh.size();

@@ -69,7 +69,7 @@ var searchData=
   ['m_5fhormonaltoggle',['m_hormonalToggle',['../class_atrial_machine2d.html#a784a6fb0c363c6858e992957279a28ea',1,'AtrialMachine2d']]],
   ['m_5finitial_5fc',['m_initial_c',['../class_atrial_machine2d.html#a5ff92394b2f3e615b7c36c8adf7286d6',1,'AtrialMachine2d']]],
   ['m_5finitial_5fc_5f2',['m_initial_c_2',['../class_atrial_machine2d.html#a14baf4c478ff64494b38eee78955a472',1,'AtrialMachine2d']]],
-  ['m_5finitial_5fv',['m_initial_v',['../class_atrial_machine2d.html#af93ce7ff7615bf27467eb765623c720c',1,'AtrialMachine2d']]],
+  ['m_5finitial_5fv',['m_initial_v',['../class_atrial_machine2d.html#af93ce7ff7615bf27467eb765623c720c',1,'AtrialMachine2d::m_initial_v()'],['../class_numeric_strategy.html#a4ee8b2dbaa436c241384f959cc5fe54d',1,'NumericStrategy::m_initial_v()']]],
   ['m_5fiohandler',['m_ioHandler',['../class_simple_heart.html#ac8828755d2dae8dbe3027deda059980a',1,'SimpleHeart']]],
   ['m_5flowerlimit',['m_lowerLimit',['../class_diffusion_painter.html#a4403369545b46ea79445e7fd71d85616',1,'DiffusionPainter']]],
   ['m_5fmainskip',['m_mainSkip',['../classatrial_parameters.html#a8ff21c69a731af1992ad8f5f39deec96',1,'atrialParameters']]],
