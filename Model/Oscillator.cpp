@@ -189,10 +189,10 @@ double Oscillator::getUniformTimestepCurrentSource()
 	double Vinterpol = 0;
 	for (unsigned int i = 0; i < m_neighbours.size(); ++i)
 	{
-		//if (m_currentTime == (m_neighbours[i]->getCurrentTime()))
+		if (m_currentTime == (m_neighbours[i]->getCurrentTime()))
+			Vinterpol = m_neighbours[i]->getPreviousPotential();
+		else
 			Vinterpol = m_neighbours[i]->getPotential();
-		//else
-		//	Vinterpol = m_neighbours[i]->getPreviousPotential();
 
 		mixed += (Vinterpol - m_v_potential) *m_connexin[i];
 	}
@@ -201,7 +201,19 @@ double Oscillator::getUniformTimestepCurrentSource()
 	return m_currentSource;
 }
 //--------------------------------------------------------------
-double Oscillator::getLastCurrentSource(){ return m_currentSource; }
+double Oscillator::getLastCurrentSource()
+{
+	double mixed = 0;
+	for (unsigned int i = 0; i < m_neighbours.size(); ++i)
+	{
+			mixed += (m_neighbours[i]->getPotential() - m_v_potential) *m_connexin[i];
+	}
+
+	m_currentSource = mixed;
+	return m_currentSource;
+}
+//--------------------------------------------------------------
+//double Oscillator::getLastCurrentSource(){ return m_currentSource; }
 //--------------------------------------------------------------
 int Oscillator::getNumberOfCurrents(){ return this->m_v_current.size(); }
 //---------------------------------------------------------------

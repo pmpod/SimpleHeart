@@ -93,7 +93,7 @@ public:
 
 	double getExtrapolatedNeighbourSource();					
 	double getUniformTimestepCurrentSource();
-	double getLastCurrentSource();		
+	double getLastCurrentSource();
 
 	double getPositionX();
 	double getPositionY();

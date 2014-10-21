@@ -210,7 +210,7 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 		osc2 = m_mesh[j2];
 		if (m_mesh[j2]->getCellType() != SOLID_WALL)
 		{
-			ele_val += osc2->getUniformTimestepCurrentSource() / (pow(osc->getPositionX() - osc2->getPositionX(), 2) +
+			ele_val += osc2->getLastCurrentSource() / (pow(osc->getPositionX() - osc2->getPositionX(), 2) +
 				pow(osc->getPositionY() - osc2->getPositionY(), 2) +
 				0.7);
 		}
