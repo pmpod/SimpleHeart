@@ -32,19 +32,8 @@ TimeTree *newTreeTrunk(TimeTree *&node, vector<Oscillator*>& mesh, vector<oscill
 }
 TimeTree *newTreeTrunk(TimeTree *&node, vector<Oscillator*>& mesh, int& numberOfOscillatorsAdded, vector<oscillatorToUpdateNode>& dictionary, int treeDepth, double initValue)
 {
-	//if (treeDepth == 0)
-	//{
-	//	assert("modelDepth == 0");
-	//	return nullptr;
-	//}
-	//if (treeDepth == 1)
-	//{
-	//	assert("modelDepth == 1");
-	//	return node;
-	//}
 	if (node == nullptr)
 	{
-		//assert("node == nullptr");
 		return nullptr;
 	}
 
@@ -55,22 +44,12 @@ TimeTree *newTreeTrunk(TimeTree *&node, vector<Oscillator*>& mesh, int& numberOf
 			if (node->earlierNode == nullptr)
 			{
 				node->earlierNode = newTreeNode(initValue, node);
-				//newTreeTrunk(node->earlierNode, treeDepth - 1, initValue);
 				newTreeTrunk(node->earlierNode, mesh, numberOfOscillatorsAdded, dictionary, treeDepth - 1, initValue);
-			}
-			else
-			{
-				//assert("Tree was occupied!");
 			}
 			if (node->laterNode == nullptr)
 			{
 				node->laterNode = newTreeNode(initValue, node);
-				//newTreeTrunk(node->laterNode, treeDepth - 1, initValue);
 				newTreeTrunk(node->laterNode, mesh, numberOfOscillatorsAdded, dictionary, treeDepth - 1, initValue);
-			}
-			else
-			{
-				//assert("Tree was occupied!");
 			}
 		}
 		if (treeDepth == 0)
@@ -78,6 +57,15 @@ TimeTree *newTreeTrunk(TimeTree *&node, vector<Oscillator*>& mesh, int& numberOf
 			//tutaj mozna dodac oscylator
 			if (numberOfOscillatorsAdded < mesh.size())
 			{
+				while ((mesh[numberOfOscillatorsAdded]->getCellType() == SOLID_WALL || mesh[numberOfOscillatorsAdded]->getCellType() == NONE))
+				{
+					++numberOfOscillatorsAdded;
+					if (numberOfOscillatorsAdded == mesh.size() )
+						break;
+				}
+			}
+			if (numberOfOscillatorsAdded < mesh.size())
+			{	
 				node->osc = mesh[numberOfOscillatorsAdded];
 				++numberOfOscillatorsAdded;
 
