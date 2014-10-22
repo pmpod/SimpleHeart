@@ -35,8 +35,8 @@ public:
 	double getSizeInMm();
 	double getDeltaR();
 
-
-	void setStimulation(Oscillator* osc, const int& depth);
+	void startStimulation(Oscillator* osc, const int& id, const double radius, const double strength);
+	//void setStimulation(Oscillator* osc, const int& depth);
 	void stopStimulation();
 	double calculateElectrogram(Oscillator* osc);
 	bool stimulationBegun;

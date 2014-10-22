@@ -59,6 +59,10 @@ TimeTree *newTreeTrunk(TimeTree *&node, vector<Oscillator*>& mesh, int& numberOf
 			{
 				while ((mesh[numberOfOscillatorsAdded]->getCellType() == SOLID_WALL || mesh[numberOfOscillatorsAdded]->getCellType() == NONE))
 				{
+					//dictionary update
+					oscillatorToUpdateNode nd;
+					dictionary.push_back(nd);
+
 					++numberOfOscillatorsAdded;
 					if (numberOfOscillatorsAdded == mesh.size() )
 						break;

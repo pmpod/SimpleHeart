@@ -7,8 +7,8 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 	deltaTimestepIncMean = oscillators->getDeltaR()*oscillators->getDeltaR() / (2 * oscillators->m_maximumCV);
 	deltaTdiff = oscillators->getDeltaR() * oscillators->getDeltaR();
 	guardUpdateTimestep = oscillators->m_maximumCV / oscillators->getDeltaR();
-	kappaAccuracy = 0.05;
-	Kguard = 20;
+	kappaAccuracy = 0.1;
+	Kguard = 2;
 
 	//[1] Create time trees
 	m_updateTimeTree = nullptr;
@@ -121,8 +121,8 @@ double AllexandreStrategy::stepModifiedBackwardEuler(Oscillator * osc)
 	int numberOfEquations = osc->getNumberOfCurrents();
 	//[3] Calculate new step 
 
-	if (osc->m_underStimulation == false)
-	{
+	//if (osc->m_underStimulation == false)
+	//{
 		v_prim = osc->m_v_potential + nextTimestep * (osc->getPotentialPrim() + osc->getExtrapolatedNeighbourSource());
 
 		v_prim = v_prim / (1 + nextTimestep * osc->m_ConnexinSum);
@@ -135,14 +135,14 @@ double AllexandreStrategy::stepModifiedBackwardEuler(Oscillator * osc)
 		osc->setPotential(v_prim);
 		osc->setElectrogram(osc->m_v_potential);
 		//osc->setElectrogram(nextTimestep);
-	}
-	else
-	{
-		osc->setPreviousPotential(osc->m_v_potential);
-		osc->setPotential(m_mesh->m_ectopicAmplitude);
-		osc->setElectrogram(osc->m_v_potential);
+	//}
+	//else
+	//{
+	//	osc->setPreviousPotential(osc->m_v_potential);
+	//	osc->setPotential(m_mesh->m_ectopicAmplitude);
+	//	osc->setElectrogram(osc->m_v_potential);
 	//	osc->setElectrogram(nextTimestep);
-	}
+	//}
 
 	if (!osc->m_wallCells.empty())
 	{

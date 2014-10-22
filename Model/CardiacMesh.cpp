@@ -179,26 +179,49 @@ void CardiacMesh::destroyGrid()
 	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();
 }
 //---------------------------------------------------------------------------
-void CardiacMesh::setStimulation(Oscillator* osc, const int& depth)
-{	// mo¿na opszeæ o sprawdzanie odleg³oœci 
+void CardiacMesh::startStimulation(Oscillator* osc, const int& id, const double radius, const double strength)
+{	
 	if (!osc->m_underStimulation)
 	{
 		m_underStimulation.push_back(osc);
 		osc->m_underStimulation = true;
+		osc->m_stimulation = strength;
 	}
+	double distance;
 	for (int k = 0; k < osc->m_neighbours.size(); ++k)
-	{ 
-		if (depth > 0)
-			setStimulation(osc->m_neighbours[k], depth - 1);
+	{
+		distance =	std::pow((m_mesh[id]->m_x - osc->m_neighbours[k]->m_x), 2) +
+					std::pow((m_mesh[id]->m_y - osc->m_neighbours[k]->m_y), 2) +
+					std::pow((m_mesh[id]->m_z - osc->m_neighbours[k]->m_z), 2);
+		if (distance < radius && !(osc->m_neighbours[k]->m_underStimulation))
+		{
+			startStimulation(osc->m_neighbours[k], id, radius, strength);
+		}
 	}
 	stimulationBegun = true;
 }
+//---------------------------------------------------------------------------
+//void CardiacMesh::setStimulation(Oscillator* osc, const int& depth)
+//{	// mo¿na opszeæ o sprawdzanie odleg³oœci 
+//	if (!osc->m_underStimulation)
+//	{
+//		m_underStimulation.push_back(osc);
+//		osc->m_underStimulation = true;
+//	}
+//	for (int k = 0; k < osc->m_neighbours.size(); ++k)
+//	{ 
+//		if (depth > 0)
+//			setStimulation(osc->m_neighbours[k], depth - 1);
+//	}
+//	stimulationBegun = true;
+//}
 //---------------------------------------------------------------------------
 void CardiacMesh::stopStimulation()
 {
 	for (int j = 0; j < m_underStimulation.size(); ++j)
 	{
 		m_underStimulation[j]->m_underStimulation = false;
+		m_underStimulation[j]->m_stimulation = 0.0;
 	}
 	m_underStimulation.clear();
 	stimulationBegun = false;

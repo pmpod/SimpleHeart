@@ -29,7 +29,7 @@ v3model::~v3model(void)
 //--------------------------------------------------------------
  double v3model::getPotentialPrim()
 {
-	 m_potentialPRIM = -(get_J_fi() + get_J_so() + get_J_si());
+	 m_potentialPRIM = -(get_J_fi() + get_J_so() + get_J_si()) + m_stimulation;
 	 return m_potentialPRIM;
 }
 //--------------------------------------------------------------

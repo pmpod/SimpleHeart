@@ -17,6 +17,7 @@ Oscillator::Oscillator(void)
 
 void Oscillator::reset()
 {
+	m_stimulation = 0.0;
 	m_v_potential = 0.0;
 	m_previous_potential = 0.0;
 	m_previous_scaledPotential = 0.0;
@@ -68,7 +69,7 @@ double Oscillator::getPreviousTime(){ return m_previousTime; }
 //--------------------------------------------------------------
 double Oscillator::getPotentialPrim()
 {
-	m_potentialPRIM = -2 * m_v_current[0];
+	m_potentialPRIM = -2 * m_v_current[0] + m_stimulation;
 	return m_potentialPRIM;
 }
 //--------------------------------------------------------------

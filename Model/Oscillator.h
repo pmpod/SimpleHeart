@@ -36,6 +36,8 @@ public:
 	double m_previousTime;			//t(current-1)
 	double guardTimestep;
 
+	double m_stimulation;			//t(current)
+
 	bool m_underStimulation;
 
 

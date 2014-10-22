@@ -30,23 +30,14 @@ double ForwardEulerStrategy::nextStep()
 			nextTime = (osc->getCurrentTime()) + nextTimestep;
 			osc->setCurrentTime(nextTime);
 
-			if (osc->m_underStimulation == false)
+			//SCA£KUJ POTENCJA£
+			osc->setPreviousPotential(osc->m_v_potential);
+			osc->setPotential(osc->m_v_potential + nextTimestep * (osc->getPotentialPrim() + osc->getUniformTimestepCurrentSource()));
+			osc->setElectrogram(osc->m_v_potential);
+			//SCA£KUJ WSZYSTKIE PR¥DY
+			for (int k = 0; k < numberOfEquations; ++k)
 			{
-				//SCA£KUJ POTENCJA£
-				osc->setPreviousPotential(osc->m_v_potential);
-				osc->setPotential(osc->m_v_potential + nextTimestep * (osc->getPotentialPrim() + osc->getUniformTimestepCurrentSource()));
-				osc->setElectrogram(osc->m_v_potential);
-				//SCA£KUJ WSZYSTKIE PR¥DY
-				for (int k = 0; k < numberOfEquations; ++k)
-				{
-					osc->setCurrent(osc->m_v_current[k] + nextTimestep * (osc->getCurrentPrim(k)), k);
-				}
-			}
-			else
-			{
-				osc->setPreviousPotential(osc->m_v_potential);
-				osc->setPotential(m_mesh->m_ectopicAmplitude);
-				osc->setElectrogram(osc->m_v_potential);
+				osc->setCurrent(osc->m_v_current[k] + nextTimestep * (osc->getCurrentPrim(k)), k);
 			}
 
 			if (!osc->m_wallCells.empty())

@@ -63,8 +63,8 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 	probeOscillator.push_back(m_grid->m_mesh[2000]);
 	probeOscillator.push_back(m_grid->m_mesh[5000]);
 
-	//m_strategy = new ForwardEulerStrategy(m_grid);
-	m_strategy = new AllexandreStrategy(m_grid);
+	m_strategy = new ForwardEulerStrategy(m_grid);
+	//m_strategy = new AllexandreStrategy(m_grid);
 }
 //-------------------------------------------------------------------------
 AtrialMachine2d::~AtrialMachine2d(void)
@@ -152,7 +152,7 @@ void AtrialMachine2d::processStep()
 	int meshWidth = m_grid->getSize();
 	if (m_definitions->m_ectopicActivity && m_grid->stimulationBegun == false)
 	{
-		m_grid->setStimulation(m_grid->m_mesh[m_stimulationID], 5);
+		m_grid->startStimulation(m_grid->m_mesh[m_stimulationID], m_stimulationID, meshWidth/20,0.1);
 	}
 
 	else if (!m_definitions->m_ectopicActivity && m_grid->stimulationBegun == true)
@@ -160,10 +160,11 @@ void AtrialMachine2d::processStep()
 		m_grid->stopStimulation();
 	}
 
-	for (int kk = 0; kk <= meshSize; ++kk)//m_skip
+	for (int kk = 0; kk <= m_skip; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}
+
 	RRcalc_1->processNewTime(m_globalTime, probeOscillator[0]->getPotential());
 	RRcalc_2->processNewTime(m_globalTime, probeOscillator[1]->getPotential());
 	RRcalc_3->processNewTime(m_globalTime, probeOscillator[2]->getPotential());
