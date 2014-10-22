@@ -42,24 +42,11 @@ private:
 	TimeTree* m_updateTimeTree;
 	vector<oscillatorToUpdateNode> m_oscillatorUpdateDictionary;
 
-	//TimeTree* m_timestepTree;
-
-	//vector<timestepNode*> m_timestepList;
-	//vector<timestepNode*> m_timestepDictionary;
-
-
-
-
-
-
-
 
 	stpHeap heap0;
 	stpHeap heap1;
 	stpHeap* timeStepHeap;
 	stpHeap* otherHeap;
-	vector<TimestepNode*> m_timestepNodes;
-
 
 	vector<oscillatorToTimestepHandle> m_oscillatorTimestepDictionary;
 	bool currentHeap;

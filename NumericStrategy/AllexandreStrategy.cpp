@@ -11,12 +11,10 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 
 	//Create time trees
 	m_updateTimeTree = nullptr;
-	//m_timestepTree = nullptr;
 	constructUpdateTimeTree();
+
 	constructTimestepTree();
-
-	//Dok³adnoœci
-
+	
 	reset();
 }
 //---------------------------------------------------------------------------------
@@ -34,6 +32,9 @@ void AllexandreStrategy::reset()
 AllexandreStrategy::~AllexandreStrategy()
 {
 	clear(m_updateTimeTree);
+	timeStepHeap->clear();
+	otherHeap->clear();
+	m_oscillatorTimestepDictionary.clear();
 }
 //---------------------------------------------------------------------------------
 double AllexandreStrategy::nextStep()

@@ -27,6 +27,7 @@ public:
 	static CardiacMesh *constructCylindricalGrid(int x, int y, double dx, double dy);
 	static CardiacMesh *importGrid();
 	void setWallCells();
+	void clearWallCells();
 	void setVertexTriangleList(bool doublesided);
 
 	void destroyGrid();
@@ -43,7 +44,7 @@ public:
 
 	std::vector<Oscillator*> m_mesh;
 	std::vector<Oscillator*> m_underStimulation;
-	std::vector<std::pair<Oscillator*, Oscillator*>> m_wallCells;
+	//std::vector<std::pair<Oscillator*, Oscillator*>> m_wallCells;
 
 	double m_minimumDistance;
 	double m_maximumDistance;

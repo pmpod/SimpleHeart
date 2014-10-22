@@ -145,10 +145,16 @@ CardiacMesh* CardiacMesh::importGrid()
 	return grid;
 }
 
-
+void CardiacMesh::clearWallCells()
+{
+	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
+	{
+		m_mesh[currentOsc]->m_wallCells.clear();
+	}
+}
 void CardiacMesh::setWallCells()
 {
-	m_wallCells.clear();
+	clearWallCells();
 	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
 	{
 		if (m_mesh[currentOsc]->m_type == SOLID_WALL)
@@ -160,14 +166,14 @@ void CardiacMesh::setWallCells()
 				if (neigh->getCellType() != SOLID_WALL &&
 					neigh->getCellType() != NONE)
 				{
-					m_wallCells.push_back(make_pair(m_mesh[currentOsc], neigh));
+					neigh->m_wallCells.push_back(m_mesh[currentOsc]);
 					break;
 				}
 			}
 		}
-		
 	}
 }
+//---------------------------------------------------------------------------
 void CardiacMesh::destroyGrid()
 {
 	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();

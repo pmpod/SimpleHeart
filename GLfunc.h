@@ -24,5 +24,12 @@ void HSVtoRGB(double h, double s, double v, double* r, double* g, double* b);
 void paintTheRay(float x, float y, float z);
 bool invertMatrix(const GLfloat m[16], double invOut[16]);
 void drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb);
+
+
+void hotToColdMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb);
+void hotMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb);
+void hotNlMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb);
+void coldMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb);
+void grayMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb);
 /*******************************************************************************/
 #endif

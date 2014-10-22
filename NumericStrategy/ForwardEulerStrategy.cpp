@@ -49,24 +49,38 @@ double ForwardEulerStrategy::nextStep()
 				osc->setElectrogram(osc->m_v_potential);
 			}
 
+			if (!osc->m_wallCells.empty())
+			{
+				for (short wc = 0; wc < osc->m_wallCells.size(); ++wc)
+				{
+					osc->m_wallCells[wc]->setPotential(osc->m_v_potential);
+					osc->m_wallCells[wc]->setElectrogram(osc->getElectrogram());
+					osc->m_wallCells[wc]->setPreviousPotential(osc->getPreviousPotential());
+					for (int k = 0; k < numberOfEquations; ++k)
+					{
+						osc->m_wallCells[wc]->setCurrent(osc->getCurrent(k), k);
+					}
+					osc->m_wallCells[wc]->setCurrentTime(osc->getCurrentTime());
+				}
+			}
 		}
 
 	}
 
-	//border walls
-	int wallSize = m_mesh->m_wallCells.size();
-	for (int i = 0; i < m_mesh->m_wallCells.size(); ++i)
-	{
-		m_mesh->m_wallCells[i].first->setPotential(m_mesh->m_wallCells[i].second->getPotential());
-		m_mesh->m_wallCells[i].first->setElectrogram(m_mesh->m_wallCells[i].second->getElectrogram());
-		m_mesh->m_wallCells[i].first->setPreviousPotential(m_mesh->m_wallCells[i].second->getPreviousPotential());
-		for (int k = 0; k < numberOfEquations; ++k)
-		{
-			m_mesh->m_wallCells[i].first->setCurrent(m_mesh->m_wallCells[i].second->getCurrent(k), k);
-		}
+	////border walls
+	//int wallSize = m_mesh->m_wallCells.size();
+	//for (int i = 0; i < m_mesh->m_wallCells.size(); ++i)
+	//{
+	//	m_mesh->m_wallCells[i].first->setPotential(m_mesh->m_wallCells[i].second->getPotential());
+	//	m_mesh->m_wallCells[i].first->setElectrogram(m_mesh->m_wallCells[i].second->getElectrogram());
+	//	m_mesh->m_wallCells[i].first->setPreviousPotential(m_mesh->m_wallCells[i].second->getPreviousPotential());
+	//	for (int k = 0; k < numberOfEquations; ++k)
+	//	{
+	//		m_mesh->m_wallCells[i].first->setCurrent(m_mesh->m_wallCells[i].second->getCurrent(k), k);
+	//	}
 
-		m_mesh->m_wallCells[i].first->setCurrentTime(m_mesh->m_wallCells[i].second->getCurrentTime());
-	}
+	//	m_mesh->m_wallCells[i].first->setCurrentTime(m_mesh->m_wallCells[i].second->getCurrentTime());
+	//}
 
 	return (nextTime);
 }

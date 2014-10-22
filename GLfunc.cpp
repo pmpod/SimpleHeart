@@ -124,14 +124,8 @@ void paintCellTriangle(double& x1, double& y1, double& z1, double color1,
 	double& x2, double& y2, double& z2, double color2,
 	double& x3, double& y3, double& z3, double color3, int palette)
 {
-	double rr = 0.3 + color1 / 2.0;
-	double gg = 0.3 + color1 / 2.0;
-	double bb = 0.3 + color1 / 2.0;
-
-	//float f[1];
-	//glGetFloatv(GL_LINE_WIDTH, f);
-	//glLineWidth(1.0f);
-	//glLineStipple(1, (short)2);
+	float val = color1;
+	GLfloat color[] = { 0.f, 0.f, 0.f, 1.f };
 
 	if (palette == 0)
 	{
@@ -140,49 +134,36 @@ void paintCellTriangle(double& x1, double& y1, double& z1, double color1,
 		//glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
 		//			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
 		//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
-
+		
+		hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
 		glNormal3d(x1, y1, z1);
-
-		HSVtoRGB(1 - sqrt(color1), 1.0, 0.2 + 0.8*color1, &rr, &gg, &bb);
-		//glColor3f(rr, gg, bb);
-		GLfloat col1[] = { rr, gg, bb, 1.f };
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
-		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
 		glVertex3f(x1, y1, z1);
-		HSVtoRGB(1 - sqrt(color2), 1.0, 0.2 + 0.8*color2, &rr, &gg, &bb);
-		col1[0] = rr;
-		col1[1] = gg;
-		col1[2] = bb;
-		col1[3] = 1.f;
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
-		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
-		//glColor3f(rr, gg, bb);
+
+		//hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
 		glNormal3d(x2, y2, z2);
 		glVertex3f(x2, y2, z2);
-		HSVtoRGB(1 - sqrt(color3), 1.0, 0.2 + 0.8*color3, &rr, &gg, &bb);
-		col1[0] = rr;
-		col1[1] = gg;
-		col1[2] = bb;
-		col1[3] = 1.f;
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, col1);
-		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
-		//glColor3f(rr, gg, bb);
+
+		//hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
 		glNormal3d(x3, y3, z3);
 		glVertex3f(x3, y3, z3);
+
 		glEnd();
 	}
 	else
 	{
-		glColor3f(rr, rr, rr);
-
+		hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
 		glBegin(GL_TRIANGLES);
 		glVertex3f(x1, y1, z1);
 		glVertex3f(x2, y2, z2);
 		glVertex3f(x3, y3, z3);
 		glEnd();
 	}
-	//glLineWidth(f[0]);
-
 }
 void paintTheRay(float x, float y, float z)
 {
@@ -677,4 +658,141 @@ void drawSphere(double r, int lats, int longs, double xorg, double yorg, double 
 		}
 		glEnd();
 	}
+}
+
+
+
+void hotToColdMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb)
+{
+	GLfloat dv;
+
+	if (v < vmin)
+		v = vmin;
+	if (v > vmax)
+		v = vmax;
+	dv = vmax - vmin;
+
+	if (v < (vmin + 0.25 * dv)) {
+		rr = 0;
+		gg = 4 * (v - vmin) / dv;
+		bb = 1.0;
+	}
+	else if (v < (vmin + 0.5 * dv)) {
+		rr = 0;
+		gg = 1.0;
+		bb = 1 + 4 * (vmin + 0.25 * dv - v) / dv;
+	}
+	else if (v < (vmin + 0.75 * dv)) {
+		rr = 4 * (v - vmin - 0.5 * dv) / dv;
+		gg = 1.0;
+		bb = 0;
+	}
+	else {
+		gg = 1 + 4 * (vmin + 0.75 * dv - v) / dv;
+		rr = 1.0;
+		bb = 0;
+	}
+
+
+}
+void hotNlMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb)
+{
+	GLfloat dv;
+
+	if (v < vmin)
+		v = vmin;
+	if (v > vmax)
+		v = vmax;
+	dv = vmax - vmin;
+
+	if (v < (vmin + 0.02 * dv)) {
+		rr = 15 * (v - vmin) / dv;
+		gg = 0;
+		bb = 0;
+	}
+	else if (v < (vmin + 0.3 * dv)) {
+		rr = 2.5* (v - vmin + 0.1 * dv) / dv;
+		gg = 0;
+		bb = 0;
+	}
+	else if (v < (vmin + 0.7 * dv)) {
+		rr = 1.0;
+		gg = 2.5 * (v - vmin - 0.3 * dv) / dv;
+		bb = 0;
+	}
+	else {
+		gg = 1.0;
+		rr = 1.0;
+		bb = 3.33 * (v - vmin - 0.7 * dv) / dv;
+	}
+}
+
+void hotMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb)
+{
+	GLfloat dv;
+
+	if (v < vmin)
+		v = vmin;
+	if (v > vmax)
+		v = vmax;
+	dv = vmax - vmin;
+
+	if (v < (vmin + 0.4 * dv)) {
+		rr = 2.5 * (v - vmin ) / dv;
+		gg = 0;
+		bb = 0;
+	}
+	else if (v < (vmin + 0.8 * dv)) {
+		rr = 1.0;
+		gg = 2.5 * (v - vmin - 0.4 * dv) / dv;
+		bb = 0;
+	}
+	else {
+		gg = 1.0;
+		rr = 1.0;
+		bb = 2.5 * (v - vmin - 0.8 * dv) / dv;
+	}
+}
+
+void coldMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb)
+{
+	GLfloat dv;
+
+	if (v < vmin)
+		v = vmin;
+	if (v > vmax)
+		v = vmax;
+	dv = vmax - vmin;
+
+	if (v < (vmin + 0.4 * dv)) {
+		rr = 0.0;
+		gg = 0;
+		bb = 2.5 * (v - vmin) / dv;
+	}
+	else if (v < (vmin + 0.8 * dv)) {
+		rr = 0.0;
+		gg = 2.5 * (v - vmin - 0.4 * dv) / dv;
+		bb = 1.0;
+	}
+	else {
+		rr = 2.5 * (v - vmin - 0.8 * dv) / dv;
+		gg = 1.0;
+		bb = 1.0;
+	}
+}
+//----------------------------------------------------------------------------------------
+void grayMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb)
+{
+	GLfloat dv;
+
+	if (v < vmin)
+		v = vmin;
+	if (v > vmax)
+		v = vmax;
+	dv = vmax - vmin;
+
+	rr = (v - vmin) / dv;
+	gg = (v - vmin) / dv;
+	bb = (v - vmin) / dv;
+	
 }
