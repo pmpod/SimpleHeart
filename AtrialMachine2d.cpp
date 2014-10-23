@@ -160,7 +160,7 @@ void AtrialMachine2d::processStep()
 		m_grid->stopStimulation();
 	}
 
-	for (int kk = 0; kk <= m_skip; ++kk)//m_skip
+	for (int kk = 0; kk <= 40; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}
@@ -168,7 +168,7 @@ void AtrialMachine2d::processStep()
 	RRcalc_1->processNewTime(m_globalTime, probeOscillator[0]->getPotential());
 	RRcalc_2->processNewTime(m_globalTime, probeOscillator[1]->getPotential());
 	RRcalc_3->processNewTime(m_globalTime, probeOscillator[2]->getPotential());
-	m_grid->calculateElectrogram(probeOscillator[0]);
+	//m_grid->calculateElectrogram(probeOscillator[0]);
 	probeOscillator[0]->stateCalculated(1,0, 1);
 	probeOscillator[1]->stateCalculated(1,0, 1);
 	probeOscillator[2]->stateCalculated(1,0, 1);

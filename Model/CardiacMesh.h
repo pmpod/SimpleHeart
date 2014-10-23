@@ -1,11 +1,13 @@
 #pragma once
 #include <QObject>
+#include <QMessageBox>
 #include <vector>
 #include "Model\Oscillator.h"
 #include "Model\v3model.h"
 #include "heartDefines.h"
 #include "NumericStrategy\TimeTree.h"
 #include "Support\Vectors.h"
+#include <matio.h>
 
 struct VertexTriangle
 {
@@ -23,9 +25,12 @@ public:
 	CardiacMesh();
 	~CardiacMesh(void);
 
-	static CardiacMesh *constructCartesianGrid(int x, int y, double dx, double dy, CELL_TYPE type);
-	static CardiacMesh *constructCylindricalGrid(int x, int y, double dx, double dy);
-	static CardiacMesh *importGrid();
+
+
+
+	static CardiacMesh* constructCartesianGrid(int x, int y, double dx, double dy, CELL_TYPE type);
+	static CardiacMesh* constructCylindricalGrid(int x, int y, double dx, double dy);
+	static CardiacMesh* importGrid();
 	void setWallCells();
 	void clearWallCells();
 	void setVertexTriangleList(bool doublesided);

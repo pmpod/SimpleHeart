@@ -1,18 +1,131 @@
 #include "ioHandler.h"
 #include "simpleheart.h"
-
+#include <stdlib.h>
 ioHandler::ioHandler(SimpleHeart* handle)
 {
 	m_handle = handle;
 	m_prefix = filePrefix();
 	paramFilename = "parameters.inf";
-
 	getParametersFromFile();
+}
+ioHandler::~ioHandler(void)
+{
 }
 
 
-ioHandler::~ioHandler(void)
+
+
+
+bool ioHandler::saveCurrentStructure()
 {
+	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current model structure"),
+		pathParameters, tr("MATLAB FILES (*.mat)"));
+
+	if (newPath.isEmpty())
+	{
+		QMessageBox::information(m_handle, "Simple Heart",
+			"Unable to save current model structure to file.\n"
+			"The path was not specified correctly");
+		return false;
+	}
+
+	pathParameters = newPath;
+	string s = pathParameters.toStdString();
+	QByteArray ba = pathParameters.toLatin1();
+	const char *outname = ba.data();
+	//const char *outname = "c:\\aaab.mat";
+
+
+	//[0] Prepare matrix sizes
+	const int numberOfColumns = 11;
+	const int meshSize = m_handle->m_grid->m_mesh.size();
+
+	//[1] Prepare and fill description of data in 1d string array form
+	char* matnames[numberOfColumns];
+	matnames[0] = "ID";
+	matnames[1] = "x [mm]";
+	matnames[2] = "y [mm]";
+	matnames[3] = "z [mm]";
+	matnames[4] = "TYPE";
+	matnames[5] = "neighbour 1 ID";
+	matnames[6] = "neighbour 2 ID";
+	matnames[7] = "neighbour 3 ID";
+	matnames[8] = "neighbour 4 ID";
+	matnames[9] = "neighbour 5 ID";
+	matnames[10] = "neighbour 6 ID";
+
+	//[2] Prepare data in 2d double array form
+	double *matvalues;
+	matvalues = (double *)malloc(sizeof(double) * numberOfColumns * meshSize);
+
+
+	//[3] Fill data to 2d double array form
+	int type;
+	Oscillator* osc;
+	for (int i = 0; i < meshSize; ++i) {
+		osc = m_handle->m_grid->m_mesh[i];
+		matvalues[meshSize * 0 + i] = static_cast<double> (osc->oscillatorID);
+		matvalues[meshSize * 1 + i] = osc->m_x;
+		matvalues[meshSize * 2 + i] = osc->m_y;
+		matvalues[meshSize * 3 + i] = osc->m_z;
+		type = osc->m_type;
+		matvalues[meshSize * 4 + i] = type;
+		for (int currentNeighbour = 0; currentNeighbour < osc->m_neighbours.size(); ++currentNeighbour)
+		{
+			matvalues[meshSize * (5 + currentNeighbour) + i] = osc->m_neighbours[currentNeighbour]->oscillatorID;
+		}
+		for (int fillToEnd = 5 + osc->m_neighbours.size(); fillToEnd < numberOfColumns; ++fillToEnd)
+		{
+			matvalues[meshSize * fillToEnd + i] = -1;
+		}
+	}
+
+
+	//[4] Setup the output variables
+	mat_t *mat = Mat_CreateVer(outname, NULL, MAT_FT_DEFAULT);
+	matvar_t *matvar;
+	matvar_t *cell_array, *cell_element;
+	size_t dims1[2] = { numberOfColumns,1 };
+	size_t dims2[2] = { meshSize, numberOfColumns };
+	size_t dims[2];
+	//mat = Mat_Open(outname, MAT_ACC_RDWR);
+
+	//[5] Save to mat file
+	if (mat)
+	{
+		////[5.1] Save the first variable matnames
+		cell_array = Mat_VarCreate("data_description", MAT_C_CELL, MAT_T_CELL, 2, dims1, NULL, 0);
+		dims[0] = 1;
+		for (int k = 0; k < numberOfColumns; ++k)
+		{
+			dims[1] = strlen(matnames[k]);
+			char * str = matnames[k];
+			cell_element = Mat_VarCreate(NULL, MAT_C_CHAR, MAT_T_UINT8, 2, dims, str, 0);
+			Mat_VarSetCell(cell_array, k, cell_element);
+		}
+		Mat_VarWrite(mat, cell_array, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(cell_array);
+
+		//[5.2] Save the second variable matvalues
+		matvar = Mat_VarCreate("mesh", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims2, matvalues, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		//[5.3] Close output
+		Mat_Close(mat);
+	}
+	else
+	{
+		return false;
+	}
+	free(matvalues);
+
+	return true;
+}
+CardiacMesh* ioHandler::loadCustomStructure()
+{
+	return CardiacMesh::constructCartesianGrid(100, 100, 0.4, 0.4, ATRIAL_V3);
 }
 void ioHandler::writeParametersToFile()
 {

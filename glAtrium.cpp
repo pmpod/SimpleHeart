@@ -173,7 +173,7 @@ void glAtrium::paintGL()
 		glRotated(zRot / 16.0, 0.0, 0.0, 1.0);
 		paintOrigin(frustrumSize, 0.1f);
 
-	//[1]Paint the clicking ray
+	//[2] Paint the clicking ray
 	if (paintRay)
 	{
 		glLoadIdentity();
@@ -198,32 +198,32 @@ void glAtrium::paintGL()
 	int vertexNumber = linkToMesh->m_vertexList.size();
 	for (unsigned int j = 0; j < vertexNumber; ++j)
 	{
-		if (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_type != SOLID_WALL)
-		{
+		//if (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_type != SOLID_WALL)
+		//{
 			paintCellTriangle(linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_y,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram(),
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram(),
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->getElectrogram(),
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram(),
+				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->getElectrogram(),
 				m_palette);
-		}
-		else
-		{
-			paintCellTriangle(linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_x,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, 0.0,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_x,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, 0.0,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, 0,
-				m_palette);
-		}
+		//}
+		//else
+		//{
+		//	paintCellTriangle(linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_x,
+		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_y,
+		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, 0.0,
+		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_x,
+		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_y,
+		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, 0.0,
+		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
+		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
+		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, 0,
+		//		m_palette);
+		////}
 
 	}
 	// [3] Paint probes

@@ -11,8 +11,7 @@
 #include "Model\cartesianGrid.h"
 #include "DiffusionPainter.h"
 #include "GLfunc.h"
-
-using namespace std;
+#include <matio.h>
 
 class SimpleHeart;
 
@@ -25,6 +24,14 @@ public:
 	~ioHandler(void);
 
 public slots:
+
+
+bool saveCurrentStructure();
+static CardiacMesh* loadCustomStructure();
+
+
+
+
 	void saveAsBmp();
 	void setBmp();
 	void saveStructureToFile();

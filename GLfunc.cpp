@@ -124,7 +124,7 @@ void paintCellTriangle(double& x1, double& y1, double& z1, double color1,
 	double& x2, double& y2, double& z2, double color2,
 	double& x3, double& y3, double& z3, double color3, int palette)
 {
-	float val = color1;
+	GLfloat val;
 	GLfloat color[] = { 0.f, 0.f, 0.f, 1.f };
 
 	if (palette == 0)
@@ -134,23 +134,25 @@ void paintCellTriangle(double& x1, double& y1, double& z1, double color1,
 		//glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
 		//			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
 		//			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
-		
+		val = color1;
 		hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-		glNormal3d(x1, y1, z1);
+		//glNormal3d(x1, y1, z1);
 		glVertex3f(x1, y1, z1);
 
-		//hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
+		val = color2;
+		hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-		glNormal3d(x2, y2, z2);
+		//glNormal3d(x2, y2, z2);
 		glVertex3f(x2, y2, z2);
 
-		//hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
+		val = color3;
+		hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-		glNormal3d(x3, y3, z3);
+		//glNormal3d(x3, y3, z3);
 		glVertex3f(x3, y3, z3);
 
 		glEnd();
