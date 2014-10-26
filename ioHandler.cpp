@@ -81,6 +81,7 @@ bool ioHandler::loadCurrentState()
 
 
 
+	m_handle->stopCalculation();
 	//[3] Fill data to 2d double array form
 	Oscillator* osc;
 
@@ -97,6 +98,7 @@ bool ioHandler::loadCurrentState()
 
 
 	m_handle->stopCalculation();
+	m_handle->Machine2d->m_strategy->synchronise();
 	return true;
 }
 
@@ -148,7 +150,7 @@ bool ioHandler::saveCurrentState()
 
 		potential[i] = osc->getPotential();
 		electrogram[i] = osc->m_v_electrogram;
-		csd[i] = osc->getUniformTimestepCurrentSource();
+		csd[i] = osc->getLastCurrentSource();
 	}
 
 	//[4] Setup the output variables

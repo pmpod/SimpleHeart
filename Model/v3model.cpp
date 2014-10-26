@@ -15,8 +15,8 @@ v3model::v3model(void) : Oscillator()
 	vzero = 0; //[mV]
 	vmax = 1;  //[mV]
 	vmin = 0;  //[mV]
-	setPotential(0);
-	setPreviousPotential(0);
+	setPotential(-75);
+	setPreviousPotential(-75);
 	setCurrent(1, 0);
 	setCurrent(1, 1);
 }

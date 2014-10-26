@@ -7,8 +7,8 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 	deltaTimestepIncMean = oscillators->getDeltaR()/ (2 * oscillators->m_maximumCV);
 	deltaTdiff = oscillators->getDeltaR() * oscillators->getDeltaR();
 	guardUpdateTimestep = oscillators->m_maximumCV / oscillators->getDeltaR();
-	kappaAccuracy = 0.1;
-	Kguard = 20;
+	kappaAccuracy = 0.05;
+	Kguard = 2;
 
 	//[1] Create time trees
 	m_updateTimeTree = nullptr;
@@ -36,26 +36,31 @@ AllexandreStrategy::~AllexandreStrategy()
 	otherHeap->clear();
 	m_oscillatorTimestepDictionary.clear();
 }
+double AllexandreStrategy::synchronise()
+{
+	guardCellUpdate();
+	return 1;
+}
 //---------------------------------------------------------------------------------
 double AllexandreStrategy::nextStep()
 {
 	//[0] Check for the stimulation going on
 	if (m_mesh->stimulationBegun && !stimulationStateUpdate)
 	{
-		double Dt;
 		double dTime;
 		//update potentials in all stimulated cells
-		for (unsigned short k = 0; k < m_mesh->m_underStimulation.size(); ++k)
+		unsigned short stimulatedSize = m_mesh->m_underStimulation.size();
+		for (unsigned short k = 0; k < stimulatedSize; ++k)
 		{
 			Oscillator* osc = m_mesh->m_underStimulation[k];
-			if (osc->getCellType() != SOLID_WALL)
+			if (osc->m_type != SOLID_WALL)
 			{
 				stepModifiedBackwardEuler(osc);
 				//bubble time
-				bubbleNewTime(m_oscillatorUpdateDictionary[osc->oscillatorID].p_updateTimeTreeNode, osc->getCurrentTime());
+				bubbleNewTime(m_oscillatorUpdateDictionary[osc->oscillatorID].p_updateTimeTreeNode, osc->m_currentTime);
 
 				// Update the timestep set			
-				dTime = min(deltaTdiff / (2 * osc->m_connexin[0]), 0.95*(timeStepHeap->top())->timestep);
+				dTime = min(deltaTdiff / (2 * osc->m_connexin[0]), 0.9999*(timeStepHeap->top())->timestep);
 				(*(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle))->timestep = dTime;
 				timeStepHeap->update(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle);
 			}
@@ -83,11 +88,11 @@ double AllexandreStrategy::nextStep()
 
 	//[4] Get the oscillator and calculate new timestep
 	Oscillator* osc = currentNode->osc;
-	double lastLocalTimestep = osc->getCurrentTime();
+	double lastLocalTimestep = osc->m_currentTime - osc->m_previousTime;
 	double bestLocalTimestep = stepModifiedBackwardEuler(osc);
 
 	//[5] Update the time update tree
-	bubbleNewTime(currentNode, osc->getCurrentTime());
+	bubbleNewTime(currentNode, osc->m_currentTime);
 
 	//[6] Update the timestep set
 	(*(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle))->timestep = bestLocalTimestep;
@@ -102,9 +107,10 @@ double AllexandreStrategy::nextStep()
 double AllexandreStrategy::stepModifiedBackwardEuler(Oscillator * osc)
 {
 	//[1] determine Next Max Local Timestep Method2b
-	nextTimestep = (osc->getCurrentTime() - osc->getPreviousTime());
-	v_prim = (osc->getPotential() - osc->getPreviousPotential());
+	nextTimestep = (osc->m_currentTime - osc->m_previousTime);
+	v_prim = (osc->m_v_potential - osc->m_previous_potential);
 	bestLocalTimestep = getMaxTimestep_Method2b(v_prim / nextTimestep, osc->m_currentPRIM[0], nextTimestep* (osc->m_connexin[0]));
+	//TODO is this model depndent? It should be model independent quantity / and osc->m_connexin[0] is bad
 
 	//[2] Check if the timestep exceeds the guard value
 
@@ -114,58 +120,54 @@ double AllexandreStrategy::stepModifiedBackwardEuler(Oscillator * osc)
 		nextTimestep = bestLocalTimestep;
 
 	//[2] Set new current time on oscillator
-	osc->setCurrentTime(osc->getCurrentTime() + nextTimestep);
+	osc->m_previousTime = osc->m_currentTime;
+	osc->m_currentTime += nextTimestep;
 
 	int numberOfEquations = osc->getNumberOfCurrents();
 	//[3] Calculate new step 
 
-	//if (osc->m_underStimulation == false)
-	//{
+		osc->m_previous_potential = osc->m_v_potential;
 		v_prim = osc->m_v_potential + nextTimestep * (osc->getPotentialPrim() + osc->getExtrapolatedNeighbourSource());
-
 		v_prim = v_prim / (1 + nextTimestep * osc->m_ConnexinSum);
+		osc->m_v_potential = v_prim;
+
+		osc->m_v_scaledPotential = osc->vzero + (osc->vmax - osc->vmin)*osc->m_v_potential;
+		osc->m_previous_scaledPotential = osc->vzero + (osc->vmax - osc->vmin)*osc->m_previous_potential;
+
+		osc->_sourceA = (osc->m_v_scaledPotential - osc->m_previous_scaledPotential) / nextTimestep;
+		osc->_sourceB = osc->m_v_scaledPotential - osc->_sourceA*osc->m_currentTime;
 
 		for (short k = 0; k < numberOfEquations; ++k)
 		{
-			osc->setCurrent(osc->m_v_current[k] + nextTimestep * (osc->getCurrentPrim(k)), k);
+			osc->m_v_current[k] += nextTimestep * (osc->getCurrentPrim(k));
 		}
-		osc->setPreviousPotential(osc->m_v_potential);
-		osc->setPotential(v_prim);
-		osc->setElectrogram(osc->m_v_potential);
+		osc->m_v_electrogram = osc->m_v_potential;
+		
 		//osc->setElectrogram(nextTimestep);
-	//}
-	//else
-	//{
-	//	osc->setPreviousPotential(osc->m_v_potential);
-	//	osc->setPotential(m_mesh->m_ectopicAmplitude);
-	//	osc->setElectrogram(osc->m_v_potential);
-	//	osc->setElectrogram(nextTimestep);
-	//}
 
 	if (!osc->m_wallCells.empty())
 	{
 		for (short wc = 0; wc < osc->m_wallCells.size(); ++wc)
 		{
-			osc->m_wallCells[wc]->setPotential(osc->m_v_potential);
-			osc->m_wallCells[wc]->setElectrogram(osc->getElectrogram());
-			osc->m_wallCells[wc]->setPreviousPotential(osc->getPreviousPotential());
-
+			osc->m_wallCells[wc]->m_v_potential = osc->m_v_potential;
+			osc->m_wallCells[wc]->m_v_scaledPotential = osc->m_v_scaledPotential;
+			osc->m_wallCells[wc]->m_previous_potential = osc->m_previous_potential;
+			osc->m_wallCells[wc]->m_previous_scaledPotential = osc->m_previous_scaledPotential;
 			osc->m_wallCells[wc]->_sourceA = osc->_sourceA;
 			osc->m_wallCells[wc]->_sourceB = osc->_sourceB;
+
+			osc->m_wallCells[wc]->m_v_electrogram = osc->m_v_electrogram;
 			for (int k = 0; k < numberOfEquations; ++k)
 			{
-				osc->m_wallCells[wc]->setCurrent(osc->getCurrent(k), k);
+				osc->m_wallCells[wc]->m_v_current[k] = osc->m_v_current[k];
 			}
-			if (osc->getCurrentTime() != osc->m_wallCells[wc]->getCurrentTime())
-				osc->m_wallCells[wc]->setCurrentTime(osc->getCurrentTime());
+			
+			if (osc->getCurrentTime() != osc->m_wallCells[wc]->m_currentTime)
+				osc->m_wallCells[wc]->m_currentTime = osc->m_currentTime;
 		}
 	}
 
 	return bestLocalTimestep;
-}
-double AllexandreStrategy::synchronise()
-{
-	return 1;
 }
 double AllexandreStrategy::guardCellUpdate()
 {
@@ -186,7 +188,7 @@ double AllexandreStrategy::guardCellUpdate()
 		osc->guardTimestep = node->timestep;
 
 		//[2] Prepare timestep value to update neighbours
-		v_prim = (osc->getPotential() - osc->getPreviousPotential()) / (osc->getCurrentTime() - osc->getPreviousTime());
+		v_prim = (osc->m_v_scaledPotential - osc->m_previous_scaledPotential) / (osc->m_currentTime- osc->m_previousTime);
 		updateTime = node->timestep + getDeltaTimestepInc(v_prim);
 
 		//[3] Update neighbours

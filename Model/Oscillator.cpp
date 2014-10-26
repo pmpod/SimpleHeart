@@ -10,9 +10,9 @@ Oscillator::Oscillator(void)
 	reset();
 	m_farthestDistanceID = -1;
 	m_closestDistanceID = -1;
-	vzero = 0; //[mV]
-	vmax = 1;  //[mV]
-	vmin = 0;  //[mV]
+	vzero = -75; //[mV]
+	vmax = 25;  //[mV]
+	vmin = -75;  //[mV]
 	m_underStimulation = false;
 }
 
@@ -20,6 +20,7 @@ void Oscillator::reset()
 {
 	m_stimulation = 0.0;
 	m_v_potential = 0.0;
+	m_v_scaledPotential = 0.0;
 	m_previous_potential = 0.0;
 	m_previous_scaledPotential = 0.0;
 	m_potentialPRIM = 0.0;
@@ -43,6 +44,7 @@ void Oscillator::reset()
 Oscillator::~Oscillator(void)
 {
 	m_v_current.clear();
+	//TODO empty all fields
 }
 //--------------------------------------------------------------
 double Oscillator::getCurrent(const int&which)

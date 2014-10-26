@@ -20,17 +20,16 @@ class Oscillator: public QObject
 public:
 	CELL_TYPE m_type;	///Type of the cell (wall, non-wall, none, tissue, nodal, etc.)					
 	int oscillatorID;	//ID number of the oscillator (matches location in the CardiacMesh m_osc vector )
-
+	//TODO _Uint32t oscillatorID;
+	
 	double m_v_potential;		/// Last cardiac potential V(t) - in model units [model]
 	double m_previous_potential;	/// Previous cardiac potential V(t-1) - in model units [model]
 	std::vector<double> m_v_current;/// Vector of last cardiac currents/gating variables/model variables - in model units [model]
 
-	double m_potentialPRIM;		/// Last calculated value of dV/dt (TODO check if necessary/useful??)
-	std::vector<double>  m_currentPRIM;/// Last calculated values of dC/dt (TODO check if necessary/useful??)
-
 	double m_v_electrogram;
-	double m_v_scaledPotential;
-	double m_previous_scaledPotential;
+
+
+
 
 	double m_currentTime;			//t(current)
 	double m_previousTime;			//t(current-1)
@@ -43,7 +42,6 @@ public:
 
 	double _sourceA;
 	double _sourceB;
-	double m_currentSource;
 	double m_x;
 	double m_y;
 	double m_z;
@@ -53,18 +51,25 @@ public:
 	double m_ConnexinSum;
 	std::vector<Oscillator*> m_wallCells;		///Vector of pointers to neighbour oscillators
 	std::vector<Oscillator*> m_neighbours;		///Vector of pointers to neighbour oscillators
+	std::vector<double> m_connexin;			///Vector of diffusion coefficients associated with neighbours
 	std::vector<double> m_neighboursDistance;	///Vector of pointers to distance to neighbour oscillators [mm]
 	double m_closestDistanceID;
 	double m_farthestDistanceID;
-	std::vector<double> m_connexin;			///Vector of diffusion coefficients associated with neighbours
 
-	double m_hormonalActivity;
 
 	//TODO Skalowanie modelu external scaling
 	double vmax;					///Model scaling values - V maximum [mV]
 	double vmin;					///Model scaling values - V minimum [mV]
 	double vzero;					///Model scaling values - V resting [mV]
-	
+
+	//TODO to drop:
+	double m_potentialPRIM;		/// Last calculated value of dV/dt (TODO check if necessary/useful??)
+	std::vector<double>  m_currentPRIM;/// Last calculated values of dC/dt (TODO check if necessary/useful??)
+	double m_currentSource;
+	double m_hormonalActivity;
+	double m_v_scaledPotential;
+	double m_previous_scaledPotential;
+
 public:
 	Oscillator(void);
 	~Oscillator(void);
