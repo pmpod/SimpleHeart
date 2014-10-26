@@ -162,7 +162,7 @@ void AtrialMachine2d::processStep()
 		m_grid->stopStimulation();
 	}
 
-	for (int kk = 0; kk <= meshSize*2; ++kk)//m_skip
+	for (int kk = 0; kk <= 20000; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}

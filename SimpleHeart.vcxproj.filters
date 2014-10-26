@@ -45,9 +45,6 @@
     <Filter Include="Support">
       <UniqueIdentifier>{deec2b3c-70a8-422c-9185-a3040e265c1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="io">
-      <UniqueIdentifier>{9aa8637e-e457-434a-8fe9-8b3e4e99e74a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -236,6 +233,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_AtrialMachine2d.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="View\SimViewState.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="simpleheart.h">
@@ -374,6 +374,9 @@
     </ClInclude>
     <ClInclude Include="Support\Vectors.h">
       <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="View\SimViewState.h">
+      <Filter>View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -131,11 +131,13 @@ void glAtrium::initializeGL()
 	viewHeight = static_cast<double>(this->height());
 	viewWidth = static_cast<double>(this->width());
 
+	glShadeModel(GL_FLAT);						// Enables Smooth Shading
 	glShadeModel(GL_SMOOTH);						// Enables Smooth Shading
 	glClearDepth(1.0f);							// Depth Buffer Setup
-	glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
+	glDisable(GL_DEPTH_TEST);						// Enables Depth Testing
+	//glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
 	glDepthMask(GL_TRUE);
-	glDepthFunc(GL_LEQUAL);							// The Type Of Depth Test To Do
+	//glDepthFunc(GL_LEQUAL);							// The Type Of Depth Test To Do
 
 
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -196,20 +198,30 @@ void glAtrium::paintGL()
 	glPushMatrix();
 
 	int vertexNumber = linkToMesh->m_vertexList.size();
-	for (unsigned int j = 0; j < vertexNumber; ++j)
+	int t_ID1;
+	int t_ID2;
+	int t_ID3;
+
+	for (unsigned int j = 0; j < vertexNumber; j=j+1)
 	{
 		//if (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_type != SOLID_WALL)
 		//{
-			paintCellTriangle(linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_x,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->getElectrogram(),
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_x,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->getElectrogram(),
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
-				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->getElectrogram(),
+		t_ID1 = linkToMesh->m_vertexList[j]->id_1;
+		t_ID2 = linkToMesh->m_vertexList[j]->id_2;
+		t_ID3 = linkToMesh->m_vertexList[j]->id_3;
+
+		glBegin(GL_TRIANGLES);
+			paintCellTriangle(linkToMesh->m_mesh[t_ID1]->m_x,
+				linkToMesh->m_mesh[t_ID1]->m_y,
+				linkToMesh->m_mesh[t_ID1]->m_z, linkToMesh->m_mesh[t_ID1]->m_v_electrogram,
+				linkToMesh->m_mesh[t_ID2]->m_x,
+				linkToMesh->m_mesh[t_ID2]->m_y,
+				linkToMesh->m_mesh[t_ID2]->m_z, linkToMesh->m_mesh[t_ID2]->m_v_electrogram,
+				linkToMesh->m_mesh[t_ID3]->m_x,
+				linkToMesh->m_mesh[t_ID3]->m_y,
+				linkToMesh->m_mesh[t_ID3]->m_z, linkToMesh->m_mesh[t_ID3]->m_v_electrogram,
 				m_palette, linkToMesh->m_minElectrogram, linkToMesh->m_maxElectrogram);
+		glEnd();
 		//}
 		//else
 		//{

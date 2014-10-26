@@ -214,6 +214,7 @@
     <ClCompile Include="simpleheart.cpp" />
     <ClCompile Include="Support\Matrices.cpp" />
     <ClCompile Include="timePlot.cpp" />
+    <ClCompile Include="View\SimViewState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="simpleheart.h">
@@ -799,6 +800,7 @@
   <ItemGroup>
     <ClInclude Include="Support\Matrices.h" />
     <ClInclude Include="Support\Vectors.h" />
+    <ClInclude Include="View\SimViewState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleHeart.doxyfile" />
