@@ -26,7 +26,9 @@ public:
 public slots:
 
 
+mat_t * initMatlabLoad(const char *inname);
 bool saveCurrentStructure();
+bool loadCurrentState();
 CardiacMesh* loadCustomStructure();
 bool saveCurrentState();
 
@@ -48,6 +50,7 @@ bool saveCurrentState();
 	void saveRRPlot_2();
 	void saveRRPlot_3();
 public:
+	template <class Ttype> matvar_t* readMatVariable(const char *varname, mat_t *matfp, Ttype* &outvar);
 
 	SimpleHeart* m_handle;
 

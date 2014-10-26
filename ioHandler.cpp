@@ -5,6 +5,20 @@
 #define VARNAME_MODEL_DATA "mesh"
 #define VARNAME_DESC_DATA "data_description"
 
+template <class Ttype> matvar_t* ioHandler::readMatVariable(const char *varname, mat_t *matfp, Ttype* &outvar)
+{
+	//[3] Read matlab variable 
+	matvar_t* matvar = Mat_VarRead(matfp, varname);
+	if (NULL == matvar) {
+		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr;
+	}
+	int meshSize = matvar->dims[0];
+	outvar = (Ttype *)malloc(sizeof(Ttype) * matvar->dims[1] * matvar->dims[0]);
+	outvar = static_cast<Ttype*>(matvar->data);
+
+	return matvar;
+}
+
 ioHandler::ioHandler(SimpleHeart* handle)
 {
 	m_handle = handle;
@@ -18,21 +32,87 @@ ioHandler::~ioHandler(void)
 
 
 
+mat_t * ioHandler::initMatlabLoad(const char *inname)
+{
+	mat_t *matfp;
+	matfp = Mat_Open(inname, MAT_ACC_RDONLY);
+	if (NULL == matfp) {
+		QMessageBox::information(m_handle, "Simple Heart", "Error opening MAT file"); return nullptr;
+	}
+	return matfp;
+}
+
+bool ioHandler::loadCurrentState()
+{
+	//[1] Open file dialog
+	QString newPath = QFileDialog::getOpenFileName(m_handle, tr("Open model simulation state"), pathParameters, tr("MATLAB FILES (*.mat)"));
+	if (newPath.isEmpty())
+	{
+		QMessageBox::information(m_handle, "Simple Heart",
+			"Ooops! Unable to read current simulation state.\n"
+			"The path and filename were not specified correctly..");
+		return nullptr;
+	}
+
+	//[2] Prepare pathname
+	pathParameters = newPath;
+	QByteArray ba = pathParameters.replace(" ", "\x20").toLatin1();
+	const char *inname = ba.data();
+
+	matvar_t *matvar;
+	mat_t *matfp = initMatlabLoad(inname);
+
+	//[3] Read matlab variable oscillator_ID
+	INT32 *oscillator_ID =nullptr;
+	matvar = readMatVariable("oscillator_ID", matfp, oscillator_ID);
+	int meshSize = matvar->dims[0];
+
+	//[3] Read matlab variable potential
+	double *potential;
+	matvar = readMatVariable("potential", matfp, potential);
+
+	//[3] Read matlab variable otherCurrents
+	double *currVariables = nullptr;
+	matvar = readMatVariable("currVariables", matfp, currVariables);
+	int noOfCurrents = matvar->dims[1];
+
+
+	Mat_Close(matfp);
+
+
+
+	//[3] Fill data to 2d double array form
+	Oscillator* osc;
+
+	for (int i = 0; i < meshSize; ++i)
+	{
+		int oscID = oscillator_ID[i];
+		osc = m_handle->m_grid->m_mesh[oscID];
+		osc->setPotential(potential[oscID]);
+		osc->setElectrogram(potential[oscID]);
+		for (short ll = 0; ll < noOfCurrents; ++ll)
+			osc->setCurrent(currVariables[meshSize * ll + oscID],ll);
+	}
+
+
+
+	m_handle->stopCalculation();
+	return true;
+}
 
 
 bool ioHandler::saveCurrentState()
 {
-	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current simulation state"), pathParameters, tr("MATLAB FILES (*.mat)"));
-
+	//[0] Creat proper filename
+	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current simulation state. The path should not contain Polish letters!"), pathParameters, tr("MATLAB FILES (*.mat)"));
 	if (newPath.isEmpty())
 	{
 		QMessageBox::information(m_handle, "Simple Heart", "Unable to save currentsimulation state.\n"
-			"The path and filename were not specified correctly");
+														   "The path and filename were not specified correctly");
 		return false;
 	}
-
 	pathParameters = newPath;
-	QByteArray ba = pathParameters.toLatin1();
+	QByteArray ba = pathParameters.replace(" ", "\x20").toLatin1();
 	const char *outname = ba.data();
 
 	//[1] Prepare matrix sizes
@@ -40,10 +120,14 @@ bool ioHandler::saveCurrentState()
 
 	//[2] Prepare data arrays in form accepted by MAT
 	double *position_xyz = (double *)malloc(sizeof(double) * 3 * meshSize);
+	INT32 *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
 	double *potential = (double *)malloc(sizeof(double) * 1 * meshSize);
+	//TODO Handling multiple cell types with different variables number
+	double *variables = (double *)malloc(sizeof(double) *  m_handle->m_grid->m_mesh[0]->getNumberOfCurrents() * meshSize);
 	double *electrogram = (double *)malloc(sizeof(double) * 1 * meshSize);
+	double *csd = (double *)malloc(sizeof(double) * 1 * meshSize);
 	double *time_ms = (double *)malloc(sizeof(double) * 1);
-	const char* description = "One frame pack";
+	char description[] = "One frame data pack";
 
 
 	//[3] Fill data to 2d double array form
@@ -51,15 +135,20 @@ bool ioHandler::saveCurrentState()
 	Oscillator* osc;
 
 	time_ms[0] = m_handle->m_grid->m_simulationTime;
-	for (int i = 0; i < meshSize; ++i) {
+	for (int i = 0; i < meshSize; ++i) 
+	{
 		osc = m_handle->m_grid->m_mesh[i];
 		position_xyz[meshSize * 0 + i] = osc->m_x;
 		position_xyz[meshSize * 1 + i] = osc->m_y;
 		position_xyz[meshSize * 2 + i] = osc->m_z;
+		oscillator_ID[i] = osc->oscillatorID;
+
+		for (short k = 0; k < osc->getNumberOfCurrents();++k)
+			variables[meshSize * k + i] = osc->m_v_current[k];
 
 		potential[i] = osc->getPotential();
 		electrogram[i] = osc->m_v_electrogram;
-
+		csd[i] = osc->getUniformTimestepCurrentSource();
 	}
 
 	//[4] Setup the output variables
@@ -79,14 +168,32 @@ bool ioHandler::saveCurrentState()
 		Mat_VarFree(matvar);
 
 		dims[1] = 1;
+		matvar = Mat_VarCreate("oscillator_ID", MAT_C_INT32, MAT_T_INT32, 2,
+			dims, oscillator_ID, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
 		matvar = Mat_VarCreate("potential", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, potential, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = m_handle->m_grid->m_mesh[0]->getNumberOfCurrents(); //TODO multiple number of currents
+		matvar = Mat_VarCreate("currVariables", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, variables, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
 		dims[1] = 1;
 		matvar = Mat_VarCreate("electrogram", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, electrogram, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		matvar = Mat_VarCreate("curerntSourceDensity", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, csd, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
@@ -98,10 +205,10 @@ bool ioHandler::saveCurrentState()
 		Mat_VarFree(matvar);
 
 
-		dims[1] = 1;
-		dims[0] = strlen(description);
+		dims[1] = strlen(description);
+		dims[0] = 1;
 		matvar = Mat_VarCreate("description", MAT_C_CHAR, MAT_T_UINT8, 2,
-			dims, &description, 0);
+			dims, description, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
@@ -115,11 +222,13 @@ bool ioHandler::saveCurrentState()
 	free(position_xyz);
 	free(potential);
 	free(electrogram);
+	free(csd);
 	free(time_ms);
-
+	free(oscillator_ID);
 
 	return true;
 }
+
 bool ioHandler::saveCurrentStructure()
 {
 	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current model structure"), pathParameters, tr("MATLAB FILES (*.mat)"));
@@ -1600,3 +1709,13 @@ int ioHandler::strToInt(string s)
 //
 //	return true;
 //}
+
+
+
+//matvar = Mat_VarRead(matfp, "oscillator_ID");
+//if (NULL == matvar) {
+//	QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr;
+//}
+//int meshSize = matvar->dims[0];
+//INT32 *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
+//oscillator_ID = static_cast<INT32*>(matvar->data);

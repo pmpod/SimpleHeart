@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1029</width>
-    <height>851</height>
+    <height>852</height>
    </rect>
   </property>
   <property name="font">
@@ -602,6 +602,13 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="b_loadState">
+             <property name="text">
+              <string>Load state</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="b_strucPainting">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -622,6 +629,9 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
               <bool>true</bool>
              </property>
              <property name="checked">
+              <bool>true</bool>
+             </property>
+             <property name="default">
               <bool>false</bool>
              </property>
              <property name="flat">

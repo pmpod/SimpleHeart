@@ -81,7 +81,7 @@ void SimpleHeart::init()
 	simpleParameters = new atrialParameters();
 
 
-	m_grid = CardiacMesh::constructCartesianGrid(200,200, 0.2, 0.2, ATRIAL_V3);
+	m_grid = CardiacMesh::constructCartesianGrid(100,100, 0.4, 0.4, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	m_matrix = new DiffusionMatrix(m_grid);
 	m_anisotrophy = new DiffusionMatrix(m_grid);
@@ -224,6 +224,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_saveStructure, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentStructure()));
 	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), m_ioHandler, SLOT(loadCustomStructure()));
 	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
+	QObject::connect(ui.b_loadState, SIGNAL(clicked()), m_ioHandler, SLOT(loadCurrentState()));
 
 
 	QObject::connect(ui.cb_calcEnt, SIGNAL(toggled(bool)), this, SLOT(setEntropyToggle(bool)));

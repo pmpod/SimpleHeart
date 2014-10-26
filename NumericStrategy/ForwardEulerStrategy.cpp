@@ -45,7 +45,7 @@ double ForwardEulerStrategy::nextStep()
 				for (short wc = 0; wc < osc->m_wallCells.size(); ++wc)
 				{
 					osc->m_wallCells[wc]->setPotential(osc->m_v_potential);
-					osc->m_wallCells[wc]->setElectrogram(osc->getElectrogram());
+					osc->m_wallCells[wc]->setElectrogram(osc->m_v_electrogram);
 					osc->m_wallCells[wc]->setPreviousPotential(osc->getPreviousPotential());
 					for (int k = 0; k < numberOfEquations; ++k)
 					{
