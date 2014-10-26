@@ -57,7 +57,7 @@ double ForwardEulerStrategy::nextStep()
 		}
 
 	}
-
+	m_mesh->m_simulationTime = osc->getCurrentTime();
 	////border walls
 	//int wallSize = m_mesh->m_wallCells.size();
 	//for (int i = 0; i < m_mesh->m_wallCells.size(); ++i)

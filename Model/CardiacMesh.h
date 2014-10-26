@@ -51,10 +51,20 @@ public:
 	std::vector<Oscillator*> m_underStimulation;
 	//std::vector<std::pair<Oscillator*, Oscillator*>> m_wallCells;
 
+	double m_simulationTime;
+
 	double m_minimumDistance;
 	double m_maximumDistance;
 	double m_maximumCV;
 
+	double m_maxElectrogram;
+	double m_minElectrogram;
+	double m_maxPotential;
+	double m_minPotential;
+
+
+
+	//TODO - poprawiæ getSize na double !!!
 	int m_size;
 
 

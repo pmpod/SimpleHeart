@@ -562,7 +562,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            </property>
           </layout>
          </widget>
-         <widget class="QWidget" name="tab_4">
+         <widget class="QWidget" name="tab_4s">
           <attribute name="title">
            <string>Model</string>
           </attribute>
@@ -576,7 +576,63 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <item>
             <widget class="QPushButton" name="b_saveStructure">
              <property name="text">
-              <string>Save structure</string>
+              <string>Save model</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_loadStructure">
+             <property name="text">
+              <string>Load Model</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_calculateFullElectrogram">
+             <property name="text">
+              <string>Calculate Electrogram</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_saveCurrentState">
+             <property name="text">
+              <string>Save current state</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_strucPainting">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="acceptDrops">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>StructurePainting Mode</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+S</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_diffPainting">
+             <property name="text">
+              <string>Diffusion painting mode</string>
              </property>
             </widget>
            </item>

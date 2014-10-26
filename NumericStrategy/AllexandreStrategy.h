@@ -25,7 +25,7 @@ public:
 	void constructUpdateTimeTree();
 	void constructTimestepTree();
 	double guardCellUpdate();
-
+	double synchronise();
 
 	double getDeltaTimestepInc( double& v_prim);
 	double getMaxTimestep_Method2b(const double& v_prim, const double& fast_prim, const double& Kd);
@@ -53,7 +53,6 @@ private:
 
 	//calculation pool:
 	double v_prim;
-	double earliestTime;
 	double latestTime;
 	double nextTimestep; 
 	double bestLocalTimestep;

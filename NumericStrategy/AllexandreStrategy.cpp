@@ -4,11 +4,11 @@
 AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)
 {
 	//[0] Set parameters
-	deltaTimestepIncMean = oscillators->getDeltaR()*oscillators->getDeltaR() / (2 * oscillators->m_maximumCV);
+	deltaTimestepIncMean = oscillators->getDeltaR()/ (2 * oscillators->m_maximumCV);
 	deltaTdiff = oscillators->getDeltaR() * oscillators->getDeltaR();
 	guardUpdateTimestep = oscillators->m_maximumCV / oscillators->getDeltaR();
 	kappaAccuracy = 0.1;
-	Kguard = 2;
+	Kguard = 20;
 
 	//[1] Create time trees
 	m_updateTimeTree = nullptr;
@@ -22,7 +22,6 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 void AllexandreStrategy::reset()
 {
 	NumericStrategy::reset();
-	earliestTime = 0;
 	latestTime = 0;
 	lastGuardUpdate = -guardUpdateTimestep-1;
 
@@ -52,8 +51,7 @@ double AllexandreStrategy::nextStep()
 			if (osc->getCellType() != SOLID_WALL)
 			{
 				stepModifiedBackwardEuler(osc);
-
-				//bublle time
+				//bubble time
 				bubbleNewTime(m_oscillatorUpdateDictionary[osc->oscillatorID].p_updateTimeTreeNode, osc->getCurrentTime());
 
 				// Update the timestep set			
@@ -72,9 +70,9 @@ double AllexandreStrategy::nextStep()
 	//------------------------------------------------------
 	//[1] Find earliest node
 	TimeTree* currentNode = goToEarliest(m_updateTimeTree);
-	earliestTime = currentNode->time;
-	if (earliestTime > latestTime)
-		latestTime = earliestTime;
+	m_mesh->m_simulationTime = currentNode->time;
+	if (m_mesh->m_simulationTime  > latestTime)
+		latestTime = m_mesh->m_simulationTime;
 
 	//[2] Update gurad cell algorithm if necessary
 	if (latestTime - lastGuardUpdate >= guardUpdateTimestep)
@@ -99,7 +97,7 @@ double AllexandreStrategy::nextStep()
 	else
 		timeStepHeap->update(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle);
 
-	return earliestTime;
+	return m_mesh->m_simulationTime;
 }
 double AllexandreStrategy::stepModifiedBackwardEuler(Oscillator * osc)
 {
@@ -164,6 +162,10 @@ double AllexandreStrategy::stepModifiedBackwardEuler(Oscillator * osc)
 	}
 
 	return bestLocalTimestep;
+}
+double AllexandreStrategy::synchronise()
+{
+	return 1;
 }
 double AllexandreStrategy::guardCellUpdate()
 {

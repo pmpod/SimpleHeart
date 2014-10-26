@@ -23,6 +23,7 @@ public:
 	~NumericStrategy();
 	 
 	virtual double nextStep() = 0;  ///< Main function
+	virtual double synchronise() = 0;  ///< Main function
 
 
 	/**
@@ -41,8 +42,5 @@ public:
 	*/
 	CardiacMesh* m_mesh;
 
-
-
-	double m_initial_v;
 };
 

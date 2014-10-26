@@ -27,7 +27,8 @@ public slots:
 
 
 bool saveCurrentStructure();
-static CardiacMesh* loadCustomStructure();
+CardiacMesh* loadCustomStructure();
+bool saveCurrentState();
 
 
 

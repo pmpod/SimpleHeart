@@ -81,7 +81,7 @@ void SimpleHeart::init()
 	simpleParameters = new atrialParameters();
 
 
-	m_grid = CardiacMesh::constructCartesianGrid(100,100, 0.4, 0.4, ATRIAL_V3);
+	m_grid = CardiacMesh::constructCartesianGrid(200,200, 0.2, 0.2, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	m_matrix = new DiffusionMatrix(m_grid);
 	m_anisotrophy = new DiffusionMatrix(m_grid);
@@ -204,7 +204,9 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->RRcalc_1, SLOT(reset()));
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->RRcalc_2, SLOT(reset()));
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->RRcalc_3, SLOT(reset()));
-	
+
+	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(stopCalculation()));
+	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(calculateFullElectrogramMap()));
 //	QObject::connect(ui.sb_tau, SIGNAL(valueChanged(int)), Machine2d->m_definitions, SLOT(setTau(int)));
 //	QObject::connect(ui.sb_winSize, SIGNAL(valueChanged(int)), Machine2d->m_definitions, SLOT(setWindowSize(int)));
 //	QObject::connect(ui.sb_binSize, SIGNAL(valueChanged(double)), Machine2d->m_definitions, SLOT(setBinSize(double)));
@@ -220,6 +222,8 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(setBmp()));
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(saveAsBmp()));
 	QObject::connect(ui.b_saveStructure, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentStructure()));
+	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), m_ioHandler, SLOT(loadCustomStructure()));
+	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
 
 
 	QObject::connect(ui.cb_calcEnt, SIGNAL(toggled(bool)), this, SLOT(setEntropyToggle(bool)));

@@ -1,6 +1,10 @@
 #include "ioHandler.h"
 #include "simpleheart.h"
 #include <stdlib.h>
+
+#define VARNAME_MODEL_DATA "mesh"
+#define VARNAME_DESC_DATA "data_description"
+
 ioHandler::ioHandler(SimpleHeart* handle)
 {
 	m_handle = handle;
@@ -16,99 +20,88 @@ ioHandler::~ioHandler(void)
 
 
 
-bool ioHandler::saveCurrentStructure()
+bool ioHandler::saveCurrentState()
 {
-	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current model structure"),
-		pathParameters, tr("MATLAB FILES (*.mat)"));
+	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current simulation state"), pathParameters, tr("MATLAB FILES (*.mat)"));
 
 	if (newPath.isEmpty())
 	{
-		QMessageBox::information(m_handle, "Simple Heart",
-			"Unable to save current model structure to file.\n"
-			"The path was not specified correctly");
+		QMessageBox::information(m_handle, "Simple Heart", "Unable to save currentsimulation state.\n"
+			"The path and filename were not specified correctly");
 		return false;
 	}
 
 	pathParameters = newPath;
-	string s = pathParameters.toStdString();
 	QByteArray ba = pathParameters.toLatin1();
 	const char *outname = ba.data();
-	//const char *outname = "c:\\aaab.mat";
 
-
-	//[0] Prepare matrix sizes
-	const int numberOfColumns = 11;
+	//[1] Prepare matrix sizes
 	const int meshSize = m_handle->m_grid->m_mesh.size();
 
-	//[1] Prepare and fill description of data in 1d string array form
-	char* matnames[numberOfColumns];
-	matnames[0] = "ID";
-	matnames[1] = "x [mm]";
-	matnames[2] = "y [mm]";
-	matnames[3] = "z [mm]";
-	matnames[4] = "TYPE";
-	matnames[5] = "neighbour 1 ID";
-	matnames[6] = "neighbour 2 ID";
-	matnames[7] = "neighbour 3 ID";
-	matnames[8] = "neighbour 4 ID";
-	matnames[9] = "neighbour 5 ID";
-	matnames[10] = "neighbour 6 ID";
-
-	//[2] Prepare data in 2d double array form
-	double *matvalues;
-	matvalues = (double *)malloc(sizeof(double) * numberOfColumns * meshSize);
+	//[2] Prepare data arrays in form accepted by MAT
+	double *position_xyz = (double *)malloc(sizeof(double) * 3 * meshSize);
+	double *potential = (double *)malloc(sizeof(double) * 1 * meshSize);
+	double *electrogram = (double *)malloc(sizeof(double) * 1 * meshSize);
+	double *time_ms = (double *)malloc(sizeof(double) * 1);
+	const char* description = "One frame pack";
 
 
 	//[3] Fill data to 2d double array form
 	int type;
 	Oscillator* osc;
+
+	time_ms[0] = m_handle->m_grid->m_simulationTime;
 	for (int i = 0; i < meshSize; ++i) {
 		osc = m_handle->m_grid->m_mesh[i];
-		matvalues[meshSize * 0 + i] = static_cast<double> (osc->oscillatorID);
-		matvalues[meshSize * 1 + i] = osc->m_x;
-		matvalues[meshSize * 2 + i] = osc->m_y;
-		matvalues[meshSize * 3 + i] = osc->m_z;
-		type = osc->m_type;
-		matvalues[meshSize * 4 + i] = type;
-		for (int currentNeighbour = 0; currentNeighbour < osc->m_neighbours.size(); ++currentNeighbour)
-		{
-			matvalues[meshSize * (5 + currentNeighbour) + i] = osc->m_neighbours[currentNeighbour]->oscillatorID;
-		}
-		for (int fillToEnd = 5 + osc->m_neighbours.size(); fillToEnd < numberOfColumns; ++fillToEnd)
-		{
-			matvalues[meshSize * fillToEnd + i] = -1;
-		}
-	}
+		position_xyz[meshSize * 0 + i] = osc->m_x;
+		position_xyz[meshSize * 1 + i] = osc->m_y;
+		position_xyz[meshSize * 2 + i] = osc->m_z;
 
+		potential[i] = osc->getPotential();
+		electrogram[i] = osc->m_v_electrogram;
+
+	}
 
 	//[4] Setup the output variables
 	mat_t *mat = Mat_CreateVer(outname, NULL, MAT_FT_DEFAULT);
 	matvar_t *matvar;
-	matvar_t *cell_array, *cell_element;
-	size_t dims1[2] = { numberOfColumns,1 };
-	size_t dims2[2] = { meshSize, numberOfColumns };
 	size_t dims[2];
-	//mat = Mat_Open(outname, MAT_ACC_RDWR);
+	dims[0] = meshSize;
 
 	//[5] Save to mat file
 	if (mat)
 	{
-		////[5.1] Save the first variable matnames
-		cell_array = Mat_VarCreate("data_description", MAT_C_CELL, MAT_T_CELL, 2, dims1, NULL, 0);
-		dims[0] = 1;
-		for (int k = 0; k < numberOfColumns; ++k)
-		{
-			dims[1] = strlen(matnames[k]);
-			char * str = matnames[k];
-			cell_element = Mat_VarCreate(NULL, MAT_C_CHAR, MAT_T_UINT8, 2, dims, str, 0);
-			Mat_VarSetCell(cell_array, k, cell_element);
-		}
-		Mat_VarWrite(mat, cell_array, MAT_COMPRESSION_ZLIB);
-		Mat_VarFree(cell_array);
-
 		//[5.2] Save the second variable matvalues
-		matvar = Mat_VarCreate("mesh", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
-			dims2, matvalues, 0);
+		dims[1] = 3;
+		matvar = Mat_VarCreate("position_xyz", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, position_xyz, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		matvar = Mat_VarCreate("potential", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, potential, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		matvar = Mat_VarCreate("electrogram", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, electrogram, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		dims[0] = 1;
+		matvar = Mat_VarCreate("time_ms", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, time_ms, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+
+		dims[1] = 1;
+		dims[0] = strlen(description);
+		matvar = Mat_VarCreate("description", MAT_C_CHAR, MAT_T_UINT8, 2,
+			dims, &description, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
@@ -119,13 +112,245 @@ bool ioHandler::saveCurrentStructure()
 	{
 		return false;
 	}
-	free(matvalues);
+	free(position_xyz);
+	free(potential);
+	free(electrogram);
+	free(time_ms);
+
+
+	return true;
+}
+bool ioHandler::saveCurrentStructure()
+{
+	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current model structure"), pathParameters, tr("MATLAB FILES (*.mat)"));
+
+	if (newPath.isEmpty())
+	{
+		QMessageBox::information(m_handle, "Simple Heart", "Unable to save current model structure to file.\n"
+														   "The path and filename were not specified correctly");
+		return false;
+	}
+
+	pathParameters = newPath;
+	QByteArray ba = pathParameters.toLatin1();
+	const char *outname = ba.data();
+
+
+	//[1] Prepare matrix sizes
+	const int meshSize = m_handle->m_grid->m_mesh.size();
+	
+	//[2] Prepare data arrays in form accepted by MAT
+	double *position_xyz = (double *)malloc(sizeof(double) * 3 * meshSize);
+	INT32 *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
+	INT32 *oscillator_TYPE = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
+	INT32 *neighbours_ID = (INT32 *)malloc(sizeof(INT32) * 6 * meshSize);
+
+
+	//[3] Fill data to 2d double array form
+	int type;
+	Oscillator* osc;
+	for (int i = 0; i < meshSize; ++i) {
+		osc = m_handle->m_grid->m_mesh[i];
+		oscillator_ID[i] = static_cast<INT32>(osc->oscillatorID);
+		position_xyz[meshSize * 0 + i] = osc->m_x;
+		position_xyz[meshSize * 1 + i] = osc->m_y;
+		position_xyz[meshSize * 2 + i] = osc->m_z;
+		//sigma_xyz[meshSize * 0 + i] = osc->m_sigmaX;
+		//sigma_xyz[meshSize * 1 + i] = osc->m_sigmaY;
+		//sigma_xyz[meshSize * 2 + i] = osc->m_sigmaZ;
+		type = osc->m_type;
+		oscillator_TYPE[i] = static_cast<INT32> (type);
+		for (int currentNeighbour = 0; currentNeighbour < osc->m_neighbours.size(); ++currentNeighbour)
+		{
+			neighbours_ID[meshSize * (currentNeighbour)+i] = static_cast<INT32> (osc->m_neighbours[currentNeighbour]->oscillatorID);
+		}
+		for (int fillToEnd = osc->m_neighbours.size(); fillToEnd < 6; ++fillToEnd)
+		{
+			neighbours_ID[meshSize * fillToEnd + i] = static_cast<INT32> (-1);
+		}
+	}
+
+	//[4] Setup the output variables
+	mat_t *mat = Mat_CreateVer(outname, NULL, MAT_FT_DEFAULT);
+	matvar_t *matvar;
+	size_t dims[2];
+	dims[0] = meshSize;
+
+	//[5] Save to mat file
+	if (mat)
+	{
+		//[5.2] Save the second variable matvalues
+		dims[1] = 3;
+		matvar = Mat_VarCreate("position_xyz", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, position_xyz, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		matvar = Mat_VarCreate("oscillator_ID", MAT_C_INT32, MAT_T_INT32, 2,
+			dims, oscillator_ID, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		matvar = Mat_VarCreate("oscillator_TYPE", MAT_C_INT32, MAT_T_INT32, 2,
+			dims, oscillator_TYPE, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 6;
+		matvar = Mat_VarCreate("neighbours_ID", MAT_C_INT32, MAT_T_INT32, 2,
+			dims, neighbours_ID, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		//[5.3] Close output
+		Mat_Close(mat);
+	}
+	else
+	{
+		return false;
+	}
+	free(position_xyz);
+	free(oscillator_TYPE);
+	free(oscillator_ID);
+	free(neighbours_ID);
 
 	return true;
 }
 CardiacMesh* ioHandler::loadCustomStructure()
 {
-	return CardiacMesh::constructCartesianGrid(100, 100, 0.4, 0.4, ATRIAL_V3);
+	//[1] Open file dialog
+	QString newPath = QFileDialog::getOpenFileName(m_handle, tr("Open mdel structure file"), pathParameters, tr("MATLAB FILES (*.mat)"));
+	if (newPath.isEmpty())
+	{
+		QMessageBox::information(m_handle, "Simple Heart",
+			"Unable to read structure of the model.\n"
+			"The path was not specified");
+		return nullptr;
+	}
+
+	//[2] Prepare pathname
+	pathParameters = newPath;
+	QByteArray ba = pathParameters.toLatin1();
+	const char *inname = ba.data();
+
+
+	//[3] Read matlab variable VARNAME_MODEL_DATA
+	mat_t *matfp;
+	matvar_t *matvar;
+	matfp = Mat_Open(inname, MAT_ACC_RDONLY);
+	if (NULL == matfp) {
+		QMessageBox::information(m_handle, "Simple Heart", "Error opening MAT file");
+		return nullptr;
+	}
+
+
+	//[3] Read matlab variable oscillator_ID
+	matvar = Mat_VarRead(matfp, "oscillator_ID");
+	if (NULL == matvar) {
+		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr; 
+	}
+	int meshSize = matvar->dims[0];
+	INT32 *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
+	oscillator_ID = static_cast<INT32*>(matvar->data);
+
+	//[3] Read matlab variable position_xyz
+	matvar = Mat_VarRead(matfp, "position_xyz");
+	if (NULL == matvar) {
+		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr;
+	}
+	double *position_xyz = (double *)malloc(sizeof(double) * 3 * meshSize);
+	position_xyz = static_cast<double*>(matvar->data);
+
+	//[3] Read matlab variable oscillator_TYPE
+	matvar = Mat_VarRead(matfp, "oscillator_TYPE");
+	if (NULL == matvar) {
+		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr;
+	}
+	INT32 *oscillator_TYPE = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
+	oscillator_TYPE = static_cast<INT32*>(matvar->data);
+
+	//[3] Read matlab variable oscillator_TYPE
+	matvar = Mat_VarRead(matfp, "neighbours_ID");
+	if (NULL == matvar) {
+		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr;
+	}
+	INT32 *neighbours_ID = (INT32 *)malloc(sizeof(INT32) * 6 * meshSize);
+	neighbours_ID = static_cast<INT32*>(matvar->data);
+
+
+	Mat_Close(matfp);
+
+	CardiacMesh *grid = new CardiacMesh();
+	int totalSize = meshSize;
+
+
+	Oscillator *node = NULL;
+	for (int j = 0; j < totalSize; ++j)
+	{
+		int temptype = oscillator_TYPE[j];
+		CELL_TYPE type = static_cast<CELL_TYPE> (temptype);
+		if (type == ATRIAL_V3)
+			node = new v3model();
+		else if (type == SOLID_WALL)
+			node = new Oscillator();
+		else 
+			node = new Oscillator();
+
+		node->setPositionX(position_xyz[totalSize * 0 + j]);
+		node->setPositionY(position_xyz[totalSize * 1 + j]);
+		node->setPositionZ(position_xyz[totalSize * 2 + j]);
+		node->setType(type);
+		node->oscillatorID = oscillator_ID[j];
+		grid->m_mesh.push_back(node);
+	}
+
+	//ADD NEIGHBOURS
+	double deltaMin = DBL_MAX;
+	double deltaMax = 0.0;
+	double mindim = 0;
+	double maxdim = 0;
+	double mintemp = 0;
+	double maxtemp = 0;
+	for (int j = 0; j < totalSize; ++j)
+	{
+		int ng = 0;
+		while (neighbours_ID[totalSize* ng + j] != -1)
+		{
+			grid->m_mesh[j]->addNeighbour(grid->m_mesh[neighbours_ID[totalSize* ng + j]]);
+			++ng;
+		}
+
+		if (deltaMin > grid->m_mesh[j]->m_closestDistanceID)
+			deltaMin = grid->m_mesh[j]->m_closestDistanceID;
+		if (deltaMax < grid->m_mesh[j]->m_farthestDistanceID)
+			deltaMax = grid->m_mesh[j]->m_farthestDistanceID;
+
+		mintemp = min(grid->m_mesh[j]->m_x, grid->m_mesh[j]->m_y);
+		mintemp = min(mintemp, grid->m_mesh[j]->m_z);
+		if (mindim > mintemp)
+		{
+			mindim = mintemp;
+		}
+		maxtemp = max(grid->m_mesh[j]->m_x, grid->m_mesh[j]->m_y);
+		maxtemp = max(maxtemp, grid->m_mesh[j]->m_z);
+		if (maxdim < maxtemp)
+		{
+			maxdim = maxtemp;
+		}
+	}
+
+
+	grid->m_minimumDistance = deltaMin;
+	grid->m_maximumDistance = deltaMax;
+	grid->m_size = maxdim / deltaMin;
+
+	grid->setVertexTriangleList(false);
+	grid->calculateCenter();
+	grid->setWallCells();
+
+	return grid;
 }
 void ioHandler::writeParametersToFile()
 {
@@ -1271,3 +1496,107 @@ int ioHandler::strToInt(string s)
           tmp = 10 * tmp + s[i] - 48;
      return m ? -tmp : tmp;   
 }
+
+//
+//bool ioHandler::saveCurrentStructure()
+//{
+//	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current model structure"),
+//		pathParameters, tr("MATLAB FILES (*.mat)"));
+//
+//	if (newPath.isEmpty())
+//	{
+//		QMessageBox::information(m_handle, "Simple Heart", "Unable to save current model structure to file.\n"
+//			"The path and filename were not specified correctly");
+//		return false;
+//	}
+//
+//	pathParameters = newPath;
+//	QByteArray ba = pathParameters.toLatin1();
+//	const char *outname = ba.data();
+//
+//
+//	//[0] Prepare matrix sizes
+//	const int numberOfColumns = 11;
+//	const int meshSize = m_handle->m_grid->m_mesh.size();
+//
+//	//[1] Prepare and fill description of data in 1d string array form
+//	char* matnames[numberOfColumns];
+//	matnames[0] = "ID";
+//	matnames[1] = "x [mm]";
+//	matnames[2] = "y [mm]";
+//	matnames[3] = "z [mm]";
+//	matnames[4] = "TYPE";
+//	matnames[5] = "neighbour 1 ID";
+//	matnames[6] = "neighbour 2 ID";
+//	matnames[7] = "neighbour 3 ID";
+//	matnames[8] = "neighbour 4 ID";
+//	matnames[9] = "neighbour 5 ID";
+//	matnames[10] = "neighbour 6 ID";
+//
+//	//[2] Prepare data in 2d double array form
+//	double *matvalues;
+//	matvalues = (double *)malloc(sizeof(double) * numberOfColumns * meshSize);
+//
+//
+//	//[3] Fill data to 2d double array form
+//	int type;
+//	Oscillator* osc;
+//	for (int i = 0; i < meshSize; ++i) {
+//		osc = m_handle->m_grid->m_mesh[i];
+//		matvalues[meshSize * 0 + i] = static_cast<double> (osc->oscillatorID);
+//		matvalues[meshSize * 1 + i] = osc->m_x;
+//		matvalues[meshSize * 2 + i] = osc->m_y;
+//		matvalues[meshSize * 3 + i] = osc->m_z;
+//		type = osc->m_type;
+//		matvalues[meshSize * 4 + i] = static_cast<double> (type);
+//		for (int currentNeighbour = 0; currentNeighbour < osc->m_neighbours.size(); ++currentNeighbour)
+//		{
+//			matvalues[meshSize * (5 + currentNeighbour) + i] = static_cast<double> (osc->m_neighbours[currentNeighbour]->oscillatorID);
+//		}
+//		for (int fillToEnd = 5 + osc->m_neighbours.size(); fillToEnd < numberOfColumns; ++fillToEnd)
+//		{
+//			matvalues[meshSize * fillToEnd + i] = static_cast<double> (-1);
+//		}
+//	}
+//
+//	//[4] Setup the output variables
+//	mat_t *mat = Mat_CreateVer(outname, NULL, MAT_FT_DEFAULT);
+//	matvar_t *matvar;
+//	matvar_t *cell_array, *cell_element;
+//	size_t dims1[2] = { numberOfColumns, 1 };
+//	size_t dims2[2] = { meshSize, numberOfColumns };
+//	size_t dims[2];
+//
+//	//[5] Save to mat file
+//	if (mat)
+//	{
+//		////[5.1] Save the first variable matnames
+//		//cell_array = Mat_VarCreate("data_description", MAT_C_CELL, MAT_T_CELL, 2, dims1, NULL, 0);
+//		//dims[1] = 1;
+//		//for (int k = 0; k < numberOfColumns; ++k)
+//		//{
+//		//	dims[0] = strlen(matnames[k]);
+//		//	char * str = matnames[k];
+//		//	cell_element = Mat_VarCreate(NULL, MAT_C_CHAR, MAT_T_UINT8, 2, dims, str, 0);
+//		//	Mat_VarSetCell(cell_array, k, cell_element);
+//		//}
+//		//Mat_VarWrite(mat, cell_array, MAT_COMPRESSION_ZLIB);
+//		//Mat_VarFree(cell_array);
+//
+//		//[5.2] Save the second variable matvalues
+//		matvar = Mat_VarCreate(VARNAME_MODEL_DATA, MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+//			dims2, matvalues, 0);
+//		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+//		Mat_VarFree(matvar);
+//
+//		//[5.3] Close output
+//		Mat_Close(mat);
+//	}
+//	else
+//	{
+//		return false;
+//	}
+//	free(matvalues);
+//
+//	return true;
+//}

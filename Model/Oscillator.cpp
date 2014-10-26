@@ -8,7 +8,8 @@ Oscillator::Oscillator(void)
 	m_currentPRIM.push_back(0.0);
 
 	reset();
-
+	m_farthestDistanceID = -1;
+	m_closestDistanceID = -1;
 	vzero = 0; //[mV]
 	vmax = 1;  //[mV]
 	vmin = 0;  //[mV]
@@ -133,6 +134,24 @@ void Oscillator::setSigma(double sX, double sY, double sZ)
 void Oscillator::setConnexins()
 {
 	m_ConnexinSum = 0;
+	////Aim at setting anisotropic connexin
+	//for (unsigned int i = 0; i < m_neighbours.size(); ++i)
+	//{
+	//	double deltaRX = std::abs(m_neighbours[i]->getPositionX() - m_x);
+	//	double deltaRY = std::abs(m_neighbours[i]->getPositionY() - m_y);
+	//	double deltaRZ = std::abs(m_neighbours[i]->getPositionZ() - m_z);
+
+	//	double deltaR = sqrt(std::pow(deltaRX, 2) + std::pow(deltaRY, 2) + std::pow(deltaRZ, 2));
+
+	//	double sigma = m_sigmaX * (deltaRX / deltaR);
+	//	sigma += m_sigmaY * (deltaRY / deltaR);
+	//	sigma += m_sigmaZ * (deltaRZ / deltaR);
+
+	//	m_connexin[i] = sigma / std::pow(deltaR, 2);
+	//	m_ConnexinSum += m_connexin[i];
+	//}
+
+	//TODO: Change into anisotropic conduction handling
 	for (unsigned int i = 0; i < m_neighbours.size(); ++i)
 	{
 		double deltaRX = std::abs(m_neighbours[i]->getPositionX() - m_x);
@@ -141,9 +160,9 @@ void Oscillator::setConnexins()
 
 		double deltaR = sqrt(std::pow(deltaRX, 2) + std::pow(deltaRY, 2) + std::pow(deltaRZ, 2));
 
-		double sigma = m_sigmaX * (deltaRX / deltaR);
-		sigma += m_sigmaY * (deltaRY / deltaR);
-		sigma += m_sigmaZ * (deltaRZ / deltaR);
+		double sigma = m_sigmaX;// *(deltaRX / deltaR);
+		//sigma += m_sigmaY * (deltaRY / deltaR);
+		//sigma += m_sigmaZ * (deltaRZ / deltaR);
 
 		m_connexin[i] = sigma / std::pow(deltaR, 2);
 		m_ConnexinSum += m_connexin[i];
@@ -159,6 +178,15 @@ void Oscillator::addNeighbour(Oscillator* neighbour)
 	double deltaR = sqrt(std::pow(deltaRX, 2) + std::pow(deltaRY, 2) + std::pow(deltaRZ, 2));
 
 
+	if (m_farthestDistanceID == -1)
+		m_farthestDistanceID = deltaR;
+	if (m_farthestDistanceID < deltaR)
+		m_farthestDistanceID = deltaR;
+
+	if (m_closestDistanceID == -1)
+		m_closestDistanceID = deltaR;
+	if (m_closestDistanceID > deltaR)
+		m_closestDistanceID = deltaR;
 
 	m_neighbours.push_back(neighbour);
 	m_neighboursDistance.push_back(deltaR);

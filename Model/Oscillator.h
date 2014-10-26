@@ -54,6 +54,8 @@ public:
 	std::vector<Oscillator*> m_wallCells;		///Vector of pointers to neighbour oscillators
 	std::vector<Oscillator*> m_neighbours;		///Vector of pointers to neighbour oscillators
 	std::vector<double> m_neighboursDistance;	///Vector of pointers to distance to neighbour oscillators [mm]
+	double m_closestDistanceID;
+	double m_farthestDistanceID;
 	std::vector<double> m_connexin;			///Vector of diffusion coefficients associated with neighbours
 
 	double m_hormonalActivity;

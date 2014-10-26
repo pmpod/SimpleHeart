@@ -31,7 +31,7 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 	paintRay = false;
 	frustrumSize = 1.0f;
 	nearClippingPlaneDistance = 2.0;
-	farClippingPlaneDistance = 80.0;
+	farClippingPlaneDistance = 500.0;
 
 
 	LightAmbient[0] = 1.0f;
@@ -209,7 +209,7 @@ void glAtrium::paintGL()
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
 				linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->getElectrogram(),
-				m_palette);
+				m_palette, linkToMesh->m_minElectrogram, linkToMesh->m_maxElectrogram);
 		//}
 		//else
 		//{

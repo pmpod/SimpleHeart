@@ -41,7 +41,8 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 	grid->m_minimumDistance = max(dx, dy);
 	grid->m_maximumDistance = min(dx, dy);
 	grid->m_size = min(x, y);
-
+	grid->m_maxElectrogram = 0.5;
+	grid->m_minElectrogram = 0.0;
 	Oscillator *node = NULL;
 	for (int j = 0; j < totalSize; ++j)
 	{
@@ -56,13 +57,21 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 		node->setType(type);
 		node->oscillatorID = j;
 		grid->m_mesh.push_back(node);
+
+		if (grid->m_maxElectrogram < node->vmax)
+			grid->m_maxElectrogram = node->vmax;
+
+		if (grid->m_minElectrogram > node->vmin)
+			grid->m_minElectrogram = node->vmin;
 	}
+	grid->m_maxPotential = grid->m_maxElectrogram;
+	grid->m_minPotential = grid->m_minElectrogram;
 
 	//ADD NEIGHBOURS
 	int idx, idy;
 	//x = x - 1;
 	//y = y - 1;
-	for (int j = 0; j < y*x; ++j)
+	for (int j = 0; j < totalSize; ++j)
 	{
 		idx = j % x;
 		idy = floor(static_cast<double>(j) / static_cast<double>(x));

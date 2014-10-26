@@ -4,6 +4,7 @@
 NumericStrategy::NumericStrategy(CardiacMesh* oscillators)
 {
 	m_mesh = oscillators;
+	m_mesh->m_simulationTime = 0;
 }
 
 
@@ -19,6 +20,7 @@ void NumericStrategy::defibrillate()
 void NumericStrategy::reset()
 {
 	int gridSize = m_mesh->m_mesh.size();
+	m_mesh->m_simulationTime = 0;
 
 	for (int j = 0; j < gridSize; ++j)
 	{

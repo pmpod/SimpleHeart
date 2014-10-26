@@ -147,6 +147,8 @@ void AtrialMachine2d::editDiffusionCoefficients()
 //---------------------------------------------------------------------------------------
 void AtrialMachine2d::processStep() 
 {
+	m_grid->m_minElectrogram = m_grid->m_minPotential;
+	m_grid->m_maxElectrogram = m_grid->m_maxPotential;
 	
 	int meshSize = m_grid->m_mesh.size();
 	int meshWidth = m_grid->getSize();
@@ -175,11 +177,29 @@ void AtrialMachine2d::processStep()
 	
 	emit emitGlobalTimeOnly(m_globalTime);
 
+
+
 }
 //-----------------
 void AtrialMachine2d::setEctoModTime()
 {
 	m_definitions->setEctoModTime(m_globalTime);
+}
+void AtrialMachine2d::calculateFullElectrogramMap()
+{
+	double minP = 0;
+	double maxP = 0;
+
+	for (int j = 0; j < m_grid->m_mesh.size(); ++j)
+	{
+		m_grid->calculateElectrogram(m_grid->m_mesh[j]);
+		if (m_grid->m_mesh[j]->m_v_electrogram < minP)
+			minP = m_grid->m_mesh[j]->m_v_electrogram;
+		if (m_grid->m_mesh[j]->m_v_electrogram > maxP)
+			maxP = m_grid->m_mesh[j]->m_v_electrogram;
+	}
+	m_grid->m_minElectrogram = minP;
+	m_grid->m_maxElectrogram = maxP;
 }
 //--------------------------------------------------------------------
 void AtrialMachine2d::setSkip(int skip) { 	m_skip = skip; }

@@ -84,6 +84,7 @@ public slots:
 	void setDiffusionCoefficients();
 	void editDiffusionCoefficients();
 	void reset();
+	void calculateFullElectrogramMap();
 //----------------simulation settings
 	void setSkip(int skip);
 
