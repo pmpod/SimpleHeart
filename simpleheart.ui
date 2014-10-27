@@ -637,6 +637,9 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
              <property name="checked">
               <bool>true</bool>
              </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
              <property name="default">
               <bool>false</bool>
              </property>
@@ -651,6 +654,9 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
               <string>Diffusion painting mode</string>
              </property>
              <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="autoExclusive">
               <bool>true</bool>
              </property>
             </widget>
