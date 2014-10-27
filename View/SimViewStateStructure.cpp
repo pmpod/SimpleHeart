@@ -3,8 +3,14 @@
 
 SimViewStateStructure* SimViewStateStructure::_instance = nullptr;
 
-SimViewStateStructure::SimViewStateStructure()
+SimViewStateStructure::SimViewStateStructure(glAtrium* view)
 {
+	cursorRadius = 2.0;
+	_view = view;
+	paintCursor(_view, cursorRadius);
+	m_paintType = SOLID_WALL;
+	m_clearType = ATRIAL_V3;
+	m_currentDrawType = m_paintType;
 }
 
 
@@ -12,49 +18,44 @@ SimViewStateStructure::~SimViewStateStructure()
 {
 }
 
-SimViewState* SimViewStateStructure::Instance()
+SimViewState* SimViewStateStructure::Instance(glAtrium* view)
 {
 	if (SimViewStateStructure::_instance == nullptr)
 	{
-		_instance = new SimViewStateStructure;
+		_instance = new SimViewStateStructure(view);
 	}
-
 	return _instance;
 
 }
 
 void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* osc, const double radius, CELL_TYPE type)
 {
-
-	if (!osc->m_underStimulation)
-	{
-		m_painted.push_back(osc);
-		osc->m_underStimulation = true;
-	}
+	m_isPaintedMap[osc->oscillatorID] = true;
+	
 	double distance;
 	for (short k = 0; k < osc->m_neighbours.size(); ++k)
 	{
-		distance = std::pow((src->m_x - osc->m_neighbours[k]->m_x), 2) +
+		distance = sqrt(std::pow((src->m_x - osc->m_neighbours[k]->m_x), 2) +
 			std::pow((src->m_y - osc->m_neighbours[k]->m_y), 2) +
-			std::pow((src->m_z - osc->m_neighbours[k]->m_z), 2);
-		if (distance <= radius && !(osc->m_neighbours[k]->m_underStimulation))
+			std::pow((src->m_z - osc->m_neighbours[k]->m_z), 2));
+		if (distance <= radius && !(m_isPaintedMap[osc->m_neighbours[k]->oscillatorID]))
 		{
 			paintStructureInRadius(src, osc->m_neighbours[k], radius, type);
 		}
 	}
 	osc->m_type = type;
-	osc->m_v_electrogram = osc->vmax;
+	if (type == SOLID_WALL)
+		osc->m_v_electrogram = osc->vmax;
+	else
+		osc->m_v_electrogram = osc->m_v_scaledPotential;
 }
 
 QCursor  SimViewStateStructure::paintCursor(glAtrium* view, float radius)
 {
-	double vLength = abs(radius*view->height()*view->frustrumSize / (view->distanceToCamera));
-	double hLength = vLength*view->width() / view->height();
-
 	int crossSize = 5;
-	int sizepix = floor(vLength);
+	int sizepix = floor(abs(radius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
 	QPixmap* m_LPixmap = new QPixmap(sizepix+2, sizepix+2);
-	m_LPixmap->fill(Qt::transparent); // Otherwise you get a black background :(
+	m_LPixmap->fill(Qt::transparent);
 	QPainter painter(m_LPixmap);
 	QColor col(64, 64, 64, 128);
 
@@ -72,57 +73,13 @@ QCursor  SimViewStateStructure::paintCursor(glAtrium* view, float radius)
 }
 void SimViewStateStructure::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 {
-	double radius = 4;
-	view->setCursor(paintCursor(view, radius));
-
-	view->setLastPos(event->pos());
-
-	double 	y = event->pos().y();
-	double 	x = event->pos().x();
-	double height = static_cast<double>(view->height());
-	double width = static_cast<double>(view->width());
-
-	view->directionRay = view->screenToWorld(x, y, width, height);
-
-	int item = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
-	if (item != -1)
-	{
-		view->testProbe.x = view->linkToMesh->m_mesh[item]->m_x;
-		view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
-		view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
-
-		paintStructureInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], radius, SOLID_WALL);
-	}
-	m_painted.clear();
-
-
-
-
-
-
+	m_currentDrawType = m_paintType;
+	handleMouseMove(view, event);
 }
 void SimViewStateStructure::handleMouseRightPress(glAtrium* view, QMouseEvent *event)
 {
-
-	view->setLastPos(event->pos());
-
-	double 	y = event->pos().y();
-	double 	x = event->pos().x();
-	double height = static_cast<double>(view->height());
-	double width = static_cast<double>(view->width());
-
-	view->directionRay = view->screenToWorld(x, y, width, height);
-
-	int item = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
-	if (item != -1)
-	{
-		view->testProbe.x = view->linkToMesh->m_mesh[item]->m_x;
-		view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
-		view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
-		view->linkToMachine->m_stimulationID = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
-		view->linkToMachine->m_definitions->m_ectopicActivity = true;
-	}
-	view->setLastPos(event->pos());
+	m_currentDrawType = m_clearType;
+	handleMouseMove(view, event);
 }
 void SimViewStateStructure::handleMouseRelease(glAtrium* view, QMouseEvent *event)
 {
@@ -137,34 +94,18 @@ void SimViewStateStructure::handleMousewheel(glAtrium* view, QWheelEvent *event)
 	double numDegrees = static_cast<double>(event->delta()) / 350.0;
 
 
-	view->distanceToCamera -= view->zoomingSpeed*numDegrees;
-	//if (distanceToCamera <nearClippingPlaneDistance) distanceToCamera = nearClippingPlaneDistance;
+	cursorRadius *= (1+0.1*numDegrees);
+	view->setCursor(paintCursor(view, cursorRadius));
 
-	////if (event->orientation() == Qt::Horizontal) {
-	//frustrumSize -= numDegrees;
-	//if (frustrumSize <0.1) frustrumSize = 0.1;
-
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-
-	//nearClippingPlaneDistance = 2.0;
-	//glFrustum(-frustrumSize*static_cast<double>(this->width()) / static_cast<double>(this->height()),
-	//	+frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())),
-	//	+frustrumSize, -frustrumSize, nearClippingPlaneDistance, 50.0);
-	//fov = 2 * atan((frustrumSize - (-frustrumSize))*0.5 / nearClippingPlaneDistance);
-	//glMatrixMode(GL_MODELVIEW);
 	event->accept();
 	view->updateGL();
 	view->resizeGL(view->width(), view->height());
-	////	}
 
 }
 void SimViewStateStructure::handleMouseMove(glAtrium* view, QMouseEvent *event)
 {
-	if ((event->buttons() & Qt::LeftButton))
+	if ((event->buttons()))
 	{
-
-
 		double 	y = event->pos().y();
 		double 	x = event->pos().x();
 		double height = static_cast<double>(view->height());
@@ -179,11 +120,11 @@ void SimViewStateStructure::handleMouseMove(glAtrium* view, QMouseEvent *event)
 			view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
 			view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
 
-			paintStructureInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], 6, SOLID_WALL);
+			paintStructureInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], cursorRadius, m_currentDrawType);
 		}
 
 		view->lastPos = event->pos();
-		m_painted.clear();
+		m_isPaintedMap.clear();
 	}
 	view->updateGL();
 }

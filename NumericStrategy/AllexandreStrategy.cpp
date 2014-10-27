@@ -1,5 +1,6 @@
 #include "NumericStrategy\AllexandreStrategy.h"
 #include <algorithm>
+#define EPSILONSTEP 0.000001
 
 AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)
 {
@@ -7,7 +8,7 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 	deltaTimestepIncMean = oscillators->getDeltaR()/ (2 * oscillators->m_maximumCV);
 	deltaTdiff = oscillators->getDeltaR() * oscillators->getDeltaR();
 	guardUpdateTimestep = oscillators->m_maximumCV / oscillators->getDeltaR();
-	kappaAccuracy = 0.05;
+	kappaAccuracy = 0.01;
 	Kguard = 2;
 
 	//[1] Create time trees
@@ -38,8 +39,112 @@ AllexandreStrategy::~AllexandreStrategy()
 }
 double AllexandreStrategy::synchronise()
 {
+	bool synchronised = false;
+
+	while (!synchronised)
+	{
+		synchronised = true;
+		//------------------------------------------------------
+		//[1] Find earliest node
+		TimeTree* currentNode = goToEarliest(m_updateTimeTree);
+		if (currentNode->time < latestTime)
+		{
+			synchronised = false;
+		}
+		else if ((currentNode->time - latestTime) > EPSILONSTEP)
+		{
+			latestTime = currentNode->time;
+			synchronised = false;
+		}
+		if (!synchronised)
+		{
+			//[4] Get the oscillator and calculate new timestep
+			Oscillator* osc = currentNode->osc;
+			double lastLocalTimestep = osc->m_currentTime - osc->m_previousTime;
+			double bestLocalTimestep = stepModifiedBackwardEuler(osc);
+			//[1] determine Next Max Local Timestep Method2b
+
+			bestLocalTimestep = getMaxTimestep_Method2b((osc->m_v_potential - osc->m_previous_potential) / lastLocalTimestep, osc->m_currentPRIM[0], lastLocalTimestep* (osc->m_connexin[0]));
+			//TODO is this model depndent? It should be model independent quantity / and osc->m_connexin[0] is bad
+
+			//[2] Check if the timestep exceeds the guard value
+			if (bestLocalTimestep > osc->guardTimestep)
+				nextTimestep = osc->guardTimestep;
+			else
+				nextTimestep = bestLocalTimestep;
+
+
+			//[2] Check if the timestep exceeds the latestTime
+			if (osc->m_currentTime + nextTimestep > latestTime)
+				nextTimestep = latestTime - osc->m_currentTime;
+
+			if (nextTimestep < EPSILONSTEP)
+				nextTimestep = EPSILONSTEP;
+
+			//[2] Set new current time on oscillator
+			osc->m_previousTime = osc->m_currentTime;
+			osc->m_currentTime += nextTimestep;
+
+			int numberOfEquations = osc->getNumberOfCurrents();
+			//[3] Calculate new step 
+
+			osc->m_previous_potential = osc->m_v_potential;
+			v_prim = osc->m_v_potential + nextTimestep * (osc->getPotentialPrim() + osc->getExtrapolatedNeighbourSource());
+			v_prim = v_prim / (1 + nextTimestep * osc->m_ConnexinSum);
+			osc->m_v_potential = v_prim;
+
+			osc->m_v_scaledPotential = osc->vzero + (osc->vmax - osc->vmin)*osc->m_v_potential;
+			osc->m_previous_scaledPotential = osc->vzero + (osc->vmax - osc->vmin)*osc->m_previous_potential;
+
+			osc->_sourceA = (osc->m_v_scaledPotential - osc->m_previous_scaledPotential) / nextTimestep;
+			osc->_sourceB = osc->m_v_scaledPotential - osc->_sourceA*osc->m_currentTime;
+
+			for (short k = 0; k < numberOfEquations; ++k)
+			{
+				osc->m_v_current[k] += nextTimestep * (osc->getCurrentPrim(k));
+			}
+			osc->m_v_electrogram = osc->m_v_potential;
+
+			//osc->setElectrogram(nextTimestep);
+
+			if (!osc->m_wallCells.empty())
+			{
+				for (short wc = 0; wc < osc->m_wallCells.size(); ++wc)
+				{
+					osc->m_wallCells[wc]->m_v_potential = osc->m_v_potential;
+					osc->m_wallCells[wc]->m_v_scaledPotential = osc->m_v_scaledPotential;
+					osc->m_wallCells[wc]->m_previous_potential = osc->m_previous_potential;
+					osc->m_wallCells[wc]->m_previous_scaledPotential = osc->m_previous_scaledPotential;
+					osc->m_wallCells[wc]->_sourceA = osc->_sourceA;
+					osc->m_wallCells[wc]->_sourceB = osc->_sourceB;
+
+					osc->m_wallCells[wc]->m_v_electrogram = osc->m_v_electrogram;
+					for (int k = 0; k < numberOfEquations; ++k)
+					{
+						osc->m_wallCells[wc]->m_v_current[k] = osc->m_v_current[k];
+					}
+
+					if (osc->getCurrentTime() != osc->m_wallCells[wc]->m_currentTime)
+						osc->m_wallCells[wc]->m_currentTime = osc->m_currentTime;
+				}
+			}
+
+			///////////////////////////////////////
+			//[5] Update the time update tree
+			bubbleNewTime(currentNode, osc->m_currentTime);
+
+			//[6] Update the timestep set
+			(*(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle))->timestep = bestLocalTimestep;
+
+			if (lastLocalTimestep > bestLocalTimestep)
+				timeStepHeap->increase(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle);
+			else
+				timeStepHeap->update(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle);
+			
+		}
+	}
 	guardCellUpdate();
-	return 1;
+	return latestTime;
 }
 //---------------------------------------------------------------------------------
 double AllexandreStrategy::nextStep()
@@ -75,6 +180,15 @@ double AllexandreStrategy::nextStep()
 	//------------------------------------------------------
 	//[1] Find earliest node
 	TimeTree* currentNode = goToEarliest(m_updateTimeTree);
+
+	//[4] Get the oscillator and calculate new timestep
+	Oscillator* osc = currentNode->osc;
+	double lastLocalTimestep = osc->m_currentTime - osc->m_previousTime;
+	double bestLocalTimestep = stepModifiedBackwardEuler(osc);
+
+	//[5] Update the time update tree
+	bubbleNewTime(currentNode, osc->m_currentTime);
+
 	m_mesh->m_simulationTime = currentNode->time;
 	if (m_mesh->m_simulationTime  > latestTime)
 		latestTime = m_mesh->m_simulationTime;
@@ -85,14 +199,6 @@ double AllexandreStrategy::nextStep()
 		guardCellUpdate();
 		lastGuardUpdate = latestTime;
 	}
-
-	//[4] Get the oscillator and calculate new timestep
-	Oscillator* osc = currentNode->osc;
-	double lastLocalTimestep = osc->m_currentTime - osc->m_previousTime;
-	double bestLocalTimestep = stepModifiedBackwardEuler(osc);
-
-	//[5] Update the time update tree
-	bubbleNewTime(currentNode, osc->m_currentTime);
 
 	//[6] Update the timestep set
 	(*(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle))->timestep = bestLocalTimestep;
@@ -264,7 +370,8 @@ void AllexandreStrategy::constructTimestepTree()
 	double initValue = 0.2;
 	if (m_mesh->m_mesh.empty())
 		return;
-
+	heap0.clear();
+	heap1.clear();
 	stpHeap::handle_type handle;
 	for (int i = 0; i < m_mesh->m_mesh.size(); ++i)
 	{

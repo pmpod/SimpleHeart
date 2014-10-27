@@ -34,7 +34,8 @@ public slots:
 	void setTop();
 	void setSide1();
 	void setSide2();
-
+	void setStateStructureModifier(bool b);
+	void setStateViewer(bool b);
 	void setPaletteHSV();
 	void setPaletteGray();
 

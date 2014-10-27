@@ -226,6 +226,8 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
 	QObject::connect(ui.b_loadState, SIGNAL(clicked()), m_ioHandler, SLOT(loadCurrentState()));
 
+	QObject::connect(ui.b_stateStructureModifier, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
+	QObject::connect(ui.b_stateViewer, SIGNAL(toggled(bool)), glGraph, SLOT(setStateViewer(bool)));
 
 	QObject::connect(ui.cb_calcEnt, SIGNAL(toggled(bool)), this, SLOT(setEntropyToggle(bool)));
 	QObject::connect(ui.cb_calcPat, SIGNAL(toggled(bool)), this, SLOT(setEntropyPat(bool)));
@@ -451,6 +453,7 @@ void SimpleHeart::startCalculation()
 void SimpleHeart::stopCalculation()
 {
 	//Machine2d->calculateElectrogram();
+	Machine2d->m_strategy->synchronise();
 	glGraph->updateGL();
 	setTimerInterval(-1);	
 	m_calculationsAreRunning = false;

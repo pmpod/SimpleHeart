@@ -51,7 +51,7 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 
 	distanceToCamera = -40.0f;
 
-	_state = SimViewStateStructure::Instance();
+	_state = SimViewStateStructure::Instance(this);
 }
 //----------------------------------------
 glAtrium::~glAtrium(void)
@@ -77,6 +77,18 @@ void  glAtrium::setPaletteGray()
 QSize glAtrium::sizeHint() const
 {
 	return QSize(this->width(), this->height());
+}
+//----------------------------------------
+void glAtrium::setStateStructureModifier(bool b)
+{
+	if (b)
+		ChangeState(SimViewStateStructure::Instance(this));
+}
+//----------------------------------------
+void glAtrium::setStateViewer(bool b)
+{
+	if (b)
+		ChangeState(SimViewStateView::Instance());
 }
 //----------------------------------------
 void glAtrium::setXRotation(int angle)
@@ -171,7 +183,9 @@ void glAtrium::paintGL()
 
 	//[1] Paint origin
 	glLoadIdentity();
-		glTranslatef(-1.1f*frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())), 1.1f*frustrumSize, -nearClippingPlaneDistance-0.5f);
+		glTranslatef(	-1.1f*frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())), 
+						1.1f*frustrumSize, 
+						-nearClippingPlaneDistance-0.5f);
 		glRotated(xRot / 16.0, 1.0, 0.0, 0.0);
 		glRotated(yRot / 16.0, 0.0, 1.0, 0.0);
 		glRotated(zRot / 16.0, 0.0, 0.0, 1.0);

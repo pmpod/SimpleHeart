@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1029</width>
-    <height>877</height>
+    <height>879</height>
    </rect>
   </property>
   <property name="font">
@@ -615,7 +615,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="b_strucPainting">
+            <widget class="QPushButton" name="b_stateStructureModifier">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -645,6 +645,19 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
              </property>
              <property name="flat">
               <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_stateViewer">
+             <property name="text">
+              <string>View Mode</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
              </property>
             </widget>
            </item>

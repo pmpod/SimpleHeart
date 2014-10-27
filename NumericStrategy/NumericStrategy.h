@@ -22,12 +22,21 @@ public:
 	*/
 	~NumericStrategy();
 	 
+
+
+	/**
+	* \brief Calculates a single step of simulation. 
+	*/
 	virtual double nextStep() = 0;  ///< Main function
+
+	/**
+	* \brief For non-uniform timestep methods synchronises time in all calculation cells; For fixed timestep does nothing
+	*/
 	virtual double synchronise() = 0;  ///< Main function
 
 
 	/**
-	* \brief Resets all the OScillators to the resting state and the time to 0
+	* \brief Resets all the Oscillators to the resting state and the time to 0
 	*/
 	virtual void reset();
 

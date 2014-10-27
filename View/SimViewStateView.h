@@ -18,5 +18,6 @@ public:
 protected:
 private:
 	static SimViewStateView* _instance;
+
 };
 
