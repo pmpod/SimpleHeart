@@ -25,6 +25,7 @@ SimViewState* SimViewStateStructure::Instance()
 
 void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* osc, const double radius, CELL_TYPE type)
 {
+
 	if (!osc->m_underStimulation)
 	{
 		m_painted.push_back(osc);
@@ -45,21 +46,34 @@ void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* 
 	osc->m_v_electrogram = osc->vmax;
 }
 
-void SimViewStateStructure::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
+QCursor  SimViewStateStructure::paintCursor(glAtrium* view, float radius)
 {
-	Vector3 vec= view->screenToWorld(5, 5, view->width(), view->height());
+	double vLength = abs(radius*view->height()*view->frustrumSize / (view->distanceToCamera));
+	double hLength = vLength*view->width() / view->height();
 
-	QPixmap* m_LPixmap = new QPixmap(32, 32);
+	int crossSize = 5;
+	int sizepix = floor(vLength);
+	QPixmap* m_LPixmap = new QPixmap(sizepix+2, sizepix+2);
 	m_LPixmap->fill(Qt::transparent); // Otherwise you get a black background :(
 	QPainter painter(m_LPixmap);
-	QColor red(255, 0, 0, 128);
+	QColor col(64, 64, 64, 128);
 
-	painter.setPen(Qt::NoPen);        // Otherwise you get an thin black border
-	painter.setBrush(red);
+	QPen pen;  // creates a default pen
+	pen.setStyle(Qt::SolidLine);
+	pen.setWidth(1);
+	pen.setBrush(QColor(128, 128, 128, 128));
+	painter.setPen(pen);
+	painter.setBrush(col);
 
-	painter.drawEllipse(0, 0, 32, 32);
-	QCursor m_Cursor = QCursor(*m_LPixmap);
-	view->setCursor(m_Cursor);
+	painter.drawLine(floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize, floor(1 + sizepix / 2.0));
+	painter.drawLine(floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize);
+	painter.drawEllipse(1, 1, sizepix, sizepix);
+	return QCursor(*m_LPixmap);
+}
+void SimViewStateStructure::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
+{
+	double radius = 4;
+	view->setCursor(paintCursor(view, radius));
 
 	view->setLastPos(event->pos());
 
@@ -77,7 +91,7 @@ void SimViewStateStructure::handleMouseLeftPress(glAtrium* view, QMouseEvent *ev
 		view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
 		view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
 
-		paintStructureInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], 6, SOLID_WALL);
+		paintStructureInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], radius, SOLID_WALL);
 	}
 	m_painted.clear();
 
@@ -140,6 +154,8 @@ void SimViewStateStructure::handleMousewheel(glAtrium* view, QWheelEvent *event)
 	//fov = 2 * atan((frustrumSize - (-frustrumSize))*0.5 / nearClippingPlaneDistance);
 	//glMatrixMode(GL_MODELVIEW);
 	event->accept();
+	view->updateGL();
+	view->resizeGL(view->width(), view->height());
 	////	}
 
 }

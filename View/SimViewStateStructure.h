@@ -20,5 +20,10 @@ private:
 	void paintStructureInRadius(Oscillator* src, Oscillator* osc, const double radius, CELL_TYPE type);
 	static SimViewStateStructure* _instance;
 	std::vector<Oscillator*> m_painted;
+
+	QPixmap _cursorPixmap;
+
+	QCursor paintCursor(glAtrium*, float radius);
+
 };
 

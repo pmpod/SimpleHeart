@@ -350,7 +350,6 @@ int glAtrium::itemAt(double xx, double yy, double zz)
 void glAtrium::wheelEvent(QWheelEvent *event)
 {
 	_state->handleMousewheel(this, event);
-	updateGL();
 }
 
 void glAtrium::mousePressEvent(QMouseEvent *event)
