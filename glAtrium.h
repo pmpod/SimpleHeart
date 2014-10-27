@@ -7,8 +7,10 @@
 #include "Model\CardiacMesh.h"
 #include "Support\Vectors.h"
 #include "Support\Matrices.h"
-
+#include "View\SimViewStateView.h"
+#include "View\SimViewStateStructure.h"
 ///TODO Update to OpenGL 3.0
+
 class glAtrium: public QGLWidget
 {
 	Q_OBJECT
@@ -20,6 +22,7 @@ public:
     QSize minimumSizeHint() const;
     QSize sizeHint() const;
 
+	void setLastPos(const QPoint& pos);
 
 
 private:
@@ -61,8 +64,7 @@ protected:
 //! [3]
 private:
 	AtrialMachine2d *linkToMachine;		///Link to the Controller
-	const CardiacMesh *linkToMesh;		///Link to the Model
-
+	CardiacMesh *linkToMesh;		///Link to the Model
 
 
 
@@ -105,4 +107,10 @@ private:
 	bool paintRay;
 	Vector3 testProbe;
 
+private:
+	friend class SimViewState;
+	friend class SimViewStateView;
+	friend class SimViewStateStructure;
+	void ChangeState(SimViewState*);
+	SimViewState* _state;
 };

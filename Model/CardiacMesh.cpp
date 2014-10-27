@@ -202,7 +202,7 @@ void CardiacMesh::startStimulation(Oscillator* osc, const int& id, const double 
 		distance =	std::pow((m_mesh[id]->m_x - osc->m_neighbours[k]->m_x), 2) +
 					std::pow((m_mesh[id]->m_y - osc->m_neighbours[k]->m_y), 2) +
 					std::pow((m_mesh[id]->m_z - osc->m_neighbours[k]->m_z), 2);
-		if (distance < radius && !(osc->m_neighbours[k]->m_underStimulation))
+		if (distance <= radius && !(osc->m_neighbours[k]->m_underStimulation))
 		{
 			startStimulation(osc->m_neighbours[k], id, radius, strength);
 		}
@@ -314,10 +314,10 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 						else
 						{
 							if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr2);
-							if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr);
-							if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr);
-							if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr2);
-							if (first.cross(second).normalize().z >-0.05 && first.cross(second).normalize().z <0.05)
+							else if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr);
+							else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr);
+							else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr2);
+							else if (first.cross(second).normalize().z >-0.05 && first.cross(second).normalize().z <0.05)
 							{
 								m_vertexList.push_back(tr);
 								m_vertexList.push_back(tr2);

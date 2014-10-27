@@ -50,6 +50,8 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 	LightPosition[3] = 1.0f;
 
 	distanceToCamera = -40.0f;
+
+	_state = SimViewStateStructure::Instance();
 }
 //----------------------------------------
 glAtrium::~glAtrium(void)
@@ -202,6 +204,13 @@ void glAtrium::paintGL()
 	int t_ID2;
 	int t_ID3;
 
+	GLfloat val;
+	GLfloat color[] = { 0.f, 0.f, 0.f, 1.f };
+	GLfloat xx, yy, zz;
+
+	GLfloat vmin = linkToMesh->m_minElectrogram;
+	GLfloat vmax = linkToMesh->m_maxElectrogram;
+
 	for (unsigned int j = 0; j < vertexNumber; j=j+1)
 	{
 		//if (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_type != SOLID_WALL)
@@ -211,6 +220,31 @@ void glAtrium::paintGL()
 		t_ID3 = linkToMesh->m_vertexList[j]->id_3;
 
 		glBegin(GL_TRIANGLES);
+
+
+
+			////glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
+			////			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
+			////			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
+			//val = linkToMesh->m_mesh[t_ID1]->m_v_electrogram;
+			//hotToColdMap(val, vmin, vmax, color[0], color[1], color[2]);
+			//glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+			//glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+			//glVertex3f(linkToMesh->m_mesh[t_ID1]->m_x, linkToMesh->m_mesh[t_ID1]->m_y, linkToMesh->m_mesh[t_ID1]->m_z);
+
+			//val = linkToMesh->m_mesh[t_ID2]->m_v_electrogram;
+			//hotToColdMap(val, vmin, vmax, color[0], color[1], color[2]);
+			//glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+			//glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+			//glVertex3f(linkToMesh->m_mesh[t_ID2]->m_x, linkToMesh->m_mesh[t_ID2]->m_y, linkToMesh->m_mesh[t_ID2]->m_z);
+
+
+			//val = linkToMesh->m_mesh[t_ID3]->m_v_electrogram;
+			//hotToColdMap(val, vmin, vmax, color[0], color[1], color[2]);
+			//glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+			//glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+			//glVertex3f(linkToMesh->m_mesh[t_ID3]->m_x, linkToMesh->m_mesh[t_ID3]->m_y, linkToMesh->m_mesh[t_ID3]->m_z);
+
 			paintCellTriangle(linkToMesh->m_mesh[t_ID1]->m_x,
 				linkToMesh->m_mesh[t_ID1]->m_y,
 				linkToMesh->m_mesh[t_ID1]->m_z, linkToMesh->m_mesh[t_ID1]->m_v_electrogram,
@@ -315,117 +349,37 @@ int glAtrium::itemAt(double xx, double yy, double zz)
 //----------------------------------------
 void glAtrium::wheelEvent(QWheelEvent *event)
 {
-	double numDegrees = static_cast<double>(event->delta()) / 350.0;
-
-
-	distanceToCamera -= zoomingSpeed*numDegrees;
-	//if (distanceToCamera <nearClippingPlaneDistance) distanceToCamera = nearClippingPlaneDistance;
-
-	////if (event->orientation() == Qt::Horizontal) {
-	//frustrumSize -= numDegrees;
-	//if (frustrumSize <0.1) frustrumSize = 0.1;
-
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-
-	//nearClippingPlaneDistance = 2.0;
-	//glFrustum(-frustrumSize*static_cast<double>(this->width()) / static_cast<double>(this->height()),
-	//	+frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())),
-	//	+frustrumSize, -frustrumSize, nearClippingPlaneDistance, 50.0);
-	//fov = 2 * atan((frustrumSize - (-frustrumSize))*0.5 / nearClippingPlaneDistance);
-	//glMatrixMode(GL_MODELVIEW);
-	event->accept();
-	////	}
+	_state->handleMousewheel(this, event);
 	updateGL();
 }
 
 void glAtrium::mousePressEvent(QMouseEvent *event)
 {
-	if (m_controlable)
-	{
-		lastPos = event->pos();
-	}
+
 	if (event->button() == Qt::LeftButton)
 	{
-		double 	y = event->pos().y();
-		double 	x = event->pos().x();
-		double height = static_cast<double>(this->height());
-		double width = static_cast<double>(this->width());
-
-		directionRay = screenToWorld(x, y, width, height);
-
-		int item = itemAt(directionRay.x, directionRay.y, directionRay.z);
-		if (item != -1)
-		{
-			testProbe.x = linkToMesh->m_mesh[itemAt(directionRay.x, directionRay.y, directionRay.z)]->m_x;
-			testProbe.y = linkToMesh->m_mesh[itemAt(directionRay.x, directionRay.y, directionRay.z)]->m_y;
-			testProbe.z = linkToMesh->m_mesh[itemAt(directionRay.x, directionRay.y, directionRay.z)]->m_z;
-			linkToMachine->m_stimulationID = itemAt(directionRay.x, directionRay.y, directionRay.z);
-			linkToMachine->m_definitions->m_ectopicActivity = true;
-		}
-
-		//if (workMode == 7)
-		//{
-		//	linkToMesh->m_mesh[itemAt(pos.x, pos.y, pos.z)]->m_type = SOLID_WALL;
-		//	for (int ss = 0; ss < linkToMesh->m_mesh[itemAt(pos.x, pos.y, pos.z)]->m_neighbours.size(); ss++)
-		//	{
-		//		linkToMesh->m_mesh[linkToMesh->m_mesh[itemAt(pos.x, pos.y, pos.z)]->m_neighbours[ss]->oscillatorID]->m_type = SOLID_WALL;
-		//	}
-		//	linkToMesh->setWallCells();
-		//}
-
-		//else if (workMode == 8)
-		//{
-		//	linkToMesh->m_mesh[itemAt(pos.x, pos.y, pos.z)]->m_type = ATRIAL_V3;
-		//	for (int ss = 0; ss < linkToMesh->m_mesh[itemAt(pos.x, pos.y, pos.z)]->m_neighbours.size(); ss++)
-		//	{
-		//		linkToMesh->m_mesh[linkToMesh->m_mesh[itemAt(pos.x, pos.y, pos.z)]->m_neighbours[ss].first]->m_type = ATRIAL_V3;
-		//	}
-		//	m_mesh->setWallCells();
-		//}
-		updateGL();
+		_state->handleMouseLeftPress(this, event);
 	}
+	else if((event->button() == Qt::RightButton))
+	{
+		_state->handleMouseRightPress(this, event);
+	}
+	updateGL();
 }
 
 void glAtrium::mouseReleaseEvent(QMouseEvent *event)
 {
-	if (m_controlable)
-	{
-		lastPos = event->pos();
-	}
-
-	linkToMachine->m_definitions->m_ectopicActivity = false;
-
-	glGetFloatv(GL_MODELVIEW_MATRIX, m);
-	modelMatrix = m;
-	for (unsigned int j = 0; j < linkToMesh->m_mesh.size(); ++j)
-	{
-		pointRays[j] = modelMatrix * Vector4(linkToMesh->m_mesh[j]->m_x, linkToMesh->m_mesh[j]->m_y, linkToMesh->m_mesh[j]->m_z, 1.0);
-	}
+	_state->handleMouseRelease(this, event);
 	updateGL();
 }
 //----------------------------------------
 void glAtrium::mouseMoveEvent(QMouseEvent *event)
 {
-	if (m_controlable && (event->buttons() & Qt::RightButton))
-	{
-
-		Vector3 next = screenToWorld(event->x(), event->y(), viewWidth, viewHeight);
-		Vector3 previous = screenToWorld(lastPos.x(), lastPos.y(), viewWidth, viewHeight);
-		Vector3 diff = next - previous;
-
-		setXRotation(xRot + rotationSpeed * (diff.y));
-		setYRotation(yRot + rotationSpeed * (diff.x));
-	//	setZRotation(zRot + rotationSpeed * (next.y - previous.y));
-
-		//setYRotation(yRot + rotationSpeed * (next.x - previous.x));
-		//setZRotation(zRot + rotationSpeed * (next.y - previous.y));
-		//setXRotation(xRot + rotationSpeed * (next.z - previous.z));
-	//	float rotX = -1 * GLKMathDegreesToRadians(diff.y / 2.0);
-	//	float rotY = -1 * GLKMathDegreesToRadians(diff.x / 2.0);
-
-		lastPos = event->pos();
-	}
+	_state->handleMouseMove(this, event);
+}
+void glAtrium::setLastPos(const QPoint& pos)
+{
+	lastPos = pos;
 }
 //------------------------------------------
 Vector3 glAtrium::screenToWorld(double x, double y, double width, double height)
@@ -465,4 +419,8 @@ Vector3 glAtrium::screenToWorld(double x, double y, double width, double height)
 
 	return pos;
 
+}
+void glAtrium::ChangeState(SimViewState* state)
+{
+	_state = state;
 }

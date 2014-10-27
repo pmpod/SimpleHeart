@@ -236,6 +236,12 @@
     <ClCompile Include="View\SimViewState.cpp">
       <Filter>View</Filter>
     </ClCompile>
+    <ClCompile Include="View\SimViewStateView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\SimViewStateStructure.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="simpleheart.h">
@@ -376,6 +382,12 @@
       <Filter>Support</Filter>
     </ClInclude>
     <ClInclude Include="View\SimViewState.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\SimViewStateView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\SimViewStateStructure.h">
       <Filter>View</Filter>
     </ClInclude>
   </ItemGroup>
