@@ -58,7 +58,8 @@ protected:
 
 	Vector3 screenToWorld(double x, double y, double width, double height);
 	int itemAt(double xx, double yy, double zz);
-
+	void paintOrigin(float scale);
+	void paintLegend(float scale);
 
 //! [2]
 

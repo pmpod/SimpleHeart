@@ -7,7 +7,6 @@ SimViewStateStructure::SimViewStateStructure(glAtrium* view)
 {
 	cursorRadius = 2.0;
 	_view = view;
-	paintCursor(_view, cursorRadius);
 	m_paintType = SOLID_WALL;
 	m_clearType = ATRIAL_V3;
 	m_currentDrawType = m_paintType;
@@ -24,6 +23,7 @@ SimViewState* SimViewStateStructure::Instance(glAtrium* view)
 	{
 		_instance = new SimViewStateStructure(view);
 	}
+	_instance->paintCursor(view, _instance->cursorRadius);
 	return _instance;
 
 }
@@ -50,7 +50,7 @@ void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* 
 		osc->m_v_electrogram = osc->m_v_scaledPotential;
 }
 
-QCursor  SimViewStateStructure::paintCursor(glAtrium* view, float radius)
+void  SimViewStateStructure::paintCursor(glAtrium* view, float radius)
 {
 	int crossSize = 5;
 	int sizepix = floor(abs(radius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
@@ -69,8 +69,10 @@ QCursor  SimViewStateStructure::paintCursor(glAtrium* view, float radius)
 	painter.drawLine(floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize, floor(1 + sizepix / 2.0));
 	painter.drawLine(floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize);
 	painter.drawEllipse(1, 1, sizepix, sizepix);
-	return QCursor(*m_LPixmap);
+
+	view->setCursor(QCursor(*m_LPixmap));
 }
+
 void SimViewStateStructure::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 {
 	m_currentDrawType = m_paintType;
@@ -95,7 +97,7 @@ void SimViewStateStructure::handleMousewheel(glAtrium* view, QWheelEvent *event)
 
 
 	cursorRadius *= (1+0.1*numDegrees);
-	view->setCursor(paintCursor(view, cursorRadius));
+	paintCursor(view, cursorRadius);
 
 	event->accept();
 	view->updateGL();

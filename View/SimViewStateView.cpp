@@ -3,8 +3,10 @@
 
 SimViewStateView* SimViewStateView::_instance = nullptr;
 
-SimViewStateView::SimViewStateView()
+SimViewStateView::SimViewStateView(glAtrium* view)
 {
+	cursorRadius = 2.0;
+	_view = view;
 }
 
 
@@ -12,17 +14,40 @@ SimViewStateView::~SimViewStateView()
 {
 }
 
-SimViewState* SimViewStateView::Instance()
+SimViewState* SimViewStateView::Instance(glAtrium* view)
 {
 	if (SimViewStateView::_instance == nullptr)
 	{
-		_instance = new SimViewStateView;
+		_instance = new SimViewStateView(view);
 	}
+	_instance->paintCursor(view, _instance->cursorRadius);
 
 	return _instance;
 }
 
 
+void  SimViewStateView::paintCursor(glAtrium* view, float radius)
+{
+	int crossSize = 5;
+	int sizepix = floor(abs(radius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
+	QPixmap* m_LPixmap = new QPixmap(sizepix + 2, sizepix + 2);
+	m_LPixmap->fill(Qt::transparent);
+	QPainter painter(m_LPixmap);
+	QColor col(0, 0, 64, 128);
+
+	QPen pen;  // creates a default pen
+	pen.setStyle(Qt::SolidLine);
+	pen.setWidth(1);
+	pen.setBrush(QColor(128, 128, 128, 128));
+	painter.setPen(pen);
+	painter.setBrush(col);
+
+	painter.drawLine(floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize, floor(1 + sizepix / 2.0));
+	painter.drawLine(floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize);
+	painter.drawEllipse(1, 1, sizepix, sizepix);
+
+	view->setCursor(QCursor(*m_LPixmap));
+}
 void SimViewStateView::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 {
 	view->setLastPos(event->pos());
@@ -92,6 +117,27 @@ void SimViewStateView::handleMousewheel(glAtrium* view, QWheelEvent *event)
 }
 void SimViewStateView::handleMouseMove(glAtrium* view, QMouseEvent *event)
 {
+	if ((event->buttons() & Qt::LeftButton))
+	{
+		//view->setLastPos(event->pos());
+
+		//double 	y = event->pos().y();
+		//double 	x = event->pos().x();
+		//double height = static_cast<double>(view->height());
+		//double width = static_cast<double>(view->width());
+
+		//view->directionRay = view->screenToWorld(x, y, width, height);
+
+		//int item = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
+		//if (item != -1)
+		//{
+		//	view->testProbe.x = view->linkToMesh->m_mesh[item]->m_x;
+		//	view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
+		//	view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
+		//	view->linkToMachine->m_stimulationID = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
+		//	view->linkToMachine->m_definitions->m_ectopicActivity = true;
+		//}
+	}
 	if ((event->buttons() & Qt::RightButton))
 	{
 

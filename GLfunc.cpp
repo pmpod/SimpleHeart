@@ -369,28 +369,7 @@ void paintPixelB(int CellsX, int CellsY, float deltaX,float deltaY, QColor colou
 
 }
 //------------------------------------------------------------------------
-void paintOrigin(float frustrumSize, float scale)
-{
-	float f[1];
-	GLfloat length = frustrumSize*scale;
-	GLfloat col1[] = { 1.0, 0.0, 0.0, 1.f };
-	GLfloat col2[] = { 0.0, 1.0, 0.0, 1.f };
-	GLfloat col3[] = { 0.0, 0.0, 1.0, 1.f };
-	glGetFloatv(GL_LINE_WIDTH, f);
-	glLineWidth(1.0f);
-	glBegin(GL_LINES);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(length, 0.0f, 0.0f);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, col2);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, -length, 0.0f);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, col3);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, length);
-	glEnd();
-	glLineWidth(f[0]);
-}
+
 //{
 //		float f[1];
 //		glGetFloatv(GL_LINE_WIDTH, f);

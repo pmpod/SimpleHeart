@@ -14,6 +14,7 @@ public:
 	void handleMouseRelease(glAtrium*, QMouseEvent *event);
 	void handleMousewheel(glAtrium*, QWheelEvent *event);
 	void handleMouseMove(glAtrium*, QMouseEvent *event);
+	void paintCursor(glAtrium*, float radius);
 
 protected:
 private:
@@ -28,10 +29,5 @@ private:
 	CELL_TYPE m_clearType;
 
 	//cursor handling
-	double cursorRadius;
-	QPixmap _cursorPixmap;
-	QCursor paintCursor(glAtrium*, float radius);
-
-	glAtrium* _view;
 };
 
