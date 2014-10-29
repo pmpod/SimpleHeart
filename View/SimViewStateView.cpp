@@ -3,10 +3,11 @@
 
 SimViewStateView* SimViewStateView::_instance = nullptr;
 
-SimViewStateView::SimViewStateView(glAtrium* view)
+SimViewStateView::SimViewStateView()
 {
 	cursorRadius = 2.0;
-	_view = view;
+	_dataDisplayMode = 1;//POTENTIAL
+	//_dataDisplayMode = 2;//CSD
 }
 
 
@@ -14,22 +15,122 @@ SimViewStateView::~SimViewStateView()
 {
 }
 
-SimViewState* SimViewStateView::Instance(glAtrium* view)
+void SimViewStateView::setDisplayMode(const int mode)
+{
+	_dataDisplayMode = mode;
+}
+SimViewState* SimViewStateView::Instance()
 {
 	if (SimViewStateView::_instance == nullptr)
 	{
-		_instance = new SimViewStateView(view);
+		_instance = new SimViewStateView();
 	}
-	_instance->paintCursor(view, _instance->cursorRadius);
+	//_instance->paintCursor(view, _instance->cursorRadius);
 
 	return _instance;
 }
 
 
-void  SimViewStateView::paintCursor(glAtrium* view, float radius)
+void SimViewStateView::paintModel(glAtrium* view)
+{
+	glPushMatrix();
+
+	// [1] Paint data
+
+	CardiacMesh *msh = view->linkToMesh;
+	std::vector<Oscillator*> oscs = view->linkToMesh->m_mesh;
+
+	int vertexNumber = msh->m_vertexList.size();
+
+	int t_ID1, t_ID2, t_ID3;
+	GLfloat val1, val2, val3;
+	GLfloat vmin = msh->m_minElectrogram;
+	GLfloat vmax = msh->m_maxElectrogram;
+
+	glBegin(GL_TRIANGLES);
+	for (unsigned int j = 0; j < vertexNumber; j = j + 1)
+	{
+		t_ID1 = msh->m_vertexList[j]->id_1;
+		t_ID2 = msh->m_vertexList[j]->id_2;
+		t_ID3 = msh->m_vertexList[j]->id_3;
+
+		if (oscs[t_ID1]->m_type != SOLID_WALL)
+		{
+
+			switch (_dataDisplayMode)
+			{
+			case 1:
+				val1 = oscs[t_ID1]->m_v_scaledPotential;
+				val2 = oscs[t_ID2]->m_v_scaledPotential;
+				val3 = oscs[t_ID3]->m_v_scaledPotential;
+				break;
+			case 2:
+				val1 = oscs[t_ID1]->getLastCurrentSource();
+				val2 = oscs[t_ID2]->getLastCurrentSource();
+				val3 = oscs[t_ID3]->getLastCurrentSource();
+				break;
+			case 3:
+				val1 = oscs[t_ID1]->m_v_current[0];
+				val2 = oscs[t_ID2]->m_v_current[0];
+				val3 = oscs[t_ID3]->m_v_current[0];
+				break;
+			case 4:
+				val1 = oscs[t_ID1]->m_v_current[1];
+				val2 = oscs[t_ID2]->m_v_current[1];
+				val3 = oscs[t_ID3]->m_v_current[1];
+				break;
+			}
+
+			paintCellTriangle(oscs[t_ID1]->m_x, oscs[t_ID1]->m_y,
+				oscs[t_ID1]->m_z, val1,
+				oscs[t_ID2]->m_x, oscs[t_ID2]->m_y,
+				oscs[t_ID2]->m_z, val2,
+				oscs[t_ID3]->m_x, oscs[t_ID3]->m_y,
+				oscs[t_ID3]->m_z, val3,
+				view->m_palette, vmin, vmax);
+		}
+		else
+		{
+			paintCellTriangle(oscs[t_ID1]->m_x,
+				oscs[t_ID1]->m_y, oscs[t_ID1]->m_z, 0.0,
+				oscs[t_ID2]->m_x, oscs[t_ID2]->m_y, oscs[t_ID2]->m_z, 0.0,
+				oscs[t_ID3]->m_x, oscs[t_ID3]->m_y, oscs[t_ID3]->m_z, 0.0,
+				3, 0, 1);
+		}
+
+	}
+	glEnd();
+
+
+
+
+
+
+
+
+	// [3] Paint probes
+		for (short n = 0; n < view->linkToMachine->probeOscillator.size(); ++n)
+		{
+			drawSphere(0.2, 10, 10, view->linkToMachine->probeOscillator[n]->getPositionX(),
+				view->linkToMachine->probeOscillator[n]->getPositionY(),
+				view->linkToMachine->probeOscillator[n]->getPositionZ(), 1.0f / (n + 1), 1.0f / (n + 1), 1.0f);
+
+		
+			view->renderText(view->linkToMachine->probeOscillator[n]->getPositionX(),
+				view->linkToMachine->probeOscillator[n]->getPositionY(),
+				view->linkToMachine->probeOscillator[n]->getPositionZ() + 1, "Electrode");
+		}
+		if (view->paintRay)
+		{
+			drawSphere(0.2, 10, 10, view->testProbe.x, view->testProbe.y, view->testProbe.z, 1.0f, 1.0f, 1.0f);
+		}
+	glPopMatrix();
+}
+
+void  SimViewStateView::paintCursor(glAtrium* view)
 {
 	int crossSize = 5;
-	int sizepix = floor(abs(radius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
+	int sizepix = floor(abs(cursorRadius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
 	QPixmap* m_LPixmap = new QPixmap(sizepix + 2, sizepix + 2);
 	m_LPixmap->fill(Qt::transparent);
 	QPainter painter(m_LPixmap);

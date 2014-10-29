@@ -78,6 +78,9 @@ TimeTree *newTreeTrunk(TimeTree *&node, vector<Oscillator*>& mesh, int& numberOf
 				nd.osc = node->osc;
 				nd.p_updateTimeTreeNode = node;
 				dictionary.push_back(nd);
+				//node->time = ;
+				double timee = node->osc->getCurrentTime();
+				bubbleNewTimeFullCheck(node, timee);
 			}
 		}
 	}
@@ -168,6 +171,26 @@ void swapChildrenIfNecessary(TimeTree *&node)
 	// if (node != nullptr && node->earlierNode != nullptr && node->earlierNode != nullptr) 
 	//if ( node->earlierNode != nullptr)
 }
+void bubbleNewTimeFullCheck(TimeTree *&node, const double& newTime)//worksOnlyOnBottomNode!
+{
+
+	if (node->earlierNode != nullptr && node->laterNode != nullptr)
+	{
+
+		if (node->earlierNode->time > node->laterNode->time)
+			std::swap(node->earlierNode, node->laterNode);
+		node->time = node->earlierNode->time;
+	}
+	else
+	{
+		node->time = newTime;
+	}
+	if (node->parentNode != nullptr)
+	{
+		bubbleNewTimeFullCheck(node->parentNode, node->time);
+	}
+}
+
 void bubbleNewTime(TimeTree *&node, const double& newTime)//worksOnlyOnBottomNode!
 {
 

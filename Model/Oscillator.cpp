@@ -7,13 +7,13 @@ Oscillator::Oscillator(void)
 	m_v_current.push_back(0.0);
 	m_currentPRIM.push_back(0.0);
 
-	reset();
 	m_farthestDistanceID = -1;
 	m_closestDistanceID = -1;
 	vzero = -75; //[mV]
 	vmax = 25;  //[mV]
 	vmin = -75;  //[mV]
 	m_underStimulation = false;
+	reset();
 }
 
 void Oscillator::reset()

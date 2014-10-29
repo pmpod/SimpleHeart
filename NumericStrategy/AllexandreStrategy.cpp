@@ -17,7 +17,12 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 	constructTimestepTree();
 
 	//[2] Initialize transient parameters
-	reset();
+
+	latestTime = 0;
+	lastGuardUpdate = -guardUpdateTimestep - 1;
+	stimulationStateUpdate = false;
+	guardCellUpdate();
+
 }
 //---------------------------------------------------------------------------------
 void AllexandreStrategy::reset()
@@ -358,16 +363,12 @@ void AllexandreStrategy::constructUpdateTimeTree()
 		return;
 
 	clear(m_updateTimeTree);
-
 	m_updateTimeTree = newTreeNode();
 	newTreeTrunk(m_updateTimeTree, m_mesh->m_mesh, m_oscillatorUpdateDictionary);
-
-	resetTime(m_updateTimeTree, 0.0);
 }
 //---------------------------------------------------------------------------------
 void AllexandreStrategy::constructTimestepTree()
 {
-	double initValue = 0.2;
 	if (m_mesh->m_mesh.empty())
 		return;
 	heap0.clear();
@@ -381,7 +382,7 @@ void AllexandreStrategy::constructTimestepTree()
 			//[1] Create timestep node
 			TimestepNode *node = new TimestepNode;
 			node->osc = m_mesh->m_mesh[i];
-			node->timestep = initValue;
+			node->timestep = (m_mesh->m_mesh[i]->m_currentTime - m_mesh->m_mesh[i]->m_previousTime);
 
 			//[2] Push the node into the heap and remember the handle
 			currentHeap = false;

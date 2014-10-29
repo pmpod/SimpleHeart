@@ -20,6 +20,7 @@ SimpleHeart::SimpleHeart(QWidget *parent, Qt::WFlags flags)
 	init();
 	
 	m_ioHandler = new ioHandler(this);
+
 	setupConnections();
 
 
@@ -78,9 +79,79 @@ void SimpleHeart::init()
 	layout_PlotsEnt->setContentsMargins(1, 1,1, 1);
 	layout_PlotsEnt->setSpacing(1);
 
+
+	//--------------------
+	plotPotentialE1 = new TimePlot(ui.displayGraphs);
+	plotPotentialE1->setObjectName(QString::fromUtf8("Electrogram 1"));
+	//plotPotentialE1->setAxisAutoScale( QwtPlot::yLeft );
+	plotPotentialE1->setMinimumHeight(2);
+	plotPotentialE1->enableAxis(QwtPlot::xBottom, false);
+	plotPotentialE1->setAxisTitle(QwtPlot::yLeft, "Probe 1");
+	plotPotentialE2 = new TimePlot(ui.displayGraphs);
+	plotPotentialE2->setObjectName(QString::fromUtf8("Electrogram 2"));
+	plotPotentialE2->setAxisTitle(QwtPlot::yLeft, "Probe 2");
+	//	plotPotentialE2->setAxisAutoScale( QwtPlot::yLeft );
+	plotPotentialE2->setMinimumHeight(2);
+	plotPotentialE2->enableAxis(QwtPlot::xBottom, false);
+	plotPotentialE3 = new TimePlot(ui.displayGraphs);
+	plotPotentialE3->setObjectName(QString::fromUtf8("Electrogram 3"));
+	plotPotentialE3->setAxisTitle(QwtPlot::yLeft, "Probe 3");
+	//plotPotentialE3->setAxisAutoScale( QwtPlot::yLeft );
+	plotPotentialE3->setMinimumHeight(2);
+	//------------------------------
+	plotRR_el1 = new rrPlot(ui.displayGraphs_3);
+	plotRR_el1->setObjectName(QString::fromUtf8("plot RR"));
+	plotRR_el1->setAxisAutoScale(QwtPlot::yLeft);
+	plotRR_el1->setAxisScale(QwtPlot::xBottom, 0, 99);
+	plotRR_el1->setMinimumHeight(2);
+
+	plotRR_el1->d_curve.front()->setPen(QPen(QBrush(QColor(255, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
+	plotRR_el2 = new rrPlot(ui.displayGraphs_3);
+	plotRR_el2->setObjectName(QString::fromUtf8("plot RR"));
+	plotRR_el2->setAxisAutoScale(QwtPlot::yLeft);
+	plotRR_el2->setAxisScale(QwtPlot::xBottom, 0, 99);
+	plotRR_el2->setMinimumHeight(2);
+	plotRR_el2->d_curve.front()->setPen(QPen(QBrush(QColor(255, 0, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
+	plotRR_el3 = new rrPlot(ui.displayGraphs_3);
+	plotRR_el3->setObjectName(QString::fromUtf8("plot RR"));
+	plotRR_el3->setAxisAutoScale(QwtPlot::yLeft);
+	plotRR_el3->setAxisScale(QwtPlot::xBottom, 0, 99);
+	plotRR_el3->setMinimumHeight(2);
+	plotRR_el3->d_curve.front()->setPen(QPen(QBrush(QColor(0, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
+	//------------------------------
+	plotEnt_el1 = new rrPlot(ui.displayGraphs_3);
+	plotEnt_el1->setObjectName(QString::fromUtf8("plot Entropy"));
+	plotEnt_el1->setAxisAutoScale(QwtPlot::yLeft);
+	plotEnt_el1->setAxisScale(QwtPlot::xBottom, 0, 99);
+	plotEnt_el1->setMinimumHeight(2);
+
+	plotEnt_el1->d_curve.back()->setPen(QPen(Qt::yellow));
+	plotEnt_el2 = new rrPlot(ui.displayGraphs_3);
+	plotEnt_el2->setObjectName(QString::fromUtf8("plot Entropy"));
+	plotEnt_el2->setAxisAutoScale(QwtPlot::yLeft);
+	plotEnt_el2->setAxisScale(QwtPlot::xBottom, 0, 99);
+	plotEnt_el2->setMinimumHeight(2);
+	plotEnt_el2->d_curve.back()->setPen(QPen(Qt::red));
+	plotEnt_el3 = new rrPlot(ui.displayGraphs_3);
+	plotEnt_el3->setObjectName(QString::fromUtf8("plot Entropy"));
+	plotEnt_el3->setAxisAutoScale(QwtPlot::yLeft);
+	plotEnt_el3->setAxisScale(QwtPlot::xBottom, 0, 99);
+	plotEnt_el3->setMinimumHeight(2);
+	plotEnt_el3->d_curve.back()->setPen(QPen(Qt::green));
+
+
+
+
+
+
+
+
+
+
+
+
+
 	simpleParameters = new atrialParameters();
-
-
 	m_grid = CardiacMesh::constructCartesianGrid(100,100, 0.4, 0.4, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	m_matrix = new DiffusionMatrix(m_grid);
@@ -90,64 +161,7 @@ void SimpleHeart::init()
 	glGraph = new glAtrium(m_grid,Machine2d, ui.displayMain);
 
 	diffusionPainter = new DiffusionPainter(m_grid, m_matrix,m_anisotrophy, ui.displayDiffusion);
-	//--------------------
-	plotPotentialE1 = new TimePlot(ui.displayGraphs);
-	plotPotentialE1->setObjectName(QString::fromUtf8("Electrogram 1"));
-	//plotPotentialE1->setAxisAutoScale( QwtPlot::yLeft );
-	plotPotentialE1->setMinimumHeight(2);
-	plotPotentialE1->enableAxis(QwtPlot::xBottom,false);
-	plotPotentialE1->setAxisTitle(QwtPlot::yLeft, "Probe 1");
-	plotPotentialE2 = new TimePlot(ui.displayGraphs);
-	plotPotentialE2->setObjectName(QString::fromUtf8("Electrogram 2"));
-	plotPotentialE2->setAxisTitle(QwtPlot::yLeft, "Probe 2");
-//	plotPotentialE2->setAxisAutoScale( QwtPlot::yLeft );
-	plotPotentialE2->setMinimumHeight(2);
-	plotPotentialE2->enableAxis(QwtPlot::xBottom,false);
-	plotPotentialE3 = new TimePlot(ui.displayGraphs);
-	plotPotentialE3->setObjectName(QString::fromUtf8("Electrogram 3"));
-	plotPotentialE3->setAxisTitle(QwtPlot::yLeft, "Probe 3");
-	//plotPotentialE3->setAxisAutoScale( QwtPlot::yLeft );
-	plotPotentialE3->setMinimumHeight(2);
-//------------------------------
-	plotRR_el1 = new rrPlot(ui.displayGraphs_3);
-    plotRR_el1->setObjectName(QString::fromUtf8("plot RR"));
-    plotRR_el1->setAxisAutoScale  ( QwtPlot::yLeft ) ;
-    plotRR_el1->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotRR_el1->setMinimumHeight(2);
 	
-	plotRR_el1->d_curve.front()->setPen(QPen(QBrush(QColor(255,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-	plotRR_el2 = new rrPlot(ui.displayGraphs_3);
-    plotRR_el2->setObjectName(QString::fromUtf8("plot RR"));
-    plotRR_el2->setAxisAutoScale  ( QwtPlot::yLeft ) ;
-    plotRR_el2->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotRR_el2->setMinimumHeight(2);
-	plotRR_el2->d_curve.front()->setPen(QPen(QBrush(QColor(255,0,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-	plotRR_el3 = new rrPlot(ui.displayGraphs_3);
-    plotRR_el3->setObjectName(QString::fromUtf8("plot RR"));
-    plotRR_el3->setAxisAutoScale  ( QwtPlot::yLeft ) ;
-    plotRR_el3->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotRR_el3->setMinimumHeight(2);
-	plotRR_el3->d_curve.front()->setPen(QPen(QBrush(QColor(0,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-//------------------------------
-	plotEnt_el1 = new rrPlot(ui.displayGraphs_3);
-    plotEnt_el1->setObjectName(QString::fromUtf8("plot Entropy"));
-    plotEnt_el1->setAxisAutoScale  ( QwtPlot::yLeft ) ;
-    plotEnt_el1->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotEnt_el1->setMinimumHeight(2);
-	
-	plotEnt_el1->d_curve.back()->setPen(QPen(Qt::yellow));
-	plotEnt_el2 = new rrPlot(ui.displayGraphs_3);
-    plotEnt_el2->setObjectName(QString::fromUtf8("plot Entropy"));
-    plotEnt_el2->setAxisAutoScale  ( QwtPlot::yLeft ) ;
-    plotEnt_el2->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotEnt_el2->setMinimumHeight(2);
-	plotEnt_el2->d_curve.back()->setPen(QPen(Qt::red));
-	plotEnt_el3 = new rrPlot(ui.displayGraphs_3);
-    plotEnt_el3->setObjectName(QString::fromUtf8("plot Entropy"));
-    plotEnt_el3->setAxisAutoScale  ( QwtPlot::yLeft ) ;
-    plotEnt_el3->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotEnt_el3->setMinimumHeight(2);
-	plotEnt_el3->d_curve.back()->setPen(QPen(Qt::green));
 
 	
 //vis tab-----------------------------
@@ -221,13 +235,21 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(stopCalculation()));
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(setBmp()));
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(saveAsBmp()));
+
+
+	//ADDED
 	QObject::connect(ui.b_saveStructure, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentStructure()));
 	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), m_ioHandler, SLOT(loadCustomStructure()));
 	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
 	QObject::connect(ui.b_loadState, SIGNAL(clicked()), m_ioHandler, SLOT(loadCurrentState()));
-
+	QObject::connect(ui.b_loadState, SIGNAL(clicked()), m_ioHandler, SLOT(loadCurrentState()));
+	QObject::connect(ui.rb_setDisplayCsdMode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCSD(bool)));
+	QObject::connect(ui.rb_setDisplayPotentialMode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayPotential(bool)));
+	QObject::connect(ui.rb_setDisplayC1Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent1(bool)));
+	QObject::connect(ui.rb_setDisplayC2Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent2(bool)));
 	QObject::connect(ui.b_stateStructureModifier, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
 	QObject::connect(ui.b_stateViewer, SIGNAL(toggled(bool)), glGraph, SLOT(setStateViewer(bool)));
+	//ADDED END
 
 	QObject::connect(ui.cb_calcEnt, SIGNAL(toggled(bool)), this, SLOT(setEntropyToggle(bool)));
 	QObject::connect(ui.cb_calcPat, SIGNAL(toggled(bool)), this, SLOT(setEntropyPat(bool)));
@@ -622,56 +644,56 @@ void SimpleHeart::setBmpSaving(bool t)
 }
 void SimpleHeart::setAtrialStructure()
 {
-		stopCalculation();
-		m_ioHandler->writeParametersToFile();
-
-	 	QObject::disconnect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
-		QObject::disconnect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
-		QObject::disconnect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
-	
-
-
-	glGraph->updateGL();
-
-/*
-		m_ioHandler->readStructureFromFile(ui.cb_setStructure->currentIndex());
-		Machine2d->setAtrialStructure();
-		///TODO tu coœ z elektrodami
-
-
-
-		for (unsigned int j = 0; j < Machine2d->m_oscillators.size(); ++j)
-		{
-			for (unsigned int i = 0; i <  Machine2d->m_oscillators[j].size(); ++i)
-			{
-				Machine2d->m_diffusionCoefficients[j][i] = 1.0*(diffusionPainter->m_upperLimit - diffusionPainter->m_lowerLimit) + diffusionPainter->m_lowerLimit;
-				Machine2d->m_anisotrophyCoefficients[j][i] = 0.5;
-				QColor colorek  = diffusionPainter->m_pixelmap->m_matrix[i][j]->color;
-				colorek.setRgbF(1.0,1.0,1.0);
-				diffusionPainter->m_pixelmap->m_matrix[i][j]->color = colorek;
-				colorek.setRgbF(0.5,0.5,0.0);
-				diffusionPainter->m_anisotrophy->m_matrix[i][j]->color = colorek;
-			}
-		}
-*/
-		Machine2d->editDiffusionCoefficients();
-
-		diffusionPainter->updateCanvas();
-		diffusionPainter->updateGL();
-/*
-		Machine2d->probeOscillator[0] =  Machine2d->m_oscillators[diffusionPainter->probe1->position().x()][diffusionPainter->probe1->myPosition.y()];
-		Machine2d->probeOscillator[1] =  Machine2d->m_oscillators[diffusionPainter->probe2->position().x()][diffusionPainter->probe2->myPosition.y()];
-		Machine2d->probeOscillator[2] = Machine2d->m_oscillators[diffusionPainter->probe3->position().x()][diffusionPainter->probe3->myPosition.y()];*/
-		Machine2d->probeOscillator[0] = m_grid->m_mesh[m_grid->getSize()*diffusionPainter->probe1->position().x() + diffusionPainter->probe1->myPosition.y()];
-		Machine2d->probeOscillator[1] = m_grid->m_mesh[m_grid->getSize()*diffusionPainter->probe2->position().x() + diffusionPainter->probe2->myPosition.y()];
-		Machine2d->probeOscillator[2] = m_grid->m_mesh[m_grid->getSize()*diffusionPainter->probe3->position().x() + diffusionPainter->probe3->myPosition.y()];
-
-
-	 QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
-	 QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
-	 QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
-		
-	 m_ioHandler->getParametersFromFile();
+//		stopCalculation();
+//		m_ioHandler->writeParametersToFile();
+//
+//	 	QObject::disconnect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
+//		QObject::disconnect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
+//		QObject::disconnect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
+//	
+//
+//
+//	glGraph->updateGL();
+//
+///*
+//		m_ioHandler->readStructureFromFile(ui.cb_setStructure->currentIndex());
+//		Machine2d->setAtrialStructure();
+//		///TODO tu coœ z elektrodami
+//
+//
+//
+//		for (unsigned int j = 0; j < Machine2d->m_oscillators.size(); ++j)
+//		{
+//			for (unsigned int i = 0; i <  Machine2d->m_oscillators[j].size(); ++i)
+//			{
+//				Machine2d->m_diffusionCoefficients[j][i] = 1.0*(diffusionPainter->m_upperLimit - diffusionPainter->m_lowerLimit) + diffusionPainter->m_lowerLimit;
+//				Machine2d->m_anisotrophyCoefficients[j][i] = 0.5;
+//				QColor colorek  = diffusionPainter->m_pixelmap->m_matrix[i][j]->color;
+//				colorek.setRgbF(1.0,1.0,1.0);
+//				diffusionPainter->m_pixelmap->m_matrix[i][j]->color = colorek;
+//				colorek.setRgbF(0.5,0.5,0.0);
+//				diffusionPainter->m_anisotrophy->m_matrix[i][j]->color = colorek;
+//			}
+//		}
+//*/
+//		Machine2d->editDiffusionCoefficients();
+//
+//		diffusionPainter->updateCanvas();
+//		diffusionPainter->updateGL();
+///*
+//		Machine2d->probeOscillator[0] =  Machine2d->m_oscillators[diffusionPainter->probe1->position().x()][diffusionPainter->probe1->myPosition.y()];
+//		Machine2d->probeOscillator[1] =  Machine2d->m_oscillators[diffusionPainter->probe2->position().x()][diffusionPainter->probe2->myPosition.y()];
+//		Machine2d->probeOscillator[2] = Machine2d->m_oscillators[diffusionPainter->probe3->position().x()][diffusionPainter->probe3->myPosition.y()];*/
+//		Machine2d->probeOscillator[0] = m_grid->m_mesh[m_grid->getSize()*diffusionPainter->probe1->position().x() + diffusionPainter->probe1->myPosition.y()];
+//		Machine2d->probeOscillator[1] = m_grid->m_mesh[m_grid->getSize()*diffusionPainter->probe2->position().x() + diffusionPainter->probe2->myPosition.y()];
+//		Machine2d->probeOscillator[2] = m_grid->m_mesh[m_grid->getSize()*diffusionPainter->probe3->position().x() + diffusionPainter->probe3->myPosition.y()];
+//
+//
+//	 QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
+//	 QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
+//	 QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
+//		
+//	 m_ioHandler->getParametersFromFile();
 }
 
 //--------------------------------------------------------------

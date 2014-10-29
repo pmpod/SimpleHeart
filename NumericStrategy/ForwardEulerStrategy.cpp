@@ -29,9 +29,7 @@ double ForwardEulerStrategy::nextStep()
 
 			osc->m_v_scaledPotential = osc->vzero + (osc->vmax - osc->vmin)*osc->m_v_potential;
 			osc->m_previous_scaledPotential = osc->vzero + (osc->vmax - osc->vmin)*osc->m_previous_potential;
-
-			osc->m_v_electrogram = osc->m_v_potential;
-
+			
 			//SCA£KUJ WSZYSTKIE PR¥DY
 			for (short k = 0; k < numberOfEquations; ++k)
 			{
@@ -47,7 +45,6 @@ double ForwardEulerStrategy::nextStep()
 					osc->m_wallCells[wc]->m_previous_potential = osc->m_previous_potential;
 					osc->m_wallCells[wc]->m_previous_scaledPotential = osc->m_previous_scaledPotential;
 
-					osc->m_wallCells[wc]->m_v_electrogram = osc->m_wallCells[wc]->vmax;
 					for (int k = 0; k < numberOfEquations; ++k)
 					{
 						osc->m_wallCells[wc]->m_v_current[k] = osc->m_v_current[k];

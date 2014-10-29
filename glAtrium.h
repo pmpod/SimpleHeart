@@ -38,7 +38,10 @@ public slots:
 	void setStateViewer(bool b);
 	void setPaletteHSV();
 	void setPaletteGray();
-
+	void setDisplayPotential(bool b);
+	void setDisplayCSD(bool b);
+	void setDisplayCurrent1(bool b);
+	void setDisplayCurrent2(bool b);
 
 signals:
     void xRotationChanged(int angle);

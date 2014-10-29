@@ -51,7 +51,7 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 
 	distanceToCamera = -40.0f;
 
-	_state = SimViewStateStructure::Instance(this);
+	_state = SimViewStateView::Instance();
 }
 //----------------------------------------
 glAtrium::~glAtrium(void)
@@ -78,17 +78,47 @@ QSize glAtrium::sizeHint() const
 {
 	return QSize(this->width(), this->height());
 }
+
+void  glAtrium::setDisplayPotential(bool b)
+{
+	if (b)
+		SimViewStateView::Instance()->setDisplayMode(1);
+	updateGL();
+}
+void  glAtrium::setDisplayCSD(bool b)
+{
+	if (b)
+		SimViewStateView::Instance()->setDisplayMode(2);
+	updateGL();
+}
+void  glAtrium::setDisplayCurrent1(bool b)
+{
+	if (b)
+		SimViewStateView::Instance()->setDisplayMode(3);
+	updateGL();
+}
+void  glAtrium::setDisplayCurrent2(bool b)
+{
+	if (b)
+		SimViewStateView::Instance()->setDisplayMode(4);
+	updateGL();
+}
+
 //----------------------------------------
 void glAtrium::setStateStructureModifier(bool b)
 {
 	if (b)
-		ChangeState(SimViewStateStructure::Instance(this));
+		ChangeState(SimViewStateStructure::Instance());
+	_state->paintCursor(this);
+	updateGL();
 }
 //----------------------------------------
 void glAtrium::setStateViewer(bool b)
 {
 	if (b)
-		ChangeState(SimViewStateView::Instance(this));
+		ChangeState(SimViewStateView::Instance());
+	_state->paintCursor(this);
+	updateGL();
 }
 //----------------------------------------
 void glAtrium::setXRotation(int angle)
@@ -254,9 +284,9 @@ void glAtrium::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	qglClearColor(backgroundColor);
+	glLoadIdentity();
 
 	//[1] Paint origin
-	glLoadIdentity();
 		glTranslatef(	-1.1f*frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())), 
 						1.1f*frustrumSize, 
 						-nearClippingPlaneDistance-0.5f);
@@ -264,6 +294,8 @@ void glAtrium::paintGL()
 		glRotated(yRot / 16.0, 0.0, 1.0, 0.0);
 		glRotated(zRot / 16.0, 0.0, 0.0, 1.0);
 		paintOrigin(0.1f);
+
+
 	//[1] Paint legend
 		glLoadIdentity();
 		glTranslatef(1.0f*frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())),
@@ -291,97 +323,10 @@ void glAtrium::paintGL()
 		glRotated(zRot / 16.0, 0.0, 0.0, 1.0);
 		glTranslatef(-linkToMesh->centerGeom.x, -linkToMesh->centerGeom.y, linkToMesh->centerGeom.z);
 
-	glPushMatrix();
-
-	int vertexNumber = linkToMesh->m_vertexList.size();
-	int t_ID1;
-	int t_ID2;
-	int t_ID3;
-
-	GLfloat val;
-	GLfloat color[] = { 0.f, 0.f, 0.f, 1.f };
-	GLfloat xx, yy, zz;
-
-	GLfloat vmin = linkToMesh->m_minElectrogram;
-	GLfloat vmax = linkToMesh->m_maxElectrogram;
-
-	for (unsigned int j = 0; j < vertexNumber; j=j+1)
-	{
-		//if (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_type != SOLID_WALL)
-		//{
-		t_ID1 = linkToMesh->m_vertexList[j]->id_1;
-		t_ID2 = linkToMesh->m_vertexList[j]->id_2;
-		t_ID3 = linkToMesh->m_vertexList[j]->id_3;
-
-		glBegin(GL_TRIANGLES);
 
 
+		_state->paintModel(this);
 
-			////glNormal3d( (y2-y1)*(z3-z1) - (z2-z1)*(y3-y1), 
-			////			(z2-z1)*(x3-x1) - (x2-x1)*(z3-z1), 
-			////			(x2-x1)*(y3-y1) - (y2-y1)*(x3-x1) );
-			//val = linkToMesh->m_mesh[t_ID1]->m_v_electrogram;
-			//hotToColdMap(val, vmin, vmax, color[0], color[1], color[2]);
-			//glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-			//glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-			//glVertex3f(linkToMesh->m_mesh[t_ID1]->m_x, linkToMesh->m_mesh[t_ID1]->m_y, linkToMesh->m_mesh[t_ID1]->m_z);
-
-			//val = linkToMesh->m_mesh[t_ID2]->m_v_electrogram;
-			//hotToColdMap(val, vmin, vmax, color[0], color[1], color[2]);
-			//glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-			//glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-			//glVertex3f(linkToMesh->m_mesh[t_ID2]->m_x, linkToMesh->m_mesh[t_ID2]->m_y, linkToMesh->m_mesh[t_ID2]->m_z);
-
-
-			//val = linkToMesh->m_mesh[t_ID3]->m_v_electrogram;
-			//hotToColdMap(val, vmin, vmax, color[0], color[1], color[2]);
-			//glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-			//glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-			//glVertex3f(linkToMesh->m_mesh[t_ID3]->m_x, linkToMesh->m_mesh[t_ID3]->m_y, linkToMesh->m_mesh[t_ID3]->m_z);
-
-			paintCellTriangle(linkToMesh->m_mesh[t_ID1]->m_x,
-				linkToMesh->m_mesh[t_ID1]->m_y,
-				linkToMesh->m_mesh[t_ID1]->m_z, linkToMesh->m_mesh[t_ID1]->m_v_electrogram,
-				linkToMesh->m_mesh[t_ID2]->m_x,
-				linkToMesh->m_mesh[t_ID2]->m_y,
-				linkToMesh->m_mesh[t_ID2]->m_z, linkToMesh->m_mesh[t_ID2]->m_v_electrogram,
-				linkToMesh->m_mesh[t_ID3]->m_x,
-				linkToMesh->m_mesh[t_ID3]->m_y,
-				linkToMesh->m_mesh[t_ID3]->m_z, linkToMesh->m_mesh[t_ID3]->m_v_electrogram,
-				m_palette, linkToMesh->m_minElectrogram, linkToMesh->m_maxElectrogram);
-		glEnd();
-		//}
-		//else
-		//{
-		//	paintCellTriangle(linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_x,
-		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_y,
-		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_z, 0.0,
-		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_x,
-		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_y,
-		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_2]->m_z, 0.0,
-		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_x,
-		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_y,
-		//		linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_3]->m_z, 0,
-		//		m_palette);
-		////}
-
-	}
-	// [3] Paint probes
-	for (short n = 0; n < linkToMachine->probeOscillator.size(); ++n)
-	{
-		drawSphere(0.2, 10, 10, linkToMachine->probeOscillator[n]->getPositionX(),
-			linkToMachine->probeOscillator[n]->getPositionY(),
-			linkToMachine->probeOscillator[n]->getPositionZ(), 1.0f / (n + 1), 1.0f / (n + 1), 1.0f);
-
-		renderText(linkToMachine->probeOscillator[n]->getPositionX(),
-			linkToMachine->probeOscillator[n]->getPositionY(),
-			linkToMachine->probeOscillator[n]->getPositionZ()+1, "Electrode");
-	}
-	if (paintRay)
-	{
-		drawSphere(0.2, 10, 10, testProbe.x, testProbe.y, testProbe.z, 1.0f, 1.0f, 1.0f);
-	}
-	glPopMatrix();
 }
 //----------------------------------------
 void glAtrium::resizeGL(int width, int height)
@@ -412,7 +357,7 @@ void glAtrium::resizeGL(int width, int height)
 													linkToMesh->m_mesh[j]->getPositionZ(),
 													1.0);
 		}
-		_state->paintCursor(this, _state->getRadius());
+		_state->paintCursor(this);
 }
 //----------------------------------------
 int glAtrium::itemAt(double xx, double yy, double zz)

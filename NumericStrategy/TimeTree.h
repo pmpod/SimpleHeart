@@ -34,7 +34,7 @@ TimeTree *resetTime(TimeTree *node, double val);
 
 void swapChildrenIfNecessary(TimeTree *&node);
 void bubbleNewTime(TimeTree *&node, const double& newTime);
-
+void bubbleNewTimeFullCheck(TimeTree *&node, const double& newTime);
 
 
 

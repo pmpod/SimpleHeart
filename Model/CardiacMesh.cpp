@@ -7,6 +7,7 @@ CardiacMesh::CardiacMesh()
 {
 	m_maximumCV = 1; // [cm/ms]
 	stimulationBegun = false;
+	m_simulationTime = 0;
 }
 
 

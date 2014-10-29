@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1029</width>
-    <height>879</height>
+    <height>904</height>
    </rect>
   </property>
   <property name="font">
@@ -580,102 +580,184 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             <number>3</number>
            </property>
            <item>
-            <widget class="QPushButton" name="b_saveStructure">
-             <property name="text">
-              <string>Save model</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="b_loadStructure">
-             <property name="text">
-              <string>Load Model</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="b_calculateFullElectrogram">
-             <property name="text">
-              <string>Calculate Electrogram</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="b_saveCurrentState">
-             <property name="text">
-              <string>Save current state</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="b_loadState">
-             <property name="text">
-              <string>Load state</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="b_stateStructureModifier">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="acceptDrops">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>StructurePainting Mode</string>
-             </property>
-             <property name="shortcut">
-              <string>Ctrl+S</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-             <property name="autoExclusive">
-              <bool>true</bool>
-             </property>
-             <property name="default">
-              <bool>false</bool>
-             </property>
-             <property name="flat">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="b_stateViewer">
-             <property name="text">
-              <string>View Mode</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="autoExclusive">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="b_diffPainting">
-             <property name="text">
-              <string>Diffusion painting mode</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="autoExclusive">
-              <bool>true</bool>
-             </property>
-            </widget>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <widget class="QPushButton" name="b_saveStructure">
+               <property name="text">
+                <string>Save model</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="b_loadStructure">
+               <property name="text">
+                <string>Load Model</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QPushButton" name="b_loadState">
+               <property name="text">
+                <string>Load state</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QPushButton" name="b_saveCurrentState">
+               <property name="text">
+                <string>Save current state</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QPushButton" name="b_calculateFullElectrogram">
+               <property name="text">
+                <string>Calculate Electrogram</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QPushButton" name="b_stateStructureModifier">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="acceptDrops">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>StructurePainting Mode</string>
+               </property>
+               <property name="shortcut">
+                <string>Ctrl+S</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <property name="default">
+                <bool>false</bool>
+               </property>
+               <property name="flat">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QPushButton" name="b_diffPainting">
+               <property name="text">
+                <string>Diffusion painting mode</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="b_stateViewer">
+               <property name="text">
+                <string>View Mode</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QRadioButton" name="rb_ForwardEulerScheme">
+            <property name="text">
+             <string>Forward Euler Scheme</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rb_AllexandereScheme">
+            <property name="text">
+             <string>Allexandere Scheme</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QRadioButton" name="rb_setDisplayPotentialMode">
+            <property name="text">
+             <string>POT</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rb_setDisplayCsdMode">
+            <property name="text">
+             <string>CSD</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rb_setDisplayC1Mode">
+            <property name="text">
+             <string>Cur1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rb_setDisplayC2Mode">
+            <property name="text">
+             <string>Cur2</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -1591,13 +1673,6 @@ border-radius: 4px;
         </layout>
        </item>
       </layout>
-      <zorder>layout_Diffbuttons</zorder>
-      <zorder>label_3</zorder>
-      <zorder>displayDiffusion</zorder>
-      <zorder>mode_tab</zorder>
-      <zorder>m_refSlider</zorder>
-      <zorder>label_7</zorder>
-      <zorder>label_8</zorder>
      </widget>
     </item>
     <item>
@@ -1618,7 +1693,7 @@ border-radius: 4px;
           </size>
          </property>
          <property name="cursor">
-          <cursorShape>CrossCursor</cursorShape>
+          <cursorShape>ArrowCursor</cursorShape>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -5785,6 +5860,20 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           <property name="rightMargin">
            <number>3</number>
           </property>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>TOP</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QLabel" name="label_5">
             <property name="styleSheet">

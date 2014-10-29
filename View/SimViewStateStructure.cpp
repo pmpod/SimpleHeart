@@ -3,31 +3,92 @@
 
 SimViewStateStructure* SimViewStateStructure::_instance = nullptr;
 
-SimViewStateStructure::SimViewStateStructure(glAtrium* view)
+SimViewStateStructure::SimViewStateStructure()
 {
 	cursorRadius = 2.0;
-	_view = view;
 	m_paintType = SOLID_WALL;
 	m_clearType = ATRIAL_V3;
 	m_currentDrawType = m_paintType;
+
+
+	//Colormap for structures
+	m_structureColorMap[SOLID_WALL] = 0.0;
+	m_structureColorMap[ATRIAL_V3] = 0.8;
 }
 
 
 SimViewStateStructure::~SimViewStateStructure()
 {
 }
+void SimViewStateStructure::setDisplayMode(const int mode)
+{
 
-SimViewState* SimViewStateStructure::Instance(glAtrium* view)
+}
+SimViewState* SimViewStateStructure::Instance()
 {
 	if (SimViewStateStructure::_instance == nullptr)
 	{
-		_instance = new SimViewStateStructure(view);
+		_instance = new SimViewStateStructure();
 	}
-	_instance->paintCursor(view, _instance->cursorRadius);
+	//_instance->paintCursor(view, _instance->cursorRadius);
 	return _instance;
 
 }
+void SimViewStateStructure::paintModel(glAtrium* view)
+{
+	CardiacMesh *msh = view->linkToMesh;
+	glPushMatrix();
 
+	int vertexNumber = msh->m_vertexList.size();
+	int t_ID1;
+	int t_ID2;
+	int t_ID3;
+
+	GLfloat val;
+	GLfloat color[] = { 0.f, 0.f, 0.f, 1.f };
+	GLfloat xx, yy, zz;
+
+	GLfloat vmin = msh->m_minElectrogram;
+	GLfloat vmax = msh->m_maxElectrogram;
+
+	for (unsigned int j = 0; j < vertexNumber; j = j + 1)
+	{
+		//if (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_type != SOLID_WALL)
+		//{
+		t_ID1 = msh->m_vertexList[j]->id_1;
+		t_ID2 = msh->m_vertexList[j]->id_2;
+		t_ID3 = msh->m_vertexList[j]->id_3;
+
+		glBegin(GL_TRIANGLES);
+
+		m_structureColorMap[SOLID_WALL] = 0.0;
+		m_structureColorMap[ATRIAL_V3] = 0.8;
+
+		paintCellTriangle(msh->m_mesh[t_ID1]->m_x,
+			msh->m_mesh[t_ID1]->m_y,
+			msh->m_mesh[t_ID1]->m_z, m_structureColorMap[msh->m_mesh[t_ID1]->m_type],
+			msh->m_mesh[t_ID2]->m_x,
+			msh->m_mesh[t_ID2]->m_y,
+			msh->m_mesh[t_ID2]->m_z, m_structureColorMap[msh->m_mesh[t_ID2]->m_type],
+			msh->m_mesh[t_ID3]->m_x,
+			msh->m_mesh[t_ID3]->m_y,
+			msh->m_mesh[t_ID3]->m_z, m_structureColorMap[msh->m_mesh[t_ID3]->m_type],
+			3, 0, 1);
+		glEnd();
+
+	}
+	if (view->paintRay)
+	{
+		drawSphere(0.2, 10, 10, view->testProbe.x, view->testProbe.y, view->testProbe.z, 1.0f, 1.0f, 1.0f);
+	}
+	glPopMatrix();
+
+
+
+
+
+
+}
 void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* osc, const double radius, CELL_TYPE type)
 {
 	m_isPaintedMap[osc->oscillatorID] = true;
@@ -44,16 +105,16 @@ void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* 
 		}
 	}
 	osc->m_type = type;
-	if (type == SOLID_WALL)
-		osc->m_v_electrogram = osc->vmax;
-	else
-		osc->m_v_electrogram = osc->m_v_scaledPotential;
+	//if (type == SOLID_WALL)
+	//	osc->m_v_electrogram = osc->vmax;
+	//else
+	//	osc->m_v_electrogram = osc->m_v_scaledPotential;
 }
 
-void  SimViewStateStructure::paintCursor(glAtrium* view, float radius)
+void  SimViewStateStructure::paintCursor(glAtrium* view)
 {
 	int crossSize = 5;
-	int sizepix = floor(abs(radius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
+	int sizepix = floor(abs(cursorRadius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
 	QPixmap* m_LPixmap = new QPixmap(sizepix+2, sizepix+2);
 	m_LPixmap->fill(Qt::transparent);
 	QPainter painter(m_LPixmap);
@@ -97,7 +158,7 @@ void SimViewStateStructure::handleMousewheel(glAtrium* view, QWheelEvent *event)
 
 
 	cursorRadius *= (1+0.1*numDegrees);
-	paintCursor(view, cursorRadius);
+	paintCursor(view);
 
 	event->accept();
 	view->updateGL();

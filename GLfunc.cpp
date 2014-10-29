@@ -154,12 +154,29 @@ void paintCellTriangle(double& x1, double& y1, double& z1, double color1,
 		glVertex3f(x3, y3, z3);
 
 	}
-	else
+	else 
 	{
-		hotToColdMap(val, 0, 1, color[0], color[1], color[2]);
+		val = color1;
+		grayMap(val, vmin, vmax, color[0], color[1], color[2]);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+		//glNormal3d(x1, y1, z1);
 		glVertex3f(x1, y1, z1);
+
+		val = color2;
+		grayMap(val, vmin, vmax, color[0], color[1], color[2]);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+		//glNormal3d(x2, y2, z2);
 		glVertex3f(x2, y2, z2);
+
+		val = color3;
+		grayMap(val, vmin, vmax, color[0], color[1], color[2]);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+		//glNormal3d(x3, y3, z3);
 		glVertex3f(x3, y3, z3);
+
 	}
 }
 void paintTheRay(float x, float y, float z)
