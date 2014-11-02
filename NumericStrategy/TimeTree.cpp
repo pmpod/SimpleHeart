@@ -78,9 +78,9 @@ TimeTree *newTreeTrunk(TimeTree *&node, vector<Oscillator*>& mesh, int& numberOf
 				nd.osc = node->osc;
 				nd.p_updateTimeTreeNode = node;
 				dictionary.push_back(nd);
-				//node->time = ;
-				double timee = node->osc->getCurrentTime();
-				bubbleNewTimeFullCheck(node, timee);
+				//node->time = node->osc->getCurrentTime();
+				//double timee = node->osc->getCurrentTime();
+				//bubbleNewTimeFullCheck(node, timee);
 			}
 		}
 	}

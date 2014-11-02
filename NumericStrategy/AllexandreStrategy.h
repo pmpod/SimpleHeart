@@ -17,7 +17,7 @@ public:
 	AllexandreStrategy(CardiacMesh* oscillators);
 	~AllexandreStrategy();
 
-	double stepModifiedBackwardEuler(Oscillator * osc);
+	double stepModifiedBackwardEuler(Oscillator * osc, double nextTimestep);
 
 	double nextStep();
 	void reset();
@@ -55,7 +55,7 @@ private:
 	double v_prim;
 	double latestTime;
 	double nextTimestep; 
-	double bestLocalTimestep;
+	//double bestLocalTimestep;
 	double deltaTdiff;
 };
 

@@ -8,7 +8,7 @@
 #include "NumericStrategy\TimeTree.h"
 #include "Support\Vectors.h"
 #include <matio.h>
-
+#include<qgl.h>
 struct VertexTriangle
 {
 	int id_1;
@@ -16,6 +16,11 @@ struct VertexTriangle
 	int id_3;
 };
 
+struct SVertex
+{
+	GLfloat x, y, z;
+	GLfloat r, g, b;
+};
 class CardiacMesh : public QObject
 {
 	Q_OBJECT
@@ -24,15 +29,12 @@ class CardiacMesh : public QObject
 public:
 	CardiacMesh();
 	~CardiacMesh(void);
-
-
-
-
 	static CardiacMesh* constructCartesianGrid(int x, int y, double dx, double dy, CELL_TYPE type);
 	static CardiacMesh* constructCylindricalGrid(int x, int y, double dx, double dy);
-	static CardiacMesh* importGrid();
+	static CardiacMesh* importGrid(const char *inname);
 	void setWallCells();
 	void clearWallCells();
+	void setDiffusionCoefficients();
 	void setVertexTriangleList(bool doublesided);
 
 	void destroyGrid();
@@ -41,15 +43,15 @@ public:
 	double getDeltaR();
 
 	void startStimulation(Oscillator* osc, const int& id, const double radius, const double strength);
-	//void setStimulation(Oscillator* osc, const int& depth);
 	void stopStimulation();
-	double calculateElectrogram(Oscillator* osc);
 	bool stimulationBegun;
 	double m_ectopicAmplitude;
+	int m_stimulationID;
+
+	double calculateElectrogram(Oscillator* osc);
 
 	std::vector<Oscillator*> m_mesh;
 	std::vector<Oscillator*> m_underStimulation;
-	//std::vector<std::pair<Oscillator*, Oscillator*>> m_wallCells;
 
 	double m_simulationTime;
 
@@ -66,6 +68,7 @@ public:
 
 	//TODO - poprawiæ getSize na double !!!
 	int m_size;
+	bool structureUpdated;
 
 
 	//3d
@@ -73,6 +76,8 @@ public:
 	void calculateCenter();
 	double m_radius;
 	std::vector<VertexTriangle*> m_vertexList;
+	SVertex* m_vertexMatrix;
+	GLuint* m_indicesMatrix;
 	Vector3 centerGeom;
 
 	public slots:

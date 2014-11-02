@@ -57,6 +57,7 @@ protected:
 signals:
 
 	void tajmer();
+	void emitGlobalTimeOnly(double);
 
 public slots:
    
@@ -115,6 +116,9 @@ private:
 	int		d_interval;	
     int		d_timerId;
 
+	double refreshRate;
+	double lastRefreshTime;
+	double refreshCounter;
 };
 
 #endif // SIMPLEHEART_H

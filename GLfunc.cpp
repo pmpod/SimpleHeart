@@ -681,8 +681,8 @@ void hotToColdMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat 
 		bb = 0;
 	}
 	else {
-		gg = 1 + 4 * (vmin + 0.75 * dv - v) / dv;
 		rr = 1.0;
+		gg = 1 + 4 * (vmin + 0.75 * dv - v) / dv;
 		bb = 0;
 	}
 

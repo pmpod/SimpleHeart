@@ -13,15 +13,22 @@ v3model::v3model(void) : Oscillator()
 	m_previousTime = -0.1;
 
 	vzero = 0; //[mV]
-	vmax = 1;  //[mV]
+	vmax = 1.0;  //[mV]
 	vmin = 0;  //[mV]
-	setPotential(vmin);
-	setPreviousPotential(vmin);
+	m_v_potential = 0;
+	m_previous_potential = 0;
+	m_v_scaledPotential = vmin;
+	m_previous_scaledPotential = vmin;
 	setCurrent(1, 0);
 	setCurrent(1, 1);
 }
 
-
+double fast_tanh(double x){
+	double x2 = x * x;
+	double a = x * (135135.0f + x2 * (17325.0f + x2 * (378.0f + x2)));
+	double b = 135135.0f + x2 * (62370.0f + x2 * (3150.0f + x2 * 28.0f));
+	return a / b;
+}
 v3model::~v3model(void)
 {
 }
@@ -50,7 +57,7 @@ v3model::~v3model(void)
 //--------------------------------------------------------------
 double v3model::get_p()
 {
-	if (this->getPotential() < u_c)
+	if (this->m_v_potential < u_c)
 		return 0;
 	else
 		return 1;
@@ -58,7 +65,7 @@ double v3model::get_p()
 //--------------------------------------------------------------
 double v3model::get_q()
 {
-	if (this->getPotential()  < u_v)
+	if (this->m_v_potential < u_v)
 		return 0;
 	else
 		return 1;
@@ -84,7 +91,7 @@ double v3model::get_J_so()
 }
 double v3model::get_J_si( )
 {
-	return (-m_v_current[1])*(1 + tanh(k*(m_v_potential - u_cs1))) / (2 * tau_s1);
+	return (-m_v_current[1])*(1 + fast_tanh(k*(m_v_potential - u_cs1))) / (2 * tau_s1);
 }
 //-------------------------------------------------------------
 void v3model::setParameter(double value, OSC_PARAMETER parameter)

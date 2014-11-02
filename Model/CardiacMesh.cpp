@@ -2,17 +2,26 @@
 #include <cmath>
 #include <algorithm>
 #include <set>
+#include <matio.h>
+#include <stdlib.h>
+#include <baseTSD.h>
 
 CardiacMesh::CardiacMesh()
 {
 	m_maximumCV = 1; // [cm/ms]
 	stimulationBegun = false;
 	m_simulationTime = 0;
+	structureUpdated = false;
+	m_vertexMatrix = nullptr;
+	m_indicesMatrix = nullptr;
 }
 
 
 CardiacMesh::~CardiacMesh()
 {
+	free(m_indicesMatrix);
+	free(m_vertexMatrix);
+	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();
 }
 
 int CardiacMesh::changeNode(int x, int y, CELL_TYPE m_type)
@@ -42,8 +51,8 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 	grid->m_minimumDistance = max(dx, dy);
 	grid->m_maximumDistance = min(dx, dy);
 	grid->m_size = min(x, y);
-	grid->m_maxElectrogram = 0.5;
-	grid->m_minElectrogram = 0.0;
+	grid->m_maxElectrogram = -1999;
+	grid->m_minElectrogram = 999;
 	Oscillator *node = NULL;
 	for (int j = 0; j < totalSize; ++j)
 	{
@@ -70,8 +79,6 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 
 	//ADD NEIGHBOURS
 	int idx, idy;
-	//x = x - 1;
-	//y = y - 1;
 	for (int j = 0; j < totalSize; ++j)
 	{
 		idx = j % x;
@@ -142,6 +149,7 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 	grid->setVertexTriangleList(false);
 	grid->calculateCenter();
 	grid->setWallCells();
+	grid->setDiffusionCoefficients();
 	return grid;
 }
 CardiacMesh* CardiacMesh::constructCylindricalGrid(int x, int y, double dx, double dy)
@@ -149,9 +157,122 @@ CardiacMesh* CardiacMesh::constructCylindricalGrid(int x, int y, double dx, doub
 	CardiacMesh *grid = new CardiacMesh();
 	return grid;
 }
-CardiacMesh* CardiacMesh::importGrid()
+CardiacMesh* CardiacMesh::importGrid(const char *inname)
 {
+
+	//[3] Read matlab variable VARNAME_MODEL_DATA
+	mat_t *matfp;
+	matvar_t *matvar;
+	matfp = Mat_Open(inname, MAT_ACC_RDONLY);
+
+
+	//[3] Read matlab variable oscillator_ID
+	matvar = Mat_VarRead(matfp, "oscillator_ID");
+
+	int meshSize = matvar->dims[0];
+	INT32 *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
+	oscillator_ID = static_cast<INT32*>(matvar->data);
+
+	//[3] Read matlab variable position_xyz
+	matvar = Mat_VarRead(matfp, "position_xyz");
+
+	double *position_xyz = (double *)malloc(sizeof(double) * 3 * meshSize);
+	position_xyz = static_cast<double*>(matvar->data);
+
+	//[3] Read matlab variable oscillator_TYPE
+	matvar = Mat_VarRead(matfp, "oscillator_TYPE");
+
+	INT32 *oscillator_TYPE = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
+	oscillator_TYPE = static_cast<INT32*>(matvar->data);
+
+	//[3] Read matlab variable oscillator_TYPE
+	matvar = Mat_VarRead(matfp, "neighbours_ID");
+
+	INT32 *neighbours_ID = (INT32 *)malloc(sizeof(INT32) * 6 * meshSize);
+	neighbours_ID = static_cast<INT32*>(matvar->data);
+
+
+	Mat_Close(matfp);
+
 	CardiacMesh *grid = new CardiacMesh();
+	int totalSize = meshSize;
+
+	grid->m_maxElectrogram = -1999;
+	grid->m_minElectrogram = 999;
+
+	Oscillator *node = NULL;
+	for (int j = 0; j < totalSize; ++j)
+	{
+		int temptype = oscillator_TYPE[j];
+		CELL_TYPE type = static_cast<CELL_TYPE> (temptype);
+		if (type == ATRIAL_V3)
+			node = new v3model();
+		else if (type == SOLID_WALL)
+			node = new Oscillator();
+		else
+			node = new Oscillator();
+
+		node->setPositionX(position_xyz[totalSize * 0 + j]);
+		node->setPositionY(position_xyz[totalSize * 1 + j]);
+		node->setPositionZ(position_xyz[totalSize * 2 + j]);
+		node->setType(type);
+		node->oscillatorID = oscillator_ID[j];
+		grid->m_mesh.push_back(node);
+
+		if (grid->m_maxElectrogram < node->vmax)
+			grid->m_maxElectrogram = node->vmax;
+
+		if (grid->m_minElectrogram > node->vmin)
+			grid->m_minElectrogram = node->vmin;
+	}
+
+	grid->m_maxPotential = grid->m_maxElectrogram;
+	grid->m_minPotential = grid->m_minElectrogram;
+	//ADD NEIGHBOURS
+	double deltaMin = DBL_MAX;
+	double deltaMax = 0.0;
+	double mindim = 0;
+	double maxdim = 0;
+	double mintemp = 0;
+	double maxtemp = 0;
+	for (int j = 0; j < totalSize; ++j)
+	{
+		int ng = 0;
+		while (neighbours_ID[totalSize* ng + j] != -1)
+		{
+			grid->m_mesh[j]->addNeighbour(grid->m_mesh[neighbours_ID[totalSize* ng + j]]);
+			++ng;
+		}
+
+		if (deltaMin > grid->m_mesh[j]->m_closestDistanceID)
+			deltaMin = grid->m_mesh[j]->m_closestDistanceID;
+		if (deltaMax < grid->m_mesh[j]->m_farthestDistanceID)
+			deltaMax = grid->m_mesh[j]->m_farthestDistanceID;
+
+		mintemp = min(grid->m_mesh[j]->m_x, grid->m_mesh[j]->m_y);
+		mintemp = min(mintemp, grid->m_mesh[j]->m_z);
+		if (mindim > mintemp)
+		{
+			mindim = mintemp;
+		}
+		maxtemp = max(grid->m_mesh[j]->m_x, grid->m_mesh[j]->m_y);
+		maxtemp = max(maxtemp, grid->m_mesh[j]->m_z);
+		if (maxdim < maxtemp)
+		{
+			maxdim = maxtemp;
+		}
+	}
+
+
+	grid->m_minimumDistance = deltaMin;
+	grid->m_maximumDistance = deltaMax;
+	grid->m_size = maxdim / deltaMin;
+
+	grid->setVertexTriangleList(false);
+	grid->calculateCenter();
+	grid->setWallCells();
+	grid->setDiffusionCoefficients();
+
 	return grid;
 }
 
@@ -183,6 +304,15 @@ void CardiacMesh::setWallCells()
 		}
 	}
 }
+//------------------------------------------------------------------------------------------
+void CardiacMesh::setDiffusionCoefficients()
+{
+	int gridSize = m_mesh.size();
+	for (int j = 0; j < gridSize; ++j)
+	{
+		m_mesh[j]->setSigma(0.05, 0.05, 0);
+	}
+}
 //---------------------------------------------------------------------------
 void CardiacMesh::destroyGrid()
 {
@@ -210,22 +340,6 @@ void CardiacMesh::startStimulation(Oscillator* osc, const int& id, const double 
 	}
 	stimulationBegun = true;
 }
-//---------------------------------------------------------------------------
-//void CardiacMesh::setStimulation(Oscillator* osc, const int& depth)
-//{	// mo¿na opszeæ o sprawdzanie odleg³oœci 
-//	if (!osc->m_underStimulation)
-//	{
-//		m_underStimulation.push_back(osc);
-//		osc->m_underStimulation = true;
-//	}
-//	for (int k = 0; k < osc->m_neighbours.size(); ++k)
-//	{ 
-//		if (depth > 0)
-//			setStimulation(osc->m_neighbours[k], depth - 1);
-//	}
-//	stimulationBegun = true;
-//}
-//---------------------------------------------------------------------------
 void CardiacMesh::stopStimulation()
 {
 	for (int j = 0; j < m_underStimulation.size(); ++j)
@@ -254,7 +368,7 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 				0.7);
 		}
 	}
-	osc->setElectrogram(ele_val);
+	osc->m_v_electrogram = ele_val;
 	return ele_val;
 	//END ELECTROGRAM
 }
@@ -262,6 +376,25 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 //-----------------------------------------------------------
 void CardiacMesh::setVertexTriangleList(bool doublesided)
 {
+	int meshSize = m_mesh.size();
+	if (m_vertexMatrix != nullptr)
+		free(m_vertexMatrix);
+
+	if (m_indicesMatrix != nullptr)
+		free(m_indicesMatrix);
+	
+	m_vertexMatrix = (SVertex *)malloc(sizeof(SVertex) * 1 * meshSize);
+	for (int currentVertex = 0; currentVertex < m_mesh.size(); ++currentVertex)
+	{
+		m_vertexMatrix[currentVertex].x = m_mesh[currentVertex]->m_x;
+		m_vertexMatrix[currentVertex].y = m_mesh[currentVertex]->m_y;
+		m_vertexMatrix[currentVertex].z = m_mesh[currentVertex]->m_z;
+		m_vertexMatrix[currentVertex].r = 0.0;
+		m_vertexMatrix[currentVertex].g = 1.0;
+		m_vertexMatrix[currentVertex].b = 1.0;
+	}
+
+
 	m_vertexList.clear();
 	Vector3 first;
 	Vector3 second;
@@ -322,6 +455,7 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 							{
 								m_vertexList.push_back(tr);
 								m_vertexList.push_back(tr2);
+
 							}
 
 						}
@@ -330,7 +464,13 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 			}
 		}
 	}
-
+	m_indicesMatrix = (GLuint *)malloc(sizeof(GLuint) * 3 * m_vertexList.size());
+	for (int currentVertex = 0; currentVertex < m_vertexList.size(); currentVertex = ++currentVertex)
+	{
+		m_indicesMatrix[3 * currentVertex] = m_vertexList[currentVertex]->id_1;
+		m_indicesMatrix[3 * currentVertex+1] = m_vertexList[currentVertex]->id_2;
+		m_indicesMatrix[3 * currentVertex+2] = m_vertexList[currentVertex]->id_3;
+	}
 }
 
 void CardiacMesh::calculateCenter()

@@ -41,7 +41,6 @@ mat_t * ioHandler::initMatlabLoad(const char *inname)
 	}
 	return matfp;
 }
-
 bool ioHandler::loadCurrentState()
 {
 	//[1] Open file dialog
@@ -101,8 +100,6 @@ bool ioHandler::loadCurrentState()
 	m_handle->Machine2d->m_strategy->synchronise();
 	return true;
 }
-
-
 bool ioHandler::saveCurrentState()
 {
 	//[0] Creat proper filename
@@ -346,122 +343,8 @@ CardiacMesh* ioHandler::loadCustomStructure()
 	QByteArray ba = pathParameters.toLatin1();
 	const char *inname = ba.data();
 
+	return CardiacMesh::importGrid(inname);
 
-	//[3] Read matlab variable VARNAME_MODEL_DATA
-	mat_t *matfp;
-	matvar_t *matvar;
-	matfp = Mat_Open(inname, MAT_ACC_RDONLY);
-	if (NULL == matfp) {
-		QMessageBox::information(m_handle, "Simple Heart", "Error opening MAT file");
-		return nullptr;
-	}
-
-
-	//[3] Read matlab variable oscillator_ID
-	matvar = Mat_VarRead(matfp, "oscillator_ID");
-	if (NULL == matvar) {
-		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr; 
-	}
-	int meshSize = matvar->dims[0];
-	INT32 *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
-	oscillator_ID = static_cast<INT32*>(matvar->data);
-
-	//[3] Read matlab variable position_xyz
-	matvar = Mat_VarRead(matfp, "position_xyz");
-	if (NULL == matvar) {
-		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr;
-	}
-	double *position_xyz = (double *)malloc(sizeof(double) * 3 * meshSize);
-	position_xyz = static_cast<double*>(matvar->data);
-
-	//[3] Read matlab variable oscillator_TYPE
-	matvar = Mat_VarRead(matfp, "oscillator_TYPE");
-	if (NULL == matvar) {
-		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr;
-	}
-	INT32 *oscillator_TYPE = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
-	oscillator_TYPE = static_cast<INT32*>(matvar->data);
-
-	//[3] Read matlab variable oscillator_TYPE
-	matvar = Mat_VarRead(matfp, "neighbours_ID");
-	if (NULL == matvar) {
-		QMessageBox::information(m_handle, "Simple Heart", "Model data not found, or error reading MAT file"); return nullptr;
-	}
-	INT32 *neighbours_ID = (INT32 *)malloc(sizeof(INT32) * 6 * meshSize);
-	neighbours_ID = static_cast<INT32*>(matvar->data);
-
-
-	Mat_Close(matfp);
-
-	CardiacMesh *grid = new CardiacMesh();
-	int totalSize = meshSize;
-
-
-	Oscillator *node = NULL;
-	for (int j = 0; j < totalSize; ++j)
-	{
-		int temptype = oscillator_TYPE[j];
-		CELL_TYPE type = static_cast<CELL_TYPE> (temptype);
-		if (type == ATRIAL_V3)
-			node = new v3model();
-		else if (type == SOLID_WALL)
-			node = new Oscillator();
-		else 
-			node = new Oscillator();
-
-		node->setPositionX(position_xyz[totalSize * 0 + j]);
-		node->setPositionY(position_xyz[totalSize * 1 + j]);
-		node->setPositionZ(position_xyz[totalSize * 2 + j]);
-		node->setType(type);
-		node->oscillatorID = oscillator_ID[j];
-		grid->m_mesh.push_back(node);
-	}
-
-	//ADD NEIGHBOURS
-	double deltaMin = DBL_MAX;
-	double deltaMax = 0.0;
-	double mindim = 0;
-	double maxdim = 0;
-	double mintemp = 0;
-	double maxtemp = 0;
-	for (int j = 0; j < totalSize; ++j)
-	{
-		int ng = 0;
-		while (neighbours_ID[totalSize* ng + j] != -1)
-		{
-			grid->m_mesh[j]->addNeighbour(grid->m_mesh[neighbours_ID[totalSize* ng + j]]);
-			++ng;
-		}
-
-		if (deltaMin > grid->m_mesh[j]->m_closestDistanceID)
-			deltaMin = grid->m_mesh[j]->m_closestDistanceID;
-		if (deltaMax < grid->m_mesh[j]->m_farthestDistanceID)
-			deltaMax = grid->m_mesh[j]->m_farthestDistanceID;
-
-		mintemp = min(grid->m_mesh[j]->m_x, grid->m_mesh[j]->m_y);
-		mintemp = min(mintemp, grid->m_mesh[j]->m_z);
-		if (mindim > mintemp)
-		{
-			mindim = mintemp;
-		}
-		maxtemp = max(grid->m_mesh[j]->m_x, grid->m_mesh[j]->m_y);
-		maxtemp = max(maxtemp, grid->m_mesh[j]->m_z);
-		if (maxdim < maxtemp)
-		{
-			maxdim = maxtemp;
-		}
-	}
-
-
-	grid->m_minimumDistance = deltaMin;
-	grid->m_maximumDistance = deltaMax;
-	grid->m_size = maxdim / deltaMin;
-
-	grid->setVertexTriangleList(false);
-	grid->calculateCenter();
-	grid->setWallCells();
-
-	return grid;
 }
 void ioHandler::writeParametersToFile()
 {
@@ -484,7 +367,7 @@ void ioHandler::writeParametersToFile()
 			outputParameters << "SIMULATION" << endl;
 			outputParameters << "step \t"<< m_handle->Machine2d->m_definitions->m_mainTimestep<<endl;
 			outputParameters << "skip \t"<< m_handle->Machine2d->m_definitions->m_mainSkip<<endl;
-			outputParameters << "maxdiff \t"<< m_handle->diffusionPainter->m_upperLimit<<endl;
+			outputParameters << "maxdiff \t"<< '0'<<endl;
 			outputParameters << "ectosizeX \t"<<  m_handle->Machine2d->m_definitions->m_ectopicSizeX<<endl;
 			outputParameters << "ectosizeY \t"<<  m_handle->Machine2d->m_definitions->m_ectopicSizeY<<endl;
 			outputParameters << "ectoamp \t"<< m_handle->Machine2d->m_definitions->m_ectopicAmplitude<<endl;
@@ -592,10 +475,10 @@ void ioHandler::getParametersFromFile()
 						}
 						else if( parameterName == "maxdiff" ) 
 						{
-							m_handle->diffusionPainter->m_upperLimit = parameterValue;
-							m_handle->diffusionPainter->m_lowerLimit = 0;
+							//m_handle->diffusionPainter->m_upperLimit = parameterValue;
+							//m_handle->diffusionPainter->m_lowerLimit = 0;
 							m_handle->Machine2d->m_definitions->m_maxDiff = parameterValue;
-							m_handle->setAtrialDiffusion();
+							//m_handle->setAtrialDiffusion();
 						}
 						else if( parameterName == "ectosizeX" ) 
 						{

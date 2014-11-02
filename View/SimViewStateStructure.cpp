@@ -9,20 +9,15 @@ SimViewStateStructure::SimViewStateStructure()
 	m_paintType = SOLID_WALL;
 	m_clearType = ATRIAL_V3;
 	m_currentDrawType = m_paintType;
+	setPalette(DP_GRAY);
 
 
 	//Colormap for structures
 	m_structureColorMap[SOLID_WALL] = 0.0;
-	m_structureColorMap[ATRIAL_V3] = 0.8;
+	m_structureColorMap[ATRIAL_V3] = 24;
 }
-
-
 SimViewStateStructure::~SimViewStateStructure()
 {
-}
-void SimViewStateStructure::setDisplayMode(const int mode)
-{
-
 }
 SimViewState* SimViewStateStructure::Instance()
 {
@@ -34,6 +29,95 @@ SimViewState* SimViewStateStructure::Instance()
 	return _instance;
 
 }
+//--------------------------------------------------
+void SimViewStateStructure::setDisplayMode(const int mode)
+{
+
+}
+//--------------------------------------------------
+void SimViewStateStructure::paintCursor(glAtrium* view)
+{
+	int crossSize = 5;
+	int sizepix = floor(abs(cursorRadius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
+	QPixmap* m_LPixmap = new QPixmap(sizepix + 2, sizepix + 2);
+	m_LPixmap->fill(Qt::transparent);
+	QPainter painter(m_LPixmap);
+	QColor col(64, 64, 64, 128);
+
+	QPen pen;  // creates a default pen
+	pen.setStyle(Qt::SolidLine);
+	pen.setWidth(1);
+	pen.setBrush(QColor(128, 128, 128, 128));
+	painter.setPen(pen);
+	painter.setBrush(col);
+
+	painter.drawLine(floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize, floor(1 + sizepix / 2.0));
+	painter.drawLine(floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize);
+	painter.drawEllipse(1, 1, sizepix, sizepix);
+
+	view->setCursor(QCursor(*m_LPixmap));
+}
+void SimViewStateStructure::paintLegend(glAtrium* view)
+{
+	glCallList(view->displayListIndex);
+	GLfloat widthL = view->frustrumSize*_scale*0.5;
+	GLfloat heightL = view->frustrumSize*_scale*0.2;
+	view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, "WALL", QFont(), view->displayListIndex);
+	view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, "ATRIUM", QFont(), view->displayListIndex);
+
+}
+void SimViewStateStructure::prepareLegend(glAtrium* view)
+{
+
+	float f[1];
+	GLfloat widthL = view->frustrumSize*_scale*0.5;
+	GLfloat heightL = view->frustrumSize*_scale*0.2;
+
+	GLfloat col_w[] = { 1.0, 1.0, 1.0, 1.f };
+	GLfloat col_g[] = { .5f, .5f, .5f, .5f };
+	GLfloat col[] = { 0.0, 0.0, 1.0, 1.f };
+
+	GLfloat ccol;
+	// compile the display list, store a triangle in it
+	glNewList(view->displayListIndex, GL_COMPILE);
+
+	glBegin(GL_QUAD_STRIP);
+	for (GLfloat i = -16.0; i <= 16.0; ++i)
+	{
+		ccol = -i;
+
+		colorMap(ccol, -16.0, 16.0, col[0], col[1], col[2]);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, col);
+		glVertex3f(widthL, i*heightL, 0.0f);
+		glVertex3f(-widthL, i*heightL, 0.0f);
+
+	}
+	glEnd();
+	glBegin(GL_LINES);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col_g);
+	for (GLfloat i = -15.0; i <= 15.0; ++i)
+	{
+		glVertex3f(-widthL, i*heightL, 0.0f);
+		glVertex3f(widthL, i*heightL, 0.0f);
+
+	}
+	glEnd();
+
+	glBegin(GL_LINES);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
+	glVertex3f(-widthL, -16.0*heightL, 0.0f);
+	glVertex3f(widthL*1.2f, -16.0*heightL, 0.0f);
+	glVertex3f(-widthL, 0.0*heightL, 0.0f);
+	glVertex3f(widthL*1.2f, 0.0*heightL, 0.0f);
+	glVertex3f(-widthL, 16.0*heightL, 0.0f);
+	glVertex3f(widthL*1.2f, 16.0*heightL, 0.0f);
+	glEnd();
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
+	glEndList();
+
+}
+
 void SimViewStateStructure::paintModel(glAtrium* view)
 {
 	CardiacMesh *msh = view->linkToMesh;
@@ -53,28 +137,33 @@ void SimViewStateStructure::paintModel(glAtrium* view)
 
 	for (unsigned int j = 0; j < vertexNumber; j = j + 1)
 	{
-		//if (linkToMesh->m_mesh[linkToMesh->m_vertexList[j]->id_1]->m_type != SOLID_WALL)
-		//{
 		t_ID1 = msh->m_vertexList[j]->id_1;
 		t_ID2 = msh->m_vertexList[j]->id_2;
 		t_ID3 = msh->m_vertexList[j]->id_3;
 
 		glBegin(GL_TRIANGLES);
+			val = m_structureColorMap[msh->m_mesh[t_ID1]->m_type];
+			colorMap(val, vmin, vmax, color[0], color[1], color[2]);
+			glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+			glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+			//glNormal3d(x1, y1, z1);
+			glVertex3f(msh->m_mesh[t_ID1]->m_x, msh->m_mesh[t_ID1]->m_y, msh->m_mesh[t_ID1]->m_z);
 
-		m_structureColorMap[SOLID_WALL] = 0.0;
-		m_structureColorMap[ATRIAL_V3] = 0.8;
+			val = m_structureColorMap[msh->m_mesh[t_ID2]->m_type];
+			colorMap(val, vmin, vmax, color[0], color[1], color[2]);
+			glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+			glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+			//glNormal3d(x2, y2, z2);
+			glVertex3f(msh->m_mesh[t_ID2]->m_x, msh->m_mesh[t_ID2]->m_y, msh->m_mesh[t_ID2]->m_z);
 
-		paintCellTriangle(msh->m_mesh[t_ID1]->m_x,
-			msh->m_mesh[t_ID1]->m_y,
-			msh->m_mesh[t_ID1]->m_z, m_structureColorMap[msh->m_mesh[t_ID1]->m_type],
-			msh->m_mesh[t_ID2]->m_x,
-			msh->m_mesh[t_ID2]->m_y,
-			msh->m_mesh[t_ID2]->m_z, m_structureColorMap[msh->m_mesh[t_ID2]->m_type],
-			msh->m_mesh[t_ID3]->m_x,
-			msh->m_mesh[t_ID3]->m_y,
-			msh->m_mesh[t_ID3]->m_z, m_structureColorMap[msh->m_mesh[t_ID3]->m_type],
-			3, 0, 1);
+			val = m_structureColorMap[msh->m_mesh[t_ID3]->m_type];
+			colorMap(val, vmin, vmax, color[0], color[1], color[2]);
+			glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+			glMaterialfv(GL_FRONT, GL_AMBIENT, color);
+			//glNormal3d(x3, y3, z3);
+			glVertex3f(msh->m_mesh[t_ID3]->m_x, msh->m_mesh[t_ID3]->m_y, msh->m_mesh[t_ID3]->m_z);
 		glEnd();
+
 
 	}
 	if (view->paintRay)
@@ -89,6 +178,7 @@ void SimViewStateStructure::paintModel(glAtrium* view)
 
 
 }
+//--------------------------------------------------
 void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* osc, const double radius, CELL_TYPE type)
 {
 	m_isPaintedMap[osc->oscillatorID] = true;
@@ -105,35 +195,8 @@ void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* 
 		}
 	}
 	osc->m_type = type;
-	//if (type == SOLID_WALL)
-	//	osc->m_v_electrogram = osc->vmax;
-	//else
-	//	osc->m_v_electrogram = osc->m_v_scaledPotential;
 }
-
-void  SimViewStateStructure::paintCursor(glAtrium* view)
-{
-	int crossSize = 5;
-	int sizepix = floor(abs(cursorRadius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
-	QPixmap* m_LPixmap = new QPixmap(sizepix+2, sizepix+2);
-	m_LPixmap->fill(Qt::transparent);
-	QPainter painter(m_LPixmap);
-	QColor col(64, 64, 64, 128);
-
-	QPen pen;  // creates a default pen
-	pen.setStyle(Qt::SolidLine);
-	pen.setWidth(1);
-	pen.setBrush(QColor(128, 128, 128, 128));
-	painter.setPen(pen);
-	painter.setBrush(col);
-
-	painter.drawLine(floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize, floor(1 + sizepix / 2.0));
-	painter.drawLine(floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize);
-	painter.drawEllipse(1, 1, sizepix, sizepix);
-
-	view->setCursor(QCursor(*m_LPixmap));
-}
-
+//--------------------------------------------------
 void SimViewStateStructure::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 {
 	m_currentDrawType = m_paintType;
@@ -182,7 +245,7 @@ void SimViewStateStructure::handleMouseMove(glAtrium* view, QMouseEvent *event)
 			view->testProbe.x = view->linkToMesh->m_mesh[item]->m_x;
 			view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
 			view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
-
+			view->linkToMesh->structureUpdated = true;
 			paintStructureInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], cursorRadius, m_currentDrawType);
 		}
 

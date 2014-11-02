@@ -23,6 +23,7 @@ public:
     QSize sizeHint() const;
 
 	void setLastPos(const QPoint& pos);
+	CardiacMesh *linkToMesh;		///Link to the Model
 
 
 private:
@@ -42,6 +43,7 @@ public slots:
 	void setDisplayCSD(bool b);
 	void setDisplayCurrent1(bool b);
 	void setDisplayCurrent2(bool b);
+	void displayElectrogram();
 
 signals:
     void xRotationChanged(int angle);
@@ -62,17 +64,15 @@ protected:
 	Vector3 screenToWorld(double x, double y, double width, double height);
 	int itemAt(double xx, double yy, double zz);
 	void paintOrigin(float scale);
-	void paintLegend(float scale);
 
 //! [2]
 
 //! [3]
 private:
 	AtrialMachine2d *linkToMachine;		///Link to the Controller
-	CardiacMesh *linkToMesh;		///Link to the Model
 
 
-
+	GLuint displayListIndex;
 	//Model view properties:
 	float viewWidth;
 	float viewHeight;

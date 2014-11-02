@@ -9,9 +9,9 @@ Oscillator::Oscillator(void)
 
 	m_farthestDistanceID = -1;
 	m_closestDistanceID = -1;
-	vzero = -75; //[mV]
-	vmax = 25;  //[mV]
-	vmin = -75;  //[mV]
+	vzero = 0; //[mV]
+	vmax = 1;  //[mV]
+	vmin = 0;  //[mV]
 	m_underStimulation = false;
 	reset();
 }
@@ -19,10 +19,10 @@ Oscillator::Oscillator(void)
 void Oscillator::reset()
 {
 	m_stimulation = 0.0;
-	m_v_potential = 0.0;
-	m_v_scaledPotential = 0.0;
-	m_previous_potential = 0.0;
-	m_previous_scaledPotential = 0.0;
+	m_v_potential = 0;
+	m_previous_potential = 0;
+	m_v_scaledPotential = vmin;
+	m_previous_scaledPotential = vmin;
 	m_potentialPRIM = 0.0;
 	m_v_electrogram = 0.0;
 	m_currentSource = 0.0;
@@ -59,7 +59,7 @@ double Oscillator::getPotential()
 //--------------------------------------------------------------
 double Oscillator::getPreviousPotential()
 {
-	return (m_previous_potential - vzero) / (vmax - vmin);
+	return m_previous_scaledPotential;
 }
 //--------------------------------------------------------------
 double& Oscillator::getRefPotential(){ return m_v_scaledPotential; }				//zwraca m_v_potential
@@ -103,7 +103,7 @@ void Oscillator::setCurrent(const double& current, const int& which)
 void Oscillator::setPotential(const double& potential)
 {
 	m_v_scaledPotential = potential;
-	m_v_potential = vzero + (vmax - vmin)*potential;
+	m_v_potential =  (potential - vzero) / (vmax - vmin);
 
 	_sourceA = (m_v_scaledPotential - m_previous_scaledPotential) / (m_currentTime - m_previousTime);
 	_sourceB = m_v_scaledPotential - _sourceA*m_currentTime;
@@ -112,7 +112,7 @@ void Oscillator::setPotential(const double& potential)
 void Oscillator::setPreviousPotential(const double& potential)
 {
 	m_previous_scaledPotential = potential;
-	m_previous_potential = vzero + (vmax - vmin)*potential;
+	m_previous_potential = (potential - vzero) / (vmax - vmin);
 }
 //--------------------------------------------------------------
 void Oscillator::setElectrogram(const double&  electrogram)
@@ -216,16 +216,18 @@ double Oscillator::getExtrapolatedNeighbourSource()
 //--------------------------------------------------------------
 double Oscillator::getUniformTimestepCurrentSource()
 {
+	Oscillator* neigh;
 	double mixed = 0;
 	double Vinterpol = 0;
 	for (unsigned int i = 0; i < m_neighbours.size(); ++i)
 	{
-		if (m_currentTime == (m_neighbours[i]->getCurrentTime()))
-			Vinterpol = m_neighbours[i]->getPreviousPotential();
+		neigh = m_neighbours[i];
+		if (m_currentTime == (neigh->m_currentTime))
+			Vinterpol = neigh->m_previous_scaledPotential;
 		else
-			Vinterpol = m_neighbours[i]->getPotential();
+			Vinterpol = neigh->m_v_scaledPotential;
 
-		mixed += (Vinterpol - m_v_potential) *m_connexin[i];
+		mixed += (Vinterpol - m_v_scaledPotential) *m_connexin[i];
 	}
 
 	m_currentSource = mixed;
@@ -237,7 +239,7 @@ double Oscillator::getLastCurrentSource()
 	double mixed = 0;
 	for (unsigned int i = 0; i < m_neighbours.size(); ++i)
 	{
-			mixed += (m_neighbours[i]->getPotential() - m_v_potential) *m_connexin[i];
+		mixed += (m_neighbours[i]->m_v_scaledPotential - m_v_scaledPotential) *m_connexin[i];
 	}
 
 	m_currentSource = mixed;

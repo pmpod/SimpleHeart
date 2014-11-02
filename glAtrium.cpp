@@ -50,12 +50,13 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 	LightPosition[3] = 1.0f;
 
 	distanceToCamera = -40.0f;
-
 	_state = SimViewStateView::Instance();
 }
 //----------------------------------------
 glAtrium::~glAtrium(void)
 {
+
+	glDeleteLists(displayListIndex, 1);
 	makeCurrent();
 }
 //----------------------------------------
@@ -103,6 +104,11 @@ void  glAtrium::setDisplayCurrent2(bool b)
 		SimViewStateView::Instance()->setDisplayMode(4);
 	updateGL();
 }
+void glAtrium::displayElectrogram()
+{
+	SimViewStateView::Instance()->setDisplayMode(5);
+	updateGL();
+}
 
 //----------------------------------------
 void glAtrium::setStateStructureModifier(bool b)
@@ -110,6 +116,7 @@ void glAtrium::setStateStructureModifier(bool b)
 	if (b)
 		ChangeState(SimViewStateStructure::Instance());
 	_state->paintCursor(this);
+	_state->prepareLegend(this);
 	updateGL();
 }
 //----------------------------------------
@@ -118,6 +125,7 @@ void glAtrium::setStateViewer(bool b)
 	if (b)
 		ChangeState(SimViewStateView::Instance());
 	_state->paintCursor(this);
+	_state->prepareLegend(this);
 	updateGL();
 }
 //----------------------------------------
@@ -194,66 +202,22 @@ void glAtrium::initializeGL()
 		glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.01f);
 		glEnable(GL_LIGHT1);
 
+	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+	glEnable(GL_COLOR_MATERIAL);
 
 
 	for (unsigned int j = 0; j < linkToMesh->m_mesh.size(); ++j)
 	{
-		pointRays.push_back( Vector4(linkToMesh->m_mesh[j]->getPositionX(),
-							 		 linkToMesh->m_mesh[j]->getPositionY(),
-							 		 linkToMesh->m_mesh[j]->getPositionZ(), 
+		pointRays.push_back(Vector4( linkToMesh->m_mesh[j]->m_x,
+									 linkToMesh->m_mesh[j]->m_y,
+							 		 linkToMesh->m_mesh[j]->m_z, 
 									 1.0) );
 	}
-
+	displayListIndex = glGenLists(1);
+	_state->prepareLegend(this);
 }
 //----------------------------------------
-void glAtrium::paintLegend(float scale)
-{
-	float f[1];
-	GLfloat widthL = frustrumSize*scale*0.5;
-	GLfloat heightL = frustrumSize*scale*0.2;
 
-	GLfloat col_w[] = { 1.0, 1.0, 1.0, 1.f };
-	GLfloat col_g[] = { .5f, .5f, .5f, .5f };
-	GLfloat col[] = { 0.0, 0.0, 1.0, 1.f };
-
-	GLfloat ccol;
-	glBegin(GL_QUAD_STRIP);
-	for (GLfloat i = -16.0; i <= 16.0; ++i)
-	{
-		ccol = -i;
-		hotToColdMap(ccol, -16.0, 16.0, col[0], col[1], col[2]);
-		glMaterialfv(GL_FRONT, GL_AMBIENT, col);
-		glVertex3f(widthL, i*heightL, 0.0f);
-		glVertex3f(-widthL, i*heightL, 0.0f);
-
-	}
-	glEnd();
-	glBegin(GL_LINES);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, col_g);
-	for (GLfloat i = -15.0; i <= 15.0; ++i)
-	{
-		glVertex3f(-widthL, i*heightL, 0.0f);
-		glVertex3f(widthL, i*heightL, 0.0f);
-
-	}
-	glEnd();
-
-	glBegin(GL_LINES);
-	glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
-		glVertex3f(-widthL, -16.0*heightL, 0.0f);
-		glVertex3f(widthL*1.2f, -16.0*heightL, 0.0f);
-		glVertex3f(-widthL, 0.0*heightL, 0.0f);
-		glVertex3f(widthL*1.2f, 0.0*heightL, 0.0f);
-		glVertex3f(-widthL, 16.0*heightL, 0.0f);
-		glVertex3f(widthL*1.2f, 16.0*heightL, 0.0f);
-	glEnd();
-
-	glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
-	renderText(widthL*1.4f, 16.0*heightL - heightL/2, 0, "-75 mV");
-	renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, "25 mV");
-	renderText(widthL*1.4f, 0.0*heightL - heightL / 2, 0, "0");
-
-}
 //--------------------------------------------
 void glAtrium::paintOrigin(float scale)
 {
@@ -262,19 +226,25 @@ void glAtrium::paintOrigin(float scale)
 	GLfloat col1[] = { 1.0, 0.0, 0.0, 1.f };
 	GLfloat col2[] = { 0.0, 1.0, 0.0, 1.f };
 	GLfloat col3[] = { 0.0, 0.0, 1.0, 1.f };
+	GLfloat col_w[] = { 1.0, 1.0, 1.0, 1.f };
 	glGetFloatv(GL_LINE_WIDTH, f);
 	glLineWidth(1.0f);
 	glBegin(GL_LINES);
-		glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+		//glMaterialfv(GL_FRONT, GL_AMBIENT, col1);
+
+		glColor3fv(col1);
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(length, 0.0f, 0.0f);
-		glMaterialfv(GL_FRONT, GL_AMBIENT, col2);
+		glColor3fv(col2);
+		//glMaterialfv(GL_FRONT, GL_AMBIENT, col2);
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(0.0f, -length, 0.0f);
-		glMaterialfv(GL_FRONT, GL_AMBIENT, col3);
+		glColor3fv(col3);
+		//glMaterialfv(GL_FRONT, GL_AMBIENT, col3);
 		glVertex3f(0.0f, 0.0f, 0.0f);
 		glVertex3f(0.0f, 0.0f, length);
 	glEnd();
+	glColor3fv(col_w);
 	renderText(length, 0.0f, 0.0f, "x");
 	renderText( 0.0f, -length, 0.0f, "y");
 	renderText(0.0f, 0.0f, length, "z");
@@ -301,7 +271,10 @@ void glAtrium::paintGL()
 		glTranslatef(1.0f*frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())),
 			0*frustrumSize,
 			-nearClippingPlaneDistance - 0.5f);
-		paintLegend(0.1f);
+
+
+
+		_state->paintLegend(this);
 
 	//[2] Paint the clicking ray
 	if (paintRay)
@@ -348,14 +321,13 @@ void glAtrium::resizeGL(int width, int height)
 
 	//[2] Set model view raycasting parameters
 	glMatrixMode(GL_MODELVIEW);
+
 		glGetFloatv(GL_MODELVIEW_MATRIX, m);
 		modelMatrix = m;
-		for (unsigned int j = 0; j < linkToMesh->m_mesh.size(); ++j)
+		int meshSize = linkToMesh->m_mesh.size();
+		for (unsigned int j = 0; j < meshSize; ++j)
 		{
-			pointRays[j] = modelMatrix * Vector4(	linkToMesh->m_mesh[j]->getPositionX(),
-													linkToMesh->m_mesh[j]->getPositionY(),
-													linkToMesh->m_mesh[j]->getPositionZ(),
-													1.0);
+			pointRays[j] = modelMatrix * Vector4(linkToMesh->m_mesh[j]->m_x, linkToMesh->m_mesh[j]->m_y, linkToMesh->m_mesh[j]->m_z, 1.0);
 		}
 		_state->paintCursor(this);
 }
@@ -371,10 +343,15 @@ int glAtrium::itemAt(double xx, double yy, double zz)
 
 	Vector3 rayClicked(xx, yy, zz);
 
-	for (unsigned int j = 0; j < linkToMesh->m_mesh.size(); ++j)
+	glGetFloatv(GL_MODELVIEW_MATRIX, m);
+	modelMatrix = m;
+	int meshSize = linkToMesh->m_mesh.size();
+	for (unsigned int j = 0; j < meshSize; ++j)
 	{
+		pointRays[j] = modelMatrix * Vector4(linkToMesh->m_mesh[j]->m_x, linkToMesh->m_mesh[j]->m_y, linkToMesh->m_mesh[j]->m_z, 1.0);
+		
 		Vector3 rayTested(pointRays[j].x, pointRays[j].y, pointRays[j].z);
-		templ = rayTested.length();
+		templ = pointRays[j].length();
 		temp = (rayTested.normalize()).cross(rayClicked.normalize()).length();
 
 		if (temp <0.007)
@@ -384,6 +361,7 @@ int glAtrium::itemAt(double xx, double yy, double zz)
 				epsilon = temp;
 				index = j;
 				length = templ;
+				break;
 			}
 		}
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1029</width>
-    <height>904</height>
+    <height>914</height>
    </rect>
   </property>
   <property name="font">
@@ -1002,28 +1002,6 @@ color: rgb(255, 170, 0);
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="displayDiffusion">
-         <property name="minimumSize">
-          <size>
-           <width>255</width>
-           <height>255</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>255</width>
-           <height>255</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>CrossCursor</cursorShape>
-         </property>
-         <property name="title">
-          <string/>
          </property>
         </widget>
        </item>

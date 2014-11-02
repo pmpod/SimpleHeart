@@ -26,10 +26,12 @@ SimpleHeart::SimpleHeart(QWidget *parent, Qt::WFlags flags)
 
 	m_calculationsAreRunning = false;
 	m_calculationsArePaused = false;
-	m_patternEnt = true;
-	m_variabilityEnt = false;
-	setEntropyPat(m_patternEnt);
-	setAtrialStructure();
+	//m_patternEnt = true;
+	//m_variabilityEnt = false;
+	//setEntropyPat(m_patternEnt);
+
+	refreshRate = 1.0;
+	lastRefreshTime = 0.0;
 	ui.statusBar->showMessage(tr("Ready"));
 }
 
@@ -152,23 +154,23 @@ void SimpleHeart::init()
 
 
 	simpleParameters = new atrialParameters();
-	m_grid = CardiacMesh::constructCartesianGrid(100,100, 0.4, 0.4, ATRIAL_V3);
+	m_grid = CardiacMesh::constructCartesianGrid(128,128, 0.3, 0.3, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
-	m_matrix = new DiffusionMatrix(m_grid);
-	m_anisotrophy = new DiffusionMatrix(m_grid);
+	//m_matrix = new DiffusionMatrix(m_grid);
+	//m_anisotrophy = new DiffusionMatrix(m_grid);
 
 	Machine2d = new AtrialMachine2d(simpleParameters, m_grid);
 	glGraph = new glAtrium(m_grid,Machine2d, ui.displayMain);
 
-	diffusionPainter = new DiffusionPainter(m_grid, m_matrix,m_anisotrophy, ui.displayDiffusion);
+	//diffusionPainter = new DiffusionPainter(m_grid, m_matrix,m_anisotrophy, ui.displayDiffusion);
 	
 
 	
 //vis tab-----------------------------
 	layout_Visualisation->addWidget( glGraph );
 	ui.displayMain->setLayout(layout_Visualisation);
-	layout_Diffusion->addWidget( diffusionPainter );
-	ui.displayDiffusion->setLayout(layout_Diffusion);
+	//layout_Diffusion->addWidget( diffusionPainter );
+	//ui.displayDiffusion->setLayout(layout_Diffusion);
 	layout_Plots->addWidget( plotPotentialE1 );
 	layout_Plots->addWidget( plotPotentialE2 );
 	layout_Plots->addWidget( plotPotentialE3 );
@@ -205,7 +207,7 @@ void SimpleHeart::destroy()
 void SimpleHeart::setupConnections()
 {
 	//---------------------CONTROLS CONNECTIONS -------------------------------------------
-	QObject::connect(this, SIGNAL(tajmer()), Machine2d, SLOT(processStep()));
+	//QObject::connect(this, SIGNAL(tajmer()), Machine2d, SLOT(processStep()));
 	QObject::connect(ui.b_start, SIGNAL(clicked()),this, SLOT(startCalculation()));
 	QObject::connect(ui.b_stop, SIGNAL(clicked()), this, SLOT(stopCalculation()));
 	//QObject::connect(ui.b_stop, SIGNAL(clicked()), m_ioHandler, SLOT(getParametersFromFile()));
@@ -219,8 +221,6 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->RRcalc_2, SLOT(reset()));
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->RRcalc_3, SLOT(reset()));
 
-	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(stopCalculation()));
-	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(calculateFullElectrogramMap()));
 //	QObject::connect(ui.sb_tau, SIGNAL(valueChanged(int)), Machine2d->m_definitions, SLOT(setTau(int)));
 //	QObject::connect(ui.sb_winSize, SIGNAL(valueChanged(int)), Machine2d->m_definitions, SLOT(setWindowSize(int)));
 //	QObject::connect(ui.sb_binSize, SIGNAL(valueChanged(double)), Machine2d->m_definitions, SLOT(setBinSize(double)));
@@ -239,16 +239,20 @@ void SimpleHeart::setupConnections()
 
 	//ADDED
 	QObject::connect(ui.b_saveStructure, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentStructure()));
-	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), m_ioHandler, SLOT(loadCustomStructure()));
+	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), this, SLOT(setAtrialStructure()));
 	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
 	QObject::connect(ui.b_loadState, SIGNAL(clicked()), m_ioHandler, SLOT(loadCurrentState()));
-	QObject::connect(ui.b_loadState, SIGNAL(clicked()), m_ioHandler, SLOT(loadCurrentState()));
+
+	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(stopCalculation()));
+	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(calculateFullElectrogramMap()));
+
 	QObject::connect(ui.rb_setDisplayCsdMode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCSD(bool)));
 	QObject::connect(ui.rb_setDisplayPotentialMode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayPotential(bool)));
 	QObject::connect(ui.rb_setDisplayC1Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent1(bool)));
 	QObject::connect(ui.rb_setDisplayC2Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent2(bool)));
 	QObject::connect(ui.b_stateStructureModifier, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
 	QObject::connect(ui.b_stateViewer, SIGNAL(toggled(bool)), glGraph, SLOT(setStateViewer(bool)));
+	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), glGraph, SLOT(displayElectrogram()));
 	//ADDED END
 
 	QObject::connect(ui.cb_calcEnt, SIGNAL(toggled(bool)), this, SLOT(setEntropyToggle(bool)));
@@ -256,7 +260,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.cb_calcVar, SIGNAL(toggled(bool)), this, SLOT(setEntropyVar(bool)));
 
 //---------------------INDICATOR CONNECTIONS ------------------------------------------
-	QObject::connect(Machine2d, SIGNAL(emitGlobalTimeOnly(double)), ui.lcd_time, SLOT(display(double)));
+	QObject::connect(this, SIGNAL(emitGlobalTimeOnly(double)), ui.lcd_time, SLOT(display(double)));
 
 	QObject::connect(ui.b_setDiffusion, SIGNAL(clicked()), this, SLOT(stopCalculation()));
 	QObject::connect(ui.b_setDiffusion, SIGNAL(clicked()), this, SLOT(setAtrialDiffusion()));
@@ -264,11 +268,11 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_loadDiffusion, SIGNAL(clicked()), m_ioHandler, SLOT(readDiffusionFromFile()));
 	QObject::connect(ui.b_clearDiffusion, SIGNAL(clicked()), this, SLOT(resetDiffusion()));
 
-	QObject::connect(ui.rb_paintDiffusion, SIGNAL(toggled(bool)), diffusionPainter, SLOT(setCurrentPainter_Diffusion()));
-	QObject::connect(ui.rb_paintAnisotrophy, SIGNAL(toggled(bool)), diffusionPainter, SLOT(setCurrentPainter_Anisotrophy()));
+	//QObject::connect(ui.rb_paintDiffusion, SIGNAL(toggled(bool)), diffusionPainter, SLOT(setCurrentPainter_Diffusion()));
+	//QObject::connect(ui.rb_paintAnisotrophy, SIGNAL(toggled(bool)), diffusionPainter, SLOT(setCurrentPainter_Anisotrophy()));
 	
-	QObject::connect(ui.dial_diffSizeN, SIGNAL(valueChanged(int)), diffusionPainter, SLOT(setSigma(int)));
-	QObject::connect(ui.dial_diffValueN, SIGNAL(valueChanged(int)), diffusionPainter, SLOT(setAmplitude(int)));
+	//QObject::connect(ui.dial_diffSizeN, SIGNAL(valueChanged(int)), diffusionPainter, SLOT(setSigma(int)));
+	//QObject::connect(ui.dial_diffValueN, SIGNAL(valueChanged(int)), diffusionPainter, SLOT(setAmplitude(int)));
 	QObject::connect(ui.m_refSlider, SIGNAL(valueChanged(int)), this, SLOT(setAtrialRestitution(int)));
 
 
@@ -289,7 +293,7 @@ void SimpleHeart::setupConnections()
 
 
 //---------------------GRAPH CONNECTIONS -------------------------------------------
-	QObject::connect(diffusionPainter, SIGNAL(positionElektrode(int, int,int)), this, SLOT(setProbeElectrode(int,int,int)));
+	//QObject::connect(diffusionPainter, SIGNAL(positionElektrode(int, int,int)), this, SLOT(setProbeElectrode(int,int,int)));
 	QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
 	QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double, double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
 	QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double, double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
@@ -449,18 +453,43 @@ void SimpleHeart::plotEntClear()
 //  Generate new values 
 void SimpleHeart::timerEvent(QTimerEvent *)
 {
-	if(ui.cb_saveBMP->isChecked())
-	{
-		m_ioHandler->saveAsBmp();
-	}
-	
-	emit tajmer();
-	glGraph->updateGL();
+	//if(ui.cb_saveBMP->isChecked())
+	//{
+	//	m_ioHandler->saveAsBmp();
+	//}
+	double timee = Machine2d->m_globalTime;
+	refreshCounter = (Machine2d->processStep() - timee);
 
-	static int iter = 1;
-	static int iter2 = 1;
-	
-	///TODO: zrobiæ coœ jak jest last
+	if (refreshCounter > refreshRate)
+	{
+		refreshCounter = 0.0;
+
+		m_grid->m_minElectrogram = m_grid->m_minPotential;
+		m_grid->m_maxElectrogram = m_grid->m_maxPotential;
+		if (simpleParameters->m_ectopicActivity && m_grid->stimulationBegun == false)
+		{
+			m_grid->startStimulation(m_grid->m_mesh[m_grid->m_stimulationID], m_grid->m_stimulationID, 2, 0.1);
+		}
+
+		else if (!simpleParameters->m_ectopicActivity && m_grid->stimulationBegun == true)
+		{
+			m_grid->stopStimulation();
+		}
+
+		Machine2d->RRcalc_1->processNewTime(Machine2d->m_globalTime, Machine2d->probeOscillator[0]->getPotential());
+		Machine2d->RRcalc_2->processNewTime(Machine2d->m_globalTime, Machine2d->probeOscillator[1]->getPotential());
+		Machine2d->RRcalc_3->processNewTime(Machine2d->m_globalTime, Machine2d->probeOscillator[2]->getPotential());
+		m_grid->calculateElectrogram(Machine2d->probeOscillator[1]);
+		Machine2d->probeOscillator[0]->stateCalculated(1, 0, 0);
+		Machine2d->probeOscillator[1]->stateCalculated(1, 0, 0);
+		Machine2d->probeOscillator[2]->stateCalculated(1, 0, 0);
+
+		emit emitGlobalTimeOnly(Machine2d->m_globalTime);
+		glGraph->updateGL();
+
+	}
+	//emit tajmer();
+
 
 }
 
@@ -492,26 +521,26 @@ void SimpleHeart::resetDiffusion()
             QString::null, 0, 1 ) )
 	{
 
-		diffusionPainter->m_pixelmap->resetDefault(255,255,255);
-		diffusionPainter->m_anisotrophy->resetDefault(150,150,0);
-		diffusionPainter->updateGL();
+		//diffusionPainter->m_pixelmap->resetDefault(255,255,255);
+		//diffusionPainter->m_anisotrophy->resetDefault(150,150,0);
+		//diffusionPainter->updateGL();
 		setAtrialDiffusion();
 		///TODO tu coœ z elektrodami
 	}
 }
 void SimpleHeart::setAtrialDiffusion()
 {
-	for (unsigned int j = 0; j < m_grid->getSize(); ++j)
-	{
-		for (unsigned int i = 0; i < m_grid->getSize(); ++i)
-		{
-			Machine2d->m_diffusionCoefficients[j][i] = diffusionPainter->m_pixelmap->m_matrix[j][i]->color.greenF()*(diffusionPainter->m_upperLimit - diffusionPainter->m_lowerLimit) + diffusionPainter->m_lowerLimit;
-			Machine2d->m_anisotrophyCoefficients[j][i] = 0.5;// diffusionPainter->m_anisotrophy->m_matrix[j][i]->color.redF();
-		
-	}
-	}
-	Machine2d->editDiffusionCoefficients();
-	ui.statusBar->showMessage("Diffusion set");
+	//for (unsigned int j = 0; j < m_grid->getSize(); ++j)
+	//{
+	//	for (unsigned int i = 0; i < m_grid->getSize(); ++i)
+	//	{
+	//		Machine2d->m_diffusionCoefficients[j][i] = diffusionPainter->m_pixelmap->m_matrix[j][i]->color.greenF()*(diffusionPainter->m_upperLimit - diffusionPainter->m_lowerLimit) + diffusionPainter->m_lowerLimit;
+	//		Machine2d->m_anisotrophyCoefficients[j][i] = 0.5;// diffusionPainter->m_anisotrophy->m_matrix[j][i]->color.redF();
+	//	
+	//}
+	//}
+	//Machine2d->editDiffusionCoefficients();
+	//ui.statusBar->showMessage("Diffusion set");
 
 
 }
@@ -644,7 +673,36 @@ void SimpleHeart::setBmpSaving(bool t)
 }
 void SimpleHeart::setAtrialStructure()
 {
-//		stopCalculation();
+	stopCalculation();
+	QObject::disconnect(Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double, double)), plotPotentialE1, SLOT(addValue_e1(double, double)));
+	QObject::disconnect(Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double, double)), plotPotentialE2, SLOT(addValue_e2(double, double)));
+	QObject::disconnect(Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double, double)), plotPotentialE3, SLOT(addValue_e3(double, double)));
+
+	glGraph->updateGL();
+
+	CardiacMesh *ptr = m_ioHandler->loadCustomStructure();
+	if (ptr != nullptr)
+	{
+		CardiacMesh *tempptr = m_grid;
+		m_grid = ptr;
+
+		Machine2d->m_grid = m_grid;
+
+		(Machine2d->*Machine2d->setStrategy)();
+		glGraph->linkToMesh = m_grid;
+
+		Machine2d->probeOscillator.clear();
+		Machine2d->probeOscillator.push_back(m_grid->m_mesh[0]);
+		Machine2d->probeOscillator.push_back(m_grid->m_mesh[2000]);
+		Machine2d->probeOscillator.push_back(m_grid->m_mesh[5000]);
+		Machine2d->reset();
+		delete(tempptr);
+	}
+
+			 QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
+			 QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
+			 QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
+
 //		m_ioHandler->writeParametersToFile();
 //
 //	 	QObject::disconnect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));

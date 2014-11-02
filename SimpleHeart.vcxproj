@@ -189,7 +189,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_v3model.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_vanDerGru.cpp" />
+    <ClCompile Include="GeneratedFiles\Release\moc_vanDerGru.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="glAtrium.cpp" />
     <ClCompile Include="GLcamera.cpp" />
     <ClCompile Include="GLfunc.cpp" />
