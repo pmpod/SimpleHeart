@@ -59,7 +59,7 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 	probeOscillator.push_back(m_grid->m_mesh[2000]);
 	probeOscillator.push_back(m_grid->m_mesh[5000]);
 
-	setAllexandreStrategy();
+	setForwardEulerStrategy();
 }
 //-------------------------------------------------------------------------
 AtrialMachine2d::~AtrialMachine2d(void)
@@ -111,7 +111,7 @@ double AtrialMachine2d::processStep()
 	}
 	
 
-	for (int kk = 0; kk <= 20000; ++kk)//m_skip
+	for (int kk = 0; kk <= 30000; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}

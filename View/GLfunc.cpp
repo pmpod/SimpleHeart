@@ -1,5 +1,4 @@
 #include "GLfunc.h"
-#include <cmath>
 
 const int COORD_X = 1;
 const int COORD_Y = 2;
@@ -788,4 +787,67 @@ void grayMap(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, 
 	gg = (v - vmin) / dv;
 	bb = (v - vmin) / dv;
 	
+}
+
+Vector3 get_arcball_vector(double width, double height, int x, int y)
+{
+
+	Vector3 center = Vector3(width / 2, height / 2, 0);
+	//Vector3 P = GLKVector3Subtract(touchPoint, center);
+	float radius = width / 3;
+	//view->directionRay = view->screenToWorld(x, y, view->width(), view->height());
+
+	// Flip the y-axis because pixel coords increase toward the bottom.
+	Vector3 P = Vector3(x, y, 0) - center;
+	P = Vector3(-P.x, -P.y, 0);
+
+	float radius2 = radius * radius;
+	float length2 = P.x*P.x + P.y*P.y;
+
+	if (length2 <= radius2)
+		P.z = sqrt(radius2 - length2);
+	else
+	{
+		P.x *= radius / sqrt(length2);
+		P.y *= radius / sqrt(length2);
+		P.z = 0;
+/*
+		P.z = radius2 / (2.0 * sqrt(length2));
+		float length = sqrt(length2 + P.z * P.z);
+		P = (P / length);*/
+	}
+
+	return P.normalize();
+}
+
+GLfloat* quaternionToMatrix(QQuaternion q, GLfloat* m)
+{
+	q.normalize();
+	float qw = q.scalar();
+	float qx = q.x();
+	float qy = q.y();
+	float qz = q.z();
+	m[0] = 1.0f - 2.0f*qy*qy - 2.0f*qz*qz;
+	m[1] = 2.0f*qx*qy - 2.0f*qz*qw;
+	m[2] = 2.0f*qx*qz + 2.0f*qy*qw;
+	m[3] = 0.0f;
+	m[4] = 2.0f*qx*qy + 2.0f*qz*qw;
+	m[5] = 1.0f - 2.0f*qx*qx - 2.0f*qz*qz;
+	m[6] = 2.0f*qy*qz - 2.0f*qx*qw;
+	m[7] = 0.0f;
+	m[8] = 2.0f*qx*qz - 2.0f*qy*qw;
+	m[9] = 2.0f*qy*qz + 2.0f*qx*qw;
+	m[10] = 1.0f - 2.0f*qx*qx - 2.0f*qy*qy;
+	m[11] = 0.0f;
+	m[12] = 0.0f;
+	m[13] = 0.0f;
+	m[14] = 0.0f;
+	m[15] = 1.0f;
+
+	GLfloat z[] = { 1.0f - 2.0f*qy*qy - 2.0f*qz*qz, 2.0f*qx*qy - 2.0f*qz*qw, 2.0f*qx*qz + 2.0f*qy*qw, 0.0f,
+		2.0f*qx*qy + 2.0f*qz*qw, 1.0f - 2.0f*qx*qx - 2.0f*qz*qz, 2.0f*qy*qz - 2.0f*qx*qw, 0.0f,
+		2.0f*qx*qz - 2.0f*qy*qw, 2.0f*qy*qz + 2.0f*qx*qw, 1.0f - 2.0f*qx*qx - 2.0f*qy*qy, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f };
+	m = z;
+	return m;
 }

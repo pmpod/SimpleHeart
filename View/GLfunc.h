@@ -3,6 +3,9 @@
 
 #include "GLcamera.h"
 #include <QtGui>
+#include <cmath>
+#include "Support\Vectors.h"
+
 void paintGround(float deltaX,float deltaY, int CellsX, int CellsY);
 void paintOrigin(float frustrumSize, float scale);
 void normalizeAngle(int &angle);
@@ -32,4 +35,6 @@ void hotNlMap( GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr
 void coldMap( GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb);
 void grayMap( GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb);
 /*******************************************************************************/
+Vector3 get_arcball_vector(double width, double height, int x, int y);
+GLfloat*  quaternionToMatrix(QQuaternion q, GLfloat* m);
 #endif

@@ -1,6 +1,6 @@
 #include "View\SimViewStateView.h"
-#include "glAtrium.h"
-
+#include "View\glAtrium.h"
+#include <boost\lexical_cast.hpp>
 SimViewStateView* SimViewStateView::_instance = nullptr;
 
 SimViewStateView::SimViewStateView()
@@ -27,6 +27,24 @@ SimViewState* SimViewStateView::Instance()
 	return _instance;
 }
 //--------------------------------------------------
+//--------------------------------------------------
+void SimViewStateView::setDisplayMode(const int mode)
+{
+	_dataDisplayMode = mode;
+}\
+void SimViewStateView::setOutlineStyle(const  BRUSH_OUTLINE outline)
+{
+
+}
+void SimViewStateView::paintLegend(glAtrium* view)
+{
+	glCallList(view->displayListIndex);
+	GLfloat widthL = view->frustrumSize*_scale*0.5;
+	GLfloat heightL = view->frustrumSize*_scale*0.2;
+	view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, "-75 mV", QFont(), view->displayListIndex);
+	view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, "25 mV", QFont(), view->displayListIndex);
+	view->renderText(widthL*1.4f, 0.0*heightL - heightL / 2, 0, "0", QFont(), view->displayListIndex);
+}
 void SimViewStateView::prepareLegend(glAtrium* view)
 {
 
@@ -42,104 +60,89 @@ void SimViewStateView::prepareLegend(glAtrium* view)
 	// compile the display list, store a triangle in it
 	glNewList(view->displayListIndex, GL_COMPILE);
 
-		glBegin(GL_QUAD_STRIP);
-		for (GLfloat i = -16.0; i <= 16.0; ++i)
-		{
-			ccol = -i;
+	glBegin(GL_QUAD_STRIP);
+	for (GLfloat i = -16.0; i <= 16.0; ++i)
+	{
+		ccol = -i;
 
-			colorMap(ccol, -16.0, 16.0, col[0], col[1], col[2]);
-			glColor3f(col[0], col[1], col[2]);
-			glVertex3f(widthL, i*heightL, 0.0f);
-			glVertex3f(-widthL, i*heightL, 0.0f);
+		colorMap(ccol, -16.0, 16.0, col[0], col[1], col[2]);
+		glColor3f(col[0], col[1], col[2]);
+		glVertex3f(widthL, i*heightL, 0.0f);
+		glVertex3f(-widthL, i*heightL, 0.0f);
 
-		}
-		glEnd();
-		glBegin(GL_LINES);
-		glColor3fv(col_g);
-		//glMaterialfv(GL_FRONT, GL_AMBIENT, col_g);
-		for (GLfloat i = -15.0; i <= 15.0; ++i)
-		{
-			glVertex3f(-widthL, i*heightL, 0.0f);
-			glVertex3f(widthL, i*heightL, 0.0f);
+	}
+	glEnd();
+	glBegin(GL_LINES);
+	glColor3fv(col_g);
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, col_g);
+	for (GLfloat i = -15.0; i <= 15.0; ++i)
+	{
+		glVertex3f(-widthL, i*heightL, 0.0f);
+		glVertex3f(widthL, i*heightL, 0.0f);
 
-		}
-		glEnd();
+	}
+	glEnd();
 
-		glBegin(GL_LINES);
-		//glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
-		glColor3fv(col_w);
-		glVertex3f(-widthL, -16.0*heightL, 0.0f);
-		glVertex3f(widthL*1.2f, -16.0*heightL, 0.0f);
-		glVertex3f(-widthL, 0.0*heightL, 0.0f);
-		glVertex3f(widthL*1.2f, 0.0*heightL, 0.0f);
-		glVertex3f(-widthL, 16.0*heightL, 0.0f);
-		glVertex3f(widthL*1.2f, 16.0*heightL, 0.0f);
-		glEnd();
+	glBegin(GL_LINES);
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
+	glColor3fv(col_w);
+	glVertex3f(-widthL, -16.0*heightL, 0.0f);
+	glVertex3f(widthL*1.2f, -16.0*heightL, 0.0f);
+	glVertex3f(-widthL, 0.0*heightL, 0.0f);
+	glVertex3f(widthL*1.2f, 0.0*heightL, 0.0f);
+	glVertex3f(-widthL, 16.0*heightL, 0.0f);
+	glVertex3f(widthL*1.2f, 16.0*heightL, 0.0f);
+	glEnd();
 
 	glEndList();
-	
-}
 
-//--------------------------------------------------
-void SimViewStateView::setDisplayMode(const int mode)
-{
-	_dataDisplayMode = mode;
 }
-void SimViewStateView::paintLegend(glAtrium* view)
-{
-	glCallList(view->displayListIndex);
-	GLfloat widthL = view->frustrumSize*_scale*0.5;
-	GLfloat heightL = view->frustrumSize*_scale*0.2;
-	view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, "-75 mV", QFont(), view->displayListIndex);
-	view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, "25 mV", QFont(), view->displayListIndex);
-	view->renderText(widthL*1.4f, 0.0*heightL - heightL / 2, 0, "0", QFont(), view->displayListIndex);
-}
-//--------------------------------------------------
-void  SimViewStateView::paintCursor(glAtrium* view)
+void SimViewStateView::paintCursor(glAtrium* view)
 {
 	int crossSize = 5;
 	int sizepix = floor(abs(cursorRadius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
-	QPixmap* m_LPixmap = new QPixmap(sizepix + 2, sizepix + 2);
+
+	int pixmapsize;
+	sizepix < 60 ? pixmapsize = 62 : pixmapsize = sizepix + 2;
+	QPixmap* m_LPixmap = new QPixmap(pixmapsize, pixmapsize);
 	m_LPixmap->fill(Qt::transparent);
 	QPainter painter(m_LPixmap);
 	QColor col(0, 0, 64, 128);
 
 	QPen pen;  // creates a default pen
 	pen.setStyle(Qt::SolidLine);
-	pen.setWidth(1);
+	pen.setWidth(2);
 	pen.setBrush(QColor(128, 128, 128, 128));
 	painter.setPen(pen);
 	painter.setBrush(col);
 
+	painter.drawEllipse(1, 1, sizepix, sizepix);
 	painter.drawLine(floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize, floor(1 + sizepix / 2.0));
 	painter.drawLine(floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize);
-	painter.drawEllipse(1, 1, sizepix, sizepix);
+
+	painter.setBrush(QColor(256, 256, 256, 256));
+	char buff[20];
+	sprintf(buff, "%1.1f", cursorRadius * 2);
+	std::string str(buff);
+	painter.drawText(floor(3 + sizepix / 2.0), floor(-2 + sizepix / 2.0), QString(str.c_str()) + "mm");
 
 	view->setCursor(QCursor(*m_LPixmap));
 }
 //--------------------------------------------------
 void SimViewStateView::paintModel(glAtrium* view)
 {
-	// [1] Paint data
-
 	CardiacMesh *msh = view->linkToMesh;
 	std::vector<Oscillator*> oscs = view->linkToMesh->m_mesh;
-
 	int vertexNumber = msh->m_vertexList.size();
+
 	GLfloat val1;
 	GLfloat vmin = msh->m_minElectrogram;
 	GLfloat vmax = msh->m_maxElectrogram;
 	
 	for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
 	{
-		msh->m_vertexMatrix[currentVertex].r = 0.0;
-		msh->m_vertexMatrix[currentVertex].g = 1.0;
-		msh->m_vertexMatrix[currentVertex].b = 0.0;
-
-
 		if (oscs[currentVertex]->m_type != SOLID_WALL)
 		{
-
 			switch (_dataDisplayMode)
 			{
 			case 1:
@@ -158,31 +161,26 @@ void SimViewStateView::paintModel(glAtrium* view)
 				val1 = oscs[currentVertex]->m_v_electrogram;
 				break;
 			}
+			colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
+
 		}
 		else
 		{
-			val1 = 0.0;
+			msh->m_vertexMatrix[currentVertex].r = 0.1;
+			msh->m_vertexMatrix[currentVertex].g = 0.1; 
+			msh->m_vertexMatrix[currentVertex].b = 0.1;
 		}
-		colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
 	}
-	// activate and specify pointer to vertex array
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
 
-	glColorPointer(3,   //3 components per vertex (r,g,b)
-		GL_FLOAT,
-		sizeof(SVertex),
-		&view->linkToMesh->m_vertexMatrix[0].r);  //Pointer to the first color
+		glColorPointer(3, GL_FLOAT, sizeof(SVertex), &view->linkToMesh->m_vertexMatrix[0].r);  
 
-	glVertexPointer(3,   //3 components per vertex (x,y,z)
-		GL_FLOAT,
-		sizeof(SVertex),
-		view->linkToMesh->m_vertexMatrix);
-	//pass the color pointer
-	// draw a cube
-	//glDrawArrays(GL_POINTS, 0, view->linkToMesh->m_mesh.size());
-	glDrawElements(GL_TRIANGLES, view->linkToMesh->m_vertexList.size()*3, GL_UNSIGNED_INT, view->linkToMesh->m_indicesMatrix);
-	// deactivate vertex arrays after drawing
+		glVertexPointer(3, GL_FLOAT, sizeof(SVertex), view->linkToMesh->m_vertexMatrix);
+		
+		glDrawElements(GL_TRIANGLES, view->linkToMesh->m_vertexList.size()*3, GL_UNSIGNED_INT, view->linkToMesh->m_indicesMatrix);
+
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 
@@ -320,6 +318,7 @@ void SimViewStateView::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 void SimViewStateView::handleMouseRightPress(glAtrium* view, QMouseEvent *event)
 {
 	view->setLastPos(event->pos());
+	_quatStart = _quat;
 }
 void SimViewStateView::handleMouseRelease(glAtrium* view, QMouseEvent *event)
 {
@@ -345,6 +344,7 @@ void SimViewStateView::handleMousewheel(glAtrium* view, QWheelEvent *event)
 
 	view->distanceToCamera -= view->zoomingSpeed*numDegrees;
 
+	paintCursor(view);
 
 
 	//if (distanceToCamera <nearClippingPlaneDistance) distanceToCamera = nearClippingPlaneDistance;
@@ -390,21 +390,56 @@ void SimViewStateView::handleMouseMove(glAtrium* view, QMouseEvent *event)
 	}
 	if ((event->buttons() & Qt::RightButton))
 	{
-
 		Vector3 next = view->screenToWorld(event->x(), event->y(), view->viewWidth, view->viewHeight);
 		Vector3 previous = view->screenToWorld(view->lastPos.x(), view->lastPos.y(), view->viewWidth, view->viewHeight);
-		Vector3 diff = next - previous;
 
-		view->setXRotation(view->xRot + view->rotationSpeed * (diff.y));
-		view->setYRotation(view->yRot + view->rotationSpeed * (diff.x));
+		next = get_arcball_vector(view->width(), view->height(), event->x(), event->y());
+		previous = get_arcball_vector(view->width(),view->height(), view->lastPos.x(), view->lastPos.y());
+
+		computeIncremental(previous, next);
+
+		GLfloat m[16];
+
+		//Matrix4 rotation;
+		quaternionToMatrix(_quat, m);
+		view->modelRotation = m;
+
+		//GLfloat t[16];
+		//glGetFloatv(GL_MODELVIEW_MATRIX, t);
+		//view->modelRotation = t;
+		//view->modelRotation = view->modelRotation* rotation;
+
+
+
+
+		//view->setXRotation(view->xRot + view->rotationSpeed * (diff.y));
+		//view->setYRotation(view->yRot + view->rotationSpeed * (diff.x));
 		//	setZRotation(zRot + rotationSpeed * (next.y - previous.y));
 
 		//setYRotation(yRot + rotationSpeed * (next.x - previous.x));
 		//setZRotation(zRot + rotationSpeed * (next.y - previous.y));
 		//setXRotation(xRot + rotationSpeed * (next.z - previous.z));
 		//	float rotX = -1 * GLKMathDegreesToRadians(diff.y / 2.0);
+
+
+
+		//Vector3 next = view->screenToWorld(event->x(), event->y(), view->viewWidth, view->viewHeight);
+		//Vector3 previous = view->screenToWorld(view->lastPos.x(), view->lastPos.y(), view->viewWidth, view->viewHeight);
+
+		//next
+		//Vector3 diff = next - previous;
+
+		//view->setXRotation(view->xRot + view->rotationSpeed * (diff.y));
+		//view->setYRotation(view->yRot + view->rotationSpeed * (diff.x));
+		////	setZRotation(zRot + rotationSpeed * (next.y - previous.y));
+
+		////setYRotation(yRot + rotationSpeed * (next.x - previous.x));
+		////setZRotation(zRot + rotationSpeed * (next.y - previous.y));
+		////setXRotation(xRot + rotationSpeed * (next.z - previous.z));
+		////	float rotX = -1 * GLKMathDegreesToRadians(diff.y / 2.0);
 		//	float rotY = -1 * GLKMathDegreesToRadians(diff.x / 2.0);
 
-		view->lastPos = event->pos();
+		//view->lastPos = event->pos();
 	}
+	view->updateGL();
 }

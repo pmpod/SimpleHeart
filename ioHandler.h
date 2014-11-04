@@ -10,7 +10,7 @@
 #include "heartDefines.h"
 #include "Model\cartesianGrid.h"
 #include "DiffusionPainter.h"
-#include "GLfunc.h"
+#include "View\GLfunc.h"
 #include <matio.h>
 
 class SimpleHeart;

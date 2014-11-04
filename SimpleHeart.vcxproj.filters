@@ -45,6 +45,18 @@
     <Filter Include="Support">
       <UniqueIdentifier>{deec2b3c-70a8-422c-9185-a3040e265c1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dumpster">
+      <UniqueIdentifier>{039ec257-b29f-4150-9a67-a3f7f902e343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View\States">
+      <UniqueIdentifier>{2e577d3a-0145-4547-867d-ecee1f6cf168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Control">
+      <UniqueIdentifier>{da58e770-ae25-4cd8-9f11-96fb7757147c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View\Graphs">
+      <UniqueIdentifier>{abb48f5d-f630-4b1f-a0a8-65510d28c338}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,44 +68,11 @@
     <ClCompile Include="atrialParameters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CurveData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="defaultPlot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DiffusionMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DiffusionPainter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GLcamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="heartDefines.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ioHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Probe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RandomGenerator.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RRcalculator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rrPlot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="timePlot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="glAtrium.cpp">
-      <Filter>View</Filter>
     </ClCompile>
     <ClCompile Include="NumericStrategy\AllexandreStrategy.cpp">
       <Filter>NumericStrategy</Filter>
@@ -128,14 +107,8 @@
     <ClCompile Include="Model\vanDerGru.cpp">
       <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="AtrialMachine2d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Support\Matrices.cpp">
       <Filter>Support</Filter>
-    </ClCompile>
-    <ClCompile Include="GLfunc.cpp">
-      <Filter>View</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_AtrialMachine2d.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -233,14 +206,56 @@
     <ClCompile Include="GeneratedFiles\Release\moc_AtrialMachine2d.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="View\SimViewState.cpp">
+    <ClCompile Include="DiffusionMatrix.cpp">
+      <Filter>Dumpster</Filter>
+    </ClCompile>
+    <ClCompile Include="DiffusionPainter.cpp">
+      <Filter>Dumpster</Filter>
+    </ClCompile>
+    <ClCompile Include="GLcamera.cpp">
+      <Filter>Dumpster</Filter>
+    </ClCompile>
+    <ClCompile Include="View\glAtrium.cpp">
       <Filter>View</Filter>
     </ClCompile>
-    <ClCompile Include="View\SimViewStateView.cpp">
+    <ClCompile Include="View\GLfunc.cpp">
       <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\SimViewState.cpp">
+      <Filter>View\States</Filter>
     </ClCompile>
     <ClCompile Include="View\SimViewStateStructure.cpp">
-      <Filter>View</Filter>
+      <Filter>View\States</Filter>
+    </ClCompile>
+    <ClCompile Include="View\SimViewStateView.cpp">
+      <Filter>View\States</Filter>
+    </ClCompile>
+    <ClCompile Include="View\SimViewStateDiffusion.cpp">
+      <Filter>View\States</Filter>
+    </ClCompile>
+    <ClCompile Include="AtrialMachine2d.cpp">
+      <Filter>Control</Filter>
+    </ClCompile>
+    <ClCompile Include="ioHandler.cpp">
+      <Filter>Control</Filter>
+    </ClCompile>
+    <ClCompile Include="rrPlot.cpp">
+      <Filter>View\Graphs</Filter>
+    </ClCompile>
+    <ClCompile Include="timePlot.cpp">
+      <Filter>View\Graphs</Filter>
+    </ClCompile>
+    <ClCompile Include="RRcalculator.cpp">
+      <Filter>Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Probe.cpp">
+      <Filter>Dumpster</Filter>
+    </ClCompile>
+    <ClCompile Include="CurveData.cpp">
+      <Filter>View\Graphs</Filter>
+    </ClCompile>
+    <ClCompile Include="defaultPlot.cpp">
+      <Filter>View\Graphs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,37 +271,7 @@
     <CustomBuild Include="atrialParameters.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="defaultPlot.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DiffusionPainter.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ioHandler.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RRcalculator.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="rrPlot.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="timePlot.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="glAtrium.h">
-      <Filter>View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="CurveData.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DiffusionMatrix.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="heartDefines.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Probe.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="RandomGenerator.h">
@@ -349,9 +334,6 @@
     <CustomBuild Include="Model\vanDerGru.h">
       <Filter>Model</Filter>
     </CustomBuild>
-    <CustomBuild Include="GLfunc.h">
-      <Filter>View</Filter>
-    </CustomBuild>
     <CustomBuild Include="NumericStrategy\AllexandreStrategy.h">
       <Filter>NumericStrategy</Filter>
     </CustomBuild>
@@ -367,8 +349,35 @@
     <CustomBuild Include="NumericStrategy\TimeTree.h">
       <Filter>NumericStrategy</Filter>
     </CustomBuild>
+    <CustomBuild Include="DiffusionMatrix.h">
+      <Filter>Dumpster</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DiffusionPainter.h">
+      <Filter>Dumpster</Filter>
+    </CustomBuild>
     <CustomBuild Include="AtrialMachine2d.h">
-      <Filter>Header Files</Filter>
+      <Filter>Control</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ioHandler.h">
+      <Filter>Control</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rrPlot.h">
+      <Filter>View\Graphs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="timePlot.h">
+      <Filter>View\Graphs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RRcalculator.h">
+      <Filter>Control</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Probe.h">
+      <Filter>Dumpster</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CurveData.h">
+      <Filter>View\Graphs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="defaultPlot.h">
+      <Filter>View\Graphs</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -381,14 +390,23 @@
     <ClInclude Include="Support\Vectors.h">
       <Filter>Support</Filter>
     </ClInclude>
-    <ClInclude Include="View\SimViewState.h">
+    <ClInclude Include="View\glAtrium.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\GLfunc.h">
       <Filter>View</Filter>
     </ClInclude>
     <ClInclude Include="View\SimViewStateView.h">
-      <Filter>View</Filter>
+      <Filter>View\States</Filter>
+    </ClInclude>
+    <ClInclude Include="View\SimViewState.h">
+      <Filter>View\States</Filter>
     </ClInclude>
     <ClInclude Include="View\SimViewStateStructure.h">
-      <Filter>View</Filter>
+      <Filter>View\States</Filter>
+    </ClInclude>
+    <ClInclude Include="View\SimViewStateDiffusion.h">
+      <Filter>View\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

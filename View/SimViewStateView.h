@@ -9,7 +9,8 @@ public:
 	SimViewStateView();
 
 	static SimViewState* Instance();
-	void setDisplayMode(const int mode);
+	void setDisplayMode(const int mode); 
+	void setOutlineStyle(const  BRUSH_OUTLINE outline);
 	void handleMouseLeftPress(glAtrium*, QMouseEvent *event);
 	void handleMouseRightPress(glAtrium*, QMouseEvent *event);
 	void handleMouseRelease(glAtrium*, QMouseEvent *event);

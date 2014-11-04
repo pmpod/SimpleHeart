@@ -9,7 +9,7 @@
 #include "DiffusionMatrix.h"
 #include "Model\CardiacMesh.h"
 
-#include "GLfunc.h"
+#include "View\GLfunc.h"
 #include <assert.h>
 
 class DiffusionPainter : public QGLWidget

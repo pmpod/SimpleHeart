@@ -4,7 +4,7 @@
 #include <QtGui/QMainWindow>
 #include <QObject>
 #include "ui_simpleheart.h"
-#include "glAtrium.h"
+#include "View\glAtrium.h"
 #include "AtrialMachine2d.h"
 #include "DiffusionMatrix.h"
 #include "DiffusionPainter.h"

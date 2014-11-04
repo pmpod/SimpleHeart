@@ -9,6 +9,7 @@
 #include "Support\Matrices.h"
 #include "View\SimViewStateView.h"
 #include "View\SimViewStateStructure.h"
+#include "View\SimViewStateDiffusion.h"
 ///TODO Update to OpenGL 3.0
 
 class glAtrium: public QGLWidget
@@ -36,6 +37,7 @@ public slots:
 	void setSide1();
 	void setSide2();
 	void setStateStructureModifier(bool b);
+	void setStateDiffusionModifier(bool b);
 	void setStateViewer(bool b);
 	void setPaletteHSV();
 	void setPaletteGray();
@@ -44,7 +46,8 @@ public slots:
 	void setDisplayCurrent1(bool b);
 	void setDisplayCurrent2(bool b);
 	void displayElectrogram();
-
+	void setOutlineUniform(bool b);
+	void setOutlineGauss(bool b);
 signals:
     void xRotationChanged(int angle);
     void yRotationChanged(int angle);
@@ -78,6 +81,7 @@ private:
 	float viewHeight;
 	GLfloat m[16];
 	Matrix4 modelMatrix;
+	Matrix4 modelRotation;
 
 	float distanceToCamera;
 	int m_palette;
@@ -116,6 +120,7 @@ private:
 	friend class SimViewState;
 	friend class SimViewStateView;
 	friend class SimViewStateStructure;
+	friend class SimViewStateDiffusion;
 	void ChangeState(SimViewState*);
 	SimViewState* _state;
 };

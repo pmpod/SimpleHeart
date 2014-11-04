@@ -251,8 +251,12 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.rb_setDisplayC1Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent1(bool)));
 	QObject::connect(ui.rb_setDisplayC2Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent2(bool)));
 	QObject::connect(ui.b_stateStructureModifier, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
+	QObject::connect(ui.b_diffPainting, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
 	QObject::connect(ui.b_stateViewer, SIGNAL(toggled(bool)), glGraph, SLOT(setStateViewer(bool)));
 	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), glGraph, SLOT(displayElectrogram()));
+	QObject::connect(ui.rb_setOutlineGauss, SIGNAL(toggled(bool)), glGraph, SLOT(setOutlineGauss(bool)));
+	QObject::connect(ui.rb_setOutlineUniform, SIGNAL(toggled(bool)), glGraph, SLOT(setOutlineUniform(bool)));
+	
 	//ADDED END
 
 	QObject::connect(ui.cb_calcEnt, SIGNAL(toggled(bool)), this, SLOT(setEntropyToggle(bool)));

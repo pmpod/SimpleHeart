@@ -1,8 +1,8 @@
-#include "glAtrium.h"
+#include "View\glAtrium.h"
 #include <QtGui>
 #include <QtOpenGL>
 
-#include <cmath>
+#include <cmath> 
 
 double round(double fValue)
 {
@@ -32,6 +32,11 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 	frustrumSize = 1.0f;
 	nearClippingPlaneDistance = 2.0;
 	farClippingPlaneDistance = 500.0;
+
+	GLfloat mm[16];
+	quaternionToMatrix(QQuaternion(1, 0, 0, 0),mm);
+	modelRotation = mm;
+
 
 
 	LightAmbient[0] = 1.0f;
@@ -109,6 +114,18 @@ void glAtrium::displayElectrogram()
 	SimViewStateView::Instance()->setDisplayMode(5);
 	updateGL();
 }
+void  glAtrium::setOutlineUniform(bool b)
+{
+	if (b)
+		SimViewStateDiffusion::Instance()->setOutlineStyle(BRUSH_UNI);
+	updateGL();
+}
+void  glAtrium::setOutlineGauss(bool b)
+{
+	if (b)
+		SimViewStateDiffusion::Instance()->setOutlineStyle(BRUSH_GAUSS);
+	updateGL();
+}
 
 //----------------------------------------
 void glAtrium::setStateStructureModifier(bool b)
@@ -124,6 +141,15 @@ void glAtrium::setStateViewer(bool b)
 {
 	if (b)
 		ChangeState(SimViewStateView::Instance());
+	_state->paintCursor(this);
+	_state->prepareLegend(this);
+	updateGL();
+}
+//----------------------------------------
+void glAtrium::setStateDiffusionModifier(bool b)
+{
+	if (b)
+		ChangeState(SimViewStateDiffusion::Instance());
 	_state->paintCursor(this);
 	_state->prepareLegend(this);
 	updateGL();
@@ -259,11 +285,19 @@ void glAtrium::paintGL()
 	//[1] Paint origin
 		glTranslatef(	-1.1f*frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())), 
 						1.1f*frustrumSize, 
-						-nearClippingPlaneDistance-0.5f);
-		glRotated(xRot / 16.0, 1.0, 0.0, 0.0);
-		glRotated(yRot / 16.0, 0.0, 1.0, 0.0);
-		glRotated(zRot / 16.0, 0.0, 0.0, 1.0);
+						-nearClippingPlaneDistance - 0.5f);
+		glGetFloatv(GL_MODELVIEW_MATRIX, m);
+		modelMatrix = m;
+		modelMatrix = modelMatrix * modelRotation;
+		glLoadMatrixf(modelMatrix.get());
 		paintOrigin(0.1f);
+
+	glLoadIdentity();
+		//[1] Paint scale
+		glTranslatef(1.00f*frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())),
+			0.8f*frustrumSize,
+			-nearClippingPlaneDistance - 0.5f);
+		_state->paintScale(this);
 
 
 	//[1] Paint legend
@@ -290,13 +324,18 @@ void glAtrium::paintGL()
 
 	//[2] Paint the model
 	glLoadIdentity();
-		glTranslatef(0, 0, distanceToCamera);
-		glRotated(xRot / 16.0, 1.0, 0.0, 0.0);
-		glRotated(yRot / 16.0, 0.0, 1.0, 0.0);
-		glRotated(zRot / 16.0, 0.0, 0.0, 1.0);
+		//glRotated(xRot , 1.0, 0.0, 0.0);
+		//glRotated(yRot, 0.0, 1.0, 0.0);
+		//glRotated(zRot , 0.0, 0.0, 1.0);
+
+	glTranslatef(0, 0, distanceToCamera);
+
+		glGetFloatv(GL_MODELVIEW_MATRIX, m);
+		modelMatrix = m;
+		modelMatrix = modelMatrix * modelRotation;
+		glLoadMatrixf(modelMatrix.get());
+
 		glTranslatef(-linkToMesh->centerGeom.x, -linkToMesh->centerGeom.y, linkToMesh->centerGeom.z);
-
-
 
 		_state->paintModel(this);
 

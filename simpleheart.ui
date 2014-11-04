@@ -580,42 +580,35 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             <number>3</number>
            </property>
            <item>
+            <widget class="QPushButton" name="b_saveStructure">
+             <property name="text">
+              <string>Save model</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_loadStructure">
+             <property name="text">
+              <string>Load Model</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_saveCurrentState">
+             <property name="text">
+              <string>Save current state</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="b_loadState">
+             <property name="text">
+              <string>Load state</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <layout class="QGridLayout" name="gridLayout">
-             <item row="0" column="0">
-              <widget class="QPushButton" name="b_saveStructure">
-               <property name="text">
-                <string>Save model</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="b_loadStructure">
-               <property name="text">
-                <string>Load Model</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QPushButton" name="b_loadState">
-               <property name="text">
-                <string>Load state</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QPushButton" name="b_saveCurrentState">
-               <property name="text">
-                <string>Save current state</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QPushButton" name="b_calculateFullElectrogram">
-               <property name="text">
-                <string>Calculate Electrogram</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="1">
               <widget class="QPushButton" name="b_stateStructureModifier">
                <property name="sizePolicy">
@@ -686,6 +679,35 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
         </widget>
        </item>
        <item>
+        <widget class="QFrame" name="frame_3">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QRadioButton" name="rb_setOutlineUniform">
+            <property name="text">
+             <string>Diff Uniform</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rb_setOutlineGauss">
+            <property name="text">
+             <string>Diff Gauss</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QFrame" name="frame">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -712,6 +734,13 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="b_calculateFullElectrogram">
+         <property name="text">
+          <string>Calculate Electrogram</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -785,6 +814,9 @@ color: rgb(255, 170, 0);
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item>
           <widget class="QComboBox" name="cb_setStructure">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="insertPolicy">
             <enum>QComboBox::InsertAtBottom</enum>
            </property>
@@ -827,6 +859,9 @@ color: rgb(255, 170, 0);
          </item>
          <item>
           <widget class="QPushButton" name="b_setStructure">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -909,6 +944,9 @@ color: rgb(255, 170, 0);
        </item>
        <item>
         <widget class="QSlider" name="m_refSlider">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="styleSheet">
           <string notr="true">QSlider::groove:horizontal {
 border: 1px solid #bbb;
@@ -1009,6 +1047,9 @@ color: rgb(255, 170, 0);
         <layout class="QHBoxLayout" name="horizontalLayout_13">
          <item>
           <widget class="QPushButton" name="b_loadDiffusion">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="maximumSize">
             <size>
              <width>50</width>
@@ -1022,6 +1063,9 @@ color: rgb(255, 170, 0);
          </item>
          <item>
           <widget class="QPushButton" name="b_saveDiffusion">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="maximumSize">
             <size>
              <width>50</width>
@@ -1035,6 +1079,9 @@ color: rgb(255, 170, 0);
          </item>
          <item>
           <widget class="QPushButton" name="b_clearDiffusion">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="maximumSize">
             <size>
              <width>50</width>
@@ -1048,6 +1095,9 @@ color: rgb(255, 170, 0);
          </item>
          <item>
           <widget class="QPushButton" name="b_setDiffusion">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1129,29 +1179,12 @@ color: rgb(255, 170, 0);
              <number>0</number>
             </property>
             <item>
-             <widget class="QRadioButton" name="rb_paintDiffusion">
-              <property name="text">
-               <string>paint  diffusion</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="rb_paintAnisotrophy">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="text">
-               <string>paint  anisotrophy</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QRadioButton" name="rb_probe1">
               <property name="text">
                <string>set probe 1</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -1278,6 +1311,9 @@ color: rgb(255, 170, 0);
             </property>
             <item>
              <widget class="QSlider" name="dial_diffSizeN">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>20</width>
