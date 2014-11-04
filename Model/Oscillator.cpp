@@ -275,13 +275,14 @@ void Oscillator::setCurrentTime(const double& time)
 	}
 	m_currentTime = time;
 }
-//----------------
+//---------------------------------------------------------------
 void Oscillator::stateCalculated(double a, double b, int which)
 {
 	emit newPotentialValue(a*getElectrogram() + b);
 	emit newState(a*getElectrogram(), a*getCurrent(which) + b);
 	emit newPotentialTime(m_currentTime, getElectrogram());
 }
+//---------------------------------------------------------------
 void Oscillator::setType(CELL_TYPE type)
 {
 	m_type = type;

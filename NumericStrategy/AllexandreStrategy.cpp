@@ -5,7 +5,7 @@
 AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)
 {
 	//[0] Set parameters
-	deltaTimestepIncMean = oscillators->getDeltaR()/ (4* oscillators->m_maximumCV);
+	deltaTimestepIncMean = oscillators->getDeltaR()*oscillators->getDeltaR() / (4 * oscillators->m_maximumCV);
 	deltaTdiff = oscillators->getDeltaR() * oscillators->getDeltaR();
 	guardUpdateTimestep = oscillators->m_maximumCV / oscillators->getDeltaR();
 	kappaAccuracy = 0.05;

@@ -105,7 +105,8 @@ void v3model::setParameter(double value, OSC_PARAMETER parameter)
 		tau_w_minus = 100;
 		tau_0 = 64.7;
 		//tau_r = 222.9;
-		tau_r = 122.9;
+		//tau_r = 140; //ERP ok 200
+		tau_r = 30; //ERP ok 170
 		u_cs1 = 0.85;
 		tau_s1 = 226.9;
 		k = 10;

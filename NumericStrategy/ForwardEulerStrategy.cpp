@@ -3,7 +3,7 @@
 
 ForwardEulerStrategy::ForwardEulerStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)
 {
-	m_mainTimestep = 0.15;
+	m_mainTimestep = 0.2;
 }
 
 double ForwardEulerStrategy::nextStep()
@@ -28,7 +28,7 @@ double ForwardEulerStrategy::nextStep()
 
 			osc->m_v_scaledPotential = osc->vzero + (osc->vmax - osc->vmin)*osc->m_v_potential;
 			osc->m_previous_scaledPotential = osc->vzero + (osc->vmax - osc->vmin)*osc->m_previous_potential;
-			
+			osc->m_v_electrogram = osc->m_v_potential;
 			//SCA£KUJ WSZYSTKIE PR¥DY
 			for (short k = 0; k < numberOfEquations; ++k)
 			{

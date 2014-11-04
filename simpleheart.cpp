@@ -154,7 +154,11 @@ void SimpleHeart::init()
 
 
 	simpleParameters = new atrialParameters();
-	m_grid = CardiacMesh::constructCartesianGrid(128,128, 0.3, 0.3, ATRIAL_V3);
+	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
+	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
+	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.375, 0.375, ATRIAL_V3);// 48 mm
+	m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.2, 0.2, ATRIAL_V3);// 40 mm
+	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	//m_matrix = new DiffusionMatrix(m_grid);
 	//m_anisotrophy = new DiffusionMatrix(m_grid);
@@ -464,11 +468,15 @@ void SimpleHeart::timerEvent(QTimerEvent *)
 	double timee = Machine2d->m_globalTime;
 	refreshCounter = (Machine2d->processStep() - timee);
 
+	emit emitGlobalTimeOnly(Machine2d->m_globalTime);
+
+	glGraph->updateGL();
+
 	if (refreshCounter > refreshRate)
 	{
 		refreshCounter = 0.0;
 
-		m_grid->m_minElectrogram = m_grid->m_minPotential;
+	/*	m_grid->m_minElectrogram = m_grid->m_minPotential;
 		m_grid->m_maxElectrogram = m_grid->m_maxPotential;
 		if (simpleParameters->m_ectopicActivity && m_grid->stimulationBegun == false)
 		{
@@ -483,13 +491,14 @@ void SimpleHeart::timerEvent(QTimerEvent *)
 		Machine2d->RRcalc_1->processNewTime(Machine2d->m_globalTime, Machine2d->probeOscillator[0]->getPotential());
 		Machine2d->RRcalc_2->processNewTime(Machine2d->m_globalTime, Machine2d->probeOscillator[1]->getPotential());
 		Machine2d->RRcalc_3->processNewTime(Machine2d->m_globalTime, Machine2d->probeOscillator[2]->getPotential());
+		m_grid->calculateElectrogram(Machine2d->probeOscillator[0]);
 		m_grid->calculateElectrogram(Machine2d->probeOscillator[1]);
+		m_grid->calculateElectrogram(Machine2d->probeOscillator[2]);
 		Machine2d->probeOscillator[0]->stateCalculated(1, 0, 0);
 		Machine2d->probeOscillator[1]->stateCalculated(1, 0, 0);
 		Machine2d->probeOscillator[2]->stateCalculated(1, 0, 0);
 
-		emit emitGlobalTimeOnly(Machine2d->m_globalTime);
-		glGraph->updateGL();
+		emit emitGlobalTimeOnly(Machine2d->m_globalTime);*/
 
 	}
 	//emit tajmer();

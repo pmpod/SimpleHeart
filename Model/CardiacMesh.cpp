@@ -310,7 +310,7 @@ void CardiacMesh::setDiffusionCoefficients()
 	int gridSize = m_mesh.size();
 	for (int j = 0; j < gridSize; ++j)
 	{
-		m_mesh[j]->setSigma(0.05, 0.05, 0);
+		m_mesh[j]->setSigma(0.04, 0.04, 0);
 	}
 }
 //---------------------------------------------------------------------------
