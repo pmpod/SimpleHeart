@@ -63,6 +63,7 @@ double AllexandreStrategy::synchronise()
 			latestTime = currentNode->time;
 			synchronised = false;
 		}
+
 		if (!synchronised)
 		{
 			//[4] Get the oscillator and calculate new timestep
