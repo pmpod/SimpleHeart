@@ -239,8 +239,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(stopCalculation()));
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(setBmp()));
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(saveAsBmp()));
-
-
+	
 	//ADDED
 	QObject::connect(ui.b_saveStructure, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentStructure()));
 	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), this, SLOT(setAtrialStructure()));
@@ -257,6 +256,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_stateStructureModifier, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
 	QObject::connect(ui.b_diffPainting, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
 	QObject::connect(ui.b_stateViewer, SIGNAL(toggled(bool)), glGraph, SLOT(setStateViewer(bool)));
+	QObject::connect(ui.b_epStudy, SIGNAL(toggled(bool)), glGraph, SLOT(setStateEP(bool)));
 	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), glGraph, SLOT(displayElectrogram()));
 	QObject::connect(ui.rb_setOutlineGauss, SIGNAL(toggled(bool)), glGraph, SLOT(setOutlineGauss(bool)));
 	QObject::connect(ui.rb_setOutlineUniform, SIGNAL(toggled(bool)), glGraph, SLOT(setOutlineUniform(bool)));

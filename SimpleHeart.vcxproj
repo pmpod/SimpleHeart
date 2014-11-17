@@ -218,6 +218,7 @@
     <ClCompile Include="View\GLfunc.cpp" />
     <ClCompile Include="View\SimViewState.cpp" />
     <ClCompile Include="View\SimViewStateDiffusion.cpp" />
+    <ClCompile Include="View\SimViewStateEP.cpp" />
     <ClCompile Include="View\SimViewStateStructure.cpp" />
     <ClCompile Include="View\SimViewStateView.cpp" />
   </ItemGroup>
@@ -792,6 +793,7 @@
     <ClInclude Include="View\GLfunc.h" />
     <ClInclude Include="View\SimViewState.h" />
     <ClInclude Include="View\SimViewStateDiffusion.h" />
+    <ClInclude Include="View\SimViewStateEP.h" />
     <ClInclude Include="View\SimViewStateStructure.h" />
     <ClInclude Include="View\SimViewStateView.h" />
   </ItemGroup>

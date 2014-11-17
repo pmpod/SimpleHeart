@@ -257,6 +257,9 @@
     <ClCompile Include="defaultPlot.cpp">
       <Filter>View\Graphs</Filter>
     </ClCompile>
+    <ClCompile Include="View\SimViewStateEP.cpp">
+      <Filter>View\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="simpleheart.h">
@@ -379,6 +382,9 @@
     <CustomBuild Include="defaultPlot.h">
       <Filter>View\Graphs</Filter>
     </CustomBuild>
+    <CustomBuild Include="View\glAtrium.h">
+      <Filter>View</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SimpleHeart.rc" />
@@ -389,9 +395,6 @@
     </ClInclude>
     <ClInclude Include="Support\Vectors.h">
       <Filter>Support</Filter>
-    </ClInclude>
-    <ClInclude Include="View\glAtrium.h">
-      <Filter>View</Filter>
     </ClInclude>
     <ClInclude Include="View\GLfunc.h">
       <Filter>View</Filter>
@@ -406,6 +409,9 @@
       <Filter>View\States</Filter>
     </ClInclude>
     <ClInclude Include="View\SimViewStateDiffusion.h">
+      <Filter>View\States</Filter>
+    </ClInclude>
+    <ClInclude Include="View\SimViewStateEP.h">
       <Filter>View\States</Filter>
     </ClInclude>
   </ItemGroup>

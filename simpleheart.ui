@@ -672,6 +672,19 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
                </property>
               </widget>
              </item>
+             <item row="5" column="1">
+              <widget class="QPushButton" name="b_epStudy">
+               <property name="text">
+                <string>Electrodes  mode</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
           </layout>
@@ -1735,7 +1748,7 @@ border-radius: 4px;
           </size>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab_6">
           <attribute name="title">
@@ -5875,7 +5888,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <number>3</number>
           </property>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="b_viewTop">
             <property name="text">
              <string>TOP</string>
             </property>

@@ -137,6 +137,15 @@ void glAtrium::setStateStructureModifier(bool b)
 	updateGL();
 }
 //----------------------------------------
+void glAtrium::setStateEP(bool b)
+{
+	if (b)
+		ChangeState(SimViewStateEP::Instance());
+	_state->paintCursor(this);
+	_state->prepareLegend(this);
+	updateGL();
+}
+//----------------------------------------
 void glAtrium::setStateViewer(bool b)
 {
 	if (b)

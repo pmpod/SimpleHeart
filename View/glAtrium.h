@@ -8,6 +8,7 @@
 #include "Support\Vectors.h"
 #include "Support\Matrices.h"
 #include "View\SimViewStateView.h"
+#include "View\SimViewStateEP.h"
 #include "View\SimViewStateStructure.h"
 #include "View\SimViewStateDiffusion.h"
 ///TODO Update to OpenGL 3.0
@@ -39,6 +40,7 @@ public slots:
 	void setStateStructureModifier(bool b);
 	void setStateDiffusionModifier(bool b);
 	void setStateViewer(bool b);
+	void setStateEP(bool b);
 	void setPaletteHSV();
 	void setPaletteGray();
 	void setDisplayPotential(bool b);
@@ -121,6 +123,7 @@ private:
 	friend class SimViewStateView;
 	friend class SimViewStateStructure;
 	friend class SimViewStateDiffusion;
+	friend class SimViewStateEP;
 	void ChangeState(SimViewState*);
 	SimViewState* _state;
 };
