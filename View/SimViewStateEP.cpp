@@ -5,8 +5,9 @@ SimViewStateEP* SimViewStateEP::_instance = nullptr;
 
 SimViewStateEP::SimViewStateEP()
 {
-	cursorRadius = 2.0;
+	cursorRadius = 1.0;
 	_dataDisplayMode = 1;//POTENTIAL
+	_probeOnTheMove = -1;
 	setPalette(DP_HOTTOCOLD);
 
 
@@ -26,7 +27,6 @@ SimViewState* SimViewStateEP::Instance()
 
 	return _instance;
 }
-//--------------------------------------------------
 //--------------------------------------------------
 void SimViewStateEP::setDisplayMode(const int mode)
 {
@@ -97,36 +97,45 @@ void SimViewStateEP::prepareLegend(glAtrium* view)
 	glEndList();
 
 }
+//--------------------------------------------------
+int SimViewStateEP::findElectrode(glAtrium* view, Oscillator* src, Oscillator* osc)
+{
+	int found = -1;
+	int temp;
+	m_isSearchedMap[osc->oscillatorID] = true;
+
+
+	for (short k = 0; k < view->linkToMachine->probeOscillator.size(); ++k)
+	{
+		ProbeElectrode *probe = view->linkToMachine->probeOscillator[k];
+		if (probe->getOscillatorID() == osc->oscillatorID)
+		{
+			found = k;
+		}
+	}
+	if (found == -1)
+	{
+		double distance;
+		for (short k = 0; k < osc->m_neighbours.size(); ++k)
+		{
+			distance = sqrt(std::pow((src->m_x - osc->m_neighbours[k]->m_x), 2) +
+				std::pow((src->m_y - osc->m_neighbours[k]->m_y), 2) +
+				std::pow((src->m_z - osc->m_neighbours[k]->m_z), 2));
+
+			if (distance <= cursorRadius * 2 && !(m_isSearchedMap[osc->m_neighbours[k]->oscillatorID]))
+			{
+				temp = findElectrode(view, src, osc->m_neighbours[k]);
+				if (temp != -1)
+					found = temp;
+			}
+		}
+	}
+	return found;
+}
+//--------------------------------------------------
 void SimViewStateEP::paintCursor(glAtrium* view)
 {
-	int crossSize = 5;
-	int sizepix = floor(abs(cursorRadius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
-
-	int pixmapsize;
-	sizepix < 60 ? pixmapsize = 62 : pixmapsize = sizepix + 2;
-	QPixmap* m_LPixmap = new QPixmap(pixmapsize, pixmapsize);
-	m_LPixmap->fill(Qt::transparent);
-	QPainter painter(m_LPixmap);
-	QColor col(0, 0, 64, 128);
-
-	QPen pen;  // creates a default pen
-	pen.setStyle(Qt::SolidLine);
-	pen.setWidth(2);
-	pen.setBrush(QColor(128, 128, 128, 128));
-	painter.setPen(pen);
-	painter.setBrush(col);
-
-	painter.drawEllipse(1, 1, sizepix, sizepix);
-	painter.drawLine(floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize, floor(1 + sizepix / 2.0));
-	painter.drawLine(floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize);
-
-	painter.setBrush(QColor(256, 256, 256, 256));
-	char buff[20];
-	sprintf(buff, "%1.1f", cursorRadius * 2);
-	std::string str(buff);
-	painter.drawText(floor(3 + sizepix / 2.0), floor(-2 + sizepix / 2.0), QString(str.c_str()) + "mm");
-
-	view->setCursor(QCursor(*m_LPixmap));
+	view->setCursor(Qt::OpenHandCursor);
 }
 //--------------------------------------------------
 void SimViewStateEP::paintModel(glAtrium* view)
@@ -183,102 +192,14 @@ void SimViewStateEP::paintModel(glAtrium* view)
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
-
-	//glPushMatrix();
-
-	//// [1] Paint data
-
-	//CardiacMesh *msh = view->linkToMesh;
-	//std::vector<Oscillator*> oscs = view->linkToMesh->m_mesh;
-
-	//int vertexNumber = msh->m_vertexList.size();
-
-	//int t_ID1, t_ID2, t_ID3;
-	//GLfloat val1, val2, val3;
-	//GLfloat color[] = { 0.f, 0.f, 0.f, 1.f };
-	//GLfloat vmin = msh->m_minElectrogram;
-	//GLfloat vmax = msh->m_maxElectrogram;
-
-	//glBegin(GL_TRIANGLES);
-	//for (unsigned int j = 0; j < vertexNumber; j = j + 1)
-	//{
-	//	t_ID1 = msh->m_vertexList[j]->id_1;
-	//	t_ID2 = msh->m_vertexList[j]->id_2;
-	//	t_ID3 = msh->m_vertexList[j]->id_3;
-
-	//	if (oscs[t_ID1]->m_type != SOLID_WALL)
-	//	{
-
-	//		switch (_dataDisplayMode)
-	//		{
-	//		case 1:
-	//			val1 = oscs[t_ID1]->m_v_scaledPotential;
-	//			val2 = oscs[t_ID2]->m_v_scaledPotential;
-	//			val3 = oscs[t_ID3]->m_v_scaledPotential;
-	//			break;
-	//		case 2:
-	//			val1 = oscs[t_ID1]->getLastCurrentSource();
-	//			val2 = oscs[t_ID2]->getLastCurrentSource();
-	//			val3 = oscs[t_ID3]->getLastCurrentSource();
-	//			break;
-	//		case 3:
-	//			val1 = oscs[t_ID1]->m_v_current[0];
-	//			val2 = oscs[t_ID2]->m_v_current[0];
-	//			val3 = oscs[t_ID3]->m_v_current[0];
-	//			break;
-	//		case 4:
-	//			val1 = oscs[t_ID1]->m_currentTime - oscs[t_ID1]->m_previousTime;
-	//			val2 = oscs[t_ID2]->m_currentTime - oscs[t_ID2]->m_previousTime;
-	//			val3 = oscs[t_ID3]->m_currentTime - oscs[t_ID3]->m_previousTime;
-	//			break;
-	//		case 5:
-	//			val1 = oscs[t_ID1]->m_v_electrogram;
-	//			val2 = oscs[t_ID2]->m_v_electrogram;
-	//			val3 = oscs[t_ID3]->m_v_electrogram;
-	//			break;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		val1 = 0.0;
-	//		val2 = 0.0;
-	//		val3 = 0.0;
-	//	}
-
-	//	glBegin(GL_TRIANGLES);
-	//	colorMap(val1, vmin, vmax, color[0], color[1], color[2]);
-	//	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-	//	glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-	//	//glNormal3d(x1, y1, z1);
-	//	glVertex3f(msh->m_mesh[t_ID1]->m_x, msh->m_mesh[t_ID1]->m_y, msh->m_mesh[t_ID1]->m_z);
-
-	//	colorMap(val2, vmin, vmax, color[0], color[1], color[2]);
-	//	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-	//	glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-	//	//glNormal3d(x2, y2, z2);
-	//	glVertex3f(msh->m_mesh[t_ID2]->m_x, msh->m_mesh[t_ID2]->m_y, msh->m_mesh[t_ID2]->m_z);
-
-	//	colorMap(val3, vmin, vmax, color[0], color[1], color[2]);
-	//	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-	//	glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-	//	//glNormal3d(x3, y3, z3);
-	//	glVertex3f(msh->m_mesh[t_ID3]->m_x, msh->m_mesh[t_ID3]->m_y, msh->m_mesh[t_ID3]->m_z);
-	//	glEnd();
-
-	//}
-	//glEnd();
-
-
-
-
-
+	
 	glPushMatrix();
 
 
 	// [3] Paint probes
 		for (short n = 0; n < view->linkToMachine->probeOscillator.size(); ++n)
 		{
-			drawSphere(0.2, 10, 10, view->linkToMachine->probeOscillator[n]->getPositionX(),
+			drawSphere(0.4, 10, 10, view->linkToMachine->probeOscillator[n]->getPositionX(),
 				view->linkToMachine->probeOscillator[n]->getPositionY(),
 				view->linkToMachine->probeOscillator[n]->getPositionZ(), 1.0f / (n + 1), 1.0f / (n + 1), 1.0f);
 
@@ -289,33 +210,28 @@ void SimViewStateEP::paintModel(glAtrium* view)
 		}
 		if (view->paintRay)
 		{
-			drawSphere(0.2, 10, 10, view->testProbe.x, view->testProbe.y, view->testProbe.z, 1.0f, 1.0f, 1.0f);
+			drawSphere(0.4, 10, 10, view->testProbe.x, view->testProbe.y, view->testProbe.z, 1.0f, 1.0f, 1.0f);
 		}
 
-		glLoadIdentity();
-		drawSphere(0.2, 10, 10, view->directionRay.x, view->directionRay.y, -20, 1.0f, 1.0f, 1.0f);
 	glPopMatrix();
 }
 //--------------------------------------------------
 void SimViewStateEP::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 {
+	view->setCursor(Qt::ClosedHandCursor);
 	view->setLastPos(event->pos());
-
 	double 	y = event->pos().y();
 	double 	x = event->pos().x();
 	double height = static_cast<double>(view->height());
 	double width = static_cast<double>(view->width());
 
 	view->directionRay = view->screenToWorld(x, y, width, height);
-
 	int item = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
+
 	if (item != -1)
 	{
-		view->testProbe.x = view->linkToMesh->m_mesh[item]->m_x;
-		view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
-		view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
-		view->linkToMesh->m_stimulationID = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
-		view->linkToMachine->m_definitions->m_ectopicActivity = true;
+		m_isSearchedMap.clear();
+		_probeOnTheMove = findElectrode(view, view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item]);
 	}	
 }
 void SimViewStateEP::handleMouseRightPress(glAtrium* view, QMouseEvent *event)
@@ -325,46 +241,17 @@ void SimViewStateEP::handleMouseRightPress(glAtrium* view, QMouseEvent *event)
 }
 void SimViewStateEP::handleMouseRelease(glAtrium* view, QMouseEvent *event)
 {
+	view->setCursor(Qt::OpenHandCursor);
 	view->setLastPos(event->pos());
-
-	//if (Qt::LeftButton)
-	//{
-		view->linkToMachine->m_definitions->m_ectopicActivity = false;
-
-	//	glGetFloatv(GL_MODELVIEW_MATRIX, view->m);
-	//	view->modelMatrix = view->m;
-	//	int meshSize = view->linkToMesh->m_mesh.size();
-	//	for (unsigned int j = 0; j < meshSize; ++j)
-	//	{
-	//		view->pointRays[j] = view->modelMatrix * Vector4(view->linkToMesh->m_mesh[j]->m_x, view->linkToMesh->m_mesh[j]->m_y, view->linkToMesh->m_mesh[j]->m_z, 1.0);
-	//	}
-	////}
+	_probeOnTheMove = -1;
 }
 void SimViewStateEP::handleMousewheel(glAtrium* view, QWheelEvent *event)
 {
 	double numDegrees = static_cast<double>(event->delta()) / 350.0;
 
-
 	view->distanceToCamera -= view->zoomingSpeed*numDegrees;
-
 	paintCursor(view);
 
-
-	//if (distanceToCamera <nearClippingPlaneDistance) distanceToCamera = nearClippingPlaneDistance;
-
-	////if (event->orientation() == Qt::Horizontal) {
-	//frustrumSize -= numDegrees;
-	//if (frustrumSize <0.1) frustrumSize = 0.1;
-
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-
-	//nearClippingPlaneDistance = 2.0;
-	//glFrustum(-frustrumSize*static_cast<double>(this->width()) / static_cast<double>(this->height()),
-	//	+frustrumSize*(static_cast<double>(this->width()) / static_cast<double>(this->height())),
-	//	+frustrumSize, -frustrumSize, nearClippingPlaneDistance, 50.0);
-	//fov = 2 * atan((frustrumSize - (-frustrumSize))*0.5 / nearClippingPlaneDistance);
-	//glMatrixMode(GL_MODELVIEW);
 	event->accept();
 
 }
@@ -377,27 +264,16 @@ void SimViewStateEP::handleMouseMove(glAtrium* view, QMouseEvent *event)
 
 	view->directionRay = view->screenToWorld(x, y, width, height);
 
-	if ((event->buttons() & Qt::LeftButton))
+	if ((event->buttons() & Qt::LeftButton) && _probeOnTheMove !=-1)
 	{
-		//view->setLastPos(event->pos());
+		int item = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
 
-		//double 	y = event->pos().y();
-		//double 	x = event->pos().x();
-		//double height = static_cast<double>(view->height());
-		//double width = static_cast<double>(view->width());
-
-		//view->directionRay = view->screenToWorld(x, y, width, height);
-
-		//int item = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
-		//if (item != -1)
-		//{
-		//	view->testProbe.x = view->linkToMesh->m_mesh[item]->m_x;
-		//	view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
-		//	view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
-		//	view->linkToMachine->m_stimulationID = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
-		//	view->linkToMachine->m_definitions->m_ectopicActivity = true;
-		//}
+		if (item != -1)
+		{
+			view->linkToMachine->probeOscillator[_probeOnTheMove]->setOscillator(view->linkToMesh->m_mesh[item]);
+		}
 	}
+
 	if ((event->buttons() & Qt::RightButton))
 	{
 		Vector3 next = view->screenToWorld(event->x(), event->y(), view->viewWidth, view->viewHeight);
@@ -413,43 +289,6 @@ void SimViewStateEP::handleMouseMove(glAtrium* view, QMouseEvent *event)
 		//Matrix4 rotation;
 		quaternionToMatrix(_quat, m);
 		view->modelRotation = m;
-
-		//GLfloat t[16];
-		//glGetFloatv(GL_MODELVIEW_MATRIX, t);
-		//view->modelRotation = t;
-		//view->modelRotation = view->modelRotation* rotation;
-
-
-
-
-		//view->setXRotation(view->xRot + view->rotationSpeed * (diff.y));
-		//view->setYRotation(view->yRot + view->rotationSpeed * (diff.x));
-		//	setZRotation(zRot + rotationSpeed * (next.y - previous.y));
-
-		//setYRotation(yRot + rotationSpeed * (next.x - previous.x));
-		//setZRotation(zRot + rotationSpeed * (next.y - previous.y));
-		//setXRotation(xRot + rotationSpeed * (next.z - previous.z));
-		//	float rotX = -1 * GLKMathDegreesToRadians(diff.y / 2.0);
-
-
-
-		//Vector3 next = view->screenToWorld(event->x(), event->y(), view->viewWidth, view->viewHeight);
-		//Vector3 previous = view->screenToWorld(view->lastPos.x(), view->lastPos.y(), view->viewWidth, view->viewHeight);
-
-		//next
-		//Vector3 diff = next - previous;
-
-		//view->setXRotation(view->xRot + view->rotationSpeed * (diff.y));
-		//view->setYRotation(view->yRot + view->rotationSpeed * (diff.x));
-		////	setZRotation(zRot + rotationSpeed * (next.y - previous.y));
-
-		////setYRotation(yRot + rotationSpeed * (next.x - previous.x));
-		////setZRotation(zRot + rotationSpeed * (next.y - previous.y));
-		////setXRotation(xRot + rotationSpeed * (next.z - previous.z));
-		////	float rotX = -1 * GLKMathDegreesToRadians(diff.y / 2.0);
-		//	float rotY = -1 * GLKMathDegreesToRadians(diff.x / 2.0);
-
-		//view->lastPos = event->pos();
 	}
 	view->updateGL();
 }

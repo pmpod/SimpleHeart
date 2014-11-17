@@ -74,7 +74,7 @@ public:
 	Oscillator(void);
 	~Oscillator(void);
 
-	void stateCalculated(double a, double b, int which);	/// Qt emitter of full new state signal set
+	void stateCalculated();	/// Qt emitter of full new state signal set
 signals:
 	void newPotentialValue(double potValue);		/// Qt signal of new (scaled) potential
 	void newState(double potValue, double curValue);	/// Qt signal of new (scaled) potential & total current

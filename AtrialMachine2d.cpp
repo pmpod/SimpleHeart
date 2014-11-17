@@ -55,9 +55,9 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 	m_grid = grid;
 	m_grid->m_ectopicAmplitude = definitions->m_ectopicAmplitude;
 	
-	probeOscillator.push_back(m_grid->m_mesh[129]);
-	probeOscillator.push_back(m_grid->m_mesh[16257-128]);
-	probeOscillator.push_back(m_grid->m_mesh[5000]);
+	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[129]));
+	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[16257 - 128]));
+	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[5000]));
 
 	setAllexandreStrategy();
 }
@@ -85,13 +85,7 @@ void AtrialMachine2d::setAllexandreStrategy()
 //-------------------------------------------------------------------------
 void AtrialMachine2d::init()
 {
-	RRcalc_1 = new RRcalculator(m_definitions);
-	RRcalc_2 = new RRcalculator(m_definitions);
-	RRcalc_3 = new RRcalculator(m_definitions);
-	RRcalc_4 = new RRcalculator(m_definitions);
-
 	 m_globalTime = 0;
-	 m_mainTimestep = m_definitions->m_mainTimestep;
 	 m_skip = m_definitions->m_mainSkip;
 }
 //------------------------------------------------------------------------------------------
@@ -128,15 +122,12 @@ double AtrialMachine2d::processStep()
 	}
 
 
-	RRcalc_1->processNewTime(m_globalTime, probeOscillator[0]->getPotential());
-	RRcalc_2->processNewTime(m_globalTime, probeOscillator[1]->getPotential());
-	RRcalc_3->processNewTime(m_globalTime, probeOscillator[2]->getPotential());
 	//m_grid->calculateElectrogram(probeOscillator[0]);
 	//m_grid->calculateElectrogram(probeOscillator[1]);
 	//m_grid->calculateElectrogram(probeOscillator[2]);
-	probeOscillator[0]->stateCalculated(1, 0, 0);
-	probeOscillator[1]->stateCalculated(1, 0, 0);
-	probeOscillator[2]->stateCalculated(1, 0, 0);
+	probeOscillator[0]->processNewTime(m_globalTime);
+	probeOscillator[1]->processNewTime(m_globalTime);
+	probeOscillator[2]->processNewTime(m_globalTime);
 
 	return m_globalTime;
 

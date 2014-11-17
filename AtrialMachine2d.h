@@ -3,7 +3,6 @@
 #include <vector>
 #include <cmath>
 #include <QtGui/QMessageBox>
-#include "RRcalculator.h"
 #include "Model\Oscillator.h"
 #include "Model\vanDerGru.h"
 #include "Model\v3model.h"
@@ -14,6 +13,7 @@
 #include "RandomGenerator.h"
 #include "atrialParameters.h"
 #include "Model\CardiacMesh.h"
+#include "Control\ProbeElectrode.h"
 #include "NumericStrategy\NumericStrategy.h"
 
 class burster
@@ -37,9 +37,9 @@ class AtrialMachine2d : public QObject
 public:
 	AtrialMachine2d(atrialParameters* definitions, CardiacMesh *grid);
 	~AtrialMachine2d(void);
+	void deleteAtrium();
 	void init();
 
-	void deleteAtrium();
 	void setForwardEulerStrategy();
 	void setAllexandreStrategy();
 	void(AtrialMachine2d::*setStrategy)();
@@ -50,38 +50,28 @@ public:
 	//-------------------------------------------------------------
 	atrialParameters*		m_definitions;
 	RandomGenerator		generator;
-	RRcalculator*		RRcalc_1;			// maszyna licz¹ca rr-y
-	RRcalculator*		RRcalc_2;			// maszyna licz¹ca rr-y
-	RRcalculator*		RRcalc_3;			// maszyna licz¹ca rr-y
-	RRcalculator*		RRcalc_4;			// maszyna licz¹ca rr-y
-	Oscillator*			probeRR_4;
-	std::vector<Oscillator*> probeOscillator;
-
-	//std::vector<std::vector<Oscillator*>> m_oscillators;
-	std::vector<std::vector<double>> m_diffusionCoefficients;
-	std::vector<std::vector<double>> m_anisotrophyCoefficients;
-	std::vector<std::pair<Oscillator*, Oscillator*>> m_wallCells;
-
+	//-------------------------------------------------------------
+	std::vector<ProbeElectrode*> probeOscillator;
 	CardiacMesh* m_grid;
 	NumericStrategy* m_strategy;
 	//-------------------------------------------------------------
 	double m_globalTime;
 	int	   m_skip;
-	double m_mainTimestep;
-	double nextTimestep;
-	double nextTime;
-	double nextPotential;
-	double nextCurrent[3];
+
+	//double m_mainTimestep;
+	//double nextTimestep;
+	//double nextTime;
+	//double nextPotential;
+	//double nextCurrent[3];
 
 	bool structureUpdated;
 	//-------------------------------------------------------------
 signals:
 	void stepFinished();
-	void currentHormonalActivity(double, double);
 	void currentOscilatorPotential(double, double);
 	void currentOscilatorPotential_tab(double*);
-	void emitDebug(double);
-	public slots:
+
+public slots:
 	double processStep();
 	void reset();
 	void calculateFullElectrogramMap();

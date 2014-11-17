@@ -1297,12 +1297,12 @@ void ioHandler::savePotentialPlot()
 		output << "time \t v[electr 1] \t v[electr_2] \t v[electr3]" <<endl <<endl;
 
 
-		for (int j = 0; j < m_handle->plotPotentialE1->d_data[0]->size(); ++j)
+		for (int j = 0; j < m_handle->plotPotentials[0]->d_data[0]->size(); ++j)
 		{
-			output << m_handle->plotPotentialE1->d_data[0]->x()[j]  << "\t  ";
-			output << m_handle->plotPotentialE1->d_data[0]->y()[j]  << "\t  ";
-			output << m_handle->plotPotentialE2->d_data[1]->y()[j] << " \t ";
-			output << m_handle->plotPotentialE3->d_data[2]->y()[j]  << " ";
+			output << m_handle->plotPotentials[0]->d_data[0]->x()[j]  << "\t  ";
+			output << m_handle->plotPotentials[0]->d_data[0]->y()[j]  << "\t  ";
+			output << m_handle->plotPotentials[1]->d_data[1]->y()[j] << " \t ";
+			output << m_handle->plotPotentials[2]->d_data[2]->y()[j]  << " ";
 			output << endl;
 		}
 	}
@@ -1343,10 +1343,10 @@ void ioHandler::saveRRPlot_1()
 		output << "Electrode 1 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[0]->getPositionX()<<", ";
 		output <<  m_handle->Machine2d->probeOscillator[0]->getPositionY()<<") "<<endl;
 
-		for (int j = 0; j < m_handle->plotRR_el1->d_data[0]->size(); ++j)
+		for (int j = 0; j < m_handle->plotRR[0]->d_data[0]->size(); ++j)
 		{
-			output << m_handle->plotRR_el1->d_data[0]->x()[j]  << "\t  ";
-			output << m_handle->plotRR_el1->d_data[0]->y()[j]  << " ";
+			output << m_handle->plotRR[0]->d_data[0]->x()[j]  << "\t  ";
+			output << m_handle->plotRR[0]->d_data[0]->y()[j]  << " ";
 			output << endl;
 		}
 	}
@@ -1386,10 +1386,10 @@ void ioHandler::saveRRPlot_2()
 		output << "Electrode 2 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[1]->getPositionX()<<", ";
 		output <<  m_handle->Machine2d->probeOscillator[1]->getPositionY()<<") "<<endl;
 
-		for (int j = 0; j < m_handle->plotRR_el2->d_data[0]->size(); ++j)
+		for (int j = 0; j < m_handle->plotRR[1]->d_data[0]->size(); ++j)
 		{
-			output << m_handle->plotRR_el2->d_data[0]->x()[j]  << "\t  ";
-			output << m_handle->plotRR_el2->d_data[0]->y()[j]  << " ";
+			output << m_handle->plotRR[1]->d_data[0]->x()[j] << "\t  ";
+			output << m_handle->plotRR[1]->d_data[0]->y()[j] << " ";
 			output << endl;
 		}
 	}
@@ -1429,10 +1429,10 @@ void ioHandler::saveRRPlot_3()
 		output << "Electrode 3 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[2]->getPositionX()<<", ";
 		output <<  m_handle->Machine2d->probeOscillator[2]->getPositionY()<<") "<<endl;
 
-		for (int j = 0; j < m_handle->plotRR_el3->d_data[0]->size(); ++j)
+		for (int j = 0; j < m_handle->plotRR[2]->d_data[0]->size(); ++j)
 		{
-			output << m_handle->plotRR_el3->d_data[0]->x()[j]  << "\t  ";
-			output << m_handle->plotRR_el3->d_data[0]->y()[j]  << " ";
+			output << m_handle->plotRR[2]->d_data[0]->x()[j] << "\t  ";
+			output << m_handle->plotRR[2]->d_data[0]->y()[j] << " ";
 			output << endl;
 		}
 	}

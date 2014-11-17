@@ -36,13 +36,9 @@ public:
 	void setupConnections();
 
 	
-	TimePlot	*plotPotentialE1;
-	TimePlot	*plotPotentialE2;
-	TimePlot	*plotPotentialE3;
+	std::vector<TimePlot*> plotPotentials;
 	
-	rrPlot				*plotRR_el1;
-	rrPlot				*plotRR_el2;
-	rrPlot				*plotRR_el3;
+	std::vector<rrPlot*>	plotRR;
 	
 	rrPlot				*plotEnt_el1;
 	rrPlot				*plotEnt_el2;

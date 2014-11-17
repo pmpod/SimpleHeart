@@ -21,6 +21,10 @@ CardiacMesh::~CardiacMesh()
 {
 	free(m_indicesMatrix);
 	free(m_vertexMatrix);
+	this->destroyGrid();
+}
+void CardiacMesh::destroyGrid()
+{
 	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();
 }
 
@@ -275,7 +279,7 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 
 	return grid;
 }
-
+//------------------------------------------------------------------------------------------
 void CardiacMesh::clearWallCells()
 {
 	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
@@ -312,11 +316,6 @@ void CardiacMesh::setDiffusionCoefficients()
 	{
 		m_mesh[j]->setSigma(0.04, 0.04, 0);
 	}
-}
-//---------------------------------------------------------------------------
-void CardiacMesh::destroyGrid()
-{
-	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();
 }
 //---------------------------------------------------------------------------
 void CardiacMesh::startStimulation(Oscillator* osc, const int& id, const double radius, const double strength)
@@ -372,8 +371,6 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 	return ele_val;
 	//END ELECTROGRAM
 }
-
-//-----------------------------------------------------------
 void CardiacMesh::setVertexTriangleList(bool doublesided)
 {
 	int meshSize = m_mesh.size();
@@ -472,7 +469,7 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 		m_indicesMatrix[3 * currentVertex+2] = m_vertexList[currentVertex]->id_3;
 	}
 }
-
+//-----------------------------------------------------------
 void CardiacMesh::calculateCenter()
 {
 	centerGeom.x = 0;

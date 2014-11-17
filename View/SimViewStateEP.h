@@ -1,6 +1,6 @@
 #pragma once
 #include "View\SimViewState.h"
-
+#include "Model\Oscillator.h"
 
 class SimViewStateEP: public SimViewState
 {
@@ -21,8 +21,11 @@ public:
 	void paintModel(glAtrium*);
 	void prepareLegend(glAtrium*);
 protected:
+	int findElectrode(glAtrium* view, Oscillator* src, Oscillator* osc);
 private:
 	static SimViewStateEP* _instance;
 	short _dataDisplayMode;
+	short _probeOnTheMove;
+	std::map < int, bool > m_isSearchedMap;
 };
 

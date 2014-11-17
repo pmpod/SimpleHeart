@@ -276,10 +276,10 @@ void Oscillator::setCurrentTime(const double& time)
 	m_currentTime = time;
 }
 //---------------------------------------------------------------
-void Oscillator::stateCalculated(double a, double b, int which)
+void Oscillator::stateCalculated()
 {
-	emit newPotentialValue(a*getElectrogram() + b);
-	emit newState(a*getElectrogram(), a*getCurrent(which) + b);
+	emit newPotentialValue(getElectrogram());
+	emit newState(getElectrogram(), getCurrent(0));
 	emit newPotentialTime(m_currentTime, getElectrogram());
 }
 //---------------------------------------------------------------

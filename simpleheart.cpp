@@ -44,19 +44,19 @@ void SimpleHeart::reset()
 {
 	ui.statusBar->showMessage(tr("Simulation reset"));
 
-	QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextRR(double)),plotRR_el1, SLOT(appendRR(double)));	
-	QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextRR(double)),plotRR_el2, SLOT(appendRR(double)));	
-	QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextRR(double)),plotRR_el3, SLOT(appendRR(double)));	
-	plotRR_el1->clear();
-	plotRR_el1->d_curve.front()->setPen(QPen(QBrush(QColor(255,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-	plotRR_el2->clear();
-	plotRR_el2->d_curve.back()->setPen(QPen(QBrush(QColor(255,0,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-	plotRR_el3->clear();
-	plotRR_el3->d_curve.back()->setPen(QPen(QBrush(QColor(0,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-	ui.statusBar->showMessage(tr("Simulation reset"));
-	QObject::connect( Machine2d->RRcalc_1, SIGNAL(nextRR(double)),plotRR_el1, SLOT(appendRR(double)));	
-	QObject::connect( Machine2d->RRcalc_2, SIGNAL(nextRR(double)),plotRR_el2, SLOT(appendRR(double)));	
-	QObject::connect( Machine2d->RRcalc_3, SIGNAL(nextRR(double)),plotRR_el3, SLOT(appendRR(double)));	
+	//QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextRR(double)),plotRR_el1, SLOT(appendRR(double)));	
+	//QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextRR(double)),plotRR_el2, SLOT(appendRR(double)));	
+	//QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextRR(double)),plotRR_el3, SLOT(appendRR(double)));	
+	for (short k = 0; k < plotRR.size(); ++k)
+	{
+		plotRR[k]->clear();
+	}
+	plotRR[0]->d_curve.back()->setPen(QPen(QBrush(QColor(255, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
+	plotRR[1]->d_curve.back()->setPen(QPen(QBrush(QColor(255,0,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
+	plotRR[2]->d_curve.back()->setPen(QPen(QBrush(QColor(0,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
+	//QObject::connect( Machine2d->RRcalc_1, SIGNAL(nextRR(double)),plotRR_el1, SLOT(appendRR(double)));	
+	//QObject::connect( Machine2d->RRcalc_2, SIGNAL(nextRR(double)),plotRR_el2, SLOT(appendRR(double)));	
+	//QObject::connect( Machine2d->RRcalc_3, SIGNAL(nextRR(double)),plotRR_el3, SLOT(appendRR(double)));	
 
 }
 void SimpleHeart::init()
@@ -83,63 +83,56 @@ void SimpleHeart::init()
 
 
 	//--------------------
-	plotPotentialE1 = new TimePlot(ui.displayGraphs);
-	plotPotentialE1->setObjectName(QString::fromUtf8("Electrogram 1"));
-	//plotPotentialE1->setAxisAutoScale( QwtPlot::yLeft );
-	plotPotentialE1->setMinimumHeight(2);
-	plotPotentialE1->enableAxis(QwtPlot::xBottom, false);
-	plotPotentialE1->setAxisTitle(QwtPlot::yLeft, "Probe 1");
-	plotPotentialE2 = new TimePlot(ui.displayGraphs);
-	plotPotentialE2->setObjectName(QString::fromUtf8("Electrogram 2"));
-	plotPotentialE2->setAxisTitle(QwtPlot::yLeft, "Probe 2");
-	//	plotPotentialE2->setAxisAutoScale( QwtPlot::yLeft );
-	plotPotentialE2->setMinimumHeight(2);
-	plotPotentialE2->enableAxis(QwtPlot::xBottom, false);
-	plotPotentialE3 = new TimePlot(ui.displayGraphs);
-	plotPotentialE3->setObjectName(QString::fromUtf8("Electrogram 3"));
-	plotPotentialE3->setAxisTitle(QwtPlot::yLeft, "Probe 3");
-	//plotPotentialE3->setAxisAutoScale( QwtPlot::yLeft );
-	plotPotentialE3->setMinimumHeight(2);
+	plotPotentials.push_back(new TimePlot(ui.displayGraphs));
+	plotPotentials.push_back(new TimePlot(ui.displayGraphs));
+	plotPotentials.push_back(new TimePlot(ui.displayGraphs));
+	for (short k = 0; k < plotPotentials.size(); ++k)
+	{
+		plotPotentials[k]->setMinimumHeight(2);
+		plotPotentials[k]->enableAxis(QwtPlot::xBottom, false);
+		plotPotentials[k]->setAxisAutoScale(QwtPlot::yLeft);
+	}
+	plotPotentials[0]->setObjectName(QString::fromUtf8("Electrogram 1"));
+	plotPotentials[0]->setAxisTitle(QwtPlot::yLeft, "Probe 1");
+	plotPotentials[1]->setObjectName(QString::fromUtf8("Electrogram 2"));
+	plotPotentials[1]->setAxisTitle(QwtPlot::yLeft, "Probe 2");
+	plotPotentials[2]->setObjectName(QString::fromUtf8("Electrogram 3"));
+	plotPotentials[2]->setAxisTitle(QwtPlot::yLeft, "Probe 3");
+	plotPotentials[2]->enableAxis(QwtPlot::xBottom, true);
 	//------------------------------
-	plotRR_el1 = new rrPlot(ui.displayGraphs_3);
-	plotRR_el1->setObjectName(QString::fromUtf8("plot RR"));
-	plotRR_el1->setAxisAutoScale(QwtPlot::yLeft);
-	plotRR_el1->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotRR_el1->setMinimumHeight(2);
-
-	plotRR_el1->d_curve.front()->setPen(QPen(QBrush(QColor(255, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
-	plotRR_el2 = new rrPlot(ui.displayGraphs_3);
-	plotRR_el2->setObjectName(QString::fromUtf8("plot RR"));
-	plotRR_el2->setAxisAutoScale(QwtPlot::yLeft);
-	plotRR_el2->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotRR_el2->setMinimumHeight(2);
-	plotRR_el2->d_curve.front()->setPen(QPen(QBrush(QColor(255, 0, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
-	plotRR_el3 = new rrPlot(ui.displayGraphs_3);
-	plotRR_el3->setObjectName(QString::fromUtf8("plot RR"));
-	plotRR_el3->setAxisAutoScale(QwtPlot::yLeft);
-	plotRR_el3->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotRR_el3->setMinimumHeight(2);
-	plotRR_el3->d_curve.front()->setPen(QPen(QBrush(QColor(0, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
+	plotRR.push_back(new rrPlot(ui.displayGraphs_3));
+	plotRR.push_back(new rrPlot(ui.displayGraphs_3));
+	plotRR.push_back(new rrPlot(ui.displayGraphs_3));
+	for (short k = 0; k < plotRR.size(); ++k)
+	{
+		plotRR[k]->setObjectName(QString::fromUtf8("plot RR"));
+		plotRR[k]->setAxisAutoScale(QwtPlot::yLeft);
+		plotRR[k]->setAxisScale(QwtPlot::xBottom, 0, 99);
+		plotRR[k]->setMinimumHeight(2);
+	}
+	plotRR[0]->d_curve.front()->setPen(QPen(QBrush(QColor(255, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
+	plotRR[1]->d_curve.front()->setPen(QPen(QBrush(QColor(255, 0, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
+	plotRR[2]->d_curve.front()->setPen(QPen(QBrush(QColor(0, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
 	//------------------------------
-	plotEnt_el1 = new rrPlot(ui.displayGraphs_3);
-	plotEnt_el1->setObjectName(QString::fromUtf8("plot Entropy"));
-	plotEnt_el1->setAxisAutoScale(QwtPlot::yLeft);
-	plotEnt_el1->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotEnt_el1->setMinimumHeight(2);
+	//plotEnt_el1 = new rrPlot(ui.displayGraphs_3);
+	//plotEnt_el1->setObjectName(QString::fromUtf8("plot Entropy"));
+	//plotEnt_el1->setAxisAutoScale(QwtPlot::yLeft);
+	//plotEnt_el1->setAxisScale(QwtPlot::xBottom, 0, 99);
+	//plotEnt_el1->setMinimumHeight(2);
 
-	plotEnt_el1->d_curve.back()->setPen(QPen(Qt::yellow));
-	plotEnt_el2 = new rrPlot(ui.displayGraphs_3);
-	plotEnt_el2->setObjectName(QString::fromUtf8("plot Entropy"));
-	plotEnt_el2->setAxisAutoScale(QwtPlot::yLeft);
-	plotEnt_el2->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotEnt_el2->setMinimumHeight(2);
-	plotEnt_el2->d_curve.back()->setPen(QPen(Qt::red));
-	plotEnt_el3 = new rrPlot(ui.displayGraphs_3);
-	plotEnt_el3->setObjectName(QString::fromUtf8("plot Entropy"));
-	plotEnt_el3->setAxisAutoScale(QwtPlot::yLeft);
-	plotEnt_el3->setAxisScale(QwtPlot::xBottom, 0, 99);
-	plotEnt_el3->setMinimumHeight(2);
-	plotEnt_el3->d_curve.back()->setPen(QPen(Qt::green));
+	//plotEnt_el1->d_curve.back()->setPen(QPen(Qt::yellow));
+	//plotEnt_el2 = new rrPlot(ui.displayGraphs_3);
+	//plotEnt_el2->setObjectName(QString::fromUtf8("plot Entropy"));
+	//plotEnt_el2->setAxisAutoScale(QwtPlot::yLeft);
+	//plotEnt_el2->setAxisScale(QwtPlot::xBottom, 0, 99);
+	//plotEnt_el2->setMinimumHeight(2);
+	//plotEnt_el2->d_curve.back()->setPen(QPen(Qt::red));
+	//plotEnt_el3 = new rrPlot(ui.displayGraphs_3);
+	//plotEnt_el3->setObjectName(QString::fromUtf8("plot Entropy"));
+	//plotEnt_el3->setAxisAutoScale(QwtPlot::yLeft);
+	//plotEnt_el3->setAxisScale(QwtPlot::xBottom, 0, 99);
+	//plotEnt_el3->setMinimumHeight(2);
+	//plotEnt_el3->d_curve.back()->setPen(QPen(Qt::green));
 
 
 
@@ -175,18 +168,18 @@ void SimpleHeart::init()
 	ui.displayMain->setLayout(layout_Visualisation);
 	//layout_Diffusion->addWidget( diffusionPainter );
 	//ui.displayDiffusion->setLayout(layout_Diffusion);
-	layout_Plots->addWidget( plotPotentialE1 );
-	layout_Plots->addWidget( plotPotentialE2 );
-	layout_Plots->addWidget( plotPotentialE3 );
+	layout_Plots->addWidget( plotPotentials[0] );
+	layout_Plots->addWidget( plotPotentials[1] );
+	layout_Plots->addWidget(plotPotentials[2]);
 	ui.displayGraphs->setLayout(layout_Plots);
-	layout_PlotsRR->addWidget( plotRR_el1 );
-	layout_PlotsRR->addWidget( plotRR_el2 );
-	layout_PlotsRR->addWidget( plotRR_el3 );
+	layout_PlotsRR->addWidget( plotRR[0] );
+	layout_PlotsRR->addWidget(plotRR[1]);
+	layout_PlotsRR->addWidget(plotRR[2]);
 	ui.displayGraphs_3->setLayout(layout_PlotsRR);
-	layout_PlotsEnt->addWidget( plotEnt_el1 );
-	layout_PlotsEnt->addWidget( plotEnt_el2 );
-	layout_PlotsEnt->addWidget( plotEnt_el3 );
-	ui.displayGraphs_6->setLayout(layout_PlotsEnt);
+	//layout_PlotsEnt->addWidget( plotEnt_el1 );
+	//layout_PlotsEnt->addWidget( plotEnt_el2 );
+	//layout_PlotsEnt->addWidget( plotEnt_el3 );
+	//ui.displayGraphs_6->setLayout(layout_PlotsEnt);
 
 //----------
 	msgBoxAbout = new QMessageBox(QMessageBox::Information,"About"," ",QMessageBox::Ok, this);
@@ -218,12 +211,14 @@ void SimpleHeart::setupConnections()
 
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d, SLOT(reset()));
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), this, SLOT(reset()));
-	QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentialE1, SLOT(clear()));
-	QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentialE2, SLOT(clear()));
-	QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentialE3, SLOT(clear()));
-	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->RRcalc_1, SLOT(reset()));
-	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->RRcalc_2, SLOT(reset()));
-	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->RRcalc_3, SLOT(reset()));
+	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+	{
+		QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->probeOscillator[k], SLOT(reset()));
+	}
+	for (short k = 0; k < plotPotentials.size(); ++k)
+	{
+		QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentials[k], SLOT(clear()));
+	}
 
 //	QObject::connect(ui.sb_tau, SIGNAL(valueChanged(int)), Machine2d->m_definitions, SLOT(setTau(int)));
 //	QObject::connect(ui.sb_winSize, SIGNAL(valueChanged(int)), Machine2d->m_definitions, SLOT(setWindowSize(int)));
@@ -302,84 +297,65 @@ void SimpleHeart::setupConnections()
 
 //---------------------GRAPH CONNECTIONS -------------------------------------------
 	//QObject::connect(diffusionPainter, SIGNAL(positionElektrode(int, int,int)), this, SLOT(setProbeElectrode(int,int,int)));
-	QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
-	QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double, double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
-	QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double, double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
+	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+	{
+		QObject::connect(Machine2d->probeOscillator[k], SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
+	}
 	QObject::connect(ui.rb_probe1, SIGNAL(toggled(bool)), this, SLOT(switchElectrode()));
 	QObject::connect(ui.rb_probe2, SIGNAL(toggled(bool)), this, SLOT(switchElectrode()));
 	QObject::connect(ui.rb_probe3, SIGNAL(toggled(bool)), this, SLOT(switchElectrode()));	
 
-	QObject::connect( Machine2d->RRcalc_1, SIGNAL(nextRR(double)),plotRR_el1, SLOT(appendRR(double)));	
-	QObject::connect( Machine2d->RRcalc_2, SIGNAL(nextRR(double)),plotRR_el2, SLOT(appendRR(double)));	
-	QObject::connect( Machine2d->RRcalc_3, SIGNAL(nextRR(double)),plotRR_el3, SLOT(appendRR(double)));	
+	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+	{
+		QObject::connect(Machine2d->probeOscillator[k], SIGNAL(clicked()), plotRR[k], SLOT(appendRR(double)));
+	}
 
 
 	QObject::connect(ui.b_potentialplot_clear, SIGNAL(clicked()), this, SLOT(plotPotentialClear()));
-	QObject::connect(ui.b_potentialplot_autoscale, SIGNAL(clicked()), plotPotentialE1, SLOT(autoscale()));
-	QObject::connect(ui.b_potentialplot_zoominY, SIGNAL(clicked()), plotPotentialE1, SLOT(zoomInY()));
-	QObject::connect(ui.b_potentialplot_zoomoutY, SIGNAL(clicked()), plotPotentialE1, SLOT(zoomOutY()));
-	QObject::connect(ui.b_potentialplot_zoominX, SIGNAL(clicked()), plotPotentialE1, SLOT(zoomInX()));
-	QObject::connect(ui.b_potentialplot_zoomoutX, SIGNAL(clicked()), plotPotentialE1, SLOT(zoomOutX()));
-
-	QObject::connect(ui.b_potentialplot_autoscale, SIGNAL(clicked()), plotPotentialE2, SLOT(autoscale()));
-	QObject::connect(ui.b_potentialplot_zoominY, SIGNAL(clicked()), plotPotentialE2, SLOT(zoomInY()));
-	QObject::connect(ui.b_potentialplot_zoomoutY, SIGNAL(clicked()), plotPotentialE2, SLOT(zoomOutY()));
-	QObject::connect(ui.b_potentialplot_zoominX, SIGNAL(clicked()), plotPotentialE2, SLOT(zoomInX()));
-	QObject::connect(ui.b_potentialplot_zoomoutX, SIGNAL(clicked()), plotPotentialE2, SLOT(zoomOutX()));
-
-	QObject::connect(ui.b_potentialplot_autoscale, SIGNAL(clicked()), plotPotentialE3, SLOT(autoscale()));
-	QObject::connect(ui.b_potentialplot_zoominY, SIGNAL(clicked()), plotPotentialE3, SLOT(zoomInY()));
-	QObject::connect(ui.b_potentialplot_zoomoutY, SIGNAL(clicked()), plotPotentialE3, SLOT(zoomOutY()));
-	QObject::connect(ui.b_potentialplot_zoominX, SIGNAL(clicked()), plotPotentialE3, SLOT(zoomInX()));
-	QObject::connect(ui.b_potentialplot_zoomoutX, SIGNAL(clicked()), plotPotentialE3, SLOT(zoomOutX()));
-
-	QObject::connect(ui.b_rrplot_autoscale, SIGNAL(clicked()), plotRR_el1, SLOT(autoscale()));
-	QObject::connect(ui.b_rrplot_zoominX, SIGNAL(clicked()), plotRR_el1, SLOT(zoomInX()));
-	QObject::connect(ui.b_rrplot_zoomoutX, SIGNAL(clicked()), plotRR_el1, SLOT(zoomOutX()));
-	//QObject::connect(ui.b_rrplot_zoominY, SIGNAL(clicked()), plotRR_el1, SLOT(zoomInY()));
-	//QObject::connect(ui.b_rrplot_zoomoutY, SIGNAL(clicked()), plotRR_el1, SLOT(zoomOutY()));
-	QObject::connect(ui.sb_yminRR, SIGNAL(valueChanged(double)), plotRR_el1, SLOT(setYmin(double)));
-	QObject::connect(ui.sb_ymaxRR, SIGNAL(valueChanged(double)), plotRR_el1, SLOT(setYmax(double)));
+	for (short k = 0; k < plotPotentials.size(); ++k)
+	{
+		QObject::connect(ui.b_potentialplot_autoscale, SIGNAL(clicked()), plotPotentials[k], SLOT(autoscale()));
+		QObject::connect(ui.b_potentialplot_zoominY, SIGNAL(clicked()), plotPotentials[k], SLOT(zoomInY()));
+		QObject::connect(ui.b_potentialplot_zoomoutY, SIGNAL(clicked()), plotPotentials[k], SLOT(zoomOutY()));
+		QObject::connect(ui.b_potentialplot_zoominX, SIGNAL(clicked()), plotPotentials[k], SLOT(zoomInX()));
+		QObject::connect(ui.b_potentialplot_zoomoutX, SIGNAL(clicked()), plotPotentials[k], SLOT(zoomOutX()));
+	}
+	QObject::connect(ui.b_potentialplot_save, SIGNAL(clicked()), m_ioHandler, SLOT(savePotentialPlot()));
 
 	QObject::connect(ui.b_rrplot_clear, SIGNAL(clicked()), this, SLOT(plotRRClear()));
+	for (short k = 0; k < plotRR.size(); ++k)
+	{
+
+		QObject::connect(ui.b_rrplot_autoscale, SIGNAL(clicked()), plotRR[k], SLOT(autoscale()));
+		QObject::connect(ui.b_rrplot_zoominX, SIGNAL(clicked()), plotRR[k], SLOT(zoomInX()));
+		QObject::connect(ui.b_rrplot_zoomoutX, SIGNAL(clicked()), plotRR[k], SLOT(zoomOutX()));
+		QObject::connect(ui.sb_yminRR, SIGNAL(valueChanged(double)), plotRR[k], SLOT(setYmin(double)));
+		QObject::connect(ui.sb_ymaxRR, SIGNAL(valueChanged(double)), plotRR[k], SLOT(setYmax(double)));
+	}
 	QObject::connect(ui.b_rrlplot_save, SIGNAL(clicked()), m_ioHandler, SLOT(saveRRPlot_1()));
 	QObject::connect(ui.b_rrlplot_save, SIGNAL(clicked()), m_ioHandler, SLOT(saveRRPlot_2()));
 	QObject::connect(ui.b_rrlplot_save, SIGNAL(clicked()), m_ioHandler, SLOT(saveRRPlot_3()));
 
-	QObject::connect(ui.b_rrplot_autoscale, SIGNAL(clicked()), plotRR_el2, SLOT(autoscale()));
-	QObject::connect(ui.b_rrplot_zoominX, SIGNAL(clicked()), plotRR_el2, SLOT(zoomInX()));
-	QObject::connect(ui.b_rrplot_zoomoutX, SIGNAL(clicked()), plotRR_el2, SLOT(zoomOutX()));
-	QObject::connect(ui.sb_yminRR, SIGNAL(valueChanged(double)), plotRR_el2, SLOT(setYmin(double)));
-	QObject::connect(ui.sb_ymaxRR, SIGNAL(valueChanged(double)), plotRR_el2, SLOT(setYmax(double)));
+	
+	//QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el1, SLOT(autoscale()));
+	//QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el1, SLOT(zoomInX()));
+	//QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el1, SLOT(zoomOutX()));
+	//QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el1, SLOT(setYmin(double)));
+	//QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el1, SLOT(setYmax(double)));
 
-	QObject::connect(ui.b_rrplot_autoscale, SIGNAL(clicked()), plotRR_el3, SLOT(autoscale()));
-	QObject::connect(ui.b_rrplot_zoominX, SIGNAL(clicked()), plotRR_el3, SLOT(zoomInX()));
-	QObject::connect(ui.b_rrplot_zoomoutX, SIGNAL(clicked()), plotRR_el3, SLOT(zoomOutX()));
-	QObject::connect(ui.sb_yminRR, SIGNAL(valueChanged(double)), plotRR_el3, SLOT(setYmin(double)));
-	QObject::connect(ui.sb_ymaxRR, SIGNAL(valueChanged(double)), plotRR_el3, SLOT(setYmax(double)));
+	//QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el2, SLOT(autoscale()));
+	//QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el2, SLOT(zoomInX()));
+	//QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el2, SLOT(zoomOutX()));
+	//QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el2, SLOT(setYmin(double)));
+	//QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el2, SLOT(setYmax(double)));
 
+	//QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el3, SLOT(autoscale()));
+	//QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el3, SLOT(zoomInX()));
+	//QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el3, SLOT(zoomOutX()));
+	//QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el3, SLOT(setYmin(double)));
+	//QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el3, SLOT(setYmax(double)));
+	////QObject::connect(ui.b_rrplot_clear_3, SIGNAL(clicked()), this, SLOT(plotEntClear()));
 
-
-	QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el1, SLOT(autoscale()));
-	QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el1, SLOT(zoomInX()));
-	QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el1, SLOT(zoomOutX()));
-	QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el1, SLOT(setYmin(double)));
-	QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el1, SLOT(setYmax(double)));
-
-	QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el2, SLOT(autoscale()));
-	QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el2, SLOT(zoomInX()));
-	QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el2, SLOT(zoomOutX()));
-	QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el2, SLOT(setYmin(double)));
-	QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el2, SLOT(setYmax(double)));
-
-	QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el3, SLOT(autoscale()));
-	QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el3, SLOT(zoomInX()));
-	QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el3, SLOT(zoomOutX()));
-	QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el3, SLOT(setYmin(double)));
-	QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el3, SLOT(setYmax(double)));
-	//QObject::connect(ui.b_rrplot_clear_3, SIGNAL(clicked()), this, SLOT(plotEntClear()));
-
-	QObject::connect(ui.b_potentialplot_save, SIGNAL(clicked()), m_ioHandler, SLOT(savePotentialPlot()));
 
 }
 
@@ -412,9 +388,9 @@ void SimpleHeart::plotPotentialClear()
             tr("&Yes"), tr("&No"),
             QString::null, 0, 1 ) )
 	{
-		plotPotentialE1->clear();
-		plotPotentialE2->clear();
-		plotPotentialE3->clear();
+		for (short k = 0; k < plotPotentials.size(); ++k)
+			plotPotentials[k]->clear();
+
 		ui.statusBar->showMessage(tr("Plots cleared"));
 	}
 
@@ -428,12 +404,12 @@ void SimpleHeart::plotRRClear()
             tr("&Yes"), tr("&No"),
             QString::null, 0, 1 ) )
 	{
-		plotRR_el1->clear();
-	plotRR_el1->d_curve.front()->setPen(QPen(QBrush(QColor(255,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-		plotRR_el2->clear();
-	plotRR_el2->d_curve.front()->setPen(QPen(QBrush(QColor(255,0,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-		plotRR_el3->clear();
-	plotRR_el3->d_curve.front()->setPen(QPen(QBrush(QColor(0,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
+		for (short k = 0; k < plotPotentials.size(); ++k)
+			plotRR[k]->clear();
+
+		plotRR[0]->d_curve.front()->setPen(QPen(QBrush(QColor(255,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
+		plotRR[1]->d_curve.front()->setPen(QPen(QBrush(QColor(255,0,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
+		plotRR[2]->d_curve.front()->setPen(QPen(QBrush(QColor(0,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
 		ui.statusBar->showMessage(tr("Plots cleared"));
 	}
 
@@ -561,62 +537,62 @@ void SimpleHeart::setAtrialDiffusion()
 void SimpleHeart::setEntropyToggle(bool v)
 {
 
-	ui.statusBar->showMessage(tr("setEntropyToggle"));
-	if(v)
-	{
-		ui.statusBar->showMessage("Entropy measurment ON");
-		if(m_patternEnt)
-		{
-			QObject::connect( Machine2d->RRcalc_1, SIGNAL(nextPatEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
-			QObject::connect( Machine2d->RRcalc_2, SIGNAL(nextPatEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
-			QObject::connect( Machine2d->RRcalc_3, SIGNAL(nextPatEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextVarEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextVarEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextVarEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
+	//ui.statusBar->showMessage(tr("setEntropyToggle"));
+	//if(v)
+	//{
+	//	ui.statusBar->showMessage("Entropy measurment ON");
+	//	if(m_patternEnt)
+	//	{
+	//		QObject::connect( Machine2d->RRcalc_1, SIGNAL(nextPatEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
+	//		QObject::connect( Machine2d->RRcalc_2, SIGNAL(nextPatEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
+	//		QObject::connect( Machine2d->RRcalc_3, SIGNAL(nextPatEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextVarEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextVarEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextVarEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
 
-			
-			QObject::connect(Machine2d->RRcalc_1, SIGNAL(nextRR(double)), Machine2d->RRcalc_1, SLOT(calculatePatEn(double)));
-			QObject::connect(Machine2d->RRcalc_2, SIGNAL(nextRR(double)), Machine2d->RRcalc_2, SLOT(calculatePatEn(double)));
-			QObject::connect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculatePatEn(double)));
-			QObject::disconnect(Machine2d->RRcalc_2, SIGNAL(nextRR(double)), Machine2d->RRcalc_2, SLOT(calculateVarEn(double)));
-			QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculateVarEn(double)));
-			QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculateVarEn(double)));
-		}
-		if(m_variabilityEnt)
-		{
-			QObject::connect( Machine2d->RRcalc_1, SIGNAL(nextVarEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
-			QObject::connect( Machine2d->RRcalc_2, SIGNAL(nextVarEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
-			QObject::connect( Machine2d->RRcalc_3, SIGNAL(nextVarEn(double)),plotEnt_el3, SLOT(appendRR(double)));
-			QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextPatEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextPatEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextPatEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
+	//		
+	//		QObject::connect(Machine2d->RRcalc_1, SIGNAL(nextRR(double)), Machine2d->RRcalc_1, SLOT(calculatePatEn(double)));
+	//		QObject::connect(Machine2d->RRcalc_2, SIGNAL(nextRR(double)), Machine2d->RRcalc_2, SLOT(calculatePatEn(double)));
+	//		QObject::connect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculatePatEn(double)));
+	//		QObject::disconnect(Machine2d->RRcalc_2, SIGNAL(nextRR(double)), Machine2d->RRcalc_2, SLOT(calculateVarEn(double)));
+	//		QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculateVarEn(double)));
+	//		QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculateVarEn(double)));
+	//	}
+	//	if(m_variabilityEnt)
+	//	{
+	//		QObject::connect( Machine2d->RRcalc_1, SIGNAL(nextVarEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
+	//		QObject::connect( Machine2d->RRcalc_2, SIGNAL(nextVarEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
+	//		QObject::connect( Machine2d->RRcalc_3, SIGNAL(nextVarEn(double)),plotEnt_el3, SLOT(appendRR(double)));
+	//		QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextPatEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextPatEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextPatEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
 
-	
-			QObject::disconnect(Machine2d->RRcalc_1, SIGNAL(nextRR()), Machine2d->RRcalc_1, SLOT(calculatePatEn()));
-			QObject::disconnect(Machine2d->RRcalc_2, SIGNAL(nextRR()), Machine2d->RRcalc_2, SLOT(calculatePatEn()));
-			QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR()), Machine2d->RRcalc_3, SLOT(calculatePatEn()));
-			QObject::connect(Machine2d->RRcalc_1, SIGNAL(nextRR()), Machine2d->RRcalc_1, SLOT(calculateVarEn()));
-			QObject::connect(Machine2d->RRcalc_2, SIGNAL(nextRR()), Machine2d->RRcalc_2, SLOT(calculateVarEn()));
-			QObject::connect(Machine2d->RRcalc_3, SIGNAL(nextRR()), Machine2d->RRcalc_3, SLOT(calculateVarEn()));
-	
-		}
-	}
-	else
-	{
-		ui.statusBar->showMessage("Entropy measurment OFF");
-			QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextPatEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextPatEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextPatEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextVarEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextVarEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
-			QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextVarEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
-			QObject::disconnect(Machine2d->RRcalc_2, SIGNAL(nextRR(double)), Machine2d->RRcalc_2, SLOT(calculateVarEn(double)));
-			QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculateVarEn(double)));
-			QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculateVarEn(double)));
-			//QObject::disconnect(Machine2d->RRcalc_1, SIGNAL(nextRR()), Machine2d->RRcalc_1, SLOT(calculatePatEn()));
-			//QObject::disconnect(Machine2d->RRcalc_2, SIGNAL(nextRR()), Machine2d->RRcalc_2, SLOT(calculatePatEn()));
-			//QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR()), Machine2d->RRcalc_3, SLOT(calculatePatEn()));
-	}
+	//
+	//		QObject::disconnect(Machine2d->RRcalc_1, SIGNAL(nextRR()), Machine2d->RRcalc_1, SLOT(calculatePatEn()));
+	//		QObject::disconnect(Machine2d->RRcalc_2, SIGNAL(nextRR()), Machine2d->RRcalc_2, SLOT(calculatePatEn()));
+	//		QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR()), Machine2d->RRcalc_3, SLOT(calculatePatEn()));
+	//		QObject::connect(Machine2d->RRcalc_1, SIGNAL(nextRR()), Machine2d->RRcalc_1, SLOT(calculateVarEn()));
+	//		QObject::connect(Machine2d->RRcalc_2, SIGNAL(nextRR()), Machine2d->RRcalc_2, SLOT(calculateVarEn()));
+	//		QObject::connect(Machine2d->RRcalc_3, SIGNAL(nextRR()), Machine2d->RRcalc_3, SLOT(calculateVarEn()));
+	//
+	//	}
+	//}
+	//else
+	//{
+	//	ui.statusBar->showMessage("Entropy measurment OFF");
+	//		QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextPatEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextPatEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextPatEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextVarEn(double)),plotEnt_el1, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextVarEn(double)),plotEnt_el2, SLOT(appendRR(double)));	
+	//		QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextVarEn(double)),plotEnt_el3, SLOT(appendRR(double)));	
+	//		QObject::disconnect(Machine2d->RRcalc_2, SIGNAL(nextRR(double)), Machine2d->RRcalc_2, SLOT(calculateVarEn(double)));
+	//		QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculateVarEn(double)));
+	//		QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR(double)), Machine2d->RRcalc_3, SLOT(calculateVarEn(double)));
+	//		//QObject::disconnect(Machine2d->RRcalc_1, SIGNAL(nextRR()), Machine2d->RRcalc_1, SLOT(calculatePatEn()));
+	//		//QObject::disconnect(Machine2d->RRcalc_2, SIGNAL(nextRR()), Machine2d->RRcalc_2, SLOT(calculatePatEn()));
+	//		//QObject::disconnect(Machine2d->RRcalc_3, SIGNAL(nextRR()), Machine2d->RRcalc_3, SLOT(calculatePatEn()));
+	//}
 }
 void SimpleHeart::setEntropyPat(bool v)
 {
@@ -687,10 +663,12 @@ void SimpleHeart::setBmpSaving(bool t)
 void SimpleHeart::setAtrialStructure()
 {
 	stopCalculation();
-	QObject::disconnect(Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double, double)), plotPotentialE1, SLOT(addValue_e1(double, double)));
-	QObject::disconnect(Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double, double)), plotPotentialE2, SLOT(addValue_e2(double, double)));
-	QObject::disconnect(Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double, double)), plotPotentialE3, SLOT(addValue_e3(double, double)));
 
+	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+	{
+		QObject::disconnect(Machine2d->probeOscillator[k], SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
+	}
+	
 	glGraph->updateGL();
 
 	CardiacMesh *ptr = m_ioHandler->loadCustomStructure();
@@ -705,16 +683,17 @@ void SimpleHeart::setAtrialStructure()
 		glGraph->linkToMesh = m_grid;
 
 		Machine2d->probeOscillator.clear();
-		Machine2d->probeOscillator.push_back(m_grid->m_mesh[0]);
-		Machine2d->probeOscillator.push_back(m_grid->m_mesh[2000]);
-		Machine2d->probeOscillator.push_back(m_grid->m_mesh[5000]);
+		Machine2d->probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[0]));
+		Machine2d->probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[2000]));
+		Machine2d->probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[5000]));
 		Machine2d->reset();
 		delete(tempptr);
 	}
 
-			 QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
-			 QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
-			 QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
+	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+	{
+		QObject::connect(Machine2d->probeOscillator[k], SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
+	}
 
 //		m_ioHandler->writeParametersToFile();
 //
@@ -792,22 +771,22 @@ void SimpleHeart::switchElectrode()
 }
 void SimpleHeart::setProbeElectrode(int electrode,int id_y ,int id_x)
 {
-	if(electrode == 0 ) 	QObject::disconnect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
-	else if(electrode == 1 ) 	QObject::disconnect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
-	else if(electrode == 2) 	QObject::disconnect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
+	//if(electrode == 0 ) 	QObject::disconnect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
+	//else if(electrode == 1 ) 	QObject::disconnect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
+	//else if(electrode == 2) 	QObject::disconnect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
 
-	//int ii = static_cast<double> (j % gridWidth);
-	//int jj = floor(static_cast<double>(j) / static_cast<double>(gridWidth));
-	//Machine2d->probeOscillator[electrode] = Machine2d->m_oscillators[id_y][id_x];
+	////int ii = static_cast<double> (j % gridWidth);
+	////int jj = floor(static_cast<double>(j) / static_cast<double>(gridWidth));
+	////Machine2d->probeOscillator[electrode] = Machine2d->m_oscillators[id_y][id_x];
 
-	Machine2d->probeOscillator[electrode] = m_grid->m_mesh[id_y + m_grid->getSize()*id_x];
-		//Machine2d->m_oscillators[id_y][id_x];
+	//Machine2d->probeOscillator[electrode] = m_grid->m_mesh[id_y + m_grid->getSize()*id_x];
+	//	//Machine2d->m_oscillators[id_y][id_x];
 
-	if(electrode == 0 ) QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
-	else if(electrode == 1 ) QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
-	else if(electrode == 2) QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
+	//if(electrode == 0 ) QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
+	//else if(electrode == 1 ) QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
+	//else if(electrode == 2) QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
 
-	glGraph->updateGL();
+	//glGraph->updateGL();
 }
 void SimpleHeart::setTimerInterval(double ms)
 {
