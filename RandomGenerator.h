@@ -10,5 +10,4 @@ public:
 	double gaussRandom(double mean, double sigma);
 	double uniform();
 	int flipper( int maxNumber);
-
 };
