@@ -17,7 +17,7 @@ public:
 	void setOscillator(Oscillator*);
 	double getPositionX();
 	double getPositionY();
-	double getPositionZ();
+	double getPositionZ(); 
 	double getOscillatorID();
 
 private:
