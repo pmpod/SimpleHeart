@@ -9,7 +9,8 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", "functions_vars" ]
+        [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", null, [
@@ -30,10 +31,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_allexandre_strategy_8cpp.html",
-"class_default_plot.html#a154b2bb7e4528185f88ff204da70e4de",
-"class_simple_heart.html#a2261ed6808d375814ece785d02694acc",
-"classio_handler.html#a2de36fdfa99f28b20c6fe1b2069b75ad",
-"struct_time_tree.html"
+"class_cardiac_mesh.html#abf74825fdb7bc14445c25877f06e36af",
+"class_probe.html#a2cad80c5851ce1ab165f41e56075853d",
+"classatrial_parameters.html#a510dcbc3ee2997b618474595176ae1bf",
+"functions_func.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

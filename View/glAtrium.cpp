@@ -56,6 +56,12 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 
 	distanceToCamera = -40.0f;
 	_state = SimViewStateView::Instance();
+
+
+
+	//TODO where should I put those?
+	paintValueDiffusion = 0.01;
+	paintValueERP = 30;
 }
 //----------------------------------------
 glAtrium::~glAtrium(void)
@@ -84,34 +90,60 @@ QSize glAtrium::sizeHint() const
 {
 	return QSize(this->width(), this->height());
 }
+void  glAtrium::setPaintConductivity(bool b)
+{
+	if (b)
+		SimViewStateDiffusion::Instance()->setMode(0);
+	updateGL();
+}
 
+void  glAtrium::setPaintERP(bool b)
+{
+	if (b)
+		SimViewStateDiffusion::Instance()->setMode(1);
+	updateGL();
+}
 void  glAtrium::setDisplayPotential(bool b)
 {
 	if (b)
-		SimViewStateView::Instance()->setDisplayMode(1);
+	{
+		SimViewStateView::Instance()->setMode(1);
+		SimViewStateEP::Instance()->setMode(1);
+	}
 	updateGL();
 }
 void  glAtrium::setDisplayCSD(bool b)
 {
 	if (b)
-		SimViewStateView::Instance()->setDisplayMode(2);
+	{
+		SimViewStateView::Instance()->setMode(2);
+		SimViewStateEP::Instance()->setMode(2);
+	}
 	updateGL();
 }
 void  glAtrium::setDisplayCurrent1(bool b)
 {
 	if (b)
-		SimViewStateView::Instance()->setDisplayMode(3);
+	{
+		SimViewStateView::Instance()->setMode(3);
+		SimViewStateEP::Instance()->setMode(3);
+	}
 	updateGL();
 }
 void  glAtrium::setDisplayCurrent2(bool b)
 {
 	if (b)
-		SimViewStateView::Instance()->setDisplayMode(4);
+	{
+		SimViewStateView::Instance()->setMode(4);
+		SimViewStateEP::Instance()->setMode(4);
+	}
 	updateGL();
 }
 void glAtrium::displayElectrogram()
 {
-	SimViewStateView::Instance()->setDisplayMode(5);
+	SimViewStateView::Instance()->setMode(5);
+	SimViewStateEP::Instance()->setMode(5);
+	
 	updateGL();
 }
 void  glAtrium::setOutlineUniform(bool b)

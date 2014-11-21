@@ -81,6 +81,7 @@ signals:
 	void newPotentialTime(double time, double potValue);	/// Qt signal of new (scaled) potential & time [ms]
 public slots:
 	virtual void setParameter(double value, OSC_PARAMETER parameter); ///virtual function for parameter setting
+	virtual void setERP(double value); ///virtual function for refractory period setting
 
 public:
 
@@ -94,6 +95,7 @@ public:
 
 	virtual double getCurrentPrim(const int& which);	//podaj wynik wzoru na pochodn¹ pr¹du
 	virtual double getPotentialPrim();  //podaj wynik wzoru na pochodn¹ potencja³u
+	virtual double getERP(); ///virtual function for refractory period setting
 
 	double getCurrentTime();
 	double getPreviousTime();

@@ -1,6 +1,6 @@
 var dir_ecf2ff720ad0c2f36bc09bc5bafe8f54 =
 [
-    [ "AllexandreStrategy.cpp", "_allexandre_strategy_8cpp.html", null ],
+    [ "AllexandreStrategy.cpp", "_allexandre_strategy_8cpp.html", "_allexandre_strategy_8cpp" ],
     [ "AllexandreStrategy.h", "_allexandre_strategy_8h.html", [
       [ "AllexandreStrategy", "class_allexandre_strategy.html", "class_allexandre_strategy" ]
     ] ],

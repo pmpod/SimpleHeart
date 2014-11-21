@@ -14,14 +14,18 @@ var searchData=
   ['destroy',['destroy',['../class_simple_heart.html#a6d53dfab003b56c23ac29b60c48795da',1,'SimpleHeart']]],
   ['destroygrid',['destroyGrid',['../class_cardiac_mesh.html#ac4e6a0774e1b1abf2ddbf2cc59434a92',1,'CardiacMesh::destroyGrid()'],['../class_cartesian_grid.html#a26c1bb3be5feca0f501d901000f2bbb4',1,'CartesianGrid::destroyGrid()']]],
   ['destroypainter',['destroyPainter',['../class_diffusion_painter.html#ab71f8ba7699d9caf7927e21914c6303c',1,'DiffusionPainter']]],
-  ['determinenexttimestep_5fmethod2b',['determineNextTimestep_Method2b',['../class_atrial_machine2d.html#afb0f7ee5a1efa0f20b1f3c145927374a',1,'AtrialMachine2d']]],
   ['diffusionmatrix',['DiffusionMatrix',['../class_diffusion_matrix.html',1,'DiffusionMatrix'],['../class_diffusion_matrix.html#af115adf5551344dbe3f138f1bd322366',1,'DiffusionMatrix::DiffusionMatrix()']]],
   ['diffusionmatrix_2ecpp',['DiffusionMatrix.cpp',['../_diffusion_matrix_8cpp.html',1,'']]],
   ['diffusionmatrix_2eh',['DiffusionMatrix.h',['../_diffusion_matrix_8h.html',1,'']]],
   ['diffusionpainter',['DiffusionPainter',['../class_diffusion_painter.html',1,'DiffusionPainter'],['../class_simple_heart.html#ad1a89c2f1818a2e2e548d98e1c49a7dc',1,'SimpleHeart::diffusionPainter()'],['../class_diffusion_painter.html#a171b9c615611e9f225187f81807c00cf',1,'DiffusionPainter::DiffusionPainter()']]],
   ['diffusionpainter_2ecpp',['DiffusionPainter.cpp',['../_diffusion_painter_8cpp.html',1,'']]],
   ['diffusionpainter_2eh',['DiffusionPainter.h',['../_diffusion_painter_8h.html',1,'']]],
+  ['disp_5fpalette',['DISP_PALETTE',['../_sim_view_state_8h.html#aac0f40b4af712e3b80d1b769cb0161d3',1,'SimViewState.h']]],
+  ['displayelectrogram',['displayElectrogram',['../classgl_atrium.html#a37275a26952f199c55df1ed3b38b6887',1,'glAtrium']]],
+  ['dp_5fcold',['DP_COLD',['../_sim_view_state_8h.html#aac0f40b4af712e3b80d1b769cb0161d3a602c21c26a122399a1b839f9fd941e1b',1,'SimViewState.h']]],
+  ['dp_5fgray',['DP_GRAY',['../_sim_view_state_8h.html#aac0f40b4af712e3b80d1b769cb0161d3a4e4f9483302becf5151a133f08bd2bb1',1,'SimViewState.h']]],
+  ['dp_5fhot',['DP_HOT',['../_sim_view_state_8h.html#aac0f40b4af712e3b80d1b769cb0161d3a80f96d7116902e3589c8bbbaaefa3d9f',1,'SimViewState.h']]],
+  ['dp_5fhottocold',['DP_HOTTOCOLD',['../_sim_view_state_8h.html#aac0f40b4af712e3b80d1b769cb0161d3ada4fb84a4e3913d609c9681779768798',1,'SimViewState.h']]],
   ['draw',['draw',['../class_probe.html#a1732d34c1e5b02e12b7ec405d144190f',1,'Probe']]],
-  ['drawsphere',['drawSphere',['../_g_lfunc_8cpp.html#a306c59756ffdd5e758330dfb1fe7a190',1,'drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb):&#160;GLfunc.cpp'],['../_g_lfunc_8h.html#a306c59756ffdd5e758330dfb1fe7a190',1,'drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb):&#160;GLfunc.cpp']]],
-  ['dufortfrankl',['DufortFrankl',['../class_atrial_machine2d.html#af35ca9286dbe3f236b31ddd84f9d25e4',1,'AtrialMachine2d']]]
+  ['drawsphere',['drawSphere',['../_g_lfunc_8cpp.html#a306c59756ffdd5e758330dfb1fe7a190',1,'drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb):&#160;GLfunc.cpp'],['../_g_lfunc_8h.html#a306c59756ffdd5e758330dfb1fe7a190',1,'drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb):&#160;GLfunc.cpp']]]
 ];

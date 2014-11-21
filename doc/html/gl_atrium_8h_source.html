@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Simple Heart: glAtrium.h Source File</title>
+<title>Simple Heart: View/glAtrium.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('gl_atrium_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -117,139 +117,188 @@ $(document).ready(function(){initNavTree('gl_atrium_8h_source.html','');});
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_cardiac_mesh_8h.html">Model\CardiacMesh.h</a>&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Support\Vectors.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Support\Matrices.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classgl_atrium.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgl_atrium.html">glAtrium</a>: <span class="keyword">public</span> QGLWidget</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_sim_view_state_view_8h.html">View\SimViewStateView.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_sim_view_state_e_p_8h.html">View\SimViewStateEP.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_sim_view_state_structure_8h.html">View\SimViewStateStructure.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_sim_view_state_diffusion_8h.html">View\SimViewStateDiffusion.h</a>&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classgl_atrium.html#a68d308b0209b6111bbbcbb56b1a5e10c">glAtrium</a>(<a class="code" href="class_cardiac_mesh.html">CardiacMesh</a> *linkMesh, <a class="code" href="class_atrial_machine2d.html">AtrialMachine2d</a> *link, QWidget *parent = 0);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classgl_atrium.html#aab01fe62e0f7734e3b91b42a11d32db7">~glAtrium</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QSize <a class="code" href="classgl_atrium.html#acf3a401dfd3ca09d8dcb36886f306ba9">minimumSizeHint</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    QSize <a class="code" href="classgl_atrium.html#a0e7fc813e7c9ae4d47317109815b9705">sizeHint</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classgl_atrium.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgl_atrium.html">glAtrium</a>: <span class="keyword">public</span> QGLWidget</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classgl_atrium.html#a68d308b0209b6111bbbcbb56b1a5e10c">glAtrium</a>(<a class="code" href="class_cardiac_mesh.html">CardiacMesh</a> *linkMesh, <a class="code" href="class_atrial_machine2d.html">AtrialMachine2d</a> *link, QWidget *parent = 0);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classgl_atrium.html#aab01fe62e0f7734e3b91b42a11d32db7">~glAtrium</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    QSize <a class="code" href="classgl_atrium.html#acf3a401dfd3ca09d8dcb36886f306ba9">minimumSizeHint</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    QSize <a class="code" href="classgl_atrium.html#a0e7fc813e7c9ae4d47317109815b9705">sizeHint</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#aa5afd6c2c43a3b9445e6821586671c36">setXRotation</a>(<span class="keywordtype">int</span> angle);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a4b339e5080f2019dec3e916b4348f41c">setYRotation</a>(<span class="keywordtype">int</span> angle);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#aab5b1212e320c13d3d3f30425f8e2028">setZRotation</a>(<span class="keywordtype">int</span> angle);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#adb2aa7af154e4d83ca976bd7042726aa">setTop</a>();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a1ea5edb0605ee17d77d636c81dbc74a9">setSide1</a>();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#aab139e009363e2a027e4f3a5e3f1e84b">setSide2</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a5a67ffc011f4545b7ecf4d8a745a6c06">setPaletteHSV</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#acf6258aaf1d7c1a8cd7afe558bfd8fa4">setPaletteGray</a>();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;signals:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#add3c45ba71308914e62ac5f07d9dbce4">xRotationChanged</a>(<span class="keywordtype">int</span> angle);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a12abcdbba73ff41ea8efdbbdcdbdcb6c">yRotationChanged</a>(<span class="keywordtype">int</span> angle);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a71703a9bcfb404b9aa1bdab789573c7e">zRotationChanged</a>(<span class="keywordtype">int</span> angle);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a6fc7ea9064a492b562c0858eb3c44f86">initializeGL</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a951d4caaef073f6762ddd47a409d2cf6">paintGL</a>();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a40cd7c018c743e5738560fdb4e4fea59">resizeGL</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#af0e47f4d5e0bc6d8cdcf16dd23c0487b">mousePressEvent</a>(QMouseEvent *event);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#ad5af63d41d959d40d475d8e1aa0f6e9e">mouseMoveEvent</a>(QMouseEvent *event);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a3b2fff6d451823faa28b1b5f09aa384d">mouseReleaseEvent</a>(QMouseEvent *event);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a5a4eb4614e6619d55a484cdfb733b2ea">wheelEvent</a>(QWheelEvent *event);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    Vector3 <a class="code" href="classgl_atrium.html#a939d7c7a5289deeeea1763544e5be6b5">screenToWorld</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y, <span class="keywordtype">double</span> width, <span class="keywordtype">double</span> height);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgl_atrium.html#a02590feb7cd82c82cc67d0697136baf4">itemAt</a>(<span class="keywordtype">double</span> xx, <span class="keywordtype">double</span> yy, <span class="keywordtype">double</span> zz);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#aef6b55dd9c8a5b542c034d7bb8e6d319">setLastPos</a>(<span class="keyword">const</span> QPoint&amp; pos);</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classgl_atrium.html#a8ded24946b8c91b4e1fb7f4f0545a6b0">   28</a></span>&#160;    <a class="code" href="class_cardiac_mesh.html">CardiacMesh</a> *<a class="code" href="classgl_atrium.html#a8ded24946b8c91b4e1fb7f4f0545a6b0">linkToMesh</a>;        </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#aa5afd6c2c43a3b9445e6821586671c36">setXRotation</a>(<span class="keywordtype">int</span> angle);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a4b339e5080f2019dec3e916b4348f41c">setYRotation</a>(<span class="keywordtype">int</span> angle);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#aab5b1212e320c13d3d3f30425f8e2028">setZRotation</a>(<span class="keywordtype">int</span> angle);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#adb2aa7af154e4d83ca976bd7042726aa">setTop</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a1ea5edb0605ee17d77d636c81dbc74a9">setSide1</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#aab139e009363e2a027e4f3a5e3f1e84b">setSide2</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a10acfe771a3112264051aaecd87bc4d6">setStateStructureModifier</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a4712eeb59127c712ca5ed3e9ea2363d6">setStateDiffusionModifier</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a4fdc27d1e3a4b46fb4e545b5d5452656">setStateViewer</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a1bc8825c11be22bef34d80d8e92bba1d">setStateEP</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a6c943af88177755f0dac95d12767cd22">setPaintConductivity</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a4deff8ebaa4b5042643cbd1acefa7128">setPaintERP</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a5a67ffc011f4545b7ecf4d8a745a6c06">setPaletteHSV</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#acf6258aaf1d7c1a8cd7afe558bfd8fa4">setPaletteGray</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a41253a382f5aa16fd076770782672661">setDisplayPotential</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a0d8ebb9fd216ef5ffa626071139ee26d">setDisplayCSD</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a7a56112f029a3a8f6943841735a12a76">setDisplayCurrent1</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a22f57b77572b7535269afc46a4126a53">setDisplayCurrent2</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a37275a26952f199c55df1ed3b38b6887">displayElectrogram</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a1b033aa6b6df0e8f73c0199ddfea108f">setOutlineUniform</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a2763b82810f80bd56ac251971637df46">setOutlineGauss</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;signals:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#add3c45ba71308914e62ac5f07d9dbce4">xRotationChanged</a>(<span class="keywordtype">int</span> angle);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a12abcdbba73ff41ea8efdbbdcdbdcb6c">yRotationChanged</a>(<span class="keywordtype">int</span> angle);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a71703a9bcfb404b9aa1bdab789573c7e">zRotationChanged</a>(<span class="keywordtype">int</span> angle);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="class_atrial_machine2d.html">AtrialMachine2d</a> *linkToMachine;     </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_cardiac_mesh.html">CardiacMesh</a> *linkToMesh;      </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">//Model view properties:</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">float</span> viewWidth;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">float</span> viewHeight;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    GLfloat m[16];</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    Matrix4 modelMatrix;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a6fc7ea9064a492b562c0858eb3c44f86">initializeGL</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a951d4caaef073f6762ddd47a409d2cf6">paintGL</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a40cd7c018c743e5738560fdb4e4fea59">resizeGL</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#af0e47f4d5e0bc6d8cdcf16dd23c0487b">mousePressEvent</a>(QMouseEvent *event);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#ad5af63d41d959d40d475d8e1aa0f6e9e">mouseMoveEvent</a>(QMouseEvent *event);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a3b2fff6d451823faa28b1b5f09aa384d">mouseReleaseEvent</a>(QMouseEvent *event);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#a5a4eb4614e6619d55a484cdfb733b2ea">wheelEvent</a>(QWheelEvent *event);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    Vector3 <a class="code" href="classgl_atrium.html#a939d7c7a5289deeeea1763544e5be6b5">screenToWorld</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y, <span class="keywordtype">double</span> width, <span class="keywordtype">double</span> height);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgl_atrium.html#a02590feb7cd82c82cc67d0697136baf4">itemAt</a>(<span class="keywordtype">double</span> xx, <span class="keywordtype">double</span> yy, <span class="keywordtype">double</span> zz);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgl_atrium.html#aff81827e3285b74bea0e3777a75393db">paintOrigin</a>(<span class="keywordtype">float</span> scale);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">float</span> distanceToCamera;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> m_palette;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">float</span> rotationSpeed;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">float</span> zoomingSpeed;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">int</span> xRot;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">int</span> yRot;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">int</span> zRot;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">int</span> gridSize;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">//Event handling properties</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> m_controlable;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">int</span> workMode;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    QPoint lastPos;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="class_atrial_machine2d.html">AtrialMachine2d</a> *linkToMachine;     </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    GLuint displayListIndex;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">//Model view properties:</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">float</span> viewWidth;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">float</span> viewHeight;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    GLfloat m[16];</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    Matrix4 modelMatrix;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    Matrix4 modelRotation;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="comment">//World properities</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    QColor backgroundColor;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    GLfloat LightAmbient[4]; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    GLfloat LightDiffuse[4];</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    GLfloat LightPosition[4];</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">//Raycasting handling</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    vector&lt;Vector4&gt; pointRays;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    Vector3 directionRay;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">float</span> fov;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">float</span> frustrumSize;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">float</span> nearClippingPlaneDistance;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">float</span> farClippingPlaneDistance;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">float</span> distanceToCamera;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">int</span> m_palette;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">float</span> rotationSpeed;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">float</span> zoomingSpeed;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> xRot;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">int</span> yRot;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">int</span> zRot;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">int</span> gridSize;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">//Event handling properties</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">bool</span> m_controlable;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">int</span> workMode;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    QPoint lastPos;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">//Debug handling</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">bool</span> paintRay;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    Vector3 testProbe;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">//World properities</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    QColor backgroundColor;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    GLfloat LightAmbient[4]; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    GLfloat LightDiffuse[4];</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    GLfloat LightPosition[4];</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="comment">//Raycasting handling</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    vector&lt;Vector4&gt; pointRays;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    Vector3 directionRay;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">float</span> fov;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">float</span> frustrumSize;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">float</span> nearClippingPlaneDistance;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">float</span> farClippingPlaneDistance;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="comment">//Debug handling</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">bool</span> paintRay;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    Vector3 testProbe;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classgl_atrium.html#a9879084bed338fc174a8d2fe04996ce3">  124</a></span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_sim_view_state.html">SimViewState</a>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classgl_atrium.html#a3784e26d08f8db67d4187df43944ad76">  125</a></span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_sim_view_state_view.html">SimViewStateView</a>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classgl_atrium.html#a05f31e8af7a8b263cc06dbc57b20f144">  126</a></span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_sim_view_state_structure.html">SimViewStateStructure</a>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classgl_atrium.html#a1f495b2c4e91f752b635ad082004df63">  127</a></span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_sim_view_state_diffusion.html">SimViewStateDiffusion</a>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classgl_atrium.html#a76eb2c10fcf71ef86e90466fa0becdcb">  128</a></span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="class_sim_view_state_e_p.html">SimViewStateEP</a>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_sim_view_state.html#a272419ea4de89cc111205ebde1c8c820">ChangeState</a>(<a class="code" href="class_sim_view_state.html">SimViewState</a>*);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="class_sim_view_state.html">SimViewState</a>* _state;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;};</div>
+<div class="ttc" id="classgl_atrium_html_a1bc8825c11be22bef34d80d8e92bba1d"><div class="ttname"><a href="classgl_atrium.html#a1bc8825c11be22bef34d80d8e92bba1d">glAtrium::setStateEP</a></div><div class="ttdeci">void setStateEP(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:166</div></div>
 <div class="ttc" id="_g_lcamera_8h_html"><div class="ttname"><a href="_g_lcamera_8h.html">GLcamera.h</a></div></div>
+<div class="ttc" id="classgl_atrium_html_a1b033aa6b6df0e8f73c0199ddfea108f"><div class="ttname"><a href="classgl_atrium.html#a1b033aa6b6df0e8f73c0199ddfea108f">glAtrium::setOutlineUniform</a></div><div class="ttdeci">void setOutlineUniform(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:143</div></div>
+<div class="ttc" id="classgl_atrium_html_a10acfe771a3112264051aaecd87bc4d6"><div class="ttname"><a href="classgl_atrium.html#a10acfe771a3112264051aaecd87bc4d6">glAtrium::setStateStructureModifier</a></div><div class="ttdeci">void setStateStructureModifier(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:157</div></div>
 <div class="ttc" id="classgl_atrium_html_add3c45ba71308914e62ac5f07d9dbce4"><div class="ttname"><a href="classgl_atrium.html#add3c45ba71308914e62ac5f07d9dbce4">glAtrium::xRotationChanged</a></div><div class="ttdeci">void xRotationChanged(int angle)</div></div>
 <div class="ttc" id="class_atrial_machine2d_html"><div class="ttname"><a href="class_atrial_machine2d.html">AtrialMachine2d</a></div><div class="ttdef"><b>Definition:</b> AtrialMachine2d.h:34</div></div>
 <div class="ttc" id="_cardiac_mesh_8h_html"><div class="ttname"><a href="_cardiac_mesh_8h.html">CardiacMesh.h</a></div></div>
-<div class="ttc" id="classgl_atrium_html_a5a4eb4614e6619d55a484cdfb733b2ea"><div class="ttname"><a href="classgl_atrium.html#a5a4eb4614e6619d55a484cdfb733b2ea">glAtrium::wheelEvent</a></div><div class="ttdeci">void wheelEvent(QWheelEvent *event)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:304</div></div>
-<div class="ttc" id="classgl_atrium_html_a951d4caaef073f6762ddd47a409d2cf6"><div class="ttname"><a href="classgl_atrium.html#a951d4caaef073f6762ddd47a409d2cf6">glAtrium::paintGL</a></div><div class="ttdeci">void paintGL()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:163</div></div>
+<div class="ttc" id="classgl_atrium_html_a8ded24946b8c91b4e1fb7f4f0545a6b0"><div class="ttname"><a href="classgl_atrium.html#a8ded24946b8c91b4e1fb7f4f0545a6b0">glAtrium::linkToMesh</a></div><div class="ttdeci">CardiacMesh * linkToMesh</div><div class="ttdef"><b>Definition:</b> glAtrium.h:28</div></div>
+<div class="ttc" id="classgl_atrium_html_a5a4eb4614e6619d55a484cdfb733b2ea"><div class="ttname"><a href="classgl_atrium.html#a5a4eb4614e6619d55a484cdfb733b2ea">glAtrium::wheelEvent</a></div><div class="ttdeci">void wheelEvent(QWheelEvent *event)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:446</div></div>
+<div class="ttc" id="classgl_atrium_html_a951d4caaef073f6762ddd47a409d2cf6"><div class="ttname"><a href="classgl_atrium.html#a951d4caaef073f6762ddd47a409d2cf6">glAtrium::paintGL</a></div><div class="ttdeci">void paintGL()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:314</div></div>
 <div class="ttc" id="classgl_atrium_html_a71703a9bcfb404b9aa1bdab789573c7e"><div class="ttname"><a href="classgl_atrium.html#a71703a9bcfb404b9aa1bdab789573c7e">glAtrium::zRotationChanged</a></div><div class="ttdeci">void zRotationChanged(int angle)</div></div>
-<div class="ttc" id="classgl_atrium_html_a02590feb7cd82c82cc67d0697136baf4"><div class="ttname"><a href="classgl_atrium.html#a02590feb7cd82c82cc67d0697136baf4">glAtrium::itemAt</a></div><div class="ttdeci">int itemAt(double xx, double yy, double zz)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:273</div></div>
-<div class="ttc" id="classgl_atrium_html_a1ea5edb0605ee17d77d636c81dbc74a9"><div class="ttname"><a href="classgl_atrium.html#a1ea5edb0605ee17d77d636c81dbc74a9">glAtrium::setSide1</a></div><div class="ttdeci">void setSide1()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:116</div></div>
-<div class="ttc" id="classgl_atrium_html_aa5afd6c2c43a3b9445e6821586671c36"><div class="ttname"><a href="classgl_atrium.html#aa5afd6c2c43a3b9445e6821586671c36">glAtrium::setXRotation</a></div><div class="ttdeci">void setXRotation(int angle)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:80</div></div>
-<div class="ttc" id="classgl_atrium_html_aab139e009363e2a027e4f3a5e3f1e84b"><div class="ttname"><a href="classgl_atrium.html#aab139e009363e2a027e4f3a5e3f1e84b">glAtrium::setSide2</a></div><div class="ttdeci">void setSide2()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:122</div></div>
+<div class="ttc" id="classgl_atrium_html_a02590feb7cd82c82cc67d0697136baf4"><div class="ttname"><a href="classgl_atrium.html#a02590feb7cd82c82cc67d0697136baf4">glAtrium::itemAt</a></div><div class="ttdeci">int itemAt(double xx, double yy, double zz)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:409</div></div>
+<div class="ttc" id="classgl_atrium_html_a1ea5edb0605ee17d77d636c81dbc74a9"><div class="ttname"><a href="classgl_atrium.html#a1ea5edb0605ee17d77d636c81dbc74a9">glAtrium::setSide1</a></div><div class="ttdeci">void setSide1()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:229</div></div>
+<div class="ttc" id="classgl_atrium_html_aa5afd6c2c43a3b9445e6821586671c36"><div class="ttname"><a href="classgl_atrium.html#aa5afd6c2c43a3b9445e6821586671c36">glAtrium::setXRotation</a></div><div class="ttdeci">void setXRotation(int angle)</div><div class="ttdoc">Link to the Model. </div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:193</div></div>
+<div class="ttc" id="classgl_atrium_html_aab139e009363e2a027e4f3a5e3f1e84b"><div class="ttname"><a href="classgl_atrium.html#aab139e009363e2a027e4f3a5e3f1e84b">glAtrium::setSide2</a></div><div class="ttdeci">void setSide2()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:235</div></div>
 <div class="ttc" id="classgl_atrium_html_a68d308b0209b6111bbbcbb56b1a5e10c"><div class="ttname"><a href="classgl_atrium.html#a68d308b0209b6111bbbcbb56b1a5e10c">glAtrium::glAtrium</a></div><div class="ttdeci">glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent=0)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:13</div></div>
-<div class="ttc" id="classgl_atrium_html_aab01fe62e0f7734e3b91b42a11d32db7"><div class="ttname"><a href="classgl_atrium.html#aab01fe62e0f7734e3b91b42a11d32db7">glAtrium::~glAtrium</a></div><div class="ttdeci">~glAtrium(void)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:55</div></div>
-<div class="ttc" id="classgl_atrium_html_a6fc7ea9064a492b562c0858eb3c44f86"><div class="ttname"><a href="classgl_atrium.html#a6fc7ea9064a492b562c0858eb3c44f86">glAtrium::initializeGL</a></div><div class="ttdeci">void initializeGL()</div><div class="ttdoc">[1] </div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:129</div></div>
-<div class="ttc" id="classgl_atrium_html_ad5af63d41d959d40d475d8e1aa0f6e9e"><div class="ttname"><a href="classgl_atrium.html#ad5af63d41d959d40d475d8e1aa0f6e9e">glAtrium::mouseMoveEvent</a></div><div class="ttdeci">void mouseMoveEvent(QMouseEvent *event)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:396</div></div>
+<div class="ttc" id="classgl_atrium_html_a6c943af88177755f0dac95d12767cd22"><div class="ttname"><a href="classgl_atrium.html#a6c943af88177755f0dac95d12767cd22">glAtrium::setPaintConductivity</a></div><div class="ttdeci">void setPaintConductivity(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:87</div></div>
+<div class="ttc" id="_sim_view_state_diffusion_8h_html"><div class="ttname"><a href="_sim_view_state_diffusion_8h.html">SimViewStateDiffusion.h</a></div></div>
+<div class="ttc" id="class_sim_view_state_e_p_html"><div class="ttname"><a href="class_sim_view_state_e_p.html">SimViewStateEP</a></div><div class="ttdef"><b>Definition:</b> SimViewStateEP.h:5</div></div>
+<div class="ttc" id="classgl_atrium_html_aab01fe62e0f7734e3b91b42a11d32db7"><div class="ttname"><a href="classgl_atrium.html#aab01fe62e0f7734e3b91b42a11d32db7">glAtrium::~glAtrium</a></div><div class="ttdeci">~glAtrium(void)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:61</div></div>
+<div class="ttc" id="classgl_atrium_html_a6fc7ea9064a492b562c0858eb3c44f86"><div class="ttname"><a href="classgl_atrium.html#a6fc7ea9064a492b562c0858eb3c44f86">glAtrium::initializeGL</a></div><div class="ttdeci">void initializeGL()</div><div class="ttdoc">[1] </div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:242</div></div>
+<div class="ttc" id="classgl_atrium_html_ad5af63d41d959d40d475d8e1aa0f6e9e"><div class="ttname"><a href="classgl_atrium.html#ad5af63d41d959d40d475d8e1aa0f6e9e">glAtrium::mouseMoveEvent</a></div><div class="ttdeci">void mouseMoveEvent(QMouseEvent *event)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:472</div></div>
 <div class="ttc" id="_g_lfunc_8h_html"><div class="ttname"><a href="_g_lfunc_8h.html">GLfunc.h</a></div></div>
-<div class="ttc" id="classgl_atrium_html_a0e7fc813e7c9ae4d47317109815b9705"><div class="ttname"><a href="classgl_atrium.html#a0e7fc813e7c9ae4d47317109815b9705">glAtrium::sizeHint</a></div><div class="ttdeci">QSize sizeHint() const </div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:75</div></div>
-<div class="ttc" id="classgl_atrium_html_a4b339e5080f2019dec3e916b4348f41c"><div class="ttname"><a href="classgl_atrium.html#a4b339e5080f2019dec3e916b4348f41c">glAtrium::setYRotation</a></div><div class="ttdeci">void setYRotation(int angle)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:91</div></div>
-<div class="ttc" id="classgl_atrium_html_a939d7c7a5289deeeea1763544e5be6b5"><div class="ttname"><a href="classgl_atrium.html#a939d7c7a5289deeeea1763544e5be6b5">glAtrium::screenToWorld</a></div><div class="ttdeci">Vector3 screenToWorld(double x, double y, double width, double height)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:419</div></div>
-<div class="ttc" id="classgl_atrium_html_aab5b1212e320c13d3d3f30425f8e2028"><div class="ttname"><a href="classgl_atrium.html#aab5b1212e320c13d3d3f30425f8e2028">glAtrium::setZRotation</a></div><div class="ttdeci">void setZRotation(int angle)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:101</div></div>
-<div class="ttc" id="classgl_atrium_html_a3b2fff6d451823faa28b1b5f09aa384d"><div class="ttname"><a href="classgl_atrium.html#a3b2fff6d451823faa28b1b5f09aa384d">glAtrium::mouseReleaseEvent</a></div><div class="ttdeci">void mouseReleaseEvent(QMouseEvent *event)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:378</div></div>
-<div class="ttc" id="classgl_atrium_html_a5a67ffc011f4545b7ecf4d8a745a6c06"><div class="ttname"><a href="classgl_atrium.html#a5a67ffc011f4545b7ecf4d8a745a6c06">glAtrium::setPaletteHSV</a></div><div class="ttdeci">void setPaletteHSV()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:65</div></div>
-<div class="ttc" id="classgl_atrium_html_af0e47f4d5e0bc6d8cdcf16dd23c0487b"><div class="ttname"><a href="classgl_atrium.html#af0e47f4d5e0bc6d8cdcf16dd23c0487b">glAtrium::mousePressEvent</a></div><div class="ttdeci">void mousePressEvent(QMouseEvent *event)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:330</div></div>
-<div class="ttc" id="classgl_atrium_html"><div class="ttname"><a href="classgl_atrium.html">glAtrium</a></div><div class="ttdoc">TODO Update to OpenGL 3.0. </div><div class="ttdef"><b>Definition:</b> glAtrium.h:12</div></div>
-<div class="ttc" id="classgl_atrium_html_adb2aa7af154e4d83ca976bd7042726aa"><div class="ttname"><a href="classgl_atrium.html#adb2aa7af154e4d83ca976bd7042726aa">glAtrium::setTop</a></div><div class="ttdeci">void setTop()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:110</div></div>
+<div class="ttc" id="_sim_view_state_e_p_8h_html"><div class="ttname"><a href="_sim_view_state_e_p_8h.html">SimViewStateEP.h</a></div></div>
+<div class="ttc" id="class_sim_view_state_html_a272419ea4de89cc111205ebde1c8c820"><div class="ttname"><a href="class_sim_view_state.html#a272419ea4de89cc111205ebde1c8c820">SimViewState::ChangeState</a></div><div class="ttdeci">void ChangeState(glAtrium *view, SimViewState *s)</div><div class="ttdef"><b>Definition:</b> SimViewState.cpp:19</div></div>
+<div class="ttc" id="class_sim_view_state_diffusion_html"><div class="ttname"><a href="class_sim_view_state_diffusion.html">SimViewStateDiffusion</a></div><div class="ttdef"><b>Definition:</b> SimViewStateDiffusion.h:11</div></div>
+<div class="ttc" id="classgl_atrium_html_a0e7fc813e7c9ae4d47317109815b9705"><div class="ttname"><a href="classgl_atrium.html#a0e7fc813e7c9ae4d47317109815b9705">glAtrium::sizeHint</a></div><div class="ttdeci">QSize sizeHint() const </div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:83</div></div>
+<div class="ttc" id="classgl_atrium_html_a7a56112f029a3a8f6943841735a12a76"><div class="ttname"><a href="classgl_atrium.html#a7a56112f029a3a8f6943841735a12a76">glAtrium::setDisplayCurrent1</a></div><div class="ttdeci">void setDisplayCurrent1(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:118</div></div>
+<div class="ttc" id="classgl_atrium_html_a4b339e5080f2019dec3e916b4348f41c"><div class="ttname"><a href="classgl_atrium.html#a4b339e5080f2019dec3e916b4348f41c">glAtrium::setYRotation</a></div><div class="ttdeci">void setYRotation(int angle)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:204</div></div>
+<div class="ttc" id="classgl_atrium_html_a41253a382f5aa16fd076770782672661"><div class="ttname"><a href="classgl_atrium.html#a41253a382f5aa16fd076770782672661">glAtrium::setDisplayPotential</a></div><div class="ttdeci">void setDisplayPotential(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:100</div></div>
+<div class="ttc" id="classgl_atrium_html_a939d7c7a5289deeeea1763544e5be6b5"><div class="ttname"><a href="classgl_atrium.html#a939d7c7a5289deeeea1763544e5be6b5">glAtrium::screenToWorld</a></div><div class="ttdeci">Vector3 screenToWorld(double x, double y, double width, double height)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:481</div></div>
+<div class="ttc" id="classgl_atrium_html_aab5b1212e320c13d3d3f30425f8e2028"><div class="ttname"><a href="classgl_atrium.html#aab5b1212e320c13d3d3f30425f8e2028">glAtrium::setZRotation</a></div><div class="ttdeci">void setZRotation(int angle)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:214</div></div>
+<div class="ttc" id="_sim_view_state_structure_8h_html"><div class="ttname"><a href="_sim_view_state_structure_8h.html">SimViewStateStructure.h</a></div></div>
+<div class="ttc" id="classgl_atrium_html_a22f57b77572b7535269afc46a4126a53"><div class="ttname"><a href="classgl_atrium.html#a22f57b77572b7535269afc46a4126a53">glAtrium::setDisplayCurrent2</a></div><div class="ttdeci">void setDisplayCurrent2(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:127</div></div>
+<div class="ttc" id="classgl_atrium_html_a3b2fff6d451823faa28b1b5f09aa384d"><div class="ttname"><a href="classgl_atrium.html#a3b2fff6d451823faa28b1b5f09aa384d">glAtrium::mouseReleaseEvent</a></div><div class="ttdeci">void mouseReleaseEvent(QMouseEvent *event)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:466</div></div>
+<div class="ttc" id="_sim_view_state_view_8h_html"><div class="ttname"><a href="_sim_view_state_view_8h.html">SimViewStateView.h</a></div></div>
+<div class="ttc" id="classgl_atrium_html_aef6b55dd9c8a5b542c034d7bb8e6d319"><div class="ttname"><a href="classgl_atrium.html#aef6b55dd9c8a5b542c034d7bb8e6d319">glAtrium::setLastPos</a></div><div class="ttdeci">void setLastPos(const QPoint &amp;pos)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:476</div></div>
+<div class="ttc" id="classgl_atrium_html_a2763b82810f80bd56ac251971637df46"><div class="ttname"><a href="classgl_atrium.html#a2763b82810f80bd56ac251971637df46">glAtrium::setOutlineGauss</a></div><div class="ttdeci">void setOutlineGauss(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:149</div></div>
+<div class="ttc" id="classgl_atrium_html_a5a67ffc011f4545b7ecf4d8a745a6c06"><div class="ttname"><a href="classgl_atrium.html#a5a67ffc011f4545b7ecf4d8a745a6c06">glAtrium::setPaletteHSV</a></div><div class="ttdeci">void setPaletteHSV()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:73</div></div>
+<div class="ttc" id="class_sim_view_state_view_html"><div class="ttname"><a href="class_sim_view_state_view.html">SimViewStateView</a></div><div class="ttdef"><b>Definition:</b> SimViewStateView.h:5</div></div>
+<div class="ttc" id="classgl_atrium_html_af0e47f4d5e0bc6d8cdcf16dd23c0487b"><div class="ttname"><a href="classgl_atrium.html#af0e47f4d5e0bc6d8cdcf16dd23c0487b">glAtrium::mousePressEvent</a></div><div class="ttdeci">void mousePressEvent(QMouseEvent *event)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:452</div></div>
+<div class="ttc" id="class_sim_view_state_html"><div class="ttname"><a href="class_sim_view_state.html">SimViewState</a></div><div class="ttdef"><b>Definition:</b> SimViewState.h:24</div></div>
+<div class="ttc" id="classgl_atrium_html"><div class="ttname"><a href="classgl_atrium.html">glAtrium</a></div><div class="ttdoc">TODO Update to OpenGL 3.0. </div><div class="ttdef"><b>Definition:</b> glAtrium.h:16</div></div>
+<div class="ttc" id="classgl_atrium_html_adb2aa7af154e4d83ca976bd7042726aa"><div class="ttname"><a href="classgl_atrium.html#adb2aa7af154e4d83ca976bd7042726aa">glAtrium::setTop</a></div><div class="ttdeci">void setTop()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:223</div></div>
 <div class="ttc" id="_diffusion_matrix_8h_html"><div class="ttname"><a href="_diffusion_matrix_8h.html">DiffusionMatrix.h</a></div></div>
-<div class="ttc" id="class_cardiac_mesh_html"><div class="ttname"><a href="class_cardiac_mesh.html">CardiacMesh</a></div><div class="ttdef"><b>Definition:</b> CardiacMesh.h:17</div></div>
+<div class="ttc" id="classgl_atrium_html_a4712eeb59127c712ca5ed3e9ea2363d6"><div class="ttname"><a href="classgl_atrium.html#a4712eeb59127c712ca5ed3e9ea2363d6">glAtrium::setStateDiffusionModifier</a></div><div class="ttdeci">void setStateDiffusionModifier(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:184</div></div>
+<div class="ttc" id="classgl_atrium_html_a37275a26952f199c55df1ed3b38b6887"><div class="ttname"><a href="classgl_atrium.html#a37275a26952f199c55df1ed3b38b6887">glAtrium::displayElectrogram</a></div><div class="ttdeci">void displayElectrogram()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:136</div></div>
+<div class="ttc" id="class_cardiac_mesh_html"><div class="ttname"><a href="class_cardiac_mesh.html">CardiacMesh</a></div><div class="ttdoc">Class contatining the full information about the model and helper functions to build it...</div><div class="ttdef"><b>Definition:</b> CardiacMesh.h:43</div></div>
+<div class="ttc" id="classgl_atrium_html_a4deff8ebaa4b5042643cbd1acefa7128"><div class="ttname"><a href="classgl_atrium.html#a4deff8ebaa4b5042643cbd1acefa7128">glAtrium::setPaintERP</a></div><div class="ttdeci">void setPaintERP(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:94</div></div>
 <div class="ttc" id="classgl_atrium_html_a12abcdbba73ff41ea8efdbbdcdbdcb6c"><div class="ttname"><a href="classgl_atrium.html#a12abcdbba73ff41ea8efdbbdcdbdcb6c">glAtrium::yRotationChanged</a></div><div class="ttdeci">void yRotationChanged(int angle)</div></div>
 <div class="ttc" id="_atrial_machine2d_8h_html"><div class="ttname"><a href="_atrial_machine2d_8h.html">AtrialMachine2d.h</a></div></div>
-<div class="ttc" id="classgl_atrium_html_acf6258aaf1d7c1a8cd7afe558bfd8fa4"><div class="ttname"><a href="classgl_atrium.html#acf6258aaf1d7c1a8cd7afe558bfd8fa4">glAtrium::setPaletteGray</a></div><div class="ttdeci">void setPaletteGray()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:70</div></div>
-<div class="ttc" id="classgl_atrium_html_a40cd7c018c743e5738560fdb4e4fea59"><div class="ttname"><a href="classgl_atrium.html#a40cd7c018c743e5738560fdb4e4fea59">glAtrium::resizeGL</a></div><div class="ttdeci">void resizeGL(int width, int height)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:243</div></div>
-<div class="ttc" id="classgl_atrium_html_acf3a401dfd3ca09d8dcb36886f306ba9"><div class="ttname"><a href="classgl_atrium.html#acf3a401dfd3ca09d8dcb36886f306ba9">glAtrium::minimumSizeHint</a></div><div class="ttdeci">QSize minimumSizeHint() const </div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:60</div></div>
+<div class="ttc" id="classgl_atrium_html_a0d8ebb9fd216ef5ffa626071139ee26d"><div class="ttname"><a href="classgl_atrium.html#a0d8ebb9fd216ef5ffa626071139ee26d">glAtrium::setDisplayCSD</a></div><div class="ttdeci">void setDisplayCSD(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:109</div></div>
+<div class="ttc" id="classgl_atrium_html_acf6258aaf1d7c1a8cd7afe558bfd8fa4"><div class="ttname"><a href="classgl_atrium.html#acf6258aaf1d7c1a8cd7afe558bfd8fa4">glAtrium::setPaletteGray</a></div><div class="ttdeci">void setPaletteGray()</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:78</div></div>
+<div class="ttc" id="classgl_atrium_html_a40cd7c018c743e5738560fdb4e4fea59"><div class="ttname"><a href="classgl_atrium.html#a40cd7c018c743e5738560fdb4e4fea59">glAtrium::resizeGL</a></div><div class="ttdeci">void resizeGL(int width, int height)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:379</div></div>
+<div class="ttc" id="class_sim_view_state_structure_html"><div class="ttname"><a href="class_sim_view_state_structure.html">SimViewStateStructure</a></div><div class="ttdef"><b>Definition:</b> SimViewStateStructure.h:5</div></div>
+<div class="ttc" id="classgl_atrium_html_aff81827e3285b74bea0e3777a75393db"><div class="ttname"><a href="classgl_atrium.html#aff81827e3285b74bea0e3777a75393db">glAtrium::paintOrigin</a></div><div class="ttdeci">void paintOrigin(float scale)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:283</div></div>
+<div class="ttc" id="classgl_atrium_html_a4fdc27d1e3a4b46fb4e545b5d5452656"><div class="ttname"><a href="classgl_atrium.html#a4fdc27d1e3a4b46fb4e545b5d5452656">glAtrium::setStateViewer</a></div><div class="ttdeci">void setStateViewer(bool b)</div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:175</div></div>
+<div class="ttc" id="classgl_atrium_html_acf3a401dfd3ca09d8dcb36886f306ba9"><div class="ttname"><a href="classgl_atrium.html#acf3a401dfd3ca09d8dcb36886f306ba9">glAtrium::minimumSizeHint</a></div><div class="ttdeci">QSize minimumSizeHint() const </div><div class="ttdef"><b>Definition:</b> glAtrium.cpp:68</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="gl_atrium_8h.html">glAtrium.h</a></li>
-    <li class="footer">Generated on Mon Oct 20 2014 19:28:59 for Simple Heart by
+    <li class="navelem"><a class="el" href="dir_f2ee84e8e3a17eaa7015d788fa443c27.html">View</a></li><li class="navelem"><a class="el" href="gl_atrium_8h.html">glAtrium.h</a></li>
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:00 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -116,16 +116,10 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_atrialParameters.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_CardiacMesh.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_cartesianGrid.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_defaultPlot.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DiffusionPainter.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_FitzHughNagumo.cpp">
@@ -161,16 +155,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_atrialParameters.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CardiacMesh.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_cartesianGrid.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_defaultPlot.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DiffusionPainter.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_FitzHughNagumo.cpp">
@@ -205,12 +193,6 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_AtrialMachine2d.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="DiffusionMatrix.cpp">
-      <Filter>Dumpster</Filter>
-    </ClCompile>
-    <ClCompile Include="DiffusionPainter.cpp">
-      <Filter>Dumpster</Filter>
     </ClCompile>
     <ClCompile Include="GLcamera.cpp">
       <Filter>Dumpster</Filter>
@@ -265,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ProbeElectrode.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\epStimulator.cpp">
+      <Filter>Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -325,9 +310,6 @@
     <CustomBuild Include="wholeHeart.struc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Model\CardiacMesh.h">
-      <Filter>Model</Filter>
-    </CustomBuild>
     <CustomBuild Include="Model\cartesianGrid.h">
       <Filter>Model</Filter>
     </CustomBuild>
@@ -357,12 +339,6 @@
     </CustomBuild>
     <CustomBuild Include="NumericStrategy\TimeTree.h">
       <Filter>NumericStrategy</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DiffusionMatrix.h">
-      <Filter>Dumpster</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DiffusionPainter.h">
-      <Filter>Dumpster</Filter>
     </CustomBuild>
     <CustomBuild Include="AtrialMachine2d.h">
       <Filter>Control</Filter>
@@ -422,6 +398,12 @@
     </ClInclude>
     <ClInclude Include="View\SimViewStateEP.h">
       <Filter>View\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\CardiacMesh.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\epStimulator.h">
+      <Filter>Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

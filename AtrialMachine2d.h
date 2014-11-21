@@ -15,20 +15,7 @@
 #include "Model\CardiacMesh.h"
 #include "Control\ProbeElectrode.h"
 #include "NumericStrategy\NumericStrategy.h"
-
-class burster
-{
-public:
-	burster();
-	double lastSpike;
-	int currentPhaseOfPeak;
-	double currentPhase;
-	double meanPeriod;
-	double periodModulation;
-	double amp;
-	int length;
-	double spike(double time,double value);
-};
+#include "Control/epStimulator.h"
 
 
 class AtrialMachine2d : public QObject
@@ -40,46 +27,58 @@ public:
 	void deleteAtrium();
 	void init();
 
-	void setForwardEulerStrategy();
-	void setAllexandreStrategy();
 	void(AtrialMachine2d::*setStrategy)();
 
+
 	//-----------------------------------------------
-	//FLAGS
-	bool m_hormonalToggle;
+
 	//-------------------------------------------------------------
-	atrialParameters*		m_definitions;
-	RandomGenerator		generator;
+	atrialParameters*		m_definitions;//?
+	RandomGenerator		generator;//?
 	//-------------------------------------------------------------
 	std::vector<ProbeElectrode*> probeOscillator;
 	CardiacMesh* m_grid;
 	NumericStrategy* m_strategy;
+	EpStimulator	stimulator;
 	//-------------------------------------------------------------
 	double m_globalTime;
-	int	   m_skip;
 
-	//double m_mainTimestep;
-	//double nextTimestep;
-	//double nextTime;
-	//double nextPotential;
-	//double nextCurrent[3];
+	//bool structureUpdated;
 
-	bool structureUpdated;
+private:
+	bool			_stimulatorOn;
+	int				_skip;
+
+	//TODO - the same in Mesh??
 	//-------------------------------------------------------------
 signals:
 	void stepFinished();
-	void currentOscilatorPotential(double, double);
-	void currentOscilatorPotential_tab(double*);
+
 
 public slots:
+	void setForwardEulerStrategy();
+	void setAllexandreStrategy();
 	double processStep();
 	void reset();
+	void stimulatorOn();
+	void stimulatorOff();
+
+
 	void calculateFullElectrogramMap();
 	//----------------simulation settings
 	void setSkip(int skip);
 
-	//------------------------------------global nodes settings
-	void setGlobalTime(double t);
-	void setEctoModTime();
+	void setUniformDiffusion(double value);
+	void setUniformERP(double value);
+	//void setS1_Duration(double val);
+	//void setS1_Cycle(double val);
+	////------------------------------------global nodes settings
+	//void setGlobalTime(double t);
+	//void setEctoModTime();
 	//---------------------------------------------------
+
+
+
+
+
 };

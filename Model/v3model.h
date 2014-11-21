@@ -13,6 +13,7 @@ public:
 
 	double getCurrentPrim(const int& which);	//podaj wynik wzoru na pochodn¹ pr¹du
 	double getPotentialPrim();  //podaj wynik wzoru na pochodn¹ potencja³u
+	double getERP(); ///virtual function for refractory period setting
 
 
 	double get_p();
@@ -24,7 +25,8 @@ public:
 	double get_J_si();  
 
 public slots:
-    void setParameter(double value, OSC_PARAMETER parameter);
+	void setParameter(double value, OSC_PARAMETER parameter);
+	void setERP(double value); ///virtual function for refractory period setting
 
 
 private:

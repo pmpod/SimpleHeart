@@ -22,6 +22,10 @@ void \hyperlink{class_simple_heart_a4ffc946d90c553de0fc523d955555f65}{stop\+Calc
 \item 
 void \hyperlink{class_simple_heart_a49deb5c528545bab494fd64069103480}{start\+Calculation} ()
 \item 
+void \hyperlink{class_simple_heart_a7518755827922e9a3fa12c3e2438b3de}{set\+State} (int val)
+\item 
+void \hyperlink{class_simple_heart_a9f8cc5db506750cc418f42af3c44d44e}{set\+Free\+Touch} (bool val)
+\item 
 void \hyperlink{class_simple_heart_abaf4c1874fa254d5a1c479d9c7a8dee4}{open\+Instruction} ()
 \item 
 void \hyperlink{class_simple_heart_a6bbe8cde23ba17c810fa0dbb1d6bd5bb}{open\+Settings} ()
@@ -60,16 +64,14 @@ void \hyperlink{class_simple_heart_abee7dfe8ab6a95c525737851d195a90a}{plot\+R\+R
 \item 
 void \hyperlink{class_simple_heart_ae8f19d61bc762edd3333b102d6ba8df3}{plot\+Ent\+Clear} ()
 \item 
-void \hyperlink{class_simple_heart_a774d9d7eb7daa584ea9d30c52e90aca5}{set\+Probe\+Electrode} (int electrode, int id\+\_\+y, int id\+\_\+x)
-\item 
-void \hyperlink{class_simple_heart_a3bc02674ea9df69b00cd1f100c4807fe}{switch\+Electrode} ()
-\item 
 void \hyperlink{class_simple_heart_a4b80652996225e2f11c8325f16fc8608}{set\+Bmp\+Saving} (bool t)
 \end{DoxyCompactItemize}
 \subsection*{Signals}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{class_simple_heart_a12ac8a5b493307fbe99851f95e1fe1c1}{tajmer} ()
+\item 
+void \hyperlink{class_simple_heart_a456ffeef571ef667f4c183c32769331c}{emit\+Global\+Time\+Only} (double)
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -99,17 +101,9 @@ void \hyperlink{class_simple_heart_a5b5e31ea603407a250086dc5eb4ae45c}{setup\+Con
 \item 
 \hyperlink{classatrial_parameters}{atrial\+Parameters} $\ast$ \hyperlink{class_simple_heart_ad8157f32fa08ff832fe1fabb19d934d6}{simple\+Parameters}
 \item 
-\hyperlink{class_time_plot}{Time\+Plot} $\ast$ \hyperlink{class_simple_heart_a54ba9850eabf1da90384a7c0881d331e}{plot\+Potential\+E1}
+std\+::vector$<$ \hyperlink{class_time_plot}{Time\+Plot} $\ast$ $>$ \hyperlink{class_simple_heart_a07acbb646bff1636712c6153ef1c2d8b}{plot\+Potentials}
 \item 
-\hyperlink{class_time_plot}{Time\+Plot} $\ast$ \hyperlink{class_simple_heart_ab5c2b87be446c3c0ffa4ff03006cdba4}{plot\+Potential\+E2}
-\item 
-\hyperlink{class_time_plot}{Time\+Plot} $\ast$ \hyperlink{class_simple_heart_a55a64df2d5be8286ed56a58457d9ab68}{plot\+Potential\+E3}
-\item 
-\hyperlink{classrr_plot}{rr\+Plot} $\ast$ \hyperlink{class_simple_heart_a47c6be7e3a7f1a08c22c8a8d2df96b5c}{plot\+R\+R\+\_\+el1}
-\item 
-\hyperlink{classrr_plot}{rr\+Plot} $\ast$ \hyperlink{class_simple_heart_afceb1926c0c8d17a144998ed1b2bc197}{plot\+R\+R\+\_\+el2}
-\item 
-\hyperlink{classrr_plot}{rr\+Plot} $\ast$ \hyperlink{class_simple_heart_ad4724db8757a84361774de8c122a9f3a}{plot\+R\+R\+\_\+el3}
+std\+::vector$<$ \hyperlink{classrr_plot}{rr\+Plot} $\ast$ $>$ \hyperlink{class_simple_heart_a3e463d6398cb47e01dec31634f6afa96}{plot\+R\+R}
 \item 
 \hyperlink{classrr_plot}{rr\+Plot} $\ast$ \hyperlink{class_simple_heart_a2cf126789217e5c2532577da035b784b}{plot\+Ent\+\_\+el1}
 \item 
@@ -154,6 +148,13 @@ virtual void \hyperlink{class_simple_heart_ae23e7e550a97f784a5a1d5dcc4b841c0}{ti
 {}
 \end{DoxyParamCaption}
 )}}\label{class_simple_heart_a6d53dfab003b56c23ac29b60c48795da}
+\hypertarget{class_simple_heart_a456ffeef571ef667f4c183c32769331c}{\index{Simple\+Heart@{Simple\+Heart}!emit\+Global\+Time\+Only@{emit\+Global\+Time\+Only}}
+\index{emit\+Global\+Time\+Only@{emit\+Global\+Time\+Only}!Simple\+Heart@{Simple\+Heart}}
+\subsubsection[{emit\+Global\+Time\+Only}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::emit\+Global\+Time\+Only (
+\begin{DoxyParamCaption}
+\item[{double}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_simple_heart_a456ffeef571ef667f4c183c32769331c}
 \hypertarget{class_simple_heart_ac7b3872909078554dec5dc1a514b9bab}{\index{Simple\+Heart@{Simple\+Heart}!init@{init}}
 \index{init@{init}!Simple\+Heart@{Simple\+Heart}}
 \subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::init (
@@ -231,7 +232,11 @@ T\+O\+D\+O tu coœ z elektrodami \hypertarget{class_simple_heart_a5ceabf71ede1e16
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_simple_heart_a80ecf93003d33c5d6f9c6e13ce999cb7}
-\hypertarget{class_simple_heart_a4b80652996225e2f11c8325f16fc8608}{\index{Simple\+Heart@{Simple\+Heart}!set\+Bmp\+Saving@{set\+Bmp\+Saving}}
+
+\begin{DoxyItemize}
+\item 
+\item 
+\end{DoxyItemize}\hypertarget{class_simple_heart_a4b80652996225e2f11c8325f16fc8608}{\index{Simple\+Heart@{Simple\+Heart}!set\+Bmp\+Saving@{set\+Bmp\+Saving}}
 \index{set\+Bmp\+Saving@{set\+Bmp\+Saving}!Simple\+Heart@{Simple\+Heart}}
 \subsubsection[{set\+Bmp\+Saving}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::set\+Bmp\+Saving (
 \begin{DoxyParamCaption}
@@ -308,15 +313,20 @@ T\+O\+D\+O tu coœ z elektrodami \hypertarget{class_simple_heart_a5ceabf71ede1e16
 \item[{bool}]{v}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_simple_heart_af5d91ef8cab7fec6e6fbf5436cc25d6c}
-\hypertarget{class_simple_heart_a774d9d7eb7daa584ea9d30c52e90aca5}{\index{Simple\+Heart@{Simple\+Heart}!set\+Probe\+Electrode@{set\+Probe\+Electrode}}
-\index{set\+Probe\+Electrode@{set\+Probe\+Electrode}!Simple\+Heart@{Simple\+Heart}}
-\subsubsection[{set\+Probe\+Electrode}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::set\+Probe\+Electrode (
+\hypertarget{class_simple_heart_a9f8cc5db506750cc418f42af3c44d44e}{\index{Simple\+Heart@{Simple\+Heart}!set\+Free\+Touch@{set\+Free\+Touch}}
+\index{set\+Free\+Touch@{set\+Free\+Touch}!Simple\+Heart@{Simple\+Heart}}
+\subsubsection[{set\+Free\+Touch}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::set\+Free\+Touch (
 \begin{DoxyParamCaption}
-\item[{int}]{electrode, }
-\item[{int}]{id\+\_\+y, }
-\item[{int}]{id\+\_\+x}
+\item[{bool}]{val}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_simple_heart_a774d9d7eb7daa584ea9d30c52e90aca5}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_simple_heart_a9f8cc5db506750cc418f42af3c44d44e}
+\hypertarget{class_simple_heart_a7518755827922e9a3fa12c3e2438b3de}{\index{Simple\+Heart@{Simple\+Heart}!set\+State@{set\+State}}
+\index{set\+State@{set\+State}!Simple\+Heart@{Simple\+Heart}}
+\subsubsection[{set\+State}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::set\+State (
+\begin{DoxyParamCaption}
+\item[{int}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_simple_heart_a7518755827922e9a3fa12c3e2438b3de}
 \hypertarget{class_simple_heart_ad5519be4fe9004e2726208111b294f0b}{\index{Simple\+Heart@{Simple\+Heart}!set\+Timer\+Interval@{set\+Timer\+Interval}}
 \index{set\+Timer\+Interval@{set\+Timer\+Interval}!Simple\+Heart@{Simple\+Heart}}
 \subsubsection[{set\+Timer\+Interval}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::set\+Timer\+Interval (
@@ -345,13 +355,6 @@ T\+O\+D\+O tu coœ z elektrodami \hypertarget{class_simple_heart_a5ceabf71ede1e16
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_simple_heart_a4ffc946d90c553de0fc523d955555f65}
-\hypertarget{class_simple_heart_a3bc02674ea9df69b00cd1f100c4807fe}{\index{Simple\+Heart@{Simple\+Heart}!switch\+Electrode@{switch\+Electrode}}
-\index{switch\+Electrode@{switch\+Electrode}!Simple\+Heart@{Simple\+Heart}}
-\subsubsection[{switch\+Electrode}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::switch\+Electrode (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_simple_heart_a3bc02674ea9df69b00cd1f100c4807fe}
 \hypertarget{class_simple_heart_a12ac8a5b493307fbe99851f95e1fe1c1}{\index{Simple\+Heart@{Simple\+Heart}!tajmer@{tajmer}}
 \index{tajmer@{tajmer}!Simple\+Heart@{Simple\+Heart}}
 \subsubsection[{tajmer}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Heart\+::tajmer (
@@ -366,7 +369,7 @@ T\+O\+D\+O tu coœ z elektrodami \hypertarget{class_simple_heart_a5ceabf71ede1e16
 \item[{Q\+Timer\+Event $\ast$}]{e}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_simple_heart_ae23e7e550a97f784a5a1d5dcc4b841c0}
-T\+O\+D\+O\+: zrobiæ coœ jak jest last 
+
 
 \subsection{Member Data Documentation}
 \hypertarget{class_simple_heart_ad1a89c2f1818a2e2e548d98e1c49a7dc}{\index{Simple\+Heart@{Simple\+Heart}!diffusion\+Painter@{diffusion\+Painter}}
@@ -396,24 +399,12 @@ T\+O\+D\+O\+: zrobiæ coœ jak jest last
 \hypertarget{class_simple_heart_a9bd2fa10afc34a0d295d7b9594dc7a21}{\index{Simple\+Heart@{Simple\+Heart}!plot\+Ent\+\_\+el3@{plot\+Ent\+\_\+el3}}
 \index{plot\+Ent\+\_\+el3@{plot\+Ent\+\_\+el3}!Simple\+Heart@{Simple\+Heart}}
 \subsubsection[{plot\+Ent\+\_\+el3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rr\+Plot}$\ast$ Simple\+Heart\+::plot\+Ent\+\_\+el3}}\label{class_simple_heart_a9bd2fa10afc34a0d295d7b9594dc7a21}
-\hypertarget{class_simple_heart_a54ba9850eabf1da90384a7c0881d331e}{\index{Simple\+Heart@{Simple\+Heart}!plot\+Potential\+E1@{plot\+Potential\+E1}}
-\index{plot\+Potential\+E1@{plot\+Potential\+E1}!Simple\+Heart@{Simple\+Heart}}
-\subsubsection[{plot\+Potential\+E1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Plot}$\ast$ Simple\+Heart\+::plot\+Potential\+E1}}\label{class_simple_heart_a54ba9850eabf1da90384a7c0881d331e}
-\hypertarget{class_simple_heart_ab5c2b87be446c3c0ffa4ff03006cdba4}{\index{Simple\+Heart@{Simple\+Heart}!plot\+Potential\+E2@{plot\+Potential\+E2}}
-\index{plot\+Potential\+E2@{plot\+Potential\+E2}!Simple\+Heart@{Simple\+Heart}}
-\subsubsection[{plot\+Potential\+E2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Plot}$\ast$ Simple\+Heart\+::plot\+Potential\+E2}}\label{class_simple_heart_ab5c2b87be446c3c0ffa4ff03006cdba4}
-\hypertarget{class_simple_heart_a55a64df2d5be8286ed56a58457d9ab68}{\index{Simple\+Heart@{Simple\+Heart}!plot\+Potential\+E3@{plot\+Potential\+E3}}
-\index{plot\+Potential\+E3@{plot\+Potential\+E3}!Simple\+Heart@{Simple\+Heart}}
-\subsubsection[{plot\+Potential\+E3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Plot}$\ast$ Simple\+Heart\+::plot\+Potential\+E3}}\label{class_simple_heart_a55a64df2d5be8286ed56a58457d9ab68}
-\hypertarget{class_simple_heart_a47c6be7e3a7f1a08c22c8a8d2df96b5c}{\index{Simple\+Heart@{Simple\+Heart}!plot\+R\+R\+\_\+el1@{plot\+R\+R\+\_\+el1}}
-\index{plot\+R\+R\+\_\+el1@{plot\+R\+R\+\_\+el1}!Simple\+Heart@{Simple\+Heart}}
-\subsubsection[{plot\+R\+R\+\_\+el1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rr\+Plot}$\ast$ Simple\+Heart\+::plot\+R\+R\+\_\+el1}}\label{class_simple_heart_a47c6be7e3a7f1a08c22c8a8d2df96b5c}
-\hypertarget{class_simple_heart_afceb1926c0c8d17a144998ed1b2bc197}{\index{Simple\+Heart@{Simple\+Heart}!plot\+R\+R\+\_\+el2@{plot\+R\+R\+\_\+el2}}
-\index{plot\+R\+R\+\_\+el2@{plot\+R\+R\+\_\+el2}!Simple\+Heart@{Simple\+Heart}}
-\subsubsection[{plot\+R\+R\+\_\+el2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rr\+Plot}$\ast$ Simple\+Heart\+::plot\+R\+R\+\_\+el2}}\label{class_simple_heart_afceb1926c0c8d17a144998ed1b2bc197}
-\hypertarget{class_simple_heart_ad4724db8757a84361774de8c122a9f3a}{\index{Simple\+Heart@{Simple\+Heart}!plot\+R\+R\+\_\+el3@{plot\+R\+R\+\_\+el3}}
-\index{plot\+R\+R\+\_\+el3@{plot\+R\+R\+\_\+el3}!Simple\+Heart@{Simple\+Heart}}
-\subsubsection[{plot\+R\+R\+\_\+el3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rr\+Plot}$\ast$ Simple\+Heart\+::plot\+R\+R\+\_\+el3}}\label{class_simple_heart_ad4724db8757a84361774de8c122a9f3a}
+\hypertarget{class_simple_heart_a07acbb646bff1636712c6153ef1c2d8b}{\index{Simple\+Heart@{Simple\+Heart}!plot\+Potentials@{plot\+Potentials}}
+\index{plot\+Potentials@{plot\+Potentials}!Simple\+Heart@{Simple\+Heart}}
+\subsubsection[{plot\+Potentials}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Time\+Plot}$\ast$$>$ Simple\+Heart\+::plot\+Potentials}}\label{class_simple_heart_a07acbb646bff1636712c6153ef1c2d8b}
+\hypertarget{class_simple_heart_a3e463d6398cb47e01dec31634f6afa96}{\index{Simple\+Heart@{Simple\+Heart}!plot\+R\+R@{plot\+R\+R}}
+\index{plot\+R\+R@{plot\+R\+R}!Simple\+Heart@{Simple\+Heart}}
+\subsubsection[{plot\+R\+R}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf rr\+Plot}$\ast$$>$ Simple\+Heart\+::plot\+R\+R}}\label{class_simple_heart_a3e463d6398cb47e01dec31634f6afa96}
 \hypertarget{class_simple_heart_ad8157f32fa08ff832fe1fabb19d934d6}{\index{Simple\+Heart@{Simple\+Heart}!simple\+Parameters@{simple\+Parameters}}
 \index{simple\+Parameters@{simple\+Parameters}!Simple\+Heart@{Simple\+Heart}}
 \subsubsection[{simple\+Parameters}]{\setlength{\rightskip}{0pt plus 5cm}{\bf atrial\+Parameters}$\ast$ Simple\+Heart\+::simple\+Parameters}}\label{class_simple_heart_ad8157f32fa08ff832fe1fabb19d934d6}

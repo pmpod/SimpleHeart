@@ -81,6 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -132,7 +133,7 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -150,6 +151,9 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 </li>
 <li>calculateElectrogram()
 : <a class="el" href="class_cardiac_mesh.html#abf74825fdb7bc14445c25877f06e36af">CardiacMesh</a>
+</li>
+<li>calculateFullElectrogramMap()
+: <a class="el" href="class_atrial_machine2d.html#a9a600c1251eae56fe59c4188f1735a0b">AtrialMachine2d</a>
 </li>
 <li>calculatePatEn()
 : <a class="el" href="class_r_rcalculator.html#a91d3f4c5a7a4ca1f749a9ecada0b7d5c">RRcalculator</a>
@@ -169,6 +173,9 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <li>changeNode()
 : <a class="el" href="class_cardiac_mesh.html#a5131c310815bf636bd6de60e61dc7c5e">CardiacMesh</a>
 </li>
+<li>ChangeState()
+: <a class="el" href="class_sim_view_state.html#a272419ea4de89cc111205ebde1c8c820">SimViewState</a>
+</li>
 <li>clear()
 : <a class="el" href="class_curve_data.html#ae898810872a274a681ab60131ecf922b">CurveData</a>
 , <a class="el" href="class_default_plot.html#ad5983e28b973fa6050d1d38243c4d18d">DefaultPlot</a>
@@ -176,9 +183,18 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 , <a class="el" href="classrr_plot.html#aa967ef18a8edb8ecd196198f10ecb97c">rrPlot</a>
 , <a class="el" href="class_time_plot.html#a60cb1a4789413379c9d520a329d766f0">TimePlot</a>
 </li>
+<li>clearWallCells()
+: <a class="el" href="class_cardiac_mesh.html#a45cb6c32debebdc827e2c4f48e8f5ce2">CardiacMesh</a>
+</li>
 <li>color
 : <a class="el" href="class_pix.html#adb434da0394ea10d83bbd65982720ef1">Pix</a>
 , <a class="el" href="class_probe.html#a3b43c9b49f2672a7b0dd72bac25aab5c">Probe</a>
+</li>
+<li>colorMap
+: <a class="el" href="class_sim_view_state.html#ae589ccbf8ab7a064c2ea7d48d5c8bd24">SimViewState</a>
+</li>
+<li>computeIncremental()
+: <a class="el" href="class_sim_view_state.html#adc4b5690cdd73f8b624b86ff18cc088d">SimViewState</a>
 </li>
 <li>constructCartesianGrid()
 : <a class="el" href="class_cardiac_mesh.html#a1b47716c2b8eee65b46d9cd47e7abb8e">CardiacMesh</a>
@@ -199,16 +215,8 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 : <a class="el" href="class_curve_data.html#a6d3c0bbc2069cc39f265aa8e9ee5ad73">CurveData</a>
 </li>
 <li>curIndex()
-: <a class="el" href="class_r_rcalculator.html#aa0c89346708b0ec0b64b4256a0120c1f">RRcalculator</a>
-</li>
-<li>currentAlgorithm
-: <a class="el" href="class_atrial_machine2d.html#a57773395f154207dbbac601624586559">AtrialMachine2d</a>
-</li>
-<li>currentFunction
-: <a class="el" href="class_atrial_machine2d.html#a15d1c77b3cd28c073e221905f4cc6493">AtrialMachine2d</a>
-</li>
-<li>currentHormonalActivity()
-: <a class="el" href="class_atrial_machine2d.html#a6fd0e30ef398add561290bda4a8c7e1d">AtrialMachine2d</a>
+: <a class="el" href="class_probe_electrode.html#a46067c4a2b7476692e48fb69c6ff5c77">ProbeElectrode</a>
+, <a class="el" href="class_r_rcalculator.html#aa0c89346708b0ec0b64b4256a0120c1f">RRcalculator</a>
 </li>
 <li>currentlyPressed
 : <a class="el" href="class_diffusion_painter.html#aa57b223dd919193fe1ac1b38ddeee4a4">DiffusionPainter</a>
@@ -231,6 +239,9 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <li>currentText
 : <a class="el" href="class_default_plot.html#aecabd8aa4a721d21e1e01dcc41c621ea">DefaultPlot</a>
 </li>
+<li>cursorRadius
+: <a class="el" href="class_sim_view_state.html#aa8c58229562ab48c746b601ee18c547f">SimViewState</a>
+</li>
 <li>CurveData()
 : <a class="el" href="class_curve_data.html#a4e9a1bb778f0cb2e7d573b88163cfd38">CurveData</a>
 </li>
@@ -240,7 +251,7 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2014 19:29:07 for Simple Heart by
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:12 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

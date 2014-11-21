@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('class_numeric_strategy.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -139,10 +139,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac167251a4c6409131a1be21ce3104870"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> destructor.  <a href="#ac167251a4c6409131a1be21ce3104870">More...</a><br /></td></tr>
 <tr class="separator:ac167251a4c6409131a1be21ce3104870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeab387274e9d0ebf46a0e5ad5a5fe73f"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#aeab387274e9d0ebf46a0e5ad5a5fe73f">nextStep</a> ()=0</td></tr>
-<tr class="memdesc:aeab387274e9d0ebf46a0e5ad5a5fe73f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function.  <a href="#aeab387274e9d0ebf46a0e5ad5a5fe73f">More...</a><br /></td></tr>
+<tr class="memdesc:aeab387274e9d0ebf46a0e5ad5a5fe73f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a single step of simulation.  <a href="#aeab387274e9d0ebf46a0e5ad5a5fe73f">More...</a><br /></td></tr>
 <tr class="separator:aeab387274e9d0ebf46a0e5ad5a5fe73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af85e11ad875a008cd1b6d8b288e3866c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#af85e11ad875a008cd1b6d8b288e3866c">reset</a> ()</td></tr>
-<tr class="memdesc:af85e11ad875a008cd1b6d8b288e3866c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets all the OScillators to the resting state and the time to 0.  <a href="#af85e11ad875a008cd1b6d8b288e3866c">More...</a><br /></td></tr>
+<tr class="memitem:a5dec2aaf22a9642fdd92b55c12353f82"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a5dec2aaf22a9642fdd92b55c12353f82">synchronise</a> ()=0</td></tr>
+<tr class="memdesc:a5dec2aaf22a9642fdd92b55c12353f82"><td class="mdescLeft">&#160;</td><td class="mdescRight">For non-uniform timestep methods synchronises time in all calculation cells; For fixed timestep does nothing.  <a href="#a5dec2aaf22a9642fdd92b55c12353f82">More...</a><br /></td></tr>
+<tr class="separator:a5dec2aaf22a9642fdd92b55c12353f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85e11ad875a008cd1b6d8b288e3866c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#af85e11ad875a008cd1b6d8b288e3866c">reset</a> ()</td></tr>
+<tr class="memdesc:af85e11ad875a008cd1b6d8b288e3866c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets all the Oscillators to the resting state and the time to 0.  <a href="#af85e11ad875a008cd1b6d8b288e3866c">More...</a><br /></td></tr>
 <tr class="separator:af85e11ad875a008cd1b6d8b288e3866c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c081c97ced262ef0478daf66041ee05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a0c081c97ced262ef0478daf66041ee05">defibrillate</a> ()</td></tr>
 <tr class="memdesc:a0c081c97ced262ef0478daf66041ee05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a defibrillation shot (under construction)  <a href="#a0c081c97ced262ef0478daf66041ee05">More...</a><br /></td></tr>
@@ -153,8 +156,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a2ca52f550fd3f1cc26c65aec0cacf2f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cardiac_mesh.html">CardiacMesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a2ca52f550fd3f1cc26c65aec0cacf2f6">m_mesh</a></td></tr>
 <tr class="memdesc:a2ca52f550fd3f1cc26c65aec0cacf2f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the model.  <a href="#a2ca52f550fd3f1cc26c65aec0cacf2f6">More...</a><br /></td></tr>
 <tr class="separator:a2ca52f550fd3f1cc26c65aec0cacf2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ee8b2dbaa436c241384f959cc5fe54d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_numeric_strategy.html#a4ee8b2dbaa436c241384f959cc5fe54d">m_initial_v</a></td></tr>
-<tr class="separator:a4ee8b2dbaa436c241384f959cc5fe54d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> is a main interface class for the numerical integration of the model's equations. It provides the interface for numerical schemes like Forward Euler Scheme, modified Backward Euler Scheme, Allexandre&amp;Otani scheme etc. </p>
@@ -177,7 +178,7 @@ Public Attributes</h2></td></tr>
 <p>A <a class="el" href="class_numeric_strategy.html" title="NumericStrategy is a main interface class for the numerical integration of the model&#39;s equations...">NumericStrategy</a> constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">oscillators</td><td>- a pointer to the already initialized <a class="el" href="class_cardiac_mesh.html">CardiacMesh</a> model </td></tr>
+    <tr><td class="paramname">oscillators</td><td>- a pointer to the already initialized <a class="el" href="class_cardiac_mesh.html" title="Class contatining the full information about the model and helper functions to build it...">CardiacMesh</a> model </td></tr>
   </table>
   </dd>
 </dl>
@@ -240,7 +241,8 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Main function. </p>
+<p>Calculates a single step of simulation. </p>
+<p>Main function </p>
 
 <p>Implemented in <a class="el" href="class_allexandre_strategy.html#a418e280a746b6105eb609cbee6ea99fc">AllexandreStrategy</a>, and <a class="el" href="class_forward_euler_strategy.html#a3a382585c2d87ffaf370c07c37737a28">ForwardEulerStrategy</a>.</p>
 
@@ -249,6 +251,9 @@ Public Attributes</h2></td></tr>
 <a class="anchor" id="af85e11ad875a008cd1b6d8b288e3866c"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void NumericStrategy::reset </td>
@@ -257,25 +262,48 @@ Public Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Resets all the OScillators to the resting state and the time to 0. </p>
+<p>Resets all the Oscillators to the resting state and the time to 0. </p>
+
+<p>Reimplemented in <a class="el" href="class_allexandre_strategy.html#a8f657c6d14d76cef3a312fc862c400f7">AllexandreStrategy</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5dec2aaf22a9642fdd92b55c12353f82"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double NumericStrategy::synchronise </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>For non-uniform timestep methods synchronises time in all calculation cells; For fixed timestep does nothing. </p>
+<p>Main function </p>
+
+<p>Implemented in <a class="el" href="class_allexandre_strategy.html#a8a6038dc52af113157f911665e7d51c2">AllexandreStrategy</a>, and <a class="el" href="class_forward_euler_strategy.html#a59201ff29f82dd037576a1a7b3bf2e7f">ForwardEulerStrategy</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a4ee8b2dbaa436c241384f959cc5fe54d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double NumericStrategy::m_initial_v</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a2ca52f550fd3f1cc26c65aec0cacf2f6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +328,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_numeric_strategy.html">NumericStrategy</a></li>
-    <li class="footer">Generated on Mon Oct 20 2014 19:29:05 for Simple Heart by
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:07 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

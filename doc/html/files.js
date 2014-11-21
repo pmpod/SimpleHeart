@@ -1,7 +1,9 @@
 var files =
 [
+    [ "Control", "dir_2b2a566a879c85564d3355c24cbe6a8a.html", "dir_2b2a566a879c85564d3355c24cbe6a8a" ],
     [ "Model", "dir_312950da3f243a51cc00f4a947545131.html", "dir_312950da3f243a51cc00f4a947545131" ],
     [ "NumericStrategy", "dir_ecf2ff720ad0c2f36bc09bc5bafe8f54.html", "dir_ecf2ff720ad0c2f36bc09bc5bafe8f54" ],
+    [ "View", "dir_f2ee84e8e3a17eaa7015d788fa443c27.html", "dir_f2ee84e8e3a17eaa7015d788fa443c27" ],
     [ "AtrialMachine2d.cpp", "_atrial_machine2d_8cpp.html", "_atrial_machine2d_8cpp" ],
     [ "AtrialMachine2d.h", "_atrial_machine2d_8h.html", [
       [ "burster", "classburster.html", "classburster" ],
@@ -28,17 +30,11 @@ var files =
     [ "DiffusionPainter.h", "_diffusion_painter_8h.html", [
       [ "DiffusionPainter", "class_diffusion_painter.html", "class_diffusion_painter" ]
     ] ],
-    [ "glAtrium.cpp", "gl_atrium_8cpp.html", "gl_atrium_8cpp" ],
-    [ "glAtrium.h", "gl_atrium_8h.html", [
-      [ "glAtrium", "classgl_atrium.html", "classgl_atrium" ]
-    ] ],
     [ "GLcamera.cpp", "_g_lcamera_8cpp.html", null ],
     [ "GLcamera.h", "_g_lcamera_8h.html", "_g_lcamera_8h" ],
-    [ "GLfunc.cpp", "_g_lfunc_8cpp.html", "_g_lfunc_8cpp" ],
-    [ "GLfunc.h", "_g_lfunc_8h.html", "_g_lfunc_8h" ],
     [ "heartDefines.cpp", "heart_defines_8cpp.html", null ],
     [ "heartDefines.h", "heart_defines_8h.html", "heart_defines_8h" ],
-    [ "ioHandler.cpp", "io_handler_8cpp.html", null ],
+    [ "ioHandler.cpp", "io_handler_8cpp.html", "io_handler_8cpp" ],
     [ "ioHandler.h", "io_handler_8h.html", [
       [ "ioHandler", "classio_handler.html", "classio_handler" ]
     ] ],

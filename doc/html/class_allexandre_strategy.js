@@ -9,5 +9,6 @@ var class_allexandre_strategy =
     [ "guardCellUpdate", "class_allexandre_strategy.html#a9ae2720bb39eeb2044a9192a64e0fa95", null ],
     [ "nextStep", "class_allexandre_strategy.html#a418e280a746b6105eb609cbee6ea99fc", null ],
     [ "reset", "class_allexandre_strategy.html#a8f657c6d14d76cef3a312fc862c400f7", null ],
-    [ "stepModifiedBackwardEuler", "class_allexandre_strategy.html#a25fe69b84aed988807d10e4b72890d26", null ]
+    [ "stepModifiedBackwardEuler", "class_allexandre_strategy.html#a7507036b61a804d7596567dced8f3c73", null ],
+    [ "synchronise", "class_allexandre_strategy.html#a8a6038dc52af113157f911665e7d51c2", null ]
 ];

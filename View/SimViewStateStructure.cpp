@@ -29,7 +29,7 @@ SimViewState* SimViewStateStructure::Instance()
 
 }
 //--------------------------------------------------
-void SimViewStateStructure::setDisplayMode(const int mode)
+void SimViewStateStructure::setMode(const int mode)
 {
 
 }

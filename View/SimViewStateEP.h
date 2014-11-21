@@ -9,7 +9,7 @@ public:
 	SimViewStateEP();
 
 	static SimViewState* Instance();
-	void setDisplayMode(const int mode); 
+	void setMode(const int mode); 
 	void setOutlineStyle(const  BRUSH_OUTLINE outline);
 	void handleMouseLeftPress(glAtrium*, QMouseEvent *event);
 	void handleMouseRightPress(glAtrium*, QMouseEvent *event);
@@ -24,8 +24,8 @@ protected:
 	int findElectrode(glAtrium* view, Oscillator* src, Oscillator* osc);
 private:
 	static SimViewStateEP* _instance;
-	short _dataDisplayMode;
 	short _probeOnTheMove;
 	std::map < int, bool > m_isSearchedMap;
+	short _dataDisplayMode;
 };
 

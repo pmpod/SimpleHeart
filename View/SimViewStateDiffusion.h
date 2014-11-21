@@ -3,6 +3,11 @@
 #include "Model\Oscillator.h"
 #include <map>
 
+enum paintMode
+{
+	PAINT_DIFF,
+	PAINT_ERP
+};
 class SimViewStateDiffusion: public SimViewState
 {
 public:
@@ -10,7 +15,7 @@ public:
 	SimViewStateDiffusion();
 
 	static SimViewState* Instance();
-	void setDisplayMode(const int mode);
+	void setMode(const int mode);
 	void setOutlineStyle(const  BRUSH_OUTLINE outline);
 	void handleMouseLeftPress(glAtrium*, QMouseEvent *event);
 	void handleMouseRightPress(glAtrium*, QMouseEvent *event);
@@ -27,16 +32,17 @@ protected:
 
 private:
 	static SimViewStateDiffusion* _instance;
-	void paintDiffusionInRadius(Oscillator* src, Oscillator* osc);
+	void paintDiffusionInRadius(Oscillator* src, Oscillator* osc, double value);
 
 	//painting handling
 	std::map < int, bool > m_isPaintedMap;
 
-	double _maxDiffusion;
-	double _minDiffusion;
-	double _paintValue;
+
+	double _diffPaintingStrengthValue;
+	double _ERPpaintingStrengthValue;
 	double _gaussSigma;
 	BRUSH_OUTLINE _outline;
-	//cursor handling
+	short _whatToPaint;
+	
 };
 

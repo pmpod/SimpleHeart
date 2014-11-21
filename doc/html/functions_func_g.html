@@ -81,6 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -131,7 +132,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -204,6 +205,10 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getElectrogram()
 : <a class="el" href="class_oscillator.html#a2eb50a29aeac6a63b4b8212d1b4cc097">Oscillator</a>
 </li>
+<li>getERP()
+: <a class="el" href="class_oscillator.html#ae81ca9a4404d59af1eaea0526cc3c88e">Oscillator</a>
+, <a class="el" href="classv3model.html#aeb8db7e7f6327e341b73ce6ee22c888a">v3model</a>
+</li>
 <li>getExtrapolatedNeighbourSource()
 : <a class="el" href="class_oscillator.html#a5051ab41b5036cb775faaa5f97e2c182">Oscillator</a>
 </li>
@@ -216,17 +221,23 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getNumberOfCurrents()
 : <a class="el" href="class_oscillator.html#a115350abaf2f6ddbf9c06027b8faa1e6">Oscillator</a>
 </li>
+<li>getOscillatorID()
+: <a class="el" href="class_probe_electrode.html#a9ae2fc3f864c4c8f9971b4f4b35e7022">ProbeElectrode</a>
+</li>
 <li>getParametersFromFile()
 : <a class="el" href="classio_handler.html#a32fc5c3861951f75c7ffbf62ed44e3e3">ioHandler</a>
 </li>
 <li>getPositionX()
 : <a class="el" href="class_oscillator.html#ad2be11901d2b0055a48890643db3350d">Oscillator</a>
+, <a class="el" href="class_probe_electrode.html#a33da81f5b1c8d14f610ed8e7407cbba9">ProbeElectrode</a>
 </li>
 <li>getPositionY()
 : <a class="el" href="class_oscillator.html#aaa999e4824d4e4007c0541ae78f60e6c">Oscillator</a>
+, <a class="el" href="class_probe_electrode.html#a356cb0ec1bbdbbbe8aeddd4b90638da4">ProbeElectrode</a>
 </li>
 <li>getPositionZ()
 : <a class="el" href="class_oscillator.html#a6f21f66ca4ca7a163d6b3d84eda3b8db">Oscillator</a>
+, <a class="el" href="class_probe_electrode.html#a23b9f2c91bc2bb6952602ad9e644c72a">ProbeElectrode</a>
 </li>
 <li>getPotential()
 : <a class="el" href="class_oscillator.html#a6ababfb0cb31e5dbf26b4d60a0d0bb16">Oscillator</a>
@@ -243,6 +254,9 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getPreviousTime()
 : <a class="el" href="class_oscillator.html#a0768ee28a72db7e13e14fb717408292c">Oscillator</a>
 </li>
+<li>getRadius()
+: <a class="el" href="class_sim_view_state.html#ac07366dc45e2bf517d896df7fd791a2b">SimViewState</a>
+</li>
 <li>getRefCurrentTime()
 : <a class="el" href="class_oscillator.html#ac82b2732257e64c0f84f5b520ef16704">Oscillator</a>
 </li>
@@ -251,9 +265,6 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 </li>
 <li>getRefPreviousPotential()
 : <a class="el" href="class_oscillator.html#a734d7375586e9982a6419d1f08b63c57">Oscillator</a>
-</li>
-<li>getSize()
-: <a class="el" href="class_cardiac_mesh.html#afabd19504c5ea0168100a86205b3ccb6">CardiacMesh</a>
 </li>
 <li>getSizeInMm()
 : <a class="el" href="class_cardiac_mesh.html#a67e146331d7c41e3d528861594ac577e">CardiacMesh</a>
@@ -272,7 +283,6 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 </li>
 <li>guardCellUpdate()
 : <a class="el" href="class_allexandre_strategy.html#a9ae2720bb39eeb2044a9192a64e0fa95">AllexandreStrategy</a>
-, <a class="el" href="class_atrial_machine2d.html#ad0cfe6a11b68c40c8db51da0a4ccb4cb">AtrialMachine2d</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -280,7 +290,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2014 19:29:07 for Simple Heart by
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:12 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

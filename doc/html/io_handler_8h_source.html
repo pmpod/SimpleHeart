@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('io_handler_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -120,74 +120,104 @@ $(document).ready(function(){initNavTree('io_handler_8h_source.html','');});
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="heart_defines_8h.html">heartDefines.h</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cartesian_grid_8h.html">Model\cartesianGrid.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_diffusion_painter_8h.html">DiffusionPainter.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_g_lfunc_8h.html">GLfunc.h</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">class </span><a class="code" href="class_simple_heart.html">SimpleHeart</a>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classio_handler.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classio_handler.html">ioHandler</a>: <span class="keyword">public</span> QObject</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classio_handler.html">ioHandler</a>(<a class="code" href="class_simple_heart.html">SimpleHeart</a>* handle);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ~<a class="code" href="classio_handler.html">ioHandler</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> saveAsBmp();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> setBmp();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> saveStructureToFile();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> readStructureFromFile();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> readStructureFromFile(<span class="keywordtype">int</span> type);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> saveDiffusionToFile();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> readDiffusionFromFile();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> writeParametersToFile();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> getParametersFromFile();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> getDefaultParameters();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> savePotentialPlot();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> saveRRPlot_1();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> saveRRPlot_2();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> saveRRPlot_3();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classio_handler.html#a69a16636ea31e6b2c16a447cc69c9d40">   44</a></span>&#160;    <a class="code" href="class_simple_heart.html">SimpleHeart</a>* <a class="code" href="classio_handler.html#a69a16636ea31e6b2c16a447cc69c9d40">m_handle</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">string</span> intToStr(<span class="keywordtype">int</span> n);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">int</span> strToInt(<span class="keywordtype">string</span> s);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classio_handler.html#aa997341357b4da444f481ab43f455f9b">   50</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="classio_handler.html#aa997341357b4da444f481ab43f455f9b">paramFilename</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">string</span> filePrefix();</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classio_handler.html#a80e45be220c886422df536b4714e4b94">   53</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="classio_handler.html#a80e45be220c886422df536b4714e4b94">m_prefix</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_g_lfunc_8h.html">View\GLfunc.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;matio.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">class </span><a class="code" href="class_simple_heart.html">SimpleHeart</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classio_handler.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classio_handler.html">ioHandler</a>: <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classio_handler.html#aa57cd18c3ae379dbc508d2942ee553fa">ioHandler</a>(<a class="code" href="class_simple_heart.html">SimpleHeart</a>* handle);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classio_handler.html#a030878327dcdc71c410e2b3184538aed">~ioHandler</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// \brief Savess current structure to .mat file</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classio_handler.html#af01b41a00277e41d62d4d80fd6fe39f7">saveCurrentStructure</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classio_handler.html#a1382429c5838d6eab8195967e9c11678">loadCurrentState</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_cardiac_mesh.html">CardiacMesh</a>* <a class="code" href="classio_handler.html#aabe0f6cb21a1c374fd020ff42d5c9904">loadCustomStructure</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classio_handler.html#a59e5cd8377c13643181d9b6caef839db">saveCurrentState</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#a472e8932c9769f3a577d11ea7c0e224d">saveAsBmp</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#a8b295df2cd4f85f178935c310f6dad34">setBmp</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#a0549d597c8da9195fd764044cb4c5a63">writeParametersToFile</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#a32fc5c3861951f75c7ffbf62ed44e3e3">getParametersFromFile</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#ac9eac90b6bdc44e46d3802e884034abe">getDefaultParameters</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#a3ce2a07edc23ff12d084e64b85416954">savePotentialPlot</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#aa05a5e6a55ac70333479724c48d09a42">saveRRPlot_1</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#aee153e33abd373472c856467563d4c7d">saveRRPlot_2</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_handler.html#a2de36fdfa99f28b20c6fe1b2069b75ad">saveRRPlot_3</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> Ttype&gt; matvar_t* <a class="code" href="classio_handler.html#a217721cec0dfbacc3b564bfaa4cc7b8b">readMatVariable</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *varname, mat_t *matfp, Ttype* &amp;outvar);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    mat_t * <a class="code" href="classio_handler.html#a98fa0fabd78d5c31b4949806ac40400d">initMatlabLoad</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *inname);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classio_handler.html#a69a16636ea31e6b2c16a447cc69c9d40">   53</a></span>&#160;    <a class="code" href="class_simple_heart.html">SimpleHeart</a>* <a class="code" href="classio_handler.html#a69a16636ea31e6b2c16a447cc69c9d40">m_handle</a>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classio_handler.html#a18b3ace510b075e81a08a4a3ed9d00a2">   55</a></span>&#160;    QString <a class="code" href="classio_handler.html#a18b3ace510b075e81a08a4a3ed9d00a2">pathParameters</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classio_handler.html#a9eb908a81637ccd23846b8722f89a3c3">   56</a></span>&#160;    ifstream <a class="code" href="classio_handler.html#a9eb908a81637ccd23846b8722f89a3c3">inputParameters</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classio_handler.html#a3dde6edac5ac86c95b1651faafd8b418">   57</a></span>&#160;    ofstream <a class="code" href="classio_handler.html#a3dde6edac5ac86c95b1651faafd8b418">backupParameters</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="ttc" id="classio_handler_html_a80e45be220c886422df536b4714e4b94"><div class="ttname"><a href="classio_handler.html#a80e45be220c886422df536b4714e4b94">ioHandler::m_prefix</a></div><div class="ttdeci">string m_prefix</div><div class="ttdef"><b>Definition:</b> ioHandler.h:53</div></div>
-<div class="ttc" id="classio_handler_html_a18b3ace510b075e81a08a4a3ed9d00a2"><div class="ttname"><a href="classio_handler.html#a18b3ace510b075e81a08a4a3ed9d00a2">ioHandler::pathParameters</a></div><div class="ttdeci">QString pathParameters</div><div class="ttdef"><b>Definition:</b> ioHandler.h:55</div></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classio_handler.html#aa997341357b4da444f481ab43f455f9b">   57</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="classio_handler.html#aa997341357b4da444f481ab43f455f9b">paramFilename</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">string</span> <a class="code" href="classio_handler.html#aaf8038bd0ff5a184504cf4622411fd51">filePrefix</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classio_handler.html#a80e45be220c886422df536b4714e4b94">   60</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="classio_handler.html#a80e45be220c886422df536b4714e4b94">m_prefix</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classio_handler.html#a18b3ace510b075e81a08a4a3ed9d00a2">   62</a></span>&#160;    QString <a class="code" href="classio_handler.html#a18b3ace510b075e81a08a4a3ed9d00a2">pathParameters</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classio_handler.html#a9eb908a81637ccd23846b8722f89a3c3">   63</a></span>&#160;    ifstream <a class="code" href="classio_handler.html#a9eb908a81637ccd23846b8722f89a3c3">inputParameters</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classio_handler.html#a3dde6edac5ac86c95b1651faafd8b418">   64</a></span>&#160;    ofstream <a class="code" href="classio_handler.html#a3dde6edac5ac86c95b1651faafd8b418">backupParameters</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">string</span> <a class="code" href="classio_handler.html#a7d65ecb912b15cbeff8ecaa3f3a33f7b">intToStr</a>(<span class="keywordtype">int</span> n);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classio_handler.html#a24088c5418729764793ad2ff055d4de8">strToInt</a>(<span class="keywordtype">string</span> s);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="ttc" id="classio_handler_html_a80e45be220c886422df536b4714e4b94"><div class="ttname"><a href="classio_handler.html#a80e45be220c886422df536b4714e4b94">ioHandler::m_prefix</a></div><div class="ttdeci">string m_prefix</div><div class="ttdef"><b>Definition:</b> ioHandler.h:60</div></div>
+<div class="ttc" id="classio_handler_html_a2de36fdfa99f28b20c6fe1b2069b75ad"><div class="ttname"><a href="classio_handler.html#a2de36fdfa99f28b20c6fe1b2069b75ad">ioHandler::saveRRPlot_3</a></div><div class="ttdeci">void saveRRPlot_3()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:944</div></div>
+<div class="ttc" id="classio_handler_html_a18b3ace510b075e81a08a4a3ed9d00a2"><div class="ttname"><a href="classio_handler.html#a18b3ace510b075e81a08a4a3ed9d00a2">ioHandler::pathParameters</a></div><div class="ttdeci">QString pathParameters</div><div class="ttdef"><b>Definition:</b> ioHandler.h:62</div></div>
 <div class="ttc" id="cartesian_grid_8h_html"><div class="ttname"><a href="cartesian_grid_8h.html">cartesianGrid.h</a></div></div>
-<div class="ttc" id="classio_handler_html_a9eb908a81637ccd23846b8722f89a3c3"><div class="ttname"><a href="classio_handler.html#a9eb908a81637ccd23846b8722f89a3c3">ioHandler::inputParameters</a></div><div class="ttdeci">ifstream inputParameters</div><div class="ttdef"><b>Definition:</b> ioHandler.h:56</div></div>
-<div class="ttc" id="classio_handler_html_a69a16636ea31e6b2c16a447cc69c9d40"><div class="ttname"><a href="classio_handler.html#a69a16636ea31e6b2c16a447cc69c9d40">ioHandler::m_handle</a></div><div class="ttdeci">SimpleHeart * m_handle</div><div class="ttdef"><b>Definition:</b> ioHandler.h:44</div></div>
-<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
-<div class="ttc" id="classio_handler_html_a3dde6edac5ac86c95b1651faafd8b418"><div class="ttname"><a href="classio_handler.html#a3dde6edac5ac86c95b1651faafd8b418">ioHandler::backupParameters</a></div><div class="ttdeci">ofstream backupParameters</div><div class="ttdef"><b>Definition:</b> ioHandler.h:57</div></div>
+<div class="ttc" id="classio_handler_html_a9eb908a81637ccd23846b8722f89a3c3"><div class="ttname"><a href="classio_handler.html#a9eb908a81637ccd23846b8722f89a3c3">ioHandler::inputParameters</a></div><div class="ttdeci">ifstream inputParameters</div><div class="ttdef"><b>Definition:</b> ioHandler.h:63</div></div>
+<div class="ttc" id="classio_handler_html_a030878327dcdc71c410e2b3184538aed"><div class="ttname"><a href="classio_handler.html#a030878327dcdc71c410e2b3184538aed">ioHandler::~ioHandler</a></div><div class="ttdeci">~ioHandler(void)</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:15</div></div>
+<div class="ttc" id="classio_handler_html_a69a16636ea31e6b2c16a447cc69c9d40"><div class="ttname"><a href="classio_handler.html#a69a16636ea31e6b2c16a447cc69c9d40">ioHandler::m_handle</a></div><div class="ttdeci">SimpleHeart * m_handle</div><div class="ttdef"><b>Definition:</b> ioHandler.h:53</div></div>
+<div class="ttc" id="classio_handler_html_a217721cec0dfbacc3b564bfaa4cc7b8b"><div class="ttname"><a href="classio_handler.html#a217721cec0dfbacc3b564bfaa4cc7b8b">ioHandler::readMatVariable</a></div><div class="ttdeci">matvar_t * readMatVariable(const char *varname, mat_t *matfp, Ttype *&amp;outvar)</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:22</div></div>
+<div class="ttc" id="classio_handler_html_a1382429c5838d6eab8195967e9c11678"><div class="ttname"><a href="classio_handler.html#a1382429c5838d6eab8195967e9c11678">ioHandler::loadCurrentState</a></div><div class="ttdeci">bool loadCurrentState()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:172</div></div>
+<div class="ttc" id="classio_handler_html_a3dde6edac5ac86c95b1651faafd8b418"><div class="ttname"><a href="classio_handler.html#a3dde6edac5ac86c95b1651faafd8b418">ioHandler::backupParameters</a></div><div class="ttdeci">ofstream backupParameters</div><div class="ttdef"><b>Definition:</b> ioHandler.h:64</div></div>
 <div class="ttc" id="heart_defines_8h_html"><div class="ttname"><a href="heart_defines_8h.html">heartDefines.h</a></div></div>
+<div class="ttc" id="classio_handler_html_a472e8932c9769f3a577d11ea7c0e224d"><div class="ttname"><a href="classio_handler.html#a472e8932c9769f3a577d11ea7c0e224d">ioHandler::saveAsBmp</a></div><div class="ttdeci">void saveAsBmp()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:759</div></div>
+<div class="ttc" id="classio_handler_html_af01b41a00277e41d62d4d80fd6fe39f7"><div class="ttname"><a href="classio_handler.html#af01b41a00277e41d62d4d80fd6fe39f7">ioHandler::saveCurrentStructure</a></div><div class="ttdeci">bool saveCurrentStructure()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:46</div></div>
+<div class="ttc" id="classio_handler_html_aaf8038bd0ff5a184504cf4622411fd51"><div class="ttname"><a href="classio_handler.html#aaf8038bd0ff5a184504cf4622411fd51">ioHandler::filePrefix</a></div><div class="ttdeci">string filePrefix()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:989</div></div>
 <div class="ttc" id="_g_lfunc_8h_html"><div class="ttname"><a href="_g_lfunc_8h.html">GLfunc.h</a></div></div>
+<div class="ttc" id="classio_handler_html_ac9eac90b6bdc44e46d3802e884034abe"><div class="ttname"><a href="classio_handler.html#ac9eac90b6bdc44e46d3802e884034abe">ioHandler::getDefaultParameters</a></div><div class="ttdeci">void getDefaultParameters()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:447</div></div>
 <div class="ttc" id="class_simple_heart_html"><div class="ttname"><a href="class_simple_heart.html">SimpleHeart</a></div><div class="ttdef"><b>Definition:</b> simpleheart.h:17</div></div>
-<div class="ttc" id="classio_handler_html_aa997341357b4da444f481ab43f455f9b"><div class="ttname"><a href="classio_handler.html#aa997341357b4da444f481ab43f455f9b">ioHandler::paramFilename</a></div><div class="ttdeci">string paramFilename</div><div class="ttdef"><b>Definition:</b> ioHandler.h:50</div></div>
-<div class="ttc" id="classio_handler_html"><div class="ttname"><a href="classio_handler.html">ioHandler</a></div><div class="ttdef"><b>Definition:</b> ioHandler.h:19</div></div>
+<div class="ttc" id="classio_handler_html_aa05a5e6a55ac70333479724c48d09a42"><div class="ttname"><a href="classio_handler.html#aa05a5e6a55ac70333479724c48d09a42">ioHandler::saveRRPlot_1</a></div><div class="ttdeci">void saveRRPlot_1()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:858</div></div>
+<div class="ttc" id="classio_handler_html_a32fc5c3861951f75c7ffbf62ed44e3e3"><div class="ttname"><a href="classio_handler.html#a32fc5c3861951f75c7ffbf62ed44e3e3">ioHandler::getParametersFromFile</a></div><div class="ttdeci">void getParametersFromFile()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:456</div></div>
+<div class="ttc" id="classio_handler_html_a3ce2a07edc23ff12d084e64b85416954"><div class="ttname"><a href="classio_handler.html#a3ce2a07edc23ff12d084e64b85416954">ioHandler::savePotentialPlot</a></div><div class="ttdeci">void savePotentialPlot()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:806</div></div>
+<div class="ttc" id="classio_handler_html_a59e5cd8377c13643181d9b6caef839db"><div class="ttname"><a href="classio_handler.html#a59e5cd8377c13643181d9b6caef839db">ioHandler::saveCurrentState</a></div><div class="ttdeci">bool saveCurrentState()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:239</div></div>
+<div class="ttc" id="classio_handler_html_aabe0f6cb21a1c374fd020ff42d5c9904"><div class="ttname"><a href="classio_handler.html#aabe0f6cb21a1c374fd020ff42d5c9904">ioHandler::loadCustomStructure</a></div><div class="ttdeci">CardiacMesh * loadCustomStructure()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:151</div></div>
+<div class="ttc" id="classio_handler_html_aa57cd18c3ae379dbc508d2942ee553fa"><div class="ttname"><a href="classio_handler.html#aa57cd18c3ae379dbc508d2942ee553fa">ioHandler::ioHandler</a></div><div class="ttdeci">ioHandler(SimpleHeart *handle)</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:8</div></div>
+<div class="ttc" id="classio_handler_html_aee153e33abd373472c856467563d4c7d"><div class="ttname"><a href="classio_handler.html#aee153e33abd373472c856467563d4c7d">ioHandler::saveRRPlot_2</a></div><div class="ttdeci">void saveRRPlot_2()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:901</div></div>
+<div class="ttc" id="classio_handler_html_a98fa0fabd78d5c31b4949806ac40400d"><div class="ttname"><a href="classio_handler.html#a98fa0fabd78d5c31b4949806ac40400d">ioHandler::initMatlabLoad</a></div><div class="ttdeci">mat_t * initMatlabLoad(const char *inname)</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:35</div></div>
+<div class="ttc" id="classio_handler_html_a7d65ecb912b15cbeff8ecaa3f3a33f7b"><div class="ttname"><a href="classio_handler.html#a7d65ecb912b15cbeff8ecaa3f3a33f7b">ioHandler::intToStr</a></div><div class="ttdeci">string intToStr(int n)</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:1001</div></div>
+<div class="ttc" id="classio_handler_html_a8b295df2cd4f85f178935c310f6dad34"><div class="ttname"><a href="classio_handler.html#a8b295df2cd4f85f178935c310f6dad34">ioHandler::setBmp</a></div><div class="ttdeci">void setBmp()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:788</div></div>
+<div class="ttc" id="classio_handler_html_aa997341357b4da444f481ab43f455f9b"><div class="ttname"><a href="classio_handler.html#aa997341357b4da444f481ab43f455f9b">ioHandler::paramFilename</a></div><div class="ttdeci">string paramFilename</div><div class="ttdef"><b>Definition:</b> ioHandler.h:57</div></div>
+<div class="ttc" id="classio_handler_html"><div class="ttname"><a href="classio_handler.html">ioHandler</a></div><div class="ttdef"><b>Definition:</b> ioHandler.h:18</div></div>
 <div class="ttc" id="_diffusion_painter_8h_html"><div class="ttname"><a href="_diffusion_painter_8h.html">DiffusionPainter.h</a></div></div>
+<div class="ttc" id="classio_handler_html_a0549d597c8da9195fd764044cb4c5a63"><div class="ttname"><a href="classio_handler.html#a0549d597c8da9195fd764044cb4c5a63">ioHandler::writeParametersToFile</a></div><div class="ttdeci">void writeParametersToFile()</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:381</div></div>
+<div class="ttc" id="class_cardiac_mesh_html"><div class="ttname"><a href="class_cardiac_mesh.html">CardiacMesh</a></div><div class="ttdoc">Class contatining the full information about the model and helper functions to build it...</div><div class="ttdef"><b>Definition:</b> CardiacMesh.h:43</div></div>
 <div class="ttc" id="_atrial_machine2d_8h_html"><div class="ttname"><a href="_atrial_machine2d_8h.html">AtrialMachine2d.h</a></div></div>
+<div class="ttc" id="classio_handler_html_a24088c5418729764793ad2ff055d4de8"><div class="ttname"><a href="classio_handler.html#a24088c5418729764793ad2ff055d4de8">ioHandler::strToInt</a></div><div class="ttdeci">int strToInt(string s)</div><div class="ttdef"><b>Definition:</b> ioHandler.cpp:1018</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="io_handler_8h.html">ioHandler.h</a></li>
-    <li class="footer">Generated on Mon Oct 20 2014 19:28:59 for Simple Heart by
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:00 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

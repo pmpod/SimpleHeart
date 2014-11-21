@@ -8,8 +8,16 @@
 
 CardiacMesh::CardiacMesh()
 {
-	m_maximumCV = 1; // [cm/ms]
+	maximumCV = 1; // [cm/ms]
+	maxDiffusion = 0.5;
+	minDiffusion = 0.0;
+	maxERP = 300;
+	minERP = 10;
+	maxElectrogram = -1999;
+	minElectrogram = 999;
 	stimulationBegun = false;
+
+
 	m_simulationTime = 0;
 	structureUpdated = false;
 	m_vertexMatrix = nullptr;
@@ -28,22 +36,15 @@ void CardiacMesh::destroyGrid()
 	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();
 }
 
-int CardiacMesh::changeNode(int x, int y, CELL_TYPE m_type)
-{
-	return 1;
-}
 
-double CardiacMesh::getSizeInMm()
+const double CardiacMesh::sizeInMm()
 {
-	return (static_cast<double>(this->m_size) * (this->m_maximumDistance));
+	return _sizeInMm;
+
 }
-int CardiacMesh::getSize()
+const double CardiacMesh::minNodalSpacing()
 {
-	return this->m_size;
-}
-double CardiacMesh::getDeltaR()
-{
-	return (this->m_minimumDistance);
+	return (this->_minNodalSpacing);
 }
 
 
@@ -52,11 +53,9 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 	CardiacMesh *grid = new CardiacMesh();
 	int totalSize = y*x;
 
-	grid->m_minimumDistance = max(dx, dy);
-	grid->m_maximumDistance = min(dx, dy);
-	grid->m_size = min(x, y);
-	grid->m_maxElectrogram = -1999;
-	grid->m_minElectrogram = 999;
+	grid->_minNodalSpacing = max(dx, dy);
+	grid->_maxNodalSpacing = min(dx, dy);
+	grid->_sizeInMm = sqrt(static_cast<double>(x*x + y*y))*dx;
 	Oscillator *node = NULL;
 	for (int j = 0; j < totalSize; ++j)
 	{
@@ -72,14 +71,14 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 		node->oscillatorID = j;
 		grid->m_mesh.push_back(node);
 
-		if (grid->m_maxElectrogram < node->vmax)
-			grid->m_maxElectrogram = node->vmax;
+		if (grid->maxElectrogram < node->vmax)
+			grid->maxElectrogram = node->vmax;
 
-		if (grid->m_minElectrogram > node->vmin)
-			grid->m_minElectrogram = node->vmin;
+		if (grid->minElectrogram > node->vmin)
+			grid->minElectrogram = node->vmin;
 	}
-	grid->m_maxPotential = grid->m_maxElectrogram;
-	grid->m_minPotential = grid->m_minElectrogram;
+	grid->maxPotential = grid->maxElectrogram;
+	grid->minPotential = grid->minElectrogram;
 
 	//ADD NEIGHBOURS
 	int idx, idy;
@@ -183,6 +182,13 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 	double *position_xyz = (double *)malloc(sizeof(double) * 3 * meshSize);
 	position_xyz = static_cast<double*>(matvar->data);
 
+
+	//[3] Read matlab variable sigma
+	matvar = Mat_VarRead(matfp, "sigma");
+
+	double *sigma = (double *)malloc(sizeof(double) * 1 * meshSize);
+	sigma = static_cast<double*>(matvar->data);
+
 	//[3] Read matlab variable oscillator_TYPE
 	matvar = Mat_VarRead(matfp, "oscillator_TYPE");
 
@@ -201,8 +207,8 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 	CardiacMesh *grid = new CardiacMesh();
 	int totalSize = meshSize;
 
-	grid->m_maxElectrogram = -1999;
-	grid->m_minElectrogram = 999;
+	grid->maxElectrogram = -1999;
+	grid->minElectrogram = 999;
 
 	Oscillator *node = NULL;
 	for (int j = 0; j < totalSize; ++j)
@@ -223,15 +229,15 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 		node->oscillatorID = oscillator_ID[j];
 		grid->m_mesh.push_back(node);
 
-		if (grid->m_maxElectrogram < node->vmax)
-			grid->m_maxElectrogram = node->vmax;
+		if (grid->maxElectrogram < node->vmax)
+			grid->maxElectrogram = node->vmax;
 
-		if (grid->m_minElectrogram > node->vmin)
-			grid->m_minElectrogram = node->vmin;
+		if (grid->minElectrogram > node->vmin)
+			grid->minElectrogram = node->vmin;
 	}
 
-	grid->m_maxPotential = grid->m_maxElectrogram;
-	grid->m_minPotential = grid->m_minElectrogram;
+	grid->maxPotential = grid->maxElectrogram;
+	grid->minPotential = grid->minElectrogram;
 	//ADD NEIGHBOURS
 	double deltaMin = DBL_MAX;
 	double deltaMax = 0.0;
@@ -266,16 +272,18 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 			maxdim = maxtemp;
 		}
 	}
+	for (int j = 0; j < totalSize; ++j)
+	{
+		grid->m_mesh[j]->setSigma(sigma[j], sigma[j], 0);
+	}
 
-
-	grid->m_minimumDistance = deltaMin;
-	grid->m_maximumDistance = deltaMax;
-	grid->m_size = maxdim / deltaMin;
+	grid->_minNodalSpacing = deltaMin;
+	grid->_maxNodalSpacing = deltaMax;
+	grid->_sizeInMm = maxdim;
 
 	grid->setVertexTriangleList(false);
 	grid->calculateCenter();
 	grid->setWallCells();
-	grid->setDiffusionCoefficients();
 
 	return grid;
 }
@@ -314,40 +322,8 @@ void CardiacMesh::setDiffusionCoefficients()
 	int gridSize = m_mesh.size();
 	for (int j = 0; j < gridSize; ++j)
 	{
-		m_mesh[j]->setSigma(0.04, 0.04, 0);
+		m_mesh[j]->setSigma(0.1, 0.1, 0);
 	}
-}
-//---------------------------------------------------------------------------
-void CardiacMesh::startStimulation(Oscillator* osc, const int& id, const double radius, const double strength)
-{	
-	if (!osc->m_underStimulation)
-	{
-		m_underStimulation.push_back(osc);
-		osc->m_underStimulation = true;
-		osc->m_stimulation = strength;
-	}
-	double distance;
-	for (int k = 0; k < osc->m_neighbours.size(); ++k)
-	{
-		distance =	std::pow((m_mesh[id]->m_x - osc->m_neighbours[k]->m_x), 2) +
-					std::pow((m_mesh[id]->m_y - osc->m_neighbours[k]->m_y), 2) +
-					std::pow((m_mesh[id]->m_z - osc->m_neighbours[k]->m_z), 2);
-		if (distance <= radius && !(osc->m_neighbours[k]->m_underStimulation))
-		{
-			startStimulation(osc->m_neighbours[k], id, radius, strength);
-		}
-	}
-	stimulationBegun = true;
-}
-void CardiacMesh::stopStimulation()
-{
-	for (int j = 0; j < m_underStimulation.size(); ++j)
-	{
-		m_underStimulation[j]->m_underStimulation = false;
-		m_underStimulation[j]->m_stimulation = 0.0;
-	}
-	m_underStimulation.clear();
-	stimulationBegun = false;
 }
 //---------------------------------------------------------------------------
 double CardiacMesh::calculateElectrogram(Oscillator* osc)

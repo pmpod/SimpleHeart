@@ -93,6 +93,14 @@ double v3model::get_J_si( )
 {
 	return (-m_v_current[1])*(1 + fast_tanh(k*(m_v_potential - u_cs1))) / (2 * tau_s1);
 }
+void v3model::setERP(double value)
+{
+	tau_r = value; 
+}
+double v3model::getERP()
+{
+	return tau_r; //ERP ok 200
+}
 //-------------------------------------------------------------
 void v3model::setParameter(double value, OSC_PARAMETER parameter)
 {	
@@ -105,8 +113,8 @@ void v3model::setParameter(double value, OSC_PARAMETER parameter)
 		tau_w_minus = 100;
 		tau_0 = 64.7;
 		//tau_r = 222.9;
-		//tau_r = 140; //ERP ok 200
-		tau_r = 30; //ERP ok 170
+		tau_r = 140; //ERP ok 200
+		//tau_r = 30; //ERP ok 170
 		u_cs1 = 0.85;
 		tau_s1 = 226.9;
 		k = 10;

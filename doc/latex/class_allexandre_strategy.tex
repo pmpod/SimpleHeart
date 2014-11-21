@@ -18,18 +18,20 @@ Inheritance diagram for Allexandre\+Strategy\+:\begin{figure}[H]
 \item 
 \hyperlink{class_allexandre_strategy_ac8783c05bbc6e3fea1a99b6ff657fb0d}{$\sim$\+Allexandre\+Strategy} ()
 \item 
-double \hyperlink{class_allexandre_strategy_a25fe69b84aed988807d10e4b72890d26}{step\+Modified\+Backward\+Euler} (\hyperlink{class_oscillator}{Oscillator} $\ast$osc)
+double \hyperlink{class_allexandre_strategy_a7507036b61a804d7596567dced8f3c73}{step\+Modified\+Backward\+Euler} (\hyperlink{class_oscillator}{Oscillator} $\ast$osc, double next\+Timestep)
 \item 
 double \hyperlink{class_allexandre_strategy_a418e280a746b6105eb609cbee6ea99fc}{next\+Step} ()
-\begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculates a single step of simulation. \end{DoxyCompactList}\item 
 void \hyperlink{class_allexandre_strategy_a8f657c6d14d76cef3a312fc862c400f7}{reset} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Resets all the Oscillators to the resting state and the time to 0. \end{DoxyCompactList}\item 
 void \hyperlink{class_allexandre_strategy_a19227368bd05ee1d3df2f655387a2dda}{construct\+Update\+Time\+Tree} ()
 \item 
 void \hyperlink{class_allexandre_strategy_a194aa637bdd931c1f0541cc11e450c79}{construct\+Timestep\+Tree} ()
 \item 
 double \hyperlink{class_allexandre_strategy_a9ae2720bb39eeb2044a9192a64e0fa95}{guard\+Cell\+Update} ()
 \item 
+double \hyperlink{class_allexandre_strategy_a8a6038dc52af113157f911665e7d51c2}{synchronise} ()
+\begin{DoxyCompactList}\small\item\em For non-\/uniform timestep methods synchronises time in all calculation cells; For fixed timestep does nothing. \end{DoxyCompactList}\item 
 double \hyperlink{class_allexandre_strategy_aae541b33a9b2183437624ba5ecc083a8}{get\+Delta\+Timestep\+Inc} (double \&v\+\_\+prim)
 \item 
 double \hyperlink{class_allexandre_strategy_adbcde09e77b6c3091fc972ca135d05d4}{get\+Max\+Timestep\+\_\+\+Method2b} (const double \&v\+\_\+prim, const double \&fast\+\_\+prim, const double \&Kd)
@@ -101,9 +103,9 @@ double \hyperlink{class_allexandre_strategy_adbcde09e77b6c3091fc972ca135d05d4}{g
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_allexandre_strategy_a418e280a746b6105eb609cbee6ea99fc}
 
 
-Main function. 
+Calculates a single step of simulation. 
 
-
+Main function 
 
 Implements \hyperlink{class_numeric_strategy_aeab387274e9d0ebf46a0e5ad5a5fe73f}{Numeric\+Strategy}.
 
@@ -113,14 +115,38 @@ Implements \hyperlink{class_numeric_strategy_aeab387274e9d0ebf46a0e5ad5a5fe73f}{
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{class_allexandre_strategy_a8f657c6d14d76cef3a312fc862c400f7}
-\hypertarget{class_allexandre_strategy_a25fe69b84aed988807d10e4b72890d26}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!step\+Modified\+Backward\+Euler@{step\+Modified\+Backward\+Euler}}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_allexandre_strategy_a8f657c6d14d76cef3a312fc862c400f7}
+
+
+Resets all the Oscillators to the resting state and the time to 0. 
+
+
+
+Reimplemented from \hyperlink{class_numeric_strategy_af85e11ad875a008cd1b6d8b288e3866c}{Numeric\+Strategy}.
+
+\hypertarget{class_allexandre_strategy_a7507036b61a804d7596567dced8f3c73}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!step\+Modified\+Backward\+Euler@{step\+Modified\+Backward\+Euler}}
 \index{step\+Modified\+Backward\+Euler@{step\+Modified\+Backward\+Euler}!Allexandre\+Strategy@{Allexandre\+Strategy}}
 \subsubsection[{step\+Modified\+Backward\+Euler}]{\setlength{\rightskip}{0pt plus 5cm}double Allexandre\+Strategy\+::step\+Modified\+Backward\+Euler (
 \begin{DoxyParamCaption}
-\item[{{\bf Oscillator} $\ast$}]{osc}
+\item[{{\bf Oscillator} $\ast$}]{osc, }
+\item[{double}]{next\+Timestep}
 \end{DoxyParamCaption}
-)}}\label{class_allexandre_strategy_a25fe69b84aed988807d10e4b72890d26}
+)}}\label{class_allexandre_strategy_a7507036b61a804d7596567dced8f3c73}
+\hypertarget{class_allexandre_strategy_a8a6038dc52af113157f911665e7d51c2}{\index{Allexandre\+Strategy@{Allexandre\+Strategy}!synchronise@{synchronise}}
+\index{synchronise@{synchronise}!Allexandre\+Strategy@{Allexandre\+Strategy}}
+\subsubsection[{synchronise}]{\setlength{\rightskip}{0pt plus 5cm}double Allexandre\+Strategy\+::synchronise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_allexandre_strategy_a8a6038dc52af113157f911665e7d51c2}
+
+
+For non-\/uniform timestep methods synchronises time in all calculation cells; For fixed timestep does nothing. 
+
+Main function 
+
+Implements \hyperlink{class_numeric_strategy_a5dec2aaf22a9642fdd92b55c12353f82}{Numeric\+Strategy}.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

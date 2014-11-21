@@ -24,18 +24,18 @@ Inheritance diagram for Numeric\+Strategy\+:\begin{figure}[H]
 \hyperlink{class_numeric_strategy_ac167251a4c6409131a1be21ce3104870}{$\sim$\+Numeric\+Strategy} ()
 \begin{DoxyCompactList}\small\item\em A \hyperlink{class_numeric_strategy}{Numeric\+Strategy} destructor. \end{DoxyCompactList}\item 
 virtual double \hyperlink{class_numeric_strategy_aeab387274e9d0ebf46a0e5ad5a5fe73f}{next\+Step} ()=0
-\begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\item 
-void \hyperlink{class_numeric_strategy_af85e11ad875a008cd1b6d8b288e3866c}{reset} ()
-\begin{DoxyCompactList}\small\item\em Resets all the O\+Scillators to the resting state and the time to 0. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculates a single step of simulation. \end{DoxyCompactList}\item 
+virtual double \hyperlink{class_numeric_strategy_a5dec2aaf22a9642fdd92b55c12353f82}{synchronise} ()=0
+\begin{DoxyCompactList}\small\item\em For non-\/uniform timestep methods synchronises time in all calculation cells; For fixed timestep does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_numeric_strategy_af85e11ad875a008cd1b6d8b288e3866c}{reset} ()
+\begin{DoxyCompactList}\small\item\em Resets all the Oscillators to the resting state and the time to 0. \end{DoxyCompactList}\item 
 void \hyperlink{class_numeric_strategy_a0c081c97ced262ef0478daf66041ee05}{defibrillate} ()
 \begin{DoxyCompactList}\small\item\em Performs a defibrillation shot (under construction) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$ \hyperlink{class_numeric_strategy_a2ca52f550fd3f1cc26c65aec0cacf2f6}{m\+\_\+mesh}
-\begin{DoxyCompactList}\small\item\em A pointer to the model. \end{DoxyCompactList}\item 
-double \hyperlink{class_numeric_strategy_a4ee8b2dbaa436c241384f959cc5fe54d}{m\+\_\+initial\+\_\+v}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A pointer to the model. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -94,9 +94,9 @@ Performs a defibrillation shot (under construction)
 )\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_numeric_strategy_aeab387274e9d0ebf46a0e5ad5a5fe73f}
 
 
-Main function. 
+Calculates a single step of simulation. 
 
-
+Main function 
 
 Implemented in \hyperlink{class_allexandre_strategy_a418e280a746b6105eb609cbee6ea99fc}{Allexandre\+Strategy}, and \hyperlink{class_forward_euler_strategy_a3a382585c2d87ffaf370c07c37737a28}{Forward\+Euler\+Strategy}.
 
@@ -106,17 +106,33 @@ Implemented in \hyperlink{class_allexandre_strategy_a418e280a746b6105eb609cbee6e
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{class_numeric_strategy_af85e11ad875a008cd1b6d8b288e3866c}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_numeric_strategy_af85e11ad875a008cd1b6d8b288e3866c}
 
 
-Resets all the O\+Scillators to the resting state and the time to 0. 
+Resets all the Oscillators to the resting state and the time to 0. 
+
+
+
+Reimplemented in \hyperlink{class_allexandre_strategy_a8f657c6d14d76cef3a312fc862c400f7}{Allexandre\+Strategy}.
+
+\hypertarget{class_numeric_strategy_a5dec2aaf22a9642fdd92b55c12353f82}{\index{Numeric\+Strategy@{Numeric\+Strategy}!synchronise@{synchronise}}
+\index{synchronise@{synchronise}!Numeric\+Strategy@{Numeric\+Strategy}}
+\subsubsection[{synchronise}]{\setlength{\rightskip}{0pt plus 5cm}virtual double Numeric\+Strategy\+::synchronise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_numeric_strategy_a5dec2aaf22a9642fdd92b55c12353f82}
+
+
+For non-\/uniform timestep methods synchronises time in all calculation cells; For fixed timestep does nothing. 
+
+Main function 
+
+Implemented in \hyperlink{class_allexandre_strategy_a8a6038dc52af113157f911665e7d51c2}{Allexandre\+Strategy}, and \hyperlink{class_forward_euler_strategy_a59201ff29f82dd037576a1a7b3bf2e7f}{Forward\+Euler\+Strategy}.
 
 
 
 \subsection{Member Data Documentation}
-\hypertarget{class_numeric_strategy_a4ee8b2dbaa436c241384f959cc5fe54d}{\index{Numeric\+Strategy@{Numeric\+Strategy}!m\+\_\+initial\+\_\+v@{m\+\_\+initial\+\_\+v}}
-\index{m\+\_\+initial\+\_\+v@{m\+\_\+initial\+\_\+v}!Numeric\+Strategy@{Numeric\+Strategy}}
-\subsubsection[{m\+\_\+initial\+\_\+v}]{\setlength{\rightskip}{0pt plus 5cm}double Numeric\+Strategy\+::m\+\_\+initial\+\_\+v}}\label{class_numeric_strategy_a4ee8b2dbaa436c241384f959cc5fe54d}
 \hypertarget{class_numeric_strategy_a2ca52f550fd3f1cc26c65aec0cacf2f6}{\index{Numeric\+Strategy@{Numeric\+Strategy}!m\+\_\+mesh@{m\+\_\+mesh}}
 \index{m\+\_\+mesh@{m\+\_\+mesh}!Numeric\+Strategy@{Numeric\+Strategy}}
 \subsubsection[{m\+\_\+mesh}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cardiac\+Mesh}$\ast$ Numeric\+Strategy\+::m\+\_\+mesh}}\label{class_numeric_strategy_a2ca52f550fd3f1cc26c65aec0cacf2f6}

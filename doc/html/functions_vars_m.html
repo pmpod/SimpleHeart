@@ -81,6 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li class="current"><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -95,7 +96,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_vars_i.html#index_i"><span>i</span></a></li>
       <li><a href="functions_vars_l.html#index_l"><span>l</span></a></li>
       <li class="current"><a href="functions_vars_m.html#index_m"><span>m</span></a></li>
-      <li><a href="functions_vars_n.html#index_n"><span>n</span></a></li>
       <li><a href="functions_vars_o.html#index_o"><span>o</span></a></li>
       <li><a href="functions_vars_p.html#index_p"><span>p</span></a></li>
       <li><a href="functions_vars_r.html#index_r"><span>r</span></a></li>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -156,9 +156,6 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 </li>
 <li>m_anisotrophy_R
 : <a class="el" href="class_node.html#aee39dd0e84a95339084197716d3d2d40">Node</a>
-</li>
-<li>m_anisotrophyCoefficients
-: <a class="el" href="class_atrial_machine2d.html#abd24f8eb85fef1ffa94d910e1a87dda8">AtrialMachine2d</a>
 </li>
 <li>m_atriumAlpha_1
 : <a class="el" href="classatrial_parameters.html#a470b8d7cbf13f6779b32f9e1bfccf178">atrialParameters</a>
@@ -247,6 +244,9 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <li>m_binSize
 : <a class="el" href="classatrial_parameters.html#a0d716adf42c0d2bb5a1710dab87945dd">atrialParameters</a>
 </li>
+<li>m_closestDistanceID
+: <a class="el" href="class_oscillator.html#a85169bc0fa20530ed7a5e8089b572729">Oscillator</a>
+</li>
 <li>m_color
 : <a class="el" href="class_node.html#a5663077fbe17bf9ee7615ae394f2981b">Node</a>
 </li>
@@ -270,9 +270,6 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 </li>
 <li>m_definitions
 : <a class="el" href="class_atrial_machine2d.html#aeafb998f5621fb19749014161d7d600d">AtrialMachine2d</a>
-</li>
-<li>m_diffusionCoefficients
-: <a class="el" href="class_atrial_machine2d.html#a13e43c0cfd52339dac5ac7ed5a88a88a">AtrialMachine2d</a>
 </li>
 <li>m_ectoModTime
 : <a class="el" href="classatrial_parameters.html#ac820bd58444854634cc58275037125e8">atrialParameters</a>
@@ -314,6 +311,9 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <li>m_ectopicY
 : <a class="el" href="classatrial_parameters.html#a7ce820843b65fc9f147ca86d814e9166">atrialParameters</a>
 </li>
+<li>m_farthestDistanceID
+: <a class="el" href="class_oscillator.html#a216d83f43397708641a00c38d75570d3">Oscillator</a>
+</li>
 <li>m_globalTime
 : <a class="el" href="class_atrial_machine2d.html#a951f2f5f1bee9505ee93df61121bf5d2">AtrialMachine2d</a>
 </li>
@@ -347,15 +347,8 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <li>m_hormonalToggle
 : <a class="el" href="class_atrial_machine2d.html#a784a6fb0c363c6858e992957279a28ea">AtrialMachine2d</a>
 </li>
-<li>m_initial_c
-: <a class="el" href="class_atrial_machine2d.html#a5ff92394b2f3e615b7c36c8adf7286d6">AtrialMachine2d</a>
-</li>
-<li>m_initial_c_2
-: <a class="el" href="class_atrial_machine2d.html#a14baf4c478ff64494b38eee78955a472">AtrialMachine2d</a>
-</li>
-<li>m_initial_v
-: <a class="el" href="class_atrial_machine2d.html#af93ce7ff7615bf27467eb765623c720c">AtrialMachine2d</a>
-, <a class="el" href="class_numeric_strategy.html#a4ee8b2dbaa436c241384f959cc5fe54d">NumericStrategy</a>
+<li>m_indicesMatrix
+: <a class="el" href="class_cardiac_mesh.html#a38f8cd7d06495c84b553eba41c9cb6be">CardiacMesh</a>
 </li>
 <li>m_ioHandler
 : <a class="el" href="class_simple_heart.html#ac8828755d2dae8dbe3027deda059980a">SimpleHeart</a>
@@ -367,8 +360,7 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 : <a class="el" href="classatrial_parameters.html#a8ff21c69a731af1992ad8f5f39deec96">atrialParameters</a>
 </li>
 <li>m_mainTimestep
-: <a class="el" href="class_atrial_machine2d.html#a792a54d1811f886bf93f9546aac0120f">AtrialMachine2d</a>
-, <a class="el" href="classatrial_parameters.html#a0fc87681256f95d4354e128ff5cacf84">atrialParameters</a>
+: <a class="el" href="classatrial_parameters.html#a0fc87681256f95d4354e128ff5cacf84">atrialParameters</a>
 , <a class="el" href="class_forward_euler_strategy.html#aa7cb67aa11fb16d4a76c1944ad3dbbc4">ForwardEulerStrategy</a>
 </li>
 <li>m_matrix
@@ -377,18 +369,30 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <li>m_maxDiff
 : <a class="el" href="classatrial_parameters.html#a76aa606242b770cdc906093d0ddae353">atrialParameters</a>
 </li>
+<li>m_maxElectrogram
+: <a class="el" href="class_cardiac_mesh.html#a6856db8aafe754a849a77412106deda9">CardiacMesh</a>
+</li>
 <li>m_maximumCV
 : <a class="el" href="class_cardiac_mesh.html#a48ee051becaeae6be8d4d1b1569645d2">CardiacMesh</a>
 </li>
 <li>m_maximumDistance
 : <a class="el" href="class_cardiac_mesh.html#a05ed4402cf331198ee5021c65ac37e23">CardiacMesh</a>
 </li>
+<li>m_maxPotential
+: <a class="el" href="class_cardiac_mesh.html#acf9c4e05fe3e0b13f5ca4a849748118d">CardiacMesh</a>
+</li>
 <li>m_mesh
 : <a class="el" href="class_cardiac_mesh.html#acd49de8f8f878f45c927d4b75851ced6">CardiacMesh</a>
 , <a class="el" href="class_numeric_strategy.html#a2ca52f550fd3f1cc26c65aec0cacf2f6">NumericStrategy</a>
 </li>
+<li>m_minElectrogram
+: <a class="el" href="class_cardiac_mesh.html#abbc3c7dce57ceccaa344cbbaae6eed21">CardiacMesh</a>
+</li>
 <li>m_minimumDistance
 : <a class="el" href="class_cardiac_mesh.html#a100654a6bb2237fc09cef29c517818ad">CardiacMesh</a>
+</li>
+<li>m_minPotential
+: <a class="el" href="class_cardiac_mesh.html#a7b0d715081602222475ff5c6ae8f2acc">CardiacMesh</a>
 </li>
 <li>m_move_diminisher
 : <a class="el" href="class_diffusion_painter.html#a242c4d131a57f225a9065328f8983e31">DiffusionPainter</a>
@@ -483,14 +487,20 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <li>m_sigmaZ
 : <a class="el" href="class_oscillator.html#af8ba90eb71c73ac1c789d569e7e2f92f">Oscillator</a>
 </li>
+<li>m_simulationTime
+: <a class="el" href="class_cardiac_mesh.html#ad1bf6fc56cbc55f30f9a3855cdafc316">CardiacMesh</a>
+</li>
 <li>m_size
 : <a class="el" href="class_cardiac_mesh.html#aea33a4be0162859a292958757ac934fc">CardiacMesh</a>
 </li>
 <li>m_skip
 : <a class="el" href="class_atrial_machine2d.html#a08a7d022fbd6733e52775651b5f139dc">AtrialMachine2d</a>
 </li>
+<li>m_stimulation
+: <a class="el" href="class_oscillator.html#afc8f8dc1e06529009d1919a74c92f5f3">Oscillator</a>
+</li>
 <li>m_stimulationID
-: <a class="el" href="class_atrial_machine2d.html#ae73fef18f9b4e2d46689756b1478e025">AtrialMachine2d</a>
+: <a class="el" href="class_cardiac_mesh.html#a196d79c37896623ae3957949525c1e1d">CardiacMesh</a>
 </li>
 <li>m_strategy
 : <a class="el" href="class_atrial_machine2d.html#afa218ce1cafcf45895c0317953b97977">AtrialMachine2d</a>
@@ -527,12 +537,11 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <li>m_vertexList
 : <a class="el" href="class_cardiac_mesh.html#a1961c25aa2da5493c0316d80c38cc088">CardiacMesh</a>
 </li>
-<li>m_wallCells
-: <a class="el" href="class_atrial_machine2d.html#aea2f8cb631c24f1dbec8859d50a7918f">AtrialMachine2d</a>
-, <a class="el" href="class_cardiac_mesh.html#a80e29d81b758c0294d673ae731f26343">CardiacMesh</a>
+<li>m_vertexMatrix
+: <a class="el" href="class_cardiac_mesh.html#a0d622a665e0305897c133c8c4fe8733a">CardiacMesh</a>
 </li>
-<li>m_whichFlag
-: <a class="el" href="class_atrial_machine2d.html#a74ecd78d3016ae5a6a5c6004aa43ad96">AtrialMachine2d</a>
+<li>m_wallCells
+: <a class="el" href="class_oscillator.html#a74e09a4970c7dff6fd51e99cd399ff22">Oscillator</a>
 </li>
 <li>m_windowSize
 : <a class="el" href="classatrial_parameters.html#a51edde97bace13d58f81f63088d34091">atrialParameters</a>
@@ -587,7 +596,7 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2014 19:29:08 for Simple Heart by
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:12 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -10,6 +10,8 @@ var classv3model =
     [ "get_tau_d", "classv3model.html#a78dfba3662698b7967b683b975f473bb", null ],
     [ "get_tau_v_minus", "classv3model.html#a1eb045a08d91e3677e25c298044046df", null ],
     [ "getCurrentPrim", "classv3model.html#a14957985c821508b7a5985a423d0c942", null ],
+    [ "getERP", "classv3model.html#aeb8db7e7f6327e341b73ce6ee22c888a", null ],
     [ "getPotentialPrim", "classv3model.html#a7db295a02c2487b6eb4d13e6e942a088", null ],
+    [ "setERP", "classv3model.html#a7b930af4a46f46aaa3301947526c556d", null ],
     [ "setParameter", "classv3model.html#a1ce58dd6384772b84a7a3c3f73a70c3f", null ]
 ];

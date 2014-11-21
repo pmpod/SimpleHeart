@@ -15,6 +15,8 @@ Inheritance diagram for v3model\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{classv3model_a1ce58dd6384772b84a7a3c3f73a70c3f}{set\+Parameter} (double value, \hyperlink{heart_defines_8h_a79395aba577c2bc57e7ca211ff3476a6}{O\+S\+C\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R} parameter)
+\item 
+void \hyperlink{classv3model_a7b930af4a46f46aaa3301947526c556d}{set\+E\+R\+P} (double value)
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -27,8 +29,10 @@ double \hyperlink{classv3model_a14957985c821508b7a5985a423d0c942}{get\+Current\+
 \item 
 double \hyperlink{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{get\+Potential\+Prim} ()
 \item 
-double \hyperlink{classv3model_a18cfce2a9bc0536157da81cef399706a}{get\+\_\+p} ()
+double \hyperlink{classv3model_aeb8db7e7f6327e341b73ce6ee22c888a}{get\+E\+R\+P} ()
 \item 
+double \hyperlink{classv3model_a18cfce2a9bc0536157da81cef399706a}{get\+\_\+p} ()
+\begin{DoxyCompactList}\small\item\em virtual function for refractory period setting \end{DoxyCompactList}\item 
 double \hyperlink{classv3model_ad969fd48215103f85ce383f11d759c99}{get\+\_\+q} ()
 \item 
 double \hyperlink{classv3model_a78dfba3662698b7967b683b975f473bb}{get\+\_\+tau\+\_\+d} ()
@@ -90,6 +94,10 @@ double \hyperlink{classv3model_ac852daced9f1246ce321d8245320b345}{get\+\_\+\+J\+
 {}
 \end{DoxyParamCaption}
 )}}\label{classv3model_a18cfce2a9bc0536157da81cef399706a}
+
+
+virtual function for refractory period setting 
+
 \hypertarget{classv3model_ad969fd48215103f85ce383f11d759c99}{\index{v3model@{v3model}!get\+\_\+q@{get\+\_\+q}}
 \index{get\+\_\+q@{get\+\_\+q}!v3model@{v3model}}
 \subsubsection[{get\+\_\+q}]{\setlength{\rightskip}{0pt plus 5cm}double v3model\+::get\+\_\+q (
@@ -122,6 +130,17 @@ double \hyperlink{classv3model_ac852daced9f1246ce321d8245320b345}{get\+\_\+\+J\+
 
 Reimplemented from \hyperlink{class_oscillator_a6132c7be8737a5686d64629b68b81743}{Oscillator}.
 
+\hypertarget{classv3model_aeb8db7e7f6327e341b73ce6ee22c888a}{\index{v3model@{v3model}!get\+E\+R\+P@{get\+E\+R\+P}}
+\index{get\+E\+R\+P@{get\+E\+R\+P}!v3model@{v3model}}
+\subsubsection[{get\+E\+R\+P}]{\setlength{\rightskip}{0pt plus 5cm}double v3model\+::get\+E\+R\+P (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classv3model_aeb8db7e7f6327e341b73ce6ee22c888a}
+
+
+Reimplemented from \hyperlink{class_oscillator_ae81ca9a4404d59af1eaea0526cc3c88e}{Oscillator}.
+
 \hypertarget{classv3model_a7db295a02c2487b6eb4d13e6e942a088}{\index{v3model@{v3model}!get\+Potential\+Prim@{get\+Potential\+Prim}}
 \index{get\+Potential\+Prim@{get\+Potential\+Prim}!v3model@{v3model}}
 \subsubsection[{get\+Potential\+Prim}]{\setlength{\rightskip}{0pt plus 5cm}double v3model\+::get\+Potential\+Prim (
@@ -133,6 +152,13 @@ Reimplemented from \hyperlink{class_oscillator_a6132c7be8737a5686d64629b68b81743
 
 Reimplemented from \hyperlink{class_oscillator_a932fda2705d851fbe28c569547f4b4f1}{Oscillator}.
 
+\hypertarget{classv3model_a7b930af4a46f46aaa3301947526c556d}{\index{v3model@{v3model}!set\+E\+R\+P@{set\+E\+R\+P}}
+\index{set\+E\+R\+P@{set\+E\+R\+P}!v3model@{v3model}}
+\subsubsection[{set\+E\+R\+P}]{\setlength{\rightskip}{0pt plus 5cm}void v3model\+::set\+E\+R\+P (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classv3model_a7b930af4a46f46aaa3301947526c556d}
 \hypertarget{classv3model_a1ce58dd6384772b84a7a3c3f73a70c3f}{\index{v3model@{v3model}!set\+Parameter@{set\+Parameter}}
 \index{set\+Parameter@{set\+Parameter}!v3model@{v3model}}
 \subsubsection[{set\+Parameter}]{\setlength{\rightskip}{0pt plus 5cm}void v3model\+::set\+Parameter (

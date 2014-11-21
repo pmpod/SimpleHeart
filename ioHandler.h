@@ -26,36 +26,32 @@ public:
 public slots:
 
 
-mat_t * initMatlabLoad(const char *inname);
-bool saveCurrentStructure();
-bool loadCurrentState();
-CardiacMesh* loadCustomStructure();
-bool saveCurrentState();
+    // \brief Savess current structure to .mat file
+	bool saveCurrentStructure();
+	bool loadCurrentState();
+	CardiacMesh* loadCustomStructure();
+	bool saveCurrentState();
 
 
 
 
 	void saveAsBmp();
 	void setBmp();
-	void saveStructureToFile();
-	void readStructureFromFile();
-	void readStructureFromFile(int type);
-	void saveDiffusionToFile();
-	void readDiffusionFromFile();
+
 	void writeParametersToFile();
 	void getParametersFromFile();
 	void getDefaultParameters();
+
 	void savePotentialPlot();
 	void saveRRPlot_1();
 	void saveRRPlot_2();
 	void saveRRPlot_3();
 public:
 	template <class Ttype> matvar_t* readMatVariable(const char *varname, mat_t *matfp, Ttype* &outvar);
+	mat_t * initMatlabLoad(const char *inname);
 
 	SimpleHeart* m_handle;
 
-	string intToStr(int n);
-	int strToInt(string s);
 
 
 	string paramFilename;
@@ -66,5 +62,8 @@ public:
     QString pathParameters;
 	ifstream inputParameters;
 	ofstream backupParameters;
+
+	string intToStr(int n);
+	int strToInt(string s);
 };
 

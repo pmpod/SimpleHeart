@@ -1,17 +1,17 @@
 var searchData=
 [
+  ['r',['r',['../struct_s_vertex.html#a569fbf3b7596904acf89120c18508ba7',1,'SVertex']]],
   ['raise_5fcamera',['Raise_Camera',['../class_c_camera.html#af7b7fc6cc102a0a2df29238b93405e9c',1,'CCamera']]],
   ['randmachine',['randMachine',['../class_diffusion_painter.html#a899e223882748c213c482f298ed2cc6a',1,'DiffusionPainter']]],
   ['randomgenerator',['RandomGenerator',['../class_random_generator.html',1,'RandomGenerator'],['../class_random_generator.html#ad68dfb1d3d6164777c27beb1d5869873',1,'RandomGenerator::RandomGenerator()']]],
   ['randomgenerator_2ecpp',['RandomGenerator.cpp',['../_random_generator_8cpp.html',1,'']]],
   ['randomgenerator_2eh',['RandomGenerator.h',['../_random_generator_8h.html',1,'']]],
-  ['readdiffusionfromfile',['readDiffusionFromFile',['../classio_handler.html#ab23bb54a388784e6397575fdb5e1a836',1,'ioHandler']]],
+  ['readmatvariable',['readMatVariable',['../classio_handler.html#a217721cec0dfbacc3b564bfaa4cc7b8b',1,'ioHandler']]],
   ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
-  ['readstructurefromfile',['readStructureFromFile',['../classio_handler.html#a436429bf34fe5f838137ffd536e6859b',1,'ioHandler::readStructureFromFile()'],['../classio_handler.html#a8e799f96c1e1056d5c59f621945a64c6',1,'ioHandler::readStructureFromFile(int type)']]],
   ['refresh',['refresh',['../class_diffusion_matrix.html#ae204cc3c7fdf07b6cff3883c42bc7363',1,'DiffusionMatrix']]],
   ['removecurve',['removeCurve',['../class_default_plot.html#a572dcb659361187315a0beac070ab7f0',1,'DefaultPlot']]],
   ['removedata',['removeData',['../class_default_plot.html#ac66f2cf5b8bf20358add7261df109c9b',1,'DefaultPlot']]],
-  ['reset',['reset',['../class_atrial_machine2d.html#a3c509a3d7d9da2b758caa7347bb3ea78',1,'AtrialMachine2d::reset()'],['../class_r_rcalculator.html#affa5d0f172be4d9aa0601c8f1824aba7',1,'RRcalculator::reset()'],['../class_simple_heart.html#aff7605e57db713a7f55ca1b161ba524b',1,'SimpleHeart::reset()'],['../class_oscillator.html#aa948fd93ed91ffedd873c6d50bba3898',1,'Oscillator::reset()'],['../class_allexandre_strategy.html#a8f657c6d14d76cef3a312fc862c400f7',1,'AllexandreStrategy::reset()'],['../class_numeric_strategy.html#af85e11ad875a008cd1b6d8b288e3866c',1,'NumericStrategy::reset()']]],
+  ['reset',['reset',['../class_atrial_machine2d.html#a3c509a3d7d9da2b758caa7347bb3ea78',1,'AtrialMachine2d::reset()'],['../class_r_rcalculator.html#affa5d0f172be4d9aa0601c8f1824aba7',1,'RRcalculator::reset()'],['../class_simple_heart.html#aff7605e57db713a7f55ca1b161ba524b',1,'SimpleHeart::reset()'],['../class_oscillator.html#aa948fd93ed91ffedd873c6d50bba3898',1,'Oscillator::reset()'],['../class_allexandre_strategy.html#a8f657c6d14d76cef3a312fc862c400f7',1,'AllexandreStrategy::reset()'],['../class_numeric_strategy.html#af85e11ad875a008cd1b6d8b288e3866c',1,'NumericStrategy::reset()'],['../class_probe_electrode.html#a532617824c146216c8b6dad12aa15c6b',1,'ProbeElectrode::reset()']]],
   ['resetdefault',['resetDefault',['../class_diffusion_matrix.html#ad14d77eb67efb5140552753266c60da8',1,'DiffusionMatrix']]],
   ['resetdiffusion',['resetDiffusion',['../class_simple_heart.html#a247bb22f52da28f0651973c103b79998',1,'SimpleHeart']]],
   ['resettime',['resetTime',['../_time_tree_8cpp.html#af7ff3460489bc3b7fda27cc4e9d3abd8',1,'resetTime(TimeTree *node, double val):&#160;TimeTree.cpp'],['../_time_tree_8h.html#af7ff3460489bc3b7fda27cc4e9d3abd8',1,'resetTime(TimeTree *node, double val):&#160;TimeTree.cpp']]],
@@ -22,15 +22,10 @@ var searchData=
   ['rfhn_5fpotential',['RFHN_POTENTIAL',['../heart_defines_8h.html#a2e6f185296f039d4680b50804849b9d9a9f959aa6584ac2fd4b4a1e3b1d832d8e',1,'heartDefines.h']]],
   ['rotategl',['rotateGL',['../_g_lfunc_8cpp.html#adb638195ebb714dd5a18934580a762eb',1,'rotateGL(int coord, int angle_X, int angle_Y, int angle_Z):&#160;GLfunc.cpp'],['../_g_lfunc_8h.html#adb638195ebb714dd5a18934580a762eb',1,'rotateGL(int coord, int angle_X, int angle_Y, int angle_Z):&#160;GLfunc.cpp']]],
   ['round',['round',['../gl_atrium_8cpp.html#a582dbae5783888558714e0de9bf4ad43',1,'glAtrium.cpp']]],
-  ['rrcalc_5f1',['RRcalc_1',['../class_atrial_machine2d.html#ace665fff3f0583d9d1e285f4775adfa6',1,'AtrialMachine2d']]],
-  ['rrcalc_5f2',['RRcalc_2',['../class_atrial_machine2d.html#a34b1581457faa0fec1579cf51a187598',1,'AtrialMachine2d']]],
-  ['rrcalc_5f3',['RRcalc_3',['../class_atrial_machine2d.html#a0bcbe6368dd8bb0eb66efaafc5a4dbfb',1,'AtrialMachine2d']]],
-  ['rrcalc_5f4',['RRcalc_4',['../class_atrial_machine2d.html#aa2ede01ca50864789c112cca567c1444',1,'AtrialMachine2d']]],
   ['rrcalculator',['RRcalculator',['../class_r_rcalculator.html',1,'RRcalculator'],['../class_r_rcalculator.html#a1c8424d714a284daa7a87f634b4f8c1e',1,'RRcalculator::RRcalculator()']]],
   ['rrcalculator_2ecpp',['RRcalculator.cpp',['../_r_rcalculator_8cpp.html',1,'']]],
   ['rrcalculator_2eh',['RRcalculator.h',['../_r_rcalculator_8h.html',1,'']]],
   ['rrplot',['rrPlot',['../classrr_plot.html',1,'rrPlot'],['../classrr_plot.html#a1670fc13172e2a65ed9c10fe2c65f53a',1,'rrPlot::rrPlot()']]],
   ['rrplot_2ecpp',['rrPlot.cpp',['../rr_plot_8cpp.html',1,'']]],
-  ['rrplot_2eh',['rrPlot.h',['../rr_plot_8h.html',1,'']]],
-  ['runge_5fkutta',['Runge_Kutta',['../class_atrial_machine2d.html#a2d181080d4da8598ce58dc29d3ee707a',1,'AtrialMachine2d']]]
+  ['rrplot_2eh',['rrPlot.h',['../rr_plot_8h.html',1,'']]]
 ];

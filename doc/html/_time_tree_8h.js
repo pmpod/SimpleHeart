@@ -4,6 +4,7 @@ var _time_tree_8h =
     [ "TimeTree", "struct_time_tree.html", "struct_time_tree" ],
     [ "addOscillator", "_time_tree_8h.html#af36dec8789dded59f564e424e8cce94d", null ],
     [ "bubbleNewTime", "_time_tree_8h.html#a664699cf8087c1b0361c4d6f62fc1a54", null ],
+    [ "bubbleNewTimeFullCheck", "_time_tree_8h.html#a4b82bbc785e24d9f699748c00ae3a72a", null ],
     [ "clear", "_time_tree_8h.html#ac2198b4b6be4df9987b8560f8190064c", null ],
     [ "goToEarliest", "_time_tree_8h.html#a8dcb9d4538548cd5a8c5acd47dcffc19", null ],
     [ "goToGreaterThan", "_time_tree_8h.html#aa7b1d32c0fed338a1a36f18fccf40f18", null ],

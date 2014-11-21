@@ -3,6 +3,7 @@ var dir_312950da3f243a51cc00f4a947545131 =
     [ "CardiacMesh.cpp", "_cardiac_mesh_8cpp.html", null ],
     [ "CardiacMesh.h", "_cardiac_mesh_8h.html", [
       [ "VertexTriangle", "struct_vertex_triangle.html", "struct_vertex_triangle" ],
+      [ "SVertex", "struct_s_vertex.html", "struct_s_vertex" ],
       [ "CardiacMesh", "class_cardiac_mesh.html", "class_cardiac_mesh" ]
     ] ],
     [ "cartesianGrid.cpp", "cartesian_grid_8cpp.html", null ],
@@ -18,7 +19,7 @@ var dir_312950da3f243a51cc00f4a947545131 =
     [ "Oscillator.h", "_oscillator_8h.html", [
       [ "Oscillator", "class_oscillator.html", "class_oscillator" ]
     ] ],
-    [ "v3model.cpp", "v3model_8cpp.html", null ],
+    [ "v3model.cpp", "v3model_8cpp.html", "v3model_8cpp" ],
     [ "v3model.h", "v3model_8h.html", [
       [ "v3model", "classv3model.html", "classv3model" ]
     ] ],

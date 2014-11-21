@@ -23,6 +23,8 @@ var searchData=
   ['vandergru_2ecpp',['vanDerGru.cpp',['../van_der_gru_8cpp.html',1,'']]],
   ['vandergru_2eh',['vanDerGru.h',['../van_der_gru_8h.html',1,'']]],
   ['vandergrufunction',['vanDerGruFunction',['../classvan_der_gru.html#ad80161e6f6b1ec07f8f806efe135a1a9',1,'vanDerGru']]],
+  ['varname_5fdesc_5fdata',['VARNAME_DESC_DATA',['../io_handler_8cpp.html#ac15d951e2c7ef3d80edca3c3ee0685e7',1,'ioHandler.cpp']]],
+  ['varname_5fmodel_5fdata',['VARNAME_MODEL_DATA',['../io_handler_8cpp.html#a2248f8c5bbc0bd7b29222035ca079cd1',1,'ioHandler.cpp']]],
   ['vdg_5falpha',['VDG_ALPHA',['../heart_defines_8h.html#a79395aba577c2bc57e7ca211ff3476a6a12320b6a3a0fb68a6b66f97e1d642c4d',1,'heartDefines.h']]],
   ['vdg_5fd',['VDG_D',['../heart_defines_8h.html#a79395aba577c2bc57e7ca211ff3476a6a511a1e2dbed3e9d6ff3c600f8146e470',1,'heartDefines.h']]],
   ['vdg_5fe',['VDG_E',['../heart_defines_8h.html#a79395aba577c2bc57e7ca211ff3476a6a0da14facdf26e68c7a5da07d969df450',1,'heartDefines.h']]],

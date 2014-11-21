@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('_time_tree_8h.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -147,6 +147,8 @@ Functions</h2></td></tr>
 <tr class="separator:ae920edfcf6375b6e6b2bc8083205b805"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a664699cf8087c1b0361c4d6f62fc1a54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_time_tree_8h.html#a664699cf8087c1b0361c4d6f62fc1a54">bubbleNewTime</a> (<a class="el" href="struct_time_tree.html">TimeTree</a> *&amp;node, const double &amp;newTime)</td></tr>
 <tr class="separator:a664699cf8087c1b0361c4d6f62fc1a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b82bbc785e24d9f699748c00ae3a72a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_time_tree_8h.html#a4b82bbc785e24d9f699748c00ae3a72a">bubbleNewTimeFullCheck</a> (<a class="el" href="struct_time_tree.html">TimeTree</a> *&amp;node, const double &amp;newTime)</td></tr>
+<tr class="separator:a4b82bbc785e24d9f699748c00ae3a72a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7b1d32c0fed338a1a36f18fccf40f18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_time_tree.html">TimeTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_time_tree_8h.html#aa7b1d32c0fed338a1a36f18fccf40f18">goToGreaterThan</a> (<a class="el" href="struct_time_tree.html">TimeTree</a> *node, const double &amp;val)</td></tr>
 <tr class="separator:aa7b1d32c0fed338a1a36f18fccf40f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc7a9daaaf3e753b28dd62c76f0e3cb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_time_tree.html">TimeTree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_time_tree_8h.html#acc7a9daaaf3e753b28dd62c76f0e3cb0">goToNotUpdatedEarliest</a> (<a class="el" href="struct_time_tree.html">TimeTree</a> *node)</td></tr>
@@ -195,6 +197,32 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void bubbleNewTime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_time_tree.html">TimeTree</a> *&amp;&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>newTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4b82bbc785e24d9f699748c00ae3a72a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bubbleNewTimeFullCheck </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_time_tree.html">TimeTree</a> *&amp;&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -543,7 +571,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_ecf2ff720ad0c2f36bc09bc5bafe8f54.html">NumericStrategy</a></li><li class="navelem"><a class="el" href="_time_tree_8h.html">TimeTree.h</a></li>
-    <li class="footer">Generated on Mon Oct 20 2014 19:29:00 for Simple Heart by
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:00 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

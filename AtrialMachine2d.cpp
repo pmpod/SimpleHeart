@@ -2,50 +2,8 @@
 #include "NumericStrategy\ForwardEulerStrategy.h"
 #include "NumericStrategy\AllexandreStrategy.h"
 
-#define CYLINDER 0
 #define ELECTROGRAMMM 1
-burster::burster()
-{
-	lastSpike = 0;
-	currentPhaseOfPeak = 0;
-	currentPhase = 0;
-	meanPeriod = 70;
-	periodModulation = 0;
-	amp = -0.1;
-	length = 1;
-}
-double burster::spike(double time, double value)
-{
-	double retValue;
-	currentPhase = time - lastSpike;
-	if(currentPhaseOfPeak == 0 )
-	{
-		periodModulation = value;
-		if(meanPeriod + periodModulation<=length+1)
-		{
-			periodModulation=length+1-meanPeriod;
-		}
-		lastSpike = time;
-		retValue = amp;
-		currentPhaseOfPeak++;
-	}
-	else if(currentPhaseOfPeak < length)
-	{
-		retValue = amp;
-		currentPhaseOfPeak++;
-	}
-	else
-	{
-		retValue = 0;
-	}
 
-	if(currentPhase>= meanPeriod + periodModulation)
-	{
-		currentPhaseOfPeak=0;
-		lastSpike = time;
-	}
-	return retValue;
-}
 AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *grid)
 {
 	m_strategy = nullptr;
@@ -53,13 +11,13 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 	init();
 
 	m_grid = grid;
-	m_grid->m_ectopicAmplitude = definitions->m_ectopicAmplitude;
+
 	
 	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[129]));
 	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[16257 - 128]));
 	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[5000]));
 
-	setAllexandreStrategy();
+	setForwardEulerStrategy();
 }
 //-------------------------------------------------------------------------
 AtrialMachine2d::~AtrialMachine2d(void)
@@ -86,7 +44,8 @@ void AtrialMachine2d::setAllexandreStrategy()
 void AtrialMachine2d::init()
 {
 	 m_globalTime = 0;
-	 m_skip = m_definitions->m_mainSkip;
+	 _skip = m_definitions->m_mainSkip;
+	 _stimulatorOn = false;
 }
 //------------------------------------------------------------------------------------------
 void AtrialMachine2d::reset()
@@ -104,19 +63,28 @@ double AtrialMachine2d::processStep()
 		m_grid->structureUpdated = false;
 	}
 
-	m_grid->m_minElectrogram = m_grid->m_minPotential;
-	m_grid->m_maxElectrogram = m_grid->m_maxPotential;
-	if (m_definitions->m_ectopicActivity && m_grid->stimulationBegun == false)
-	{
-		m_grid->startStimulation(m_grid->m_mesh[m_grid->m_stimulationID], m_grid->m_stimulationID, 2, 0.1);
-	}
+	m_grid->minElectrogram = m_grid->minPotential;
+	m_grid->maxElectrogram = m_grid->maxPotential;
 
-	else if (!m_definitions->m_ectopicActivity && m_grid->stimulationBegun == true)
+	if (_stimulatorOn)
 	{
-		m_grid->stopStimulation();
+		stimulator.run(m_grid);
 	}
+	else {
+		stimulator.stop(m_grid);
 
-	for (int kk = 0; kk <= 50000; ++kk)//m_skip
+	}
+	//if (m_definitions->m_ectopicActivity && stimulationBegun == false)
+	//{
+	//	startStimulation(m_grid->m_mesh[m_grid->m_stimulationID], m_grid->m_stimulationID, 2, 0.1);
+	//}
+
+	//else if (!m_definitions->m_ectopicActivity && stimulationBegun == true)
+	//{
+	//	stopStimulation();
+	//}
+
+	for (int kk = 0; kk <= 20; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}
@@ -134,10 +102,6 @@ double AtrialMachine2d::processStep()
 
 }
 //------------------------------------------------------------------------------------------
-void AtrialMachine2d::setEctoModTime()
-{
-	m_definitions->setEctoModTime(m_globalTime);
-}
 void AtrialMachine2d::calculateFullElectrogramMap()
 {
 	m_strategy->synchronise();
@@ -152,13 +116,27 @@ void AtrialMachine2d::calculateFullElectrogramMap()
 		if (m_grid->m_mesh[j]->m_v_electrogram > maxP)
 			maxP = m_grid->m_mesh[j]->m_v_electrogram;
 	}
-	m_grid->m_minElectrogram = minP;
-	m_grid->m_maxElectrogram = maxP;
+	m_grid->minElectrogram = minP;
+	m_grid->maxElectrogram = maxP;
 }
 //--------------------------------------------------------------------
-void AtrialMachine2d::setSkip(int skip) { 	m_skip = skip; }
+void AtrialMachine2d::setSkip(int skip) { 	_skip = skip; }
 
-void AtrialMachine2d::setGlobalTime(double t)
+void AtrialMachine2d::setUniformDiffusion(double value)
 {
-	m_globalTime = t;
+	for (int j = 0; j < m_grid->m_mesh.size(); ++j)
+	{
+		m_grid->m_mesh[j]->setSigma(value, value, 0);
+	}
+
 }
+void AtrialMachine2d::setUniformERP(double value)
+{
+	for (int j = 0; j < m_grid->m_mesh.size(); ++j)
+	{
+		m_grid->m_mesh[j]->setERP(value);
+	}
+}
+
+void AtrialMachine2d::stimulatorOn() { _stimulatorOn = true; }
+void AtrialMachine2d::stimulatorOff(){ _stimulatorOn = false; }

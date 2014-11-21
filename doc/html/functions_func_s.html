@@ -81,6 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -131,7 +132,7 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -147,8 +148,11 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>saveAsBmp()
 : <a class="el" href="classio_handler.html#a472e8932c9769f3a577d11ea7c0e224d">ioHandler</a>
 </li>
-<li>saveDiffusionToFile()
-: <a class="el" href="classio_handler.html#a8e39ebabd54b939c91b8d70bc7234e8c">ioHandler</a>
+<li>saveCurrentState()
+: <a class="el" href="classio_handler.html#a59e5cd8377c13643181d9b6caef839db">ioHandler</a>
+</li>
+<li>saveCurrentStructure()
+: <a class="el" href="classio_handler.html#af01b41a00277e41d62d4d80fd6fe39f7">ioHandler</a>
 </li>
 <li>savePotentialPlot()
 : <a class="el" href="classio_handler.html#a3ce2a07edc23ff12d084e64b85416954">ioHandler</a>
@@ -162,17 +166,14 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>saveRRPlot_3()
 : <a class="el" href="classio_handler.html#a2de36fdfa99f28b20c6fe1b2069b75ad">ioHandler</a>
 </li>
-<li>saveStructureToFile()
-: <a class="el" href="classio_handler.html#a91de29843e2894a8b778de65a557562a">ioHandler</a>
-</li>
 <li>screenToWorld()
 : <a class="el" href="classgl_atrium.html#a939d7c7a5289deeeea1763544e5be6b5">glAtrium</a>
 </li>
 <li>selectedNode()
 : <a class="el" href="class_diffusion_painter.html#ad5ca1a51002b96b7aae86de9176acb02">DiffusionPainter</a>
 </li>
-<li>setAlgorithm()
-: <a class="el" href="class_atrial_machine2d.html#aab1d925f08bbf319b374f6d2b879878b">AtrialMachine2d</a>
+<li>setAllexandreStrategy()
+: <a class="el" href="class_atrial_machine2d.html#af808c57f5af0c0c26aadcf4c812cb21f">AtrialMachine2d</a>
 </li>
 <li>setAmplitude()
 : <a class="el" href="class_diffusion_painter.html#abaa3b7e44c4494471bc22117661ba51f">DiffusionPainter</a>
@@ -185,9 +186,6 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 </li>
 <li>setAtrialStructure()
 : <a class="el" href="class_simple_heart.html#a80ecf93003d33c5d6f9c6e13ce999cb7">SimpleHeart</a>
-</li>
-<li>setAtrium()
-: <a class="el" href="class_atrial_machine2d.html#a80f97d261da5f2ca116592b07455425a">AtrialMachine2d</a>
 </li>
 <li>setAtriumGlobalAlpha()
 : <a class="el" href="classatrial_parameters.html#a7b26befa3c022befa5eda7408920d379">atrialParameters</a>
@@ -320,7 +318,19 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 , <a class="el" href="classvan_der_gru.html#ac756d19f03e7387f09e94b27aff03da2">vanDerGru</a>
 </li>
 <li>setDiffusionCoefficients()
-: <a class="el" href="class_atrial_machine2d.html#a23d7a0f70a9ddda7dfffc13df9c9964a">AtrialMachine2d</a>
+: <a class="el" href="class_cardiac_mesh.html#a5fb6507c440aeb2d947663047fbdac92">CardiacMesh</a>
+</li>
+<li>setDisplayCSD()
+: <a class="el" href="classgl_atrium.html#a0d8ebb9fd216ef5ffa626071139ee26d">glAtrium</a>
+</li>
+<li>setDisplayCurrent1()
+: <a class="el" href="classgl_atrium.html#a7a56112f029a3a8f6943841735a12a76">glAtrium</a>
+</li>
+<li>setDisplayCurrent2()
+: <a class="el" href="classgl_atrium.html#a22f57b77572b7535269afc46a4126a53">glAtrium</a>
+</li>
+<li>setDisplayPotential()
+: <a class="el" href="classgl_atrium.html#a41253a382f5aa16fd076770782672661">glAtrium</a>
 </li>
 <li>setDuffort()
 : <a class="el" href="classatrial_parameters.html#a8debca6529b58fa7105c2cf339c9b94d">atrialParameters</a>
@@ -401,8 +411,18 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>setEntropyVar()
 : <a class="el" href="class_simple_heart.html#af5d91ef8cab7fec6e6fbf5436cc25d6c">SimpleHeart</a>
 </li>
+<li>setERP()
+: <a class="el" href="class_oscillator.html#a1c7d55f29268d097fa3bab3f8da3d91a">Oscillator</a>
+, <a class="el" href="classv3model.html#a7b930af4a46f46aaa3301947526c556d">v3model</a>
+</li>
 <li>setEuler()
 : <a class="el" href="classatrial_parameters.html#a4dd8c8fb864448c607126b224dc9179f">atrialParameters</a>
+</li>
+<li>setForwardEulerStrategy()
+: <a class="el" href="class_atrial_machine2d.html#ab4833c86a56f23867915d876fac581e0">AtrialMachine2d</a>
+</li>
+<li>setFreeTouch()
+: <a class="el" href="class_simple_heart.html#a9f8cc5db506750cc418f42af3c44d44e">SimpleHeart</a>
 </li>
 <li>setGlobalTime()
 : <a class="el" href="class_atrial_machine2d.html#abc84bef4b3b1a84a4959e820dea21fc3">AtrialMachine2d</a>
@@ -413,11 +433,46 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>setLabel()
 : <a class="el" href="class_probe.html#a2cad80c5851ce1ab165f41e56075853d">Probe</a>
 </li>
+<li>setLastPos()
+: <a class="el" href="classgl_atrium.html#aef6b55dd9c8a5b542c034d7bb8e6d319">glAtrium</a>
+</li>
 <li>setLowerLimit()
 : <a class="el" href="class_diffusion_painter.html#a2c1af0a12e7a22b239fa0fa7587babe9">DiffusionPainter</a>
 </li>
 <li>setMainTimeStep()
 : <a class="el" href="classatrial_parameters.html#a78d1ea1d1f6c256851cf7b83a8a21707">atrialParameters</a>
+</li>
+<li>setMode()
+: <a class="el" href="class_sim_view_state.html#a974327508e13018d05da02b3bce08615">SimViewState</a>
+, <a class="el" href="class_sim_view_state_diffusion.html#a399cf7a08f4c6dccaf350665a2c120df">SimViewStateDiffusion</a>
+, <a class="el" href="class_sim_view_state_e_p.html#aba966e899aefd372056a297b4b548617">SimViewStateEP</a>
+, <a class="el" href="class_sim_view_state_structure.html#a3a90f8f41ff1383ca27d4b7684990979">SimViewStateStructure</a>
+, <a class="el" href="class_sim_view_state_view.html#a71335c51c957210f1bd6f697026c2de1">SimViewStateView</a>
+</li>
+<li>setOscillator()
+: <a class="el" href="class_probe_electrode.html#aeee592bae931530360c5102b2c968e0d">ProbeElectrode</a>
+</li>
+<li>setOutlineGauss()
+: <a class="el" href="classgl_atrium.html#a2763b82810f80bd56ac251971637df46">glAtrium</a>
+</li>
+<li>setOutlineStyle()
+: <a class="el" href="class_sim_view_state.html#ab564f25312c081a619efd4e7619b68d1">SimViewState</a>
+, <a class="el" href="class_sim_view_state_diffusion.html#ac5b42fac66fcba6d2e268d187c756578">SimViewStateDiffusion</a>
+, <a class="el" href="class_sim_view_state_e_p.html#abb6fc8658ac934c2e89e73369545dcd1">SimViewStateEP</a>
+, <a class="el" href="class_sim_view_state_structure.html#a058bfe5e7626fff59c1a329be9703283">SimViewStateStructure</a>
+, <a class="el" href="class_sim_view_state_view.html#a478f837eea498f64d56bac73856b1112">SimViewStateView</a>
+</li>
+<li>setOutlineUniform()
+: <a class="el" href="classgl_atrium.html#a1b033aa6b6df0e8f73c0199ddfea108f">glAtrium</a>
+</li>
+<li>setPaintConductivity()
+: <a class="el" href="classgl_atrium.html#a6c943af88177755f0dac95d12767cd22">glAtrium</a>
+</li>
+<li>setPaintERP()
+: <a class="el" href="classgl_atrium.html#a4deff8ebaa4b5042643cbd1acefa7128">glAtrium</a>
+</li>
+<li>setPalette()
+: <a class="el" href="class_sim_view_state.html#a6f4914ea9b1dcdee9657d5d58b553a36">SimViewState</a>
 </li>
 <li>setPaletteGray()
 : <a class="el" href="classgl_atrium.html#acf6258aaf1d7c1a8cd7afe558bfd8fa4">glAtrium</a>
@@ -452,11 +507,14 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>setPreviousPotential()
 : <a class="el" href="class_oscillator.html#a3e24a7637ed5aaf05101f3e115ea8e9c">Oscillator</a>
 </li>
-<li>setProbeElectrode()
-: <a class="el" href="class_simple_heart.html#a774d9d7eb7daa584ea9d30c52e90aca5">SimpleHeart</a>
-</li>
 <li>setRangeOfFocus()
 : <a class="el" href="class_r_rcalculator.html#ac612758f699b103d8deedf130dbc8cc9">RRcalculator</a>
+</li>
+<li>setS1_Cycle()
+: <a class="el" href="class_atrial_machine2d.html#adda0c3f022e32b53d89f42b440336cd0">AtrialMachine2d</a>
+</li>
+<li>setS1_Duration()
+: <a class="el" href="class_atrial_machine2d.html#a4edba6c43406c28e00e90acd0d8a1f1d">AtrialMachine2d</a>
 </li>
 <li>setSaGlobalAlpha()
 : <a class="el" href="classatrial_parameters.html#aa8568ffc4c3280b182f1c99a270c2828">atrialParameters</a>
@@ -538,8 +596,20 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>setSsavePotentialPlots()
 : <a class="el" href="classatrial_parameters.html#ab299e636262065b0423eff7ed72bc263">atrialParameters</a>
 </li>
-<li>setStimulation()
-: <a class="el" href="class_cardiac_mesh.html#a22bc3080340bc2ecad69e151098edaf5">CardiacMesh</a>
+<li>setState()
+: <a class="el" href="class_simple_heart.html#a7518755827922e9a3fa12c3e2438b3de">SimpleHeart</a>
+</li>
+<li>setStateDiffusionModifier()
+: <a class="el" href="classgl_atrium.html#a4712eeb59127c712ca5ed3e9ea2363d6">glAtrium</a>
+</li>
+<li>setStateEP()
+: <a class="el" href="classgl_atrium.html#a1bc8825c11be22bef34d80d8e92bba1d">glAtrium</a>
+</li>
+<li>setStateStructureModifier()
+: <a class="el" href="classgl_atrium.html#a10acfe771a3112264051aaecd87bc4d6">glAtrium</a>
+</li>
+<li>setStateViewer()
+: <a class="el" href="classgl_atrium.html#a4fdc27d1e3a4b46fb4e545b5d5452656">glAtrium</a>
 </li>
 <li>setTau()
 : <a class="el" href="classatrial_parameters.html#a450421c3abc5eecff0bca9f73a7a72d8">atrialParameters</a>
@@ -552,6 +622,9 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 </li>
 <li>setType()
 : <a class="el" href="class_oscillator.html#acdee83b452a76ee20b48248cd4ba45cc">Oscillator</a>
+</li>
+<li>setUniformDiffusion()
+: <a class="el" href="class_atrial_machine2d.html#a2bc748b9fda32f5efe515474df2c85e6">AtrialMachine2d</a>
 </li>
 <li>setupConnections()
 : <a class="el" href="class_simple_heart.html#a5b5e31ea603407a250086dc5eb4ae45c">SimpleHeart</a>
@@ -625,6 +698,21 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>SimpleHeart()
 : <a class="el" href="class_simple_heart.html#a55464c2470b955c8a6de95c5ebebaa39">SimpleHeart</a>
 </li>
+<li>SimViewState()
+: <a class="el" href="class_sim_view_state.html#a25716f67bc5a503232f0cda26ae54efd">SimViewState</a>
+</li>
+<li>SimViewStateDiffusion()
+: <a class="el" href="class_sim_view_state_diffusion.html#af2d9dfaf5a6b3e09097515ad8f999605">SimViewStateDiffusion</a>
+</li>
+<li>SimViewStateEP()
+: <a class="el" href="class_sim_view_state_e_p.html#a32f99c8f47d2b2f6eb499852e4dbe7fd">SimViewStateEP</a>
+</li>
+<li>SimViewStateStructure()
+: <a class="el" href="class_sim_view_state_structure.html#a40b328e72b5dfc6bcb74176a868d9932">SimViewStateStructure</a>
+</li>
+<li>SimViewStateView()
+: <a class="el" href="class_sim_view_state_view.html#a50285d334c6fc2a919819098123d553b">SimViewStateView</a>
+</li>
 <li>size()
 : <a class="el" href="class_curve_data.html#aa47747f11e103e908781800b278596d7">CurveData</a>
 </li>
@@ -638,14 +726,17 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>startCalculation()
 : <a class="el" href="class_simple_heart.html#a49deb5c528545bab494fd64069103480">SimpleHeart</a>
 </li>
+<li>startStimulation()
+: <a class="el" href="class_cardiac_mesh.html#afb67d1d5f4e382916e9c8f044739887b">CardiacMesh</a>
+</li>
 <li>stateCalculated()
-: <a class="el" href="class_oscillator.html#abc5d43aeb061d97dd58749baf2b8f82d">Oscillator</a>
+: <a class="el" href="class_oscillator.html#aaa37a3ba59f862e45025f93d8564474f">Oscillator</a>
 </li>
 <li>stepFinished()
 : <a class="el" href="class_atrial_machine2d.html#aa0503c0b65de1d0a3353fa60001b7c7b">AtrialMachine2d</a>
 </li>
 <li>stepModifiedBackwardEuler()
-: <a class="el" href="class_allexandre_strategy.html#a25fe69b84aed988807d10e4b72890d26">AllexandreStrategy</a>
+: <a class="el" href="class_allexandre_strategy.html#a7507036b61a804d7596567dced8f3c73">AllexandreStrategy</a>
 </li>
 <li>stopCalculation()
 : <a class="el" href="class_simple_heart.html#a4ffc946d90c553de0fc523d955555f65">SimpleHeart</a>
@@ -662,8 +753,10 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <li>strToInt()
 : <a class="el" href="classio_handler.html#a24088c5418729764793ad2ff055d4de8">ioHandler</a>
 </li>
-<li>switchElectrode()
-: <a class="el" href="class_simple_heart.html#a3bc02674ea9df69b00cd1f100c4807fe">SimpleHeart</a>
+<li>synchronise()
+: <a class="el" href="class_allexandre_strategy.html#a8a6038dc52af113157f911665e7d51c2">AllexandreStrategy</a>
+, <a class="el" href="class_forward_euler_strategy.html#a59201ff29f82dd037576a1a7b3bf2e7f">ForwardEulerStrategy</a>
+, <a class="el" href="class_numeric_strategy.html#a5dec2aaf22a9642fdd92b55c12353f82">NumericStrategy</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -671,7 +764,7 @@ $(document).ready(function(){initNavTree('functions_func_s.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2014 19:29:07 for Simple Heart by
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:12 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['fast_5ftanh',['fast_tanh',['../v3model_8cpp.html#a9cf116d8a7c54ba915a1d59a69ad92ea',1,'v3model.cpp']]],
   ['fhn_5falpha',['FHN_ALPHA',['../heart_defines_8h.html#a79395aba577c2bc57e7ca211ff3476a6a70654d0bc01f577b169c5691ba40284b',1,'heartDefines.h']]],
   ['fhn_5fbeta',['FHN_BETA',['../heart_defines_8h.html#a79395aba577c2bc57e7ca211ff3476a6a441772dabf0e2cf1f17e4b7552f6f07f',1,'heartDefines.h']]],
   ['fhn_5fc1',['FHN_C1',['../heart_defines_8h.html#a79395aba577c2bc57e7ca211ff3476a6acd179ecc712161ec84071832eca0c89a',1,'heartDefines.h']]],
@@ -10,6 +11,7 @@ var searchData=
   ['fhn_5fpotential',['FHN_POTENTIAL',['../heart_defines_8h.html#a2e6f185296f039d4680b50804849b9d9a7081502d72ee8506fc4c02b464913a12',1,'heartDefines.h']]],
   ['fhn_5fts',['FHN_TS',['../heart_defines_8h.html#a79395aba577c2bc57e7ca211ff3476a6aa47cb576d6ffccc3dae0541c8f5c76bf',1,'heartDefines.h']]],
   ['fileprefix',['filePrefix',['../classio_handler.html#aaf8038bd0ff5a184504cf4622411fd51',1,'ioHandler']]],
+  ['findelectrode',['findElectrode',['../class_sim_view_state_e_p.html#affa6e610e4d7b1091c073d41824fee4f',1,'SimViewStateEP']]],
   ['fitzhughnagumo',['FitzHughNagumo',['../class_fitz_hugh_nagumo.html',1,'FitzHughNagumo'],['../class_fitz_hugh_nagumo.html#a2c8d3d7f70371091eadeab6ce0873404',1,'FitzHughNagumo::FitzHughNagumo()']]],
   ['fitzhughnagumo_2ecpp',['FitzHughNagumo.cpp',['../_fitz_hugh_nagumo_8cpp.html',1,'']]],
   ['fitzhughnagumo_2eh',['FitzHughNagumo.h',['../_fitz_hugh_nagumo_8h.html',1,'']]],

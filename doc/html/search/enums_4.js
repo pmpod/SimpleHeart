@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['v_5fborderness',['V_BORDERNESS',['../heart_defines_8h.html#a07a1e1e8da3860dbb667bfda73337fff',1,'heartDefines.h']]]
+  ['osc_5fparameter',['OSC_PARAMETER',['../heart_defines_8h.html#a79395aba577c2bc57e7ca211ff3476a6',1,'heartDefines.h']]]
 ];

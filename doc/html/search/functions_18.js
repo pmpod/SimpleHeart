@@ -15,10 +15,16 @@ var searchData=
   ['_7enumericstrategy',['~NumericStrategy',['../class_numeric_strategy.html#ac167251a4c6409131a1be21ce3104870',1,'NumericStrategy']]],
   ['_7eoscillator',['~Oscillator',['../class_oscillator.html#accb2f4ecc6604b2c38a7fd9973578360',1,'Oscillator']]],
   ['_7eprobe',['~Probe',['../class_probe.html#a0bfeef911e78cd2ebc151da41a458f60',1,'Probe']]],
+  ['_7eprobeelectrode',['~ProbeElectrode',['../class_probe_electrode.html#a00dcd3547df479ca0b932958b2f3936b',1,'ProbeElectrode']]],
   ['_7erandomgenerator',['~RandomGenerator',['../class_random_generator.html#ada0252d5def711284f6b381a3aa85b6e',1,'RandomGenerator']]],
   ['_7errcalculator',['~RRcalculator',['../class_r_rcalculator.html#a8af8b7c5cb9fd55b78757780ba8c3007',1,'RRcalculator']]],
   ['_7errplot',['~rrPlot',['../classrr_plot.html#a4804c1ab8d3cc373b8e12d660ea2dba6',1,'rrPlot']]],
   ['_7esimpleheart',['~SimpleHeart',['../class_simple_heart.html#ab592cf6c22fc8945190fb64454fc74c6',1,'SimpleHeart']]],
+  ['_7esimviewstate',['~SimViewState',['../class_sim_view_state.html#a146b34bbbf4107030f0f19da24f45985',1,'SimViewState']]],
+  ['_7esimviewstatediffusion',['~SimViewStateDiffusion',['../class_sim_view_state_diffusion.html#a0a9cd4ae5c64bbe8434d3c696eb7be4d',1,'SimViewStateDiffusion']]],
+  ['_7esimviewstateep',['~SimViewStateEP',['../class_sim_view_state_e_p.html#aa994e811ee4eb85f564f5bac5ff60042',1,'SimViewStateEP']]],
+  ['_7esimviewstatestructure',['~SimViewStateStructure',['../class_sim_view_state_structure.html#a9828433887b48e5c9970e722a2e6506d',1,'SimViewStateStructure']]],
+  ['_7esimviewstateview',['~SimViewStateView',['../class_sim_view_state_view.html#a53ee7dbb7b57ff9a11157530f724fc6c',1,'SimViewStateView']]],
   ['_7ev3model',['~v3model',['../classv3model.html#a78cbf845aa6ab504372a8710cad28f4b',1,'v3model']]],
   ['_7evandergru',['~vanDerGru',['../classvan_der_gru.html#af9ce49799c6bbe6825acfb0a16ecf847',1,'vanDerGru']]]
 ];

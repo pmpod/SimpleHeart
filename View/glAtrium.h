@@ -27,7 +27,9 @@ public:
 	void setLastPos(const QPoint& pos);
 	CardiacMesh *linkToMesh;		///Link to the Model
 
-
+	
+	double paintValueDiffusion;
+	double paintValueERP;
 private:
 
 public slots:
@@ -41,6 +43,8 @@ public slots:
 	void setStateDiffusionModifier(bool b);
 	void setStateViewer(bool b);
 	void setStateEP(bool b);
+	void setPaintConductivity(bool b);
+	void setPaintERP(bool b);
 	void setPaletteHSV();
 	void setPaletteGray();
 	void setDisplayPotential(bool b);

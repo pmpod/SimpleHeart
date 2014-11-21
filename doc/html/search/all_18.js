@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['z',['z',['../structt_vector3.html#abdbd8e973fd4634920a44119f329920f',1,'tVector3']]],
+  ['z',['z',['../structt_vector3.html#abdbd8e973fd4634920a44119f329920f',1,'tVector3::z()'],['../struct_s_vertex.html#a52b7560faaa70a1e61b8221135e50d63',1,'SVertex::z()']]],
   ['z_5faxisfont',['z_axisFont',['../rr_plot_8cpp.html#abf8cb2242ad43a56d47ea681bd61b9a4',1,'rrPlot.cpp']]],
   ['z_5flegendsfont',['z_legendsFont',['../rr_plot_8cpp.html#ad5dc34ab73b9a0e140d6d92343ce9ce1',1,'rrPlot.cpp']]],
   ['z_5ftitlefont',['z_titleFont',['../rr_plot_8cpp.html#a02020a8c530320ca7f4c16d442070680',1,'rrPlot.cpp']]],

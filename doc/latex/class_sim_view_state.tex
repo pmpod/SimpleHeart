@@ -1,0 +1,280 @@
+\hypertarget{class_sim_view_state}{\section{Sim\+View\+State Class Reference}
+\label{class_sim_view_state}\index{Sim\+View\+State@{Sim\+View\+State}}
+}
+
+
+{\ttfamily \#include $<$Sim\+View\+State.\+h$>$}
+
+Inheritance diagram for Sim\+View\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.891892cm]{class_sim_view_state}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sim_view_state_a25716f67bc5a503232f0cda26ae54efd}{Sim\+View\+State} ()
+\item 
+\hyperlink{class_sim_view_state_a146b34bbbf4107030f0f19da24f45985}{$\sim$\+Sim\+View\+State} ()
+\item 
+virtual void \hyperlink{class_sim_view_state_a88e0bdb8f9bc192aafdd03cfcfedb739}{handle\+Mouse\+Left\+Press} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view, Q\+Mouse\+Event $\ast$event)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_ae19144be611a82cdeaf6fa14e51dd2b8}{handle\+Mouse\+Right\+Press} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view, Q\+Mouse\+Event $\ast$event)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_ade4b50513760c26f2fee922d9490fe9f}{handle\+Mouse\+Release} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view, Q\+Mouse\+Event $\ast$event)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_a12e4d1b637498ebc47cf1bc3d73e0f6f}{handle\+Mousewheel} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view, Q\+Wheel\+Event $\ast$event)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_aed57f0c2dfd5b883ab967b06c4264809}{handle\+Mouse\+Move} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view, Q\+Mouse\+Event $\ast$event)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_a495ab39e6dfdf96cca95a16bb773fae5}{paint\+Model} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_a837acc68609fe299ec477ebccbaab7b7}{paint\+Cursor} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view)=0
+\item 
+void \hyperlink{class_sim_view_state_a4b4827ed55ec2cfd5b2ceb6c977425cf}{paint\+Scale} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view)
+\item 
+virtual void \hyperlink{class_sim_view_state_aaf43f6d62a2a9bc6c3e52adf0f56b166}{paint\+Legend} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_a1ddc84529f91fceb9b96096639ba3aca}{prepare\+Legend} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_a974327508e13018d05da02b3bce08615}{set\+Mode} (const int mode)=0
+\item 
+virtual void \hyperlink{class_sim_view_state_ab564f25312c081a619efd4e7619b68d1}{set\+Outline\+Style} (const \hyperlink{_sim_view_state_8h_a64cb6e33858a4b9db209712bab2f0e99}{B\+R\+U\+S\+H\+\_\+\+O\+U\+T\+L\+I\+N\+E} outline)=0
+\item 
+void \hyperlink{class_sim_view_state_a6f4914ea9b1dcdee9657d5d58b553a36}{set\+Palette} (const \hyperlink{_sim_view_state_8h_aac0f40b4af712e3b80d1b769cb0161d3}{D\+I\+S\+P\+\_\+\+P\+A\+L\+E\+T\+T\+E} pal)
+\item 
+const double \hyperlink{class_sim_view_state_ac07366dc45e2bf517d896df7fd791a2b}{get\+Radius} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_sim_view_state_adc4b5690cdd73f8b624b86ff18cc088d}{compute\+Incremental} (Vector3 last, Vector3 next)
+\item 
+void \hyperlink{class_sim_view_state_a272419ea4de89cc111205ebde1c8c820}{Change\+State} (\hyperlink{classgl_atrium}{gl\+Atrium} $\ast$view, \hyperlink{class_sim_view_state}{Sim\+View\+State} $\ast$s)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void($\ast$ \hyperlink{class_sim_view_state_ae589ccbf8ab7a064c2ea7d48d5c8bd24}{color\+Map} )(G\+Lfloat \&v, const G\+Lfloat \&vmin, const G\+Lfloat \&vmax, G\+Lfloat \&rr, G\+Lfloat \&gg, G\+Lfloat \&bb)
+\item 
+double \hyperlink{class_sim_view_state_aa8c58229562ab48c746b601ee18c547f}{cursor\+Radius}
+\item 
+Q\+Pixmap \hyperlink{class_sim_view_state_a81d972d69bb9faeadad77688cc1d8c41}{\+\_\+cursor\+Pixmap}
+\item 
+float \hyperlink{class_sim_view_state_a51600cc462d6a280685873259d00afc8}{\+\_\+scale}
+\item 
+Q\+Quaternion \hyperlink{class_sim_view_state_aac7dea4f3ebe5c8b8ef3bec00d375ee1}{\+\_\+quat\+Start}
+\item 
+Q\+Quaternion \hyperlink{class_sim_view_state_aeac9ae8a7ccf8c76c14c87eda4c3ebb7}{\+\_\+quat}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_sim_view_state_a25716f67bc5a503232f0cda26ae54efd}{\index{Sim\+View\+State@{Sim\+View\+State}!Sim\+View\+State@{Sim\+View\+State}}
+\index{Sim\+View\+State@{Sim\+View\+State}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{Sim\+View\+State}]{\setlength{\rightskip}{0pt plus 5cm}Sim\+View\+State\+::\+Sim\+View\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sim_view_state_a25716f67bc5a503232f0cda26ae54efd}
+\hypertarget{class_sim_view_state_a146b34bbbf4107030f0f19da24f45985}{\index{Sim\+View\+State@{Sim\+View\+State}!````~Sim\+View\+State@{$\sim$\+Sim\+View\+State}}
+\index{````~Sim\+View\+State@{$\sim$\+Sim\+View\+State}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{$\sim$\+Sim\+View\+State}]{\setlength{\rightskip}{0pt plus 5cm}Sim\+View\+State\+::$\sim$\+Sim\+View\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sim_view_state_a146b34bbbf4107030f0f19da24f45985}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_sim_view_state_a272419ea4de89cc111205ebde1c8c820}{\index{Sim\+View\+State@{Sim\+View\+State}!Change\+State@{Change\+State}}
+\index{Change\+State@{Change\+State}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{Change\+State}]{\setlength{\rightskip}{0pt plus 5cm}void Sim\+View\+State\+::\+Change\+State (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view, }
+\item[{{\bf Sim\+View\+State} $\ast$}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sim_view_state_a272419ea4de89cc111205ebde1c8c820}
+\hypertarget{class_sim_view_state_adc4b5690cdd73f8b624b86ff18cc088d}{\index{Sim\+View\+State@{Sim\+View\+State}!compute\+Incremental@{compute\+Incremental}}
+\index{compute\+Incremental@{compute\+Incremental}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{compute\+Incremental}]{\setlength{\rightskip}{0pt plus 5cm}void Sim\+View\+State\+::compute\+Incremental (
+\begin{DoxyParamCaption}
+\item[{Vector3}]{last, }
+\item[{Vector3}]{next}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sim_view_state_adc4b5690cdd73f8b624b86ff18cc088d}
+\hypertarget{class_sim_view_state_ac07366dc45e2bf517d896df7fd791a2b}{\index{Sim\+View\+State@{Sim\+View\+State}!get\+Radius@{get\+Radius}}
+\index{get\+Radius@{get\+Radius}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{get\+Radius}]{\setlength{\rightskip}{0pt plus 5cm}const double Sim\+View\+State\+::get\+Radius (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_sim_view_state_ac07366dc45e2bf517d896df7fd791a2b}
+\hypertarget{class_sim_view_state_a88e0bdb8f9bc192aafdd03cfcfedb739}{\index{Sim\+View\+State@{Sim\+View\+State}!handle\+Mouse\+Left\+Press@{handle\+Mouse\+Left\+Press}}
+\index{handle\+Mouse\+Left\+Press@{handle\+Mouse\+Left\+Press}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{handle\+Mouse\+Left\+Press}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::handle\+Mouse\+Left\+Press (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view, }
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_a88e0bdb8f9bc192aafdd03cfcfedb739}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_a921e715622d8d2365d206a62b27743b3}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_e_p_a5a6017c556c686abfa5448307b972246}{Sim\+View\+State\+E\+P}, \hyperlink{class_sim_view_state_structure_ae248744063ada5daf9e6d2eef9025948}{Sim\+View\+State\+Structure}, and \hyperlink{class_sim_view_state_view_af59efbe30926804b1e344a6d072e8a56}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_aed57f0c2dfd5b883ab967b06c4264809}{\index{Sim\+View\+State@{Sim\+View\+State}!handle\+Mouse\+Move@{handle\+Mouse\+Move}}
+\index{handle\+Mouse\+Move@{handle\+Mouse\+Move}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{handle\+Mouse\+Move}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::handle\+Mouse\+Move (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view, }
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_aed57f0c2dfd5b883ab967b06c4264809}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_aac90b9a9b9ff19af8818223f499f0d02}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_e_p_a1c305958bc20ac6d16a4460b08444f1a}{Sim\+View\+State\+E\+P}, \hyperlink{class_sim_view_state_structure_a0dec438e97fd54e39f057d7d641292a5}{Sim\+View\+State\+Structure}, and \hyperlink{class_sim_view_state_view_a57b794dd5b5a13f26be4763976052ec5}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_ade4b50513760c26f2fee922d9490fe9f}{\index{Sim\+View\+State@{Sim\+View\+State}!handle\+Mouse\+Release@{handle\+Mouse\+Release}}
+\index{handle\+Mouse\+Release@{handle\+Mouse\+Release}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{handle\+Mouse\+Release}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::handle\+Mouse\+Release (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view, }
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_ade4b50513760c26f2fee922d9490fe9f}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_acecedd98fde1cacd09c4dda625879c87}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_e_p_aa2acd865c23f62612f50b2a889fffb04}{Sim\+View\+State\+E\+P}, \hyperlink{class_sim_view_state_structure_abb8f738ef86bd47034e309be7024c9d3}{Sim\+View\+State\+Structure}, and \hyperlink{class_sim_view_state_view_a744509eb2f2183839db2314f4b8e355b}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_ae19144be611a82cdeaf6fa14e51dd2b8}{\index{Sim\+View\+State@{Sim\+View\+State}!handle\+Mouse\+Right\+Press@{handle\+Mouse\+Right\+Press}}
+\index{handle\+Mouse\+Right\+Press@{handle\+Mouse\+Right\+Press}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{handle\+Mouse\+Right\+Press}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::handle\+Mouse\+Right\+Press (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view, }
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_ae19144be611a82cdeaf6fa14e51dd2b8}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_ac7f6e1d2e85c3ada328497a96e81f14a}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_e_p_a9865b939ec1f27b0769cc154fdecbb80}{Sim\+View\+State\+E\+P}, \hyperlink{class_sim_view_state_structure_a7a4160dd1a5f88e016baebc22b88e784}{Sim\+View\+State\+Structure}, and \hyperlink{class_sim_view_state_view_af9c7bbc4803aa9c735642bfd55621185}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_a12e4d1b637498ebc47cf1bc3d73e0f6f}{\index{Sim\+View\+State@{Sim\+View\+State}!handle\+Mousewheel@{handle\+Mousewheel}}
+\index{handle\+Mousewheel@{handle\+Mousewheel}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{handle\+Mousewheel}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::handle\+Mousewheel (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view, }
+\item[{Q\+Wheel\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_a12e4d1b637498ebc47cf1bc3d73e0f6f}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_a49bba5caf4d67fe1372fe2476d8cdd76}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_e_p_a4e12ee474236a13bd1ab0c44c69b4896}{Sim\+View\+State\+E\+P}, \hyperlink{class_sim_view_state_structure_a7bfa48da0a9cdccb8fa2ec06dda602ba}{Sim\+View\+State\+Structure}, and \hyperlink{class_sim_view_state_view_acf5a37a09255f9bade04d734eeca23b2}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_a837acc68609fe299ec477ebccbaab7b7}{\index{Sim\+View\+State@{Sim\+View\+State}!paint\+Cursor@{paint\+Cursor}}
+\index{paint\+Cursor@{paint\+Cursor}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{paint\+Cursor}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::paint\+Cursor (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_a837acc68609fe299ec477ebccbaab7b7}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_ab241942ec392bd039985dbc5762eb073}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_structure_adbea3b6c2714744bc0eebcd452bed40b}{Sim\+View\+State\+Structure}, \hyperlink{class_sim_view_state_e_p_a42cf30be08ad247c6e96494f69228b72}{Sim\+View\+State\+E\+P}, and \hyperlink{class_sim_view_state_view_af77472deee1b96ae0bbbe6f7e8e8e341}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_aaf43f6d62a2a9bc6c3e52adf0f56b166}{\index{Sim\+View\+State@{Sim\+View\+State}!paint\+Legend@{paint\+Legend}}
+\index{paint\+Legend@{paint\+Legend}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{paint\+Legend}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::paint\+Legend (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_aaf43f6d62a2a9bc6c3e52adf0f56b166}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_a98a24411d5567042c8812e0ca762b62d}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_structure_a6fa028f33f534b5bb311fa1640f491c4}{Sim\+View\+State\+Structure}, \hyperlink{class_sim_view_state_e_p_ac02b3a96c6cad6cab41ff668fb70db83}{Sim\+View\+State\+E\+P}, and \hyperlink{class_sim_view_state_view_a35f2631db7cf7f2299461a5042d5b5ff}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_a495ab39e6dfdf96cca95a16bb773fae5}{\index{Sim\+View\+State@{Sim\+View\+State}!paint\+Model@{paint\+Model}}
+\index{paint\+Model@{paint\+Model}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{paint\+Model}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::paint\+Model (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_a495ab39e6dfdf96cca95a16bb773fae5}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_abb9cbbba81242ac63e391ad38953bc2f}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_structure_a96d5263397b53a2639e1cc7b8b6b2c46}{Sim\+View\+State\+Structure}, \hyperlink{class_sim_view_state_e_p_a178f42d37a3195fc55344701779bdc39}{Sim\+View\+State\+E\+P}, and \hyperlink{class_sim_view_state_view_ac8c1e5d3136a8b14276a6c8b6a03065f}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_a4b4827ed55ec2cfd5b2ceb6c977425cf}{\index{Sim\+View\+State@{Sim\+View\+State}!paint\+Scale@{paint\+Scale}}
+\index{paint\+Scale@{paint\+Scale}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{paint\+Scale}]{\setlength{\rightskip}{0pt plus 5cm}void Sim\+View\+State\+::paint\+Scale (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{view}
+\end{DoxyParamCaption}
+)}}\label{class_sim_view_state_a4b4827ed55ec2cfd5b2ceb6c977425cf}
+\hypertarget{class_sim_view_state_a1ddc84529f91fceb9b96096639ba3aca}{\index{Sim\+View\+State@{Sim\+View\+State}!prepare\+Legend@{prepare\+Legend}}
+\index{prepare\+Legend@{prepare\+Legend}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{prepare\+Legend}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::prepare\+Legend (
+\begin{DoxyParamCaption}
+\item[{{\bf gl\+Atrium} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_a1ddc84529f91fceb9b96096639ba3aca}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_afc42be7984dd936f3be4abe614af0edd}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_structure_ad2d4accdf29279f0feaf94dc99824862}{Sim\+View\+State\+Structure}, \hyperlink{class_sim_view_state_e_p_a5783cc798a85d0633e4be298431eb310}{Sim\+View\+State\+E\+P}, and \hyperlink{class_sim_view_state_view_adb26e11e9aa29c2c72e9b013d35c3c8f}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_a974327508e13018d05da02b3bce08615}{\index{Sim\+View\+State@{Sim\+View\+State}!set\+Mode@{set\+Mode}}
+\index{set\+Mode@{set\+Mode}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{set\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::set\+Mode (
+\begin{DoxyParamCaption}
+\item[{const int}]{mode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_a974327508e13018d05da02b3bce08615}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_a399cf7a08f4c6dccaf350665a2c120df}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_e_p_aba966e899aefd372056a297b4b548617}{Sim\+View\+State\+E\+P}, \hyperlink{class_sim_view_state_structure_a3a90f8f41ff1383ca27d4b7684990979}{Sim\+View\+State\+Structure}, and \hyperlink{class_sim_view_state_view_a71335c51c957210f1bd6f697026c2de1}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_ab564f25312c081a619efd4e7619b68d1}{\index{Sim\+View\+State@{Sim\+View\+State}!set\+Outline\+Style@{set\+Outline\+Style}}
+\index{set\+Outline\+Style@{set\+Outline\+Style}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{set\+Outline\+Style}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sim\+View\+State\+::set\+Outline\+Style (
+\begin{DoxyParamCaption}
+\item[{const {\bf B\+R\+U\+S\+H\+\_\+\+O\+U\+T\+L\+I\+N\+E}}]{outline}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_sim_view_state_ab564f25312c081a619efd4e7619b68d1}
+
+
+Implemented in \hyperlink{class_sim_view_state_diffusion_ac5b42fac66fcba6d2e268d187c756578}{Sim\+View\+State\+Diffusion}, \hyperlink{class_sim_view_state_e_p_abb6fc8658ac934c2e89e73369545dcd1}{Sim\+View\+State\+E\+P}, \hyperlink{class_sim_view_state_structure_a058bfe5e7626fff59c1a329be9703283}{Sim\+View\+State\+Structure}, and \hyperlink{class_sim_view_state_view_a478f837eea498f64d56bac73856b1112}{Sim\+View\+State\+View}.
+
+\hypertarget{class_sim_view_state_a6f4914ea9b1dcdee9657d5d58b553a36}{\index{Sim\+View\+State@{Sim\+View\+State}!set\+Palette@{set\+Palette}}
+\index{set\+Palette@{set\+Palette}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{set\+Palette}]{\setlength{\rightskip}{0pt plus 5cm}void Sim\+View\+State\+::set\+Palette (
+\begin{DoxyParamCaption}
+\item[{const {\bf D\+I\+S\+P\+\_\+\+P\+A\+L\+E\+T\+T\+E}}]{pal}
+\end{DoxyParamCaption}
+)}}\label{class_sim_view_state_a6f4914ea9b1dcdee9657d5d58b553a36}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_sim_view_state_a81d972d69bb9faeadad77688cc1d8c41}{\index{Sim\+View\+State@{Sim\+View\+State}!\+\_\+cursor\+Pixmap@{\+\_\+cursor\+Pixmap}}
+\index{\+\_\+cursor\+Pixmap@{\+\_\+cursor\+Pixmap}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{\+\_\+cursor\+Pixmap}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Pixmap Sim\+View\+State\+::\+\_\+cursor\+Pixmap\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sim_view_state_a81d972d69bb9faeadad77688cc1d8c41}
+\hypertarget{class_sim_view_state_aeac9ae8a7ccf8c76c14c87eda4c3ebb7}{\index{Sim\+View\+State@{Sim\+View\+State}!\+\_\+quat@{\+\_\+quat}}
+\index{\+\_\+quat@{\+\_\+quat}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{\+\_\+quat}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Quaternion Sim\+View\+State\+::\+\_\+quat\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sim_view_state_aeac9ae8a7ccf8c76c14c87eda4c3ebb7}
+\hypertarget{class_sim_view_state_aac7dea4f3ebe5c8b8ef3bec00d375ee1}{\index{Sim\+View\+State@{Sim\+View\+State}!\+\_\+quat\+Start@{\+\_\+quat\+Start}}
+\index{\+\_\+quat\+Start@{\+\_\+quat\+Start}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{\+\_\+quat\+Start}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Quaternion Sim\+View\+State\+::\+\_\+quat\+Start\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sim_view_state_aac7dea4f3ebe5c8b8ef3bec00d375ee1}
+\hypertarget{class_sim_view_state_a51600cc462d6a280685873259d00afc8}{\index{Sim\+View\+State@{Sim\+View\+State}!\+\_\+scale@{\+\_\+scale}}
+\index{\+\_\+scale@{\+\_\+scale}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{\+\_\+scale}]{\setlength{\rightskip}{0pt plus 5cm}float Sim\+View\+State\+::\+\_\+scale\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sim_view_state_a51600cc462d6a280685873259d00afc8}
+\hypertarget{class_sim_view_state_ae589ccbf8ab7a064c2ea7d48d5c8bd24}{\index{Sim\+View\+State@{Sim\+View\+State}!color\+Map@{color\+Map}}
+\index{color\+Map@{color\+Map}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{color\+Map}]{\setlength{\rightskip}{0pt plus 5cm}void($\ast$ Sim\+View\+State\+::color\+Map)(G\+Lfloat \&v, const G\+Lfloat \&vmin, const G\+Lfloat \&vmax, G\+Lfloat \&rr, G\+Lfloat \&gg, G\+Lfloat \&bb)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sim_view_state_ae589ccbf8ab7a064c2ea7d48d5c8bd24}
+\hypertarget{class_sim_view_state_aa8c58229562ab48c746b601ee18c547f}{\index{Sim\+View\+State@{Sim\+View\+State}!cursor\+Radius@{cursor\+Radius}}
+\index{cursor\+Radius@{cursor\+Radius}!Sim\+View\+State@{Sim\+View\+State}}
+\subsubsection[{cursor\+Radius}]{\setlength{\rightskip}{0pt plus 5cm}double Sim\+View\+State\+::cursor\+Radius\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_sim_view_state_aa8c58229562ab48c746b601ee18c547f}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+View/\hyperlink{_sim_view_state_8h}{Sim\+View\+State.\+h}\item 
+View/\hyperlink{_sim_view_state_8cpp}{Sim\+View\+State.\+cpp}\end{DoxyCompactItemize}

@@ -40,7 +40,7 @@ public:
 	virtual void paintLegend(glAtrium*) = 0;
 	virtual void prepareLegend(glAtrium*) = 0;
 
-	virtual void setDisplayMode(const int mode) = 0;
+	virtual void setMode(const int mode) = 0;
 	virtual void setOutlineStyle(const  BRUSH_OUTLINE outline) = 0;
 	void setPalette(const DISP_PALETTE pal);
 	

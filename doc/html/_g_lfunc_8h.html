@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Simple Heart: GLfunc.h File Reference</title>
+<title>Simple Heart: View/GLfunc.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('_g_lfunc_8h.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -112,6 +112,8 @@ $(document).ready(function(){initNavTree('_g_lfunc_8h.html','');});
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_g_lcamera_8h_source.html">GLcamera.h</a>&quot;</code><br />
 <code>#include &lt;QtGui&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;Support\Vectors.h&quot;</code><br />
 </div>
 <p><a href="_g_lfunc_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -131,8 +133,8 @@ Functions</h2></td></tr>
 <tr class="separator:a4c049ee72792efa1f90a7445f3275e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4733a84e2fc93367a9ea01aaa926c10b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#a4733a84e2fc93367a9ea01aaa926c10b">paintCellPoint</a> (int CellsX, int CellsY, float deltaX, float deltaY, float colour1, float colour2, float colour3, float colour4, int palette)</td></tr>
 <tr class="separator:a4733a84e2fc93367a9ea01aaa926c10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74a8f4db298c8a354d62ab5f8449bb0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#a74a8f4db298c8a354d62ab5f8449bb0e">paintCellTriangle</a> (double &amp;x1, double &amp;y1, double &amp;z1, double color1, double &amp;x2, double &amp;y2, double &amp;z2, double color2, double &amp;x3, double &amp;y3, double &amp;z3, double color3, int palette)</td></tr>
-<tr class="separator:a74a8f4db298c8a354d62ab5f8449bb0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcaa3abafed8b1d13428d1185ec90158"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#adcaa3abafed8b1d13428d1185ec90158">paintCellTriangle</a> (double &amp;x1, double &amp;y1, double &amp;z1, double color1, double &amp;x2, double &amp;y2, double &amp;z2, double color2, double &amp;x3, double &amp;y3, double &amp;z3, double color3, int palette, const double &amp;vmin, const double &amp;vmax)</td></tr>
+<tr class="separator:adcaa3abafed8b1d13428d1185ec90158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7488fcc14badc528876d75ac0a02f08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#ad7488fcc14badc528876d75ac0a02f08">paintCellTriangleFull</a> (float x1, float y1, float z1, QColor color1, float x2, float y2, float z2, QColor color2, float x3, float y3, float z3, QColor color3)</td></tr>
 <tr class="separator:ad7488fcc14badc528876d75ac0a02f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca1ec173d6107f7aa871af5f8e22e09a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#aca1ec173d6107f7aa871af5f8e22e09a">paintPixel</a> (int CellsX, int CellsY, float deltaX, float deltaY, QColor colour)</td></tr>
@@ -147,8 +149,72 @@ Functions</h2></td></tr>
 <tr class="separator:a760ddd322067db6e7c27679e8d4af390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a306c59756ffdd5e758330dfb1fe7a190"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#a306c59756ffdd5e758330dfb1fe7a190">drawSphere</a> (double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb)</td></tr>
 <tr class="separator:a306c59756ffdd5e758330dfb1fe7a190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aa46aa0a5f9eaea7778e0b6b0a07fc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#a0aa46aa0a5f9eaea7778e0b6b0a07fc8">hotToColdMap</a> (GLfloat &amp;v, const GLfloat &amp;vmin, const GLfloat &amp;vmax, GLfloat &amp;rr, GLfloat &amp;gg, GLfloat &amp;bb)</td></tr>
+<tr class="separator:a0aa46aa0a5f9eaea7778e0b6b0a07fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb6b8c740812ede16a2e1db0fbed68da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#afb6b8c740812ede16a2e1db0fbed68da">hotMap</a> (GLfloat &amp;v, const GLfloat &amp;vmin, const GLfloat &amp;vmax, GLfloat &amp;rr, GLfloat &amp;gg, GLfloat &amp;bb)</td></tr>
+<tr class="separator:afb6b8c740812ede16a2e1db0fbed68da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1117366f19b48086b8639e932f2d27aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#a1117366f19b48086b8639e932f2d27aa">hotNlMap</a> (GLfloat &amp;v, const GLfloat &amp;vmin, const GLfloat &amp;vmax, GLfloat &amp;rr, GLfloat &amp;gg, GLfloat &amp;bb)</td></tr>
+<tr class="separator:a1117366f19b48086b8639e932f2d27aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36e8e86e1fdac361955e326350614094"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#a36e8e86e1fdac361955e326350614094">coldMap</a> (GLfloat &amp;v, const GLfloat &amp;vmin, const GLfloat &amp;vmax, GLfloat &amp;rr, GLfloat &amp;gg, GLfloat &amp;bb)</td></tr>
+<tr class="separator:a36e8e86e1fdac361955e326350614094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b9feb519826080165229786d316e4d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#a4b9feb519826080165229786d316e4d4">grayMap</a> (GLfloat &amp;v, const GLfloat &amp;vmin, const GLfloat &amp;vmax, GLfloat &amp;rr, GLfloat &amp;gg, GLfloat &amp;bb)</td></tr>
+<tr class="separator:a4b9feb519826080165229786d316e4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab372197b154d3b98d2d31a1fa8c08634"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#ab372197b154d3b98d2d31a1fa8c08634">get_arcball_vector</a> (double width, double height, int x, int y)</td></tr>
+<tr class="separator:ab372197b154d3b98d2d31a1fa8c08634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea8088a67d651fb7c6083bc9131b5f95"><td class="memItemLeft" align="right" valign="top">GLfloat *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_lfunc_8h.html#aea8088a67d651fb7c6083bc9131b5f95">quaternionToMatrix</a> (QQuaternion q, GLfloat *m)</td></tr>
+<tr class="separator:aea8088a67d651fb7c6083bc9131b5f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a36e8e86e1fdac361955e326350614094"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void coldMap </td>
+          <td>(</td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>rr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>gg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>bb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a306c59756ffdd5e758330dfb1fe7a190"></a>
 <div class="memitem">
 <div class="memproto">
@@ -205,6 +271,244 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>bb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab372197b154d3b98d2d31a1fa8c08634"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector3 get_arcball_vector </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4b9feb519826080165229786d316e4d4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void grayMap </td>
+          <td>(</td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>rr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>gg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>bb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afb6b8c740812ede16a2e1db0fbed68da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hotMap </td>
+          <td>(</td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>rr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>gg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>bb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1117366f19b48086b8639e932f2d27aa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hotNlMap </td>
+          <td>(</td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>rr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>gg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>bb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0aa46aa0a5f9eaea7778e0b6b0a07fc8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hotToColdMap </td>
+          <td>(</td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>vmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>rr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
+          <td class="paramname"><em>gg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat &amp;&#160;</td>
           <td class="paramname"><em>bb</em>&#160;</td>
         </tr>
         <tr>
@@ -433,7 +737,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a74a8f4db298c8a354d62ab5f8449bb0e"></a>
+<a class="anchor" id="adcaa3abafed8b1d13428d1185ec90158"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -513,7 +817,19 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>palette</em>&#160;</td>
+          <td class="paramname"><em>palette</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>vmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>vmax</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -851,6 +1167,32 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aea8088a67d651fb7c6083bc9131b5f95"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLfloat* quaternionToMatrix </td>
+          <td>(</td>
+          <td class="paramtype">QQuaternion&#160;</td>
+          <td class="paramname"><em>q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLfloat *&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="adb638195ebb714dd5a18934580a762eb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -894,8 +1236,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="_g_lfunc_8h.html">GLfunc.h</a></li>
-    <li class="footer">Generated on Mon Oct 20 2014 19:29:00 for Simple Heart by
+    <li class="navelem"><a class="el" href="dir_f2ee84e8e3a17eaa7015d788fa443c27.html">View</a></li><li class="navelem"><a class="el" href="_g_lfunc_8h.html">GLfunc.h</a></li>
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:01 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

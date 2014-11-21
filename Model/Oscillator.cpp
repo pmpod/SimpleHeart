@@ -287,3 +287,14 @@ void Oscillator::setType(CELL_TYPE type)
 {
 	m_type = type;
 }
+//---------------------------------------------------------------
+void Oscillator::setERP(double value)
+{
+
+
+
+}
+double Oscillator::getERP()
+{
+	return 1;
+}

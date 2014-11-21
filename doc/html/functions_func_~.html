@@ -81,6 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -131,7 +132,7 @@ $(document).ready(function(){initNavTree('functions_func_~.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -189,6 +190,9 @@ $(document).ready(function(){initNavTree('functions_func_~.html','');});
 <li>~Probe()
 : <a class="el" href="class_probe.html#a0bfeef911e78cd2ebc151da41a458f60">Probe</a>
 </li>
+<li>~ProbeElectrode()
+: <a class="el" href="class_probe_electrode.html#a00dcd3547df479ca0b932958b2f3936b">ProbeElectrode</a>
+</li>
 <li>~RandomGenerator()
 : <a class="el" href="class_random_generator.html#ada0252d5def711284f6b381a3aa85b6e">RandomGenerator</a>
 </li>
@@ -200,6 +204,21 @@ $(document).ready(function(){initNavTree('functions_func_~.html','');});
 </li>
 <li>~SimpleHeart()
 : <a class="el" href="class_simple_heart.html#ab592cf6c22fc8945190fb64454fc74c6">SimpleHeart</a>
+</li>
+<li>~SimViewState()
+: <a class="el" href="class_sim_view_state.html#a146b34bbbf4107030f0f19da24f45985">SimViewState</a>
+</li>
+<li>~SimViewStateDiffusion()
+: <a class="el" href="class_sim_view_state_diffusion.html#a0a9cd4ae5c64bbe8434d3c696eb7be4d">SimViewStateDiffusion</a>
+</li>
+<li>~SimViewStateEP()
+: <a class="el" href="class_sim_view_state_e_p.html#aa994e811ee4eb85f564f5bac5ff60042">SimViewStateEP</a>
+</li>
+<li>~SimViewStateStructure()
+: <a class="el" href="class_sim_view_state_structure.html#a9828433887b48e5c9970e722a2e6506d">SimViewStateStructure</a>
+</li>
+<li>~SimViewStateView()
+: <a class="el" href="class_sim_view_state_view.html#a53ee7dbb7b57ff9a11157530f724fc6c">SimViewStateView</a>
 </li>
 <li>~v3model()
 : <a class="el" href="classv3model.html#a78cbf845aa6ab504372a8710cad28f4b">v3model</a>
@@ -213,7 +232,7 @@ $(document).ready(function(){initNavTree('functions_func_~.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 20 2014 19:29:07 for Simple Heart by
+    <li class="footer">Generated on Fri Nov 21 2014 11:31:12 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

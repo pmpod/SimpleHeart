@@ -148,9 +148,9 @@ void SimpleHeart::init()
 
 	simpleParameters = new atrialParameters();
 	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
-	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
+	m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
 	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.375, 0.375, ATRIAL_V3);// 48 mm
-	m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.2, 0.2, ATRIAL_V3);// 40 mm
+	//m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm
 	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	//m_matrix = new DiffusionMatrix(m_grid);
@@ -220,17 +220,9 @@ void SimpleHeart::setupConnections()
 		QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentials[k], SLOT(clear()));
 	}
 
-//	QObject::connect(ui.sb_tau, SIGNAL(valueChanged(int)), Machine2d->m_definitions, SLOT(setTau(int)));
-//	QObject::connect(ui.sb_winSize, SIGNAL(valueChanged(int)), Machine2d->m_definitions, SLOT(setWindowSize(int)));
-//	QObject::connect(ui.sb_binSize, SIGNAL(valueChanged(double)), Machine2d->m_definitions, SLOT(setBinSize(double)));
-	
 
 	QObject::connect(ui.cb_saveBMP, SIGNAL(toggled()), this, SLOT(stopCalculation()));
 	QObject::connect(ui.cb_saveBMP, SIGNAL(toggled(bool)), this, SLOT(setBmpSaving(bool)));
-	QObject::connect(ui.sb_simPeriod, SIGNAL(valueChanged(double)), this, SLOT(setEctopicPeriodS1(double)));
-	QObject::connect(ui.cb_simPeriod, SIGNAL(toggled(bool)), this, SLOT(setEctopicModS1(bool)));
-	QObject::connect(ui.sb_simPeriod_2, SIGNAL(valueChanged(double)), this, SLOT(setEctopicPeriodS2(double)));
-	QObject::connect(ui.cb_simPeriod_2, SIGNAL(toggled(bool)), this, SLOT(setEctopicModS2(bool)));		
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(stopCalculation()));
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(setBmp()));
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(saveAsBmp()));
@@ -248,10 +240,36 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.rb_setDisplayPotentialMode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayPotential(bool)));
 	QObject::connect(ui.rb_setDisplayC1Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent1(bool)));
 	QObject::connect(ui.rb_setDisplayC2Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent2(bool)));
-	QObject::connect(ui.b_stateStructureModifier, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
-	QObject::connect(ui.b_diffPainting, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
-	QObject::connect(ui.b_stateViewer, SIGNAL(toggled(bool)), glGraph, SLOT(setStateViewer(bool)));
-	QObject::connect(ui.b_epStudy, SIGNAL(toggled(bool)), glGraph, SLOT(setStateEP(bool)));
+
+
+	QObject::connect(ui.mode_tab, SIGNAL(currentChanged(int)), this, SLOT(setState(int)));
+
+	QObject::connect(ui.b_setStateStructure, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
+	QObject::connect(ui.b_setStatePaintERP, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
+	QObject::connect(ui.b_setStatePaintConductivity, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
+
+
+	QObject::connect(ui.b_setStatePaintERP, SIGNAL(toggled(bool)), this, SLOT(setPaintERP(bool)));
+	QObject::connect(ui.b_setStatePaintConductivity, SIGNAL(toggled(bool)), this, SLOT(setPaintConductivity(bool)));
+
+	QObject::connect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+	QObject::connect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+	QObject::connect(ui.b_clearDiffusion, SIGNAL(clicked()), this, SLOT(paintUniform()));
+
+	QObject::connect(ui.b_freeTouchMode, SIGNAL(toggled(bool)), this, SLOT(setFreeTouch(bool)));
+/*
+	QObject::connect(ui.b_pacingModeFree, SIGNAL(toggled(bool)), glGraph, SLOT(setStateViewer(bool)));
+	QObject::connect(ui.b_pacingModeCycle, SIGNAL(toggled(bool)), glGraph, SLOT(setStateEP(bool)));
+	QObject::connect(ui.b_pacingModeSensing, SIGNAL(toggled(bool)), glGraph, SLOT(setStateEP(bool)));
+	QObject::connect(ui.b_pacingModeFixed SIGNAL(toggled(bool)), glGraph, SLOT(setStateEP(bool)));
+	QObject::connect(ui.b_epStudy, SIGNAL(toggled(bool)), glGraph, SLOT(setStateEP(bool)));*/
+	
+
+//	QObject::connect(ui.b_diffPainting, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
+//	QObject::connect(ui.b_stateViewer, SIGNAL(toggled(bool)), glGraph, SLOT(setStateViewer(bool)));
+//	QObject::connect(ui.b_epStudy, SIGNAL(toggled(bool)), glGraph, SLOT(setStateEP(bool)));
+
+
 	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), glGraph, SLOT(displayElectrogram()));
 	QObject::connect(ui.rb_setOutlineGauss, SIGNAL(toggled(bool)), glGraph, SLOT(setOutlineGauss(bool)));
 	QObject::connect(ui.rb_setOutlineUniform, SIGNAL(toggled(bool)), glGraph, SLOT(setOutlineUniform(bool)));
@@ -265,18 +283,12 @@ void SimpleHeart::setupConnections()
 //---------------------INDICATOR CONNECTIONS ------------------------------------------
 	QObject::connect(this, SIGNAL(emitGlobalTimeOnly(double)), ui.lcd_time, SLOT(display(double)));
 
-	QObject::connect(ui.b_setDiffusion, SIGNAL(clicked()), this, SLOT(stopCalculation()));
-	QObject::connect(ui.b_setDiffusion, SIGNAL(clicked()), this, SLOT(setAtrialDiffusion()));
-	QObject::connect(ui.b_saveDiffusion, SIGNAL(clicked()), m_ioHandler, SLOT(saveDiffusionToFile()));
-	QObject::connect(ui.b_loadDiffusion, SIGNAL(clicked()), m_ioHandler, SLOT(readDiffusionFromFile()));
-	QObject::connect(ui.b_clearDiffusion, SIGNAL(clicked()), this, SLOT(resetDiffusion()));
 
 	//QObject::connect(ui.rb_paintDiffusion, SIGNAL(toggled(bool)), diffusionPainter, SLOT(setCurrentPainter_Diffusion()));
 	//QObject::connect(ui.rb_paintAnisotrophy, SIGNAL(toggled(bool)), diffusionPainter, SLOT(setCurrentPainter_Anisotrophy()));
 	
 	//QObject::connect(ui.dial_diffSizeN, SIGNAL(valueChanged(int)), diffusionPainter, SLOT(setSigma(int)));
 	//QObject::connect(ui.dial_diffValueN, SIGNAL(valueChanged(int)), diffusionPainter, SLOT(setAmplitude(int)));
-	QObject::connect(ui.m_refSlider, SIGNAL(valueChanged(int)), this, SLOT(setAtrialRestitution(int)));
 
 
 	QObject::connect(ui.actionO_programie, SIGNAL(activated()), msgBoxAbout, SLOT(exec()));
@@ -284,16 +296,6 @@ void SimpleHeart::setupConnections()
 
 		
 	QObject::connect(ui.actionSettings, SIGNAL(activated()), this, SLOT(openSettings()));
-	QObject::connect(ui.actionSet_Default_Settings, SIGNAL(activated()), this, SLOT(stopCalculation()));
-	QObject::connect(ui.actionSet_Default_Settings, SIGNAL(activated()), m_ioHandler, SLOT(getDefaultParameters()));
-
-	QObject::connect(this->ui.b_setStructure, SIGNAL(clicked()), this, SLOT(stopCalculation()));
-	QObject::connect(this->ui.b_setStructure, SIGNAL(clicked()), this, SLOT(setAtrialStructure()));
-	
-	QObject::connect(this->ui.b_stimPoint, SIGNAL(clicked()), this, SLOT(setEctopicPoint()));
-	QObject::connect(this->ui.b_stimHorizontal, SIGNAL(clicked()), this, SLOT(setEctopicHoriz()));
-	QObject::connect(this->ui.b_stimVert, SIGNAL(clicked()), this, SLOT(setEctopicVert()));
-
 
 //---------------------GRAPH CONNECTIONS -------------------------------------------
 	//QObject::connect(diffusionPainter, SIGNAL(positionElektrode(int, int,int)), this, SLOT(setProbeElectrode(int,int,int)));
@@ -301,10 +303,6 @@ void SimpleHeart::setupConnections()
 	{
 		QObject::connect(Machine2d->probeOscillator[k], SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
 	}
-	QObject::connect(ui.rb_probe1, SIGNAL(toggled(bool)), this, SLOT(switchElectrode()));
-	QObject::connect(ui.rb_probe2, SIGNAL(toggled(bool)), this, SLOT(switchElectrode()));
-	QObject::connect(ui.rb_probe3, SIGNAL(toggled(bool)), this, SLOT(switchElectrode()));	
-
 	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
 	{
 		QObject::connect(Machine2d->probeOscillator[k], SIGNAL(clicked()), plotRR[k], SLOT(appendRR(double)));
@@ -358,7 +356,137 @@ void SimpleHeart::setupConnections()
 
 
 }
+void SimpleHeart::paintUniform()
+{
+	if (!QMessageBox::question(
+		this,
+		tr("Simple Heart"),
+		tr("Do you want to make current painting uniform?"),
+		tr("&Yes"), tr("&No"),
+		QString::null, 0, 1))
+	{
 
+		if (ui.b_setStatePaintConductivity->isChecked())
+		{
+			Machine2d->setUniformDiffusion(glGraph->paintValueDiffusion);
+
+		}
+		else if (ui.b_setStatePaintERP->isChecked())
+		{
+			Machine2d->setUniformERP(glGraph->paintValueERP);
+		}
+	}
+
+}
+
+
+
+void SimpleHeart::setPaintERP(bool b)
+{
+	if (b)
+	{
+		QObject::disconnect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+		QObject::disconnect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+		glGraph->setPaintERP(b);
+		ui.sb_paintValue->setMaximum(m_grid->maxERP);
+		ui.sb_paintValue->setMinimum(m_grid->minERP);
+		ui.sb_paintValue->setValue(glGraph->paintValueERP);
+		ui.l_maxPaintValue->setText(QString::number(m_grid->maxERP));
+		ui.l_minPaintValue->setText(QString::number(m_grid->minERP));
+
+		int val = floor(ui.dial_paintValue->maximum() * (glGraph->paintValueERP - m_grid->minERP) / (m_grid->maxERP - m_grid->minERP));
+		ui.dial_paintValue->setValue(val);
+		QObject::connect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+		QObject::connect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+	}
+
+}
+void SimpleHeart::setPaintConductivity(bool b)
+{
+	if (b)
+	{
+		QObject::disconnect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+		QObject::disconnect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+		glGraph->setPaintConductivity(b);
+		ui.sb_paintValue->setMaximum(m_grid->maxDiffusion);
+		ui.sb_paintValue->setMinimum(m_grid->minDiffusion);
+		ui.sb_paintValue->setValue(glGraph->paintValueDiffusion);
+		ui.l_maxPaintValue->setText(QString::number(m_grid->maxDiffusion));
+		ui.l_minPaintValue->setText(QString::number(m_grid->minDiffusion));
+		
+		int val = floor(ui.dial_paintValue->maximum() * (glGraph->paintValueDiffusion - m_grid->minDiffusion) / (m_grid->maxDiffusion - m_grid->minDiffusion));
+		ui.dial_paintValue->setValue(val);
+		QObject::connect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+		QObject::connect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+	}
+
+}
+void SimpleHeart::setPaintValue(int val)
+{
+	QObject::disconnect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+	if (ui.b_setStatePaintConductivity->isChecked())
+	{
+		double setval = (static_cast<double>(val) / ui.dial_paintValue->maximum())* (m_grid->maxDiffusion - m_grid->minDiffusion) + m_grid->minDiffusion;
+		ui.sb_paintValue->setValue(setval);
+		glGraph->paintValueDiffusion = setval;
+
+	}
+	else if (ui.b_setStatePaintERP->isChecked())
+	{
+		double setval = (static_cast<double>(val) / ui.dial_paintValue->maximum())* (m_grid->maxERP - m_grid->minERP) + m_grid->minERP;
+		ui.sb_paintValue->setValue(setval);
+		glGraph->paintValueERP = setval;
+	}
+	QObject::connect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+}
+void SimpleHeart::setPaintValue(double val)
+{
+	QObject::disconnect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+	if (ui.b_setStatePaintConductivity->isChecked())
+	{
+		glGraph->paintValueDiffusion = val;
+		int setval = floor(ui.dial_paintValue->maximum() * (glGraph->paintValueDiffusion - m_grid->minDiffusion) / (m_grid->maxDiffusion - m_grid->minDiffusion));
+
+		ui.dial_paintValue->setValue(setval);
+	}
+	else if (ui.b_setStatePaintERP->isChecked())
+	{
+		glGraph->paintValueERP = val;
+		int setval = floor(ui.dial_paintValue->maximum() * (glGraph->paintValueDiffusion - m_grid->minERP) / (m_grid->maxERP - m_grid->minERP));
+		ui.dial_paintValue->setValue(setval);
+	}
+	QObject::connect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+}
+void SimpleHeart::setFreeTouch(bool val)
+{
+	if (val)
+	{
+		glGraph->setStateViewer(true);
+
+	}
+	else
+	{
+		glGraph->setStateEP(true);
+	}
+
+}
+void SimpleHeart::setState(int val)
+{
+	switch (val)
+	{
+	case 0:
+		glGraph->setStateEP(true);
+		ui.b_freeTouchMode->setChecked(false);
+		break;
+	case 1:
+		glGraph->setStateDiffusionModifier(true);
+		ui.b_setStateStructure->setChecked(false);
+		ui.b_setStatePaintConductivity->setChecked(true);
+		setPaintConductivity(true);
+		break;
+	}
+
+}
 void SimpleHeart::setEctopicPoint()
 {
 	Machine2d->m_definitions->m_ectopicSizeX = 3;
@@ -646,7 +774,6 @@ void SimpleHeart::setAtrialRestitution(int value)
 	//Machine2d->setAtriumV3multi(static_cast<double>(((100-value)))/static_cast<double>(100));
 	
 	//Machine2d->setAtriumGlobalNi(static_cast<double>(((100-value)))/static_cast<double>(1000));
-	ui.m_refraction->setValue(value);
 }
 //-------------------------------------------------------------------------
 void SimpleHeart::setBmpSaving(bool t)
@@ -746,48 +873,7 @@ void SimpleHeart::setAtrialStructure()
 //	 m_ioHandler->getParametersFromFile();
 }
 
-//--------------------------------------------------------------
-void SimpleHeart::switchElectrode()
-{
-	if(ui.rb_probe1->isChecked())
-	{
-		diffusionPainter->setCurrentPainter_Selector();
-		diffusionPainter->currentMoover=0;
-	}
-	else if(ui.rb_probe2->isChecked())
-	{
-		diffusionPainter->setCurrentPainter_Selector();
-		diffusionPainter->currentMoover=1;
-	}
-	else if(ui.rb_probe3->isChecked())
-	{
-		diffusionPainter->setCurrentPainter_Selector();
-		diffusionPainter->currentMoover=2;
-	}
-	else
-	{
-		diffusionPainter->setCurrentPainter_Diffusion();
-	}
-}
-void SimpleHeart::setProbeElectrode(int electrode,int id_y ,int id_x)
-{
-	//if(electrode == 0 ) 	QObject::disconnect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
-	//else if(electrode == 1 ) 	QObject::disconnect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
-	//else if(electrode == 2) 	QObject::disconnect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
 
-	////int ii = static_cast<double> (j % gridWidth);
-	////int jj = floor(static_cast<double>(j) / static_cast<double>(gridWidth));
-	////Machine2d->probeOscillator[electrode] = Machine2d->m_oscillators[id_y][id_x];
-
-	//Machine2d->probeOscillator[electrode] = m_grid->m_mesh[id_y + m_grid->getSize()*id_x];
-	//	//Machine2d->m_oscillators[id_y][id_x];
-
-	//if(electrode == 0 ) QObject::connect( Machine2d->probeOscillator[0], SIGNAL(newPotentialTime(double,double)),plotPotentialE1, SLOT(addValue_e1(double,double)));
-	//else if(electrode == 1 ) QObject::connect( Machine2d->probeOscillator[1], SIGNAL(newPotentialTime(double,double)),plotPotentialE2, SLOT(addValue_e2(double,double)));
-	//else if(electrode == 2) QObject::connect( Machine2d->probeOscillator[2], SIGNAL(newPotentialTime(double,double)),plotPotentialE3, SLOT(addValue_e3(double,double)));
-
-	//glGraph->updateGL();
-}
 void SimpleHeart::setTimerInterval(double ms)
 {
     d_interval = qRound(ms);

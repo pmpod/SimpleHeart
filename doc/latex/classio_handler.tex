@@ -14,19 +14,17 @@ Inheritance diagram for io\+Handler\+:\begin{figure}[H]
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
+bool \hyperlink{classio_handler_af01b41a00277e41d62d4d80fd6fe39f7}{save\+Current\+Structure} ()
+\item 
+bool \hyperlink{classio_handler_a1382429c5838d6eab8195967e9c11678}{load\+Current\+State} ()
+\item 
+\hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$ \hyperlink{classio_handler_aabe0f6cb21a1c374fd020ff42d5c9904}{load\+Custom\+Structure} ()
+\item 
+bool \hyperlink{classio_handler_a59e5cd8377c13643181d9b6caef839db}{save\+Current\+State} ()
+\item 
 void \hyperlink{classio_handler_a472e8932c9769f3a577d11ea7c0e224d}{save\+As\+Bmp} ()
 \item 
 void \hyperlink{classio_handler_a8b295df2cd4f85f178935c310f6dad34}{set\+Bmp} ()
-\item 
-void \hyperlink{classio_handler_a91de29843e2894a8b778de65a557562a}{save\+Structure\+To\+File} ()
-\item 
-void \hyperlink{classio_handler_a436429bf34fe5f838137ffd536e6859b}{read\+Structure\+From\+File} ()
-\item 
-void \hyperlink{classio_handler_a8e799f96c1e1056d5c59f621945a64c6}{read\+Structure\+From\+File} (int type)
-\item 
-void \hyperlink{classio_handler_a8e39ebabd54b939c91b8d70bc7234e8c}{save\+Diffusion\+To\+File} ()
-\item 
-void \hyperlink{classio_handler_ab23bb54a388784e6397575fdb5e1a836}{read\+Diffusion\+From\+File} ()
 \item 
 void \hyperlink{classio_handler_a0549d597c8da9195fd764044cb4c5a63}{write\+Parameters\+To\+File} ()
 \item 
@@ -49,11 +47,15 @@ void \hyperlink{classio_handler_a2de36fdfa99f28b20c6fe1b2069b75ad}{save\+R\+R\+P
 \item 
 \hyperlink{classio_handler_a030878327dcdc71c410e2b3184538aed}{$\sim$io\+Handler} (void)
 \item 
+{\footnotesize template$<$class Ttype $>$ }\\matvar\+\_\+t $\ast$ \hyperlink{classio_handler_a217721cec0dfbacc3b564bfaa4cc7b8b}{read\+Mat\+Variable} (const char $\ast$varname, mat\+\_\+t $\ast$matfp, Ttype $\ast$\&outvar)
+\item 
+mat\+\_\+t $\ast$ \hyperlink{classio_handler_a98fa0fabd78d5c31b4949806ac40400d}{init\+Matlab\+Load} (const char $\ast$inname)
+\item 
+string \hyperlink{classio_handler_aaf8038bd0ff5a184504cf4622411fd51}{file\+Prefix} ()
+\item 
 string \hyperlink{classio_handler_a7d65ecb912b15cbeff8ecaa3f3a33f7b}{int\+To\+Str} (int n)
 \item 
 int \hyperlink{classio_handler_a24088c5418729764793ad2ff055d4de8}{str\+To\+Int} (string s)
-\item 
-string \hyperlink{classio_handler_aaf8038bd0ff5a184504cf4622411fd51}{file\+Prefix} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -111,6 +113,13 @@ ofstream \hyperlink{classio_handler_a3dde6edac5ac86c95b1651faafd8b418}{backup\+P
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a32fc5c3861951f75c7ffbf62ed44e3e3}
+\hypertarget{classio_handler_a98fa0fabd78d5c31b4949806ac40400d}{\index{io\+Handler@{io\+Handler}!init\+Matlab\+Load@{init\+Matlab\+Load}}
+\index{init\+Matlab\+Load@{init\+Matlab\+Load}!io\+Handler@{io\+Handler}}
+\subsubsection[{init\+Matlab\+Load}]{\setlength{\rightskip}{0pt plus 5cm}mat\+\_\+t $\ast$ io\+Handler\+::init\+Matlab\+Load (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{inname}
+\end{DoxyParamCaption}
+)}}\label{classio_handler_a98fa0fabd78d5c31b4949806ac40400d}
 \hypertarget{classio_handler_a7d65ecb912b15cbeff8ecaa3f3a33f7b}{\index{io\+Handler@{io\+Handler}!int\+To\+Str@{int\+To\+Str}}
 \index{int\+To\+Str@{int\+To\+Str}!io\+Handler@{io\+Handler}}
 \subsubsection[{int\+To\+Str}]{\setlength{\rightskip}{0pt plus 5cm}string io\+Handler\+::int\+To\+Str (
@@ -118,27 +127,29 @@ ofstream \hyperlink{classio_handler_a3dde6edac5ac86c95b1651faafd8b418}{backup\+P
 \item[{int}]{n}
 \end{DoxyParamCaption}
 )}}\label{classio_handler_a7d65ecb912b15cbeff8ecaa3f3a33f7b}
-\hypertarget{classio_handler_ab23bb54a388784e6397575fdb5e1a836}{\index{io\+Handler@{io\+Handler}!read\+Diffusion\+From\+File@{read\+Diffusion\+From\+File}}
-\index{read\+Diffusion\+From\+File@{read\+Diffusion\+From\+File}!io\+Handler@{io\+Handler}}
-\subsubsection[{read\+Diffusion\+From\+File}]{\setlength{\rightskip}{0pt plus 5cm}void io\+Handler\+::read\+Diffusion\+From\+File (
+\hypertarget{classio_handler_a1382429c5838d6eab8195967e9c11678}{\index{io\+Handler@{io\+Handler}!load\+Current\+State@{load\+Current\+State}}
+\index{load\+Current\+State@{load\+Current\+State}!io\+Handler@{io\+Handler}}
+\subsubsection[{load\+Current\+State}]{\setlength{\rightskip}{0pt plus 5cm}bool io\+Handler\+::load\+Current\+State (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_ab23bb54a388784e6397575fdb5e1a836}
-\hypertarget{classio_handler_a436429bf34fe5f838137ffd536e6859b}{\index{io\+Handler@{io\+Handler}!read\+Structure\+From\+File@{read\+Structure\+From\+File}}
-\index{read\+Structure\+From\+File@{read\+Structure\+From\+File}!io\+Handler@{io\+Handler}}
-\subsubsection[{read\+Structure\+From\+File}]{\setlength{\rightskip}{0pt plus 5cm}void io\+Handler\+::read\+Structure\+From\+File (
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a1382429c5838d6eab8195967e9c11678}
+\hypertarget{classio_handler_aabe0f6cb21a1c374fd020ff42d5c9904}{\index{io\+Handler@{io\+Handler}!load\+Custom\+Structure@{load\+Custom\+Structure}}
+\index{load\+Custom\+Structure@{load\+Custom\+Structure}!io\+Handler@{io\+Handler}}
+\subsubsection[{load\+Custom\+Structure}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cardiac\+Mesh} $\ast$ io\+Handler\+::load\+Custom\+Structure (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a436429bf34fe5f838137ffd536e6859b}
-\hypertarget{classio_handler_a8e799f96c1e1056d5c59f621945a64c6}{\index{io\+Handler@{io\+Handler}!read\+Structure\+From\+File@{read\+Structure\+From\+File}}
-\index{read\+Structure\+From\+File@{read\+Structure\+From\+File}!io\+Handler@{io\+Handler}}
-\subsubsection[{read\+Structure\+From\+File}]{\setlength{\rightskip}{0pt plus 5cm}void io\+Handler\+::read\+Structure\+From\+File (
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_aabe0f6cb21a1c374fd020ff42d5c9904}
+\hypertarget{classio_handler_a217721cec0dfbacc3b564bfaa4cc7b8b}{\index{io\+Handler@{io\+Handler}!read\+Mat\+Variable@{read\+Mat\+Variable}}
+\index{read\+Mat\+Variable@{read\+Mat\+Variable}!io\+Handler@{io\+Handler}}
+\subsubsection[{read\+Mat\+Variable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Ttype $>$ matvar\+\_\+t $\ast$ io\+Handler\+::read\+Mat\+Variable (
 \begin{DoxyParamCaption}
-\item[{int}]{type}
+\item[{const char $\ast$}]{varname, }
+\item[{mat\+\_\+t $\ast$}]{matfp, }
+\item[{Ttype $\ast$\&}]{outvar}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a8e799f96c1e1056d5c59f621945a64c6}
+)}}\label{classio_handler_a217721cec0dfbacc3b564bfaa4cc7b8b}
 \hypertarget{classio_handler_a472e8932c9769f3a577d11ea7c0e224d}{\index{io\+Handler@{io\+Handler}!save\+As\+Bmp@{save\+As\+Bmp}}
 \index{save\+As\+Bmp@{save\+As\+Bmp}!io\+Handler@{io\+Handler}}
 \subsubsection[{save\+As\+Bmp}]{\setlength{\rightskip}{0pt plus 5cm}void io\+Handler\+::save\+As\+Bmp (
@@ -146,13 +157,20 @@ ofstream \hyperlink{classio_handler_a3dde6edac5ac86c95b1651faafd8b418}{backup\+P
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a472e8932c9769f3a577d11ea7c0e224d}
-\hypertarget{classio_handler_a8e39ebabd54b939c91b8d70bc7234e8c}{\index{io\+Handler@{io\+Handler}!save\+Diffusion\+To\+File@{save\+Diffusion\+To\+File}}
-\index{save\+Diffusion\+To\+File@{save\+Diffusion\+To\+File}!io\+Handler@{io\+Handler}}
-\subsubsection[{save\+Diffusion\+To\+File}]{\setlength{\rightskip}{0pt plus 5cm}void io\+Handler\+::save\+Diffusion\+To\+File (
+\hypertarget{classio_handler_a59e5cd8377c13643181d9b6caef839db}{\index{io\+Handler@{io\+Handler}!save\+Current\+State@{save\+Current\+State}}
+\index{save\+Current\+State@{save\+Current\+State}!io\+Handler@{io\+Handler}}
+\subsubsection[{save\+Current\+State}]{\setlength{\rightskip}{0pt plus 5cm}bool io\+Handler\+::save\+Current\+State (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a8e39ebabd54b939c91b8d70bc7234e8c}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a59e5cd8377c13643181d9b6caef839db}
+\hypertarget{classio_handler_af01b41a00277e41d62d4d80fd6fe39f7}{\index{io\+Handler@{io\+Handler}!save\+Current\+Structure@{save\+Current\+Structure}}
+\index{save\+Current\+Structure@{save\+Current\+Structure}!io\+Handler@{io\+Handler}}
+\subsubsection[{save\+Current\+Structure}]{\setlength{\rightskip}{0pt plus 5cm}bool io\+Handler\+::save\+Current\+Structure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_af01b41a00277e41d62d4d80fd6fe39f7}
 \hypertarget{classio_handler_a3ce2a07edc23ff12d084e64b85416954}{\index{io\+Handler@{io\+Handler}!save\+Potential\+Plot@{save\+Potential\+Plot}}
 \index{save\+Potential\+Plot@{save\+Potential\+Plot}!io\+Handler@{io\+Handler}}
 \subsubsection[{save\+Potential\+Plot}]{\setlength{\rightskip}{0pt plus 5cm}void io\+Handler\+::save\+Potential\+Plot (
@@ -181,14 +199,7 @@ T\+O\+D\+O -\/ save log here also \hypertarget{classio_handler_a2de36fdfa99f28b2
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a2de36fdfa99f28b20c6fe1b2069b75ad}
-T\+O\+D\+O -\/ save log here also \hypertarget{classio_handler_a91de29843e2894a8b778de65a557562a}{\index{io\+Handler@{io\+Handler}!save\+Structure\+To\+File@{save\+Structure\+To\+File}}
-\index{save\+Structure\+To\+File@{save\+Structure\+To\+File}!io\+Handler@{io\+Handler}}
-\subsubsection[{save\+Structure\+To\+File}]{\setlength{\rightskip}{0pt plus 5cm}void io\+Handler\+::save\+Structure\+To\+File (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classio_handler_a91de29843e2894a8b778de65a557562a}
-\hypertarget{classio_handler_a8b295df2cd4f85f178935c310f6dad34}{\index{io\+Handler@{io\+Handler}!set\+Bmp@{set\+Bmp}}
+T\+O\+D\+O -\/ save log here also \hypertarget{classio_handler_a8b295df2cd4f85f178935c310f6dad34}{\index{io\+Handler@{io\+Handler}!set\+Bmp@{set\+Bmp}}
 \index{set\+Bmp@{set\+Bmp}!io\+Handler@{io\+Handler}}
 \subsubsection[{set\+Bmp}]{\setlength{\rightskip}{0pt plus 5cm}void io\+Handler\+::set\+Bmp (
 \begin{DoxyParamCaption}

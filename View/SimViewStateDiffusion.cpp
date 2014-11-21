@@ -1,11 +1,11 @@
 #include "View\SimViewStateDiffusion.h"
 #include "View\glAtrium.h"
 
+#define SRPAY_PRESSURE 15
 double gaussFunction(double y, double mean, double sigma)
 {
 	double norm = 1 / sqrt(2 * 3.14) * sigma;
 	double expon = exp((-pow((y - mean), 2)) / (2 * pow(sigma, 2)));
-
 	return norm*expon;
 }
 
@@ -14,13 +14,15 @@ SimViewStateDiffusion* SimViewStateDiffusion::_instance = nullptr;
 SimViewStateDiffusion::SimViewStateDiffusion()
 {
 	cursorRadius = 3.0;
-	setPalette(DP_COLD);
+	setPalette(DP_HOT);
 
 	_gaussSigma = 3.0;
-	_maxDiffusion =0.05;
-	_minDiffusion =0.0;
-	_paintValue = 0.01;
+
 	_outline = BRUSH_GAUSS;
+	_whatToPaint = 0;
+
+	_diffPaintingStrengthValue = 0.5;
+	_ERPpaintingStrengthValue = 100;
 }
 SimViewStateDiffusion::~SimViewStateDiffusion()
 {
@@ -35,13 +37,17 @@ SimViewState* SimViewStateDiffusion::Instance()
 
 }
 //--------------------------------------------------
-void SimViewStateDiffusion::setDisplayMode(const int mode)
+void SimViewStateDiffusion::setMode(const int mode)
 {
-
+	_whatToPaint = mode;
 }
 //--------------------------------------------------
 void SimViewStateDiffusion::paintCursor(glAtrium* view)
 {
+
+	_diffPaintingStrengthValue = view->linkToMesh->maxDiffusion - view->linkToMesh->minDiffusion;
+	_ERPpaintingStrengthValue = view->linkToMesh->maxERP - view->linkToMesh->minERP;
+
 	int crossSize = 5;
 	int sizepix = floor(abs(cursorRadius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
 
@@ -144,9 +150,19 @@ void SimViewStateDiffusion::paintModel(glAtrium* view)
 	{
 		if (oscs[currentVertex]->m_type != SOLID_WALL)
 		{
-			val = oscs[currentVertex]->m_sigmaX;
 
-			colorMap(val, _minDiffusion, _maxDiffusion, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
+			 if (_whatToPaint == 0) //diffusion
+			{
+				val = oscs[currentVertex]->m_sigmaX;
+				colorMap(val, msh->minDiffusion, msh->maxDiffusion, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
+
+			}
+			else if (_whatToPaint == 1) //diffusion
+			{
+				val = oscs[currentVertex]->getERP();
+				colorMap(val, msh->minERP, msh->maxERP, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
+				//TODO fix max/min values;
+			}
 		}
 		else
 		{
@@ -186,7 +202,7 @@ void SimViewStateDiffusion::setOutlineStyle(const  BRUSH_OUTLINE outline)
 	_outline = outline;
 }
 //--------------------------------------------------
-void SimViewStateDiffusion::paintDiffusionInRadius(Oscillator* src, Oscillator* osc)
+void SimViewStateDiffusion::paintDiffusionInRadius(Oscillator* src, Oscillator* osc, double value)
 {
 	m_isPaintedMap[osc->oscillatorID] = true;
 	
@@ -199,38 +215,59 @@ void SimViewStateDiffusion::paintDiffusionInRadius(Oscillator* src, Oscillator* 
 
 		if (distance <= cursorRadius*2 && !(m_isPaintedMap[osc->m_neighbours[k]->oscillatorID]))
 		{
-			paintDiffusionInRadius(src, osc->m_neighbours[k]);
+			paintDiffusionInRadius(src, osc->m_neighbours[k], value);
 		}
 	}
 
-	double val = osc->m_sigmaX;
-	double valsign = (_paintValue >= osc->m_sigmaX) ? +1.0 : -1.0;
 	distance = sqrt(std::pow((src->m_x - osc->m_x), 2) +
 		std::pow((src->m_y - osc->m_y), 2) +
 		std::pow((src->m_z - osc->m_z), 2));
-	switch (_outline)
+
+	if (_whatToPaint == 0) //diffusion
 	{
-	case BRUSH_GAUSS:
-		val += valsign* gaussFunction(distance, 0, cursorRadius/2) / (cursorRadius*100.0);
-		if (valsign * val >= valsign *_paintValue) val = _paintValue;
-		break;
-	case BRUSH_UNI:
-		if (distance <= cursorRadius) 
-			val = _paintValue;
 
+		double val = osc->m_sigmaX;
+		double valsign = (value >= osc->m_sigmaX) ? +1.0 : -1.0;
+		switch (_outline)
+		{
+		case BRUSH_GAUSS:
+			val += valsign* _diffPaintingStrengthValue*gaussFunction(distance, 0, cursorRadius / 2) / SRPAY_PRESSURE;
+			if (valsign * val >= valsign *value) val = value;
+			break;
+		case BRUSH_UNI:
+			if (distance <= cursorRadius)
+				val = value;
+
+		}
+		osc->setSigma(val, val, val);
 	}
+	else if (_whatToPaint == 1) //ERP
+	{
+		double val = osc->getERP();
+		double valsign = (value >= val) ? +1.0 : -1.0;
+		switch (_outline)
+		{
+		case BRUSH_GAUSS:
+			val += valsign*_ERPpaintingStrengthValue*gaussFunction(distance, 0, cursorRadius / 2) / SRPAY_PRESSURE;
+			if (valsign * val >= valsign *value) val = value;
+			break;
+		case BRUSH_UNI:
+			if (distance <= cursorRadius)
+				val = value;
+		}
 
-	osc->setSigma(val, val, val);
+		osc->setERP(val);
+	}
 }
 //--------------------------------------------------
 void SimViewStateDiffusion::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 {
-	_paintValue = 0.01;
-	handleMouseMove(view, event);
+	for (int k = 0; k < SRPAY_PRESSURE /2; ++k)
+		handleMouseMove(view, event);
+	
 }
 void SimViewStateDiffusion::handleMouseRightPress(glAtrium* view, QMouseEvent *event)
 {
-	_paintValue = 0.05;
 	handleMouseMove(view, event);
 }
 void SimViewStateDiffusion::handleMouseRelease(glAtrium* view, QMouseEvent *event)
@@ -255,7 +292,7 @@ void SimViewStateDiffusion::handleMousewheel(glAtrium* view, QWheelEvent *event)
 }
 void SimViewStateDiffusion::handleMouseMove(glAtrium* view, QMouseEvent *event)
 {
-	if ((event->buttons()))
+	if ((event->buttons() == Qt::LeftButton))
 	{
 		double 	y = event->pos().y();
 		double 	x = event->pos().x();
@@ -272,13 +309,27 @@ void SimViewStateDiffusion::handleMouseMove(glAtrium* view, QMouseEvent *event)
 			view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
 
 
-
-			//view->linkToMesh->structureUpdated = true;
-			paintDiffusionInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item]);
+			if (_whatToPaint == 0) //DIFF
+				paintDiffusionInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], view->paintValueDiffusion);
+			else if (_whatToPaint == 1) //ERP
+		
+				paintDiffusionInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], view->paintValueERP);
 		}
 
 		view->lastPos = event->pos();
 		m_isPaintedMap.clear();
+	}
+	else if ((event->buttons() == Qt::RightButton))
+	{
+		double 	y = event->pos().y();
+		double delta = (y - view->lastPos.y());
+		if (delta > 0)
+			view->distanceToCamera -= view->zoomingSpeed/40.0f;
+		else
+			view->distanceToCamera += view->zoomingSpeed /40.0f;
+		paintCursor(view);
+		view->setLastPos(event->pos());
+
 	}
 	view->updateGL();
 }

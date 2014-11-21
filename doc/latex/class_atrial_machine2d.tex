@@ -14,15 +14,19 @@ Inheritance diagram for Atrial\+Machine2d\+:\begin{figure}[H]
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{class_atrial_machine2d_ac298c084be8e7a01ec02bbdaea49c493}{process\+Step} ()
-\item 
-void \hyperlink{class_atrial_machine2d_a23d7a0f70a9ddda7dfffc13df9c9964a}{set\+Diffusion\+Coefficients} ()
-\item 
-void \hyperlink{class_atrial_machine2d_a75d9bb70add513fe3bed06c714842bff}{edit\+Diffusion\+Coefficients} ()
+double \hyperlink{class_atrial_machine2d_a2a59d6433bd614ff51bc07227210b2e8}{process\+Step} ()
 \item 
 void \hyperlink{class_atrial_machine2d_a3c509a3d7d9da2b758caa7347bb3ea78}{reset} ()
 \item 
+void \hyperlink{class_atrial_machine2d_a9a600c1251eae56fe59c4188f1735a0b}{calculate\+Full\+Electrogram\+Map} ()
+\item 
 void \hyperlink{class_atrial_machine2d_a5e5d865f2142795acca445437cc2346d}{set\+Skip} (int skip)
+\item 
+void \hyperlink{class_atrial_machine2d_a2bc748b9fda32f5efe515474df2c85e6}{set\+Uniform\+Diffusion} (double value)
+\item 
+void \hyperlink{class_atrial_machine2d_a4edba6c43406c28e00e90acd0d8a1f1d}{set\+S1\+\_\+\+Duration} (double val)
+\item 
+void \hyperlink{class_atrial_machine2d_adda0c3f022e32b53d89f42b440336cd0}{set\+S1\+\_\+\+Cycle} (double val)
 \item 
 void \hyperlink{class_atrial_machine2d_abc84bef4b3b1a84a4959e820dea21fc3}{set\+Global\+Time} (double t)
 \item 
@@ -33,15 +37,9 @@ void \hyperlink{class_atrial_machine2d_afeca8099f6767e7850ba1bd305dc9ed7}{set\+E
 \item 
 void \hyperlink{class_atrial_machine2d_aa0503c0b65de1d0a3353fa60001b7c7b}{step\+Finished} ()
 \item 
-void \hyperlink{class_atrial_machine2d_a6fd0e30ef398add561290bda4a8c7e1d}{current\+Hormonal\+Activity} (double, double)
-\item 
-void \hyperlink{class_atrial_machine2d_a5bc4b4d189faff85b485a0275a160a71}{emit\+Global\+Time\+Only} (double)
-\item 
 void \hyperlink{class_atrial_machine2d_ab95917c203cf726da282efcfb26241a3}{current\+Oscilator\+Potential} (double, double)
 \item 
 void \hyperlink{class_atrial_machine2d_a8a2f2c40ae228ee8a2cf6f7457acfd28}{current\+Oscilator\+Potential\+\_\+tab} (double $\ast$)
-\item 
-void \hyperlink{class_atrial_machine2d_a3c9c12d7d363a0a715a5d5f24aa075c8}{emit\+Debug} (double)
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -50,28 +48,18 @@ void \hyperlink{class_atrial_machine2d_a3c9c12d7d363a0a715a5d5f24aa075c8}{emit\+
 \item 
 \hyperlink{class_atrial_machine2d_a955b6614307d86c8d9e196a3b7ce2434}{$\sim$\+Atrial\+Machine2d} (void)
 \item 
-void \hyperlink{class_atrial_machine2d_a22a0e5a3d07859721cce24ed253932ed}{init} ()
-\item 
-void \hyperlink{class_atrial_machine2d_a80f97d261da5f2ca116592b07455425a}{set\+Atrium} (\hyperlink{classatrial_parameters}{atrial\+Parameters} $\ast$definitions, \hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$grid)
-\item 
 void \hyperlink{class_atrial_machine2d_a40366613671e5856d0c3cd0572398dc1}{delete\+Atrium} ()
 \item 
-double \hyperlink{class_atrial_machine2d_a9cd5c318f2021169ee6a28ca27ff6924}{Euler} (double t, double y\mbox{[}$\,$\mbox{]}, double h, double y0, \hyperlink{class_oscillator}{Oscillator} $\ast$osc)
+void \hyperlink{class_atrial_machine2d_a22a0e5a3d07859721cce24ed253932ed}{init} ()
 \item 
-double \hyperlink{class_atrial_machine2d_a2d181080d4da8598ce58dc29d3ee707a}{Runge\+\_\+\+Kutta} (double $\ast$y, double x, double h, \hyperlink{class_oscillator}{Oscillator} $\ast$osc)
+void \hyperlink{class_atrial_machine2d_ab4833c86a56f23867915d876fac581e0}{set\+Forward\+Euler\+Strategy} ()
 \item 
-double \hyperlink{class_atrial_machine2d_af35ca9286dbe3f236b31ddd84f9d25e4}{Dufort\+Frankl} (double t, double y\mbox{[}$\,$\mbox{]}, double h, double y0, \hyperlink{class_oscillator}{Oscillator} $\ast$osc)
-\item 
-double \hyperlink{class_atrial_machine2d_afb0f7ee5a1efa0f20b1f3c145927374a}{determine\+Next\+Timestep\+\_\+\+Method2b} (\hyperlink{class_oscillator}{Oscillator} $\ast$osc)
-\item 
-double \hyperlink{class_atrial_machine2d_ad0cfe6a11b68c40c8db51da0a4ccb4cb}{guard\+Cell\+Update} (\hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$grid)
-\item 
-void \hyperlink{class_atrial_machine2d_aac348bf7321fae9fe7d8265f36e9d1e6}{process\+Forward\+Euler} ()
-\item 
-void \hyperlink{class_atrial_machine2d_aab1d925f08bbf319b374f6d2b879878b}{set\+Algorithm} (\hyperlink{heart_defines_8h_ae0e356ca8deebb30aca0cd91e0cbd46c}{S\+W\+\_\+\+A\+L\+G\+O\+R\+I\+T\+H\+M\+S} type)
+void \hyperlink{class_atrial_machine2d_af808c57f5af0c0c26aadcf4c812cb21f}{set\+Allexandre\+Strategy} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
+\item 
+void(Atrial\+Machine2d\+::$\ast$ \hyperlink{class_atrial_machine2d_aaeb0690b1fbd433bd0c25f2162b7b4bb}{set\+Strategy} )()
 \item 
 bool \hyperlink{class_atrial_machine2d_a784a6fb0c363c6858e992957279a28ea}{m\+\_\+hormonal\+Toggle}
 \item 
@@ -79,26 +67,7 @@ bool \hyperlink{class_atrial_machine2d_a784a6fb0c363c6858e992957279a28ea}{m\+\_\
 \item 
 \hyperlink{class_random_generator}{Random\+Generator} \hyperlink{class_atrial_machine2d_a4ee41f8430aca76d5c6411cd37c92d38}{generator}
 \item 
-\hyperlink{class_r_rcalculator}{R\+Rcalculator} $\ast$ \hyperlink{class_atrial_machine2d_ace665fff3f0583d9d1e285f4775adfa6}{R\+Rcalc\+\_\+1}
-\item 
-\hyperlink{class_r_rcalculator}{R\+Rcalculator} $\ast$ \hyperlink{class_atrial_machine2d_a34b1581457faa0fec1579cf51a187598}{R\+Rcalc\+\_\+2}
-\item 
-\hyperlink{class_r_rcalculator}{R\+Rcalculator} $\ast$ \hyperlink{class_atrial_machine2d_a0bcbe6368dd8bb0eb66efaafc5a4dbfb}{R\+Rcalc\+\_\+3}
-\item 
-\hyperlink{class_r_rcalculator}{R\+Rcalculator} $\ast$ \hyperlink{class_atrial_machine2d_aa2ede01ca50864789c112cca567c1444}{R\+Rcalc\+\_\+4}
-\item 
-\hyperlink{class_oscillator}{Oscillator} $\ast$ \hyperlink{class_atrial_machine2d_ae73cbdaac9845bd587afefab6c8c94fa}{probe\+R\+R\+\_\+4}
-\item 
-std\+::vector$<$ \hyperlink{class_oscillator}{Oscillator} $\ast$ $>$ \hyperlink{class_atrial_machine2d_a0f0e192be32cbbfa3f327cfe6e174f5e}{probe\+Oscillator}
-\item 
-std\+::vector$<$ std\+::vector\\*
-$<$ double $>$ $>$ \hyperlink{class_atrial_machine2d_a13e43c0cfd52339dac5ac7ed5a88a88a}{m\+\_\+diffusion\+Coefficients}
-\item 
-std\+::vector$<$ std\+::vector\\*
-$<$ double $>$ $>$ \hyperlink{class_atrial_machine2d_abd24f8eb85fef1ffa94d910e1a87dda8}{m\+\_\+anisotrophy\+Coefficients}
-\item 
-std\+::vector$<$ std\+::pair\\*
-$<$ \hyperlink{class_oscillator}{Oscillator} $\ast$, \hyperlink{class_oscillator}{Oscillator} $\ast$ $>$ $>$ \hyperlink{class_atrial_machine2d_aea2f8cb631c24f1dbec8859d50a7918f}{m\+\_\+wall\+Cells}
+std\+::vector$<$ \hyperlink{class_probe_electrode}{Probe\+Electrode} $\ast$ $>$ \hyperlink{class_atrial_machine2d_a524fc9fd5d07a9f6f93611ee7839c99c}{probe\+Oscillator}
 \item 
 \hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$ \hyperlink{class_atrial_machine2d_ae5a4568a32980b04648791e7ac5e3249}{m\+\_\+grid}
 \item 
@@ -108,29 +77,7 @@ double \hyperlink{class_atrial_machine2d_a951f2f5f1bee9505ee93df61121bf5d2}{m\+\
 \item 
 int \hyperlink{class_atrial_machine2d_a08a7d022fbd6733e52775651b5f139dc}{m\+\_\+skip}
 \item 
-double \hyperlink{class_atrial_machine2d_a792a54d1811f886bf93f9546aac0120f}{m\+\_\+main\+Timestep}
-\item 
-double \hyperlink{class_atrial_machine2d_aa279d4e4ab1193bb6c358541d52424ff}{next\+Timestep}
-\item 
-double \hyperlink{class_atrial_machine2d_a8f3931073e39c8c188d5ca65631b704b}{next\+Time}
-\item 
-double \hyperlink{class_atrial_machine2d_a50c29aa024f47633087f27e0f70607cf}{next\+Potential}
-\item 
-double \hyperlink{class_atrial_machine2d_ae037f3658a7c3f9af7e05cd19a0a94b7}{next\+Current} \mbox{[}3\mbox{]}
-\item 
-double \hyperlink{class_atrial_machine2d_af93ce7ff7615bf27467eb765623c720c}{m\+\_\+initial\+\_\+v}
-\item 
-double \hyperlink{class_atrial_machine2d_a5ff92394b2f3e615b7c36c8adf7286d6}{m\+\_\+initial\+\_\+c}
-\item 
-double \hyperlink{class_atrial_machine2d_a14baf4c478ff64494b38eee78955a472}{m\+\_\+initial\+\_\+c\+\_\+2}
-\item 
-int \hyperlink{class_atrial_machine2d_a74ecd78d3016ae5a6a5c6004aa43ad96}{m\+\_\+which\+Flag}
-\item 
-int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+stimulation\+I\+D}
-\item 
-\hyperlink{heart_defines_8h_a2e6f185296f039d4680b50804849b9d9}{H\+E\+A\+R\+T\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N} \hyperlink{class_atrial_machine2d_a15d1c77b3cd28c073e221905f4cc6493}{current\+Function}
-\item 
-\hyperlink{heart_defines_8h_ae0e356ca8deebb30aca0cd91e0cbd46c}{S\+W\+\_\+\+A\+L\+G\+O\+R\+I\+T\+H\+M\+S} \hyperlink{class_atrial_machine2d_a57773395f154207dbbac601624586559}{current\+Algorithm}
+bool \hyperlink{class_atrial_machine2d_a9d4b451c3384c6cac71bd06662e30b55}{structure\+Updated}
 \end{DoxyCompactItemize}
 
 
@@ -153,14 +100,13 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 
 
 \subsection{Member Function Documentation}
-\hypertarget{class_atrial_machine2d_a6fd0e30ef398add561290bda4a8c7e1d}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!current\+Hormonal\+Activity@{current\+Hormonal\+Activity}}
-\index{current\+Hormonal\+Activity@{current\+Hormonal\+Activity}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{current\+Hormonal\+Activity}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::current\+Hormonal\+Activity (
+\hypertarget{class_atrial_machine2d_a9a600c1251eae56fe59c4188f1735a0b}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!calculate\+Full\+Electrogram\+Map@{calculate\+Full\+Electrogram\+Map}}
+\index{calculate\+Full\+Electrogram\+Map@{calculate\+Full\+Electrogram\+Map}!Atrial\+Machine2d@{Atrial\+Machine2d}}
+\subsubsection[{calculate\+Full\+Electrogram\+Map}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::calculate\+Full\+Electrogram\+Map (
 \begin{DoxyParamCaption}
-\item[{double}]{, }
-\item[{double}]{}
+{}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_atrial_machine2d_a6fd0e30ef398add561290bda4a8c7e1d}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_a9a600c1251eae56fe59c4188f1735a0b}
 \hypertarget{class_atrial_machine2d_ab95917c203cf726da282efcfb26241a3}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!current\+Oscilator\+Potential@{current\+Oscilator\+Potential}}
 \index{current\+Oscilator\+Potential@{current\+Oscilator\+Potential}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{current\+Oscilator\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::current\+Oscilator\+Potential (
@@ -183,63 +129,6 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 {}
 \end{DoxyParamCaption}
 )}}\label{class_atrial_machine2d_a40366613671e5856d0c3cd0572398dc1}
-\hypertarget{class_atrial_machine2d_afb0f7ee5a1efa0f20b1f3c145927374a}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!determine\+Next\+Timestep\+\_\+\+Method2b@{determine\+Next\+Timestep\+\_\+\+Method2b}}
-\index{determine\+Next\+Timestep\+\_\+\+Method2b@{determine\+Next\+Timestep\+\_\+\+Method2b}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{determine\+Next\+Timestep\+\_\+\+Method2b}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::determine\+Next\+Timestep\+\_\+\+Method2b (
-\begin{DoxyParamCaption}
-\item[{{\bf Oscillator} $\ast$}]{osc}
-\end{DoxyParamCaption}
-)}}\label{class_atrial_machine2d_afb0f7ee5a1efa0f20b1f3c145927374a}
-\hypertarget{class_atrial_machine2d_af35ca9286dbe3f236b31ddd84f9d25e4}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!Dufort\+Frankl@{Dufort\+Frankl}}
-\index{Dufort\+Frankl@{Dufort\+Frankl}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{Dufort\+Frankl}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::\+Dufort\+Frankl (
-\begin{DoxyParamCaption}
-\item[{double}]{t, }
-\item[{double}]{y\mbox{[}$\,$\mbox{]}, }
-\item[{double}]{h, }
-\item[{double}]{y0, }
-\item[{{\bf Oscillator} $\ast$}]{osc}
-\end{DoxyParamCaption}
-)}}\label{class_atrial_machine2d_af35ca9286dbe3f236b31ddd84f9d25e4}
-\hypertarget{class_atrial_machine2d_a75d9bb70add513fe3bed06c714842bff}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!edit\+Diffusion\+Coefficients@{edit\+Diffusion\+Coefficients}}
-\index{edit\+Diffusion\+Coefficients@{edit\+Diffusion\+Coefficients}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{edit\+Diffusion\+Coefficients}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::edit\+Diffusion\+Coefficients (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_a75d9bb70add513fe3bed06c714842bff}
-\hypertarget{class_atrial_machine2d_a3c9c12d7d363a0a715a5d5f24aa075c8}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!emit\+Debug@{emit\+Debug}}
-\index{emit\+Debug@{emit\+Debug}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{emit\+Debug}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::emit\+Debug (
-\begin{DoxyParamCaption}
-\item[{double}]{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_atrial_machine2d_a3c9c12d7d363a0a715a5d5f24aa075c8}
-\hypertarget{class_atrial_machine2d_a5bc4b4d189faff85b485a0275a160a71}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!emit\+Global\+Time\+Only@{emit\+Global\+Time\+Only}}
-\index{emit\+Global\+Time\+Only@{emit\+Global\+Time\+Only}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{emit\+Global\+Time\+Only}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::emit\+Global\+Time\+Only (
-\begin{DoxyParamCaption}
-\item[{double}]{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_atrial_machine2d_a5bc4b4d189faff85b485a0275a160a71}
-\hypertarget{class_atrial_machine2d_a9cd5c318f2021169ee6a28ca27ff6924}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!Euler@{Euler}}
-\index{Euler@{Euler}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{Euler}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::\+Euler (
-\begin{DoxyParamCaption}
-\item[{double}]{t, }
-\item[{double}]{y\mbox{[}$\,$\mbox{]}, }
-\item[{double}]{h, }
-\item[{double}]{y0, }
-\item[{{\bf Oscillator} $\ast$}]{osc}
-\end{DoxyParamCaption}
-)}}\label{class_atrial_machine2d_a9cd5c318f2021169ee6a28ca27ff6924}
-\hypertarget{class_atrial_machine2d_ad0cfe6a11b68c40c8db51da0a4ccb4cb}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!guard\+Cell\+Update@{guard\+Cell\+Update}}
-\index{guard\+Cell\+Update@{guard\+Cell\+Update}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{guard\+Cell\+Update}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::guard\+Cell\+Update (
-\begin{DoxyParamCaption}
-\item[{{\bf Cardiac\+Mesh} $\ast$}]{grid}
-\end{DoxyParamCaption}
-)}}\label{class_atrial_machine2d_ad0cfe6a11b68c40c8db51da0a4ccb4cb}
 \hypertarget{class_atrial_machine2d_a22a0e5a3d07859721cce24ed253932ed}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!init@{init}}
 \index{init@{init}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::init (
@@ -247,20 +136,13 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 {}
 \end{DoxyParamCaption}
 )}}\label{class_atrial_machine2d_a22a0e5a3d07859721cce24ed253932ed}
-\hypertarget{class_atrial_machine2d_aac348bf7321fae9fe7d8265f36e9d1e6}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!process\+Forward\+Euler@{process\+Forward\+Euler}}
-\index{process\+Forward\+Euler@{process\+Forward\+Euler}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{process\+Forward\+Euler}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::process\+Forward\+Euler (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{class_atrial_machine2d_aac348bf7321fae9fe7d8265f36e9d1e6}
-\hypertarget{class_atrial_machine2d_ac298c084be8e7a01ec02bbdaea49c493}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!process\+Step@{process\+Step}}
+\hypertarget{class_atrial_machine2d_a2a59d6433bd614ff51bc07227210b2e8}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!process\+Step@{process\+Step}}
 \index{process\+Step@{process\+Step}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{process\+Step}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::process\+Step (
+\subsubsection[{process\+Step}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::process\+Step (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_ac298c084be8e7a01ec02bbdaea49c493}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_a2a59d6433bd614ff51bc07227210b2e8}
 \hypertarget{class_atrial_machine2d_a3c509a3d7d9da2b758caa7347bb3ea78}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!reset@{reset}}
 \index{reset@{reset}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::reset (
@@ -268,38 +150,13 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_a3c509a3d7d9da2b758caa7347bb3ea78}
-\hypertarget{class_atrial_machine2d_a2d181080d4da8598ce58dc29d3ee707a}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!Runge\+\_\+\+Kutta@{Runge\+\_\+\+Kutta}}
-\index{Runge\+\_\+\+Kutta@{Runge\+\_\+\+Kutta}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{Runge\+\_\+\+Kutta}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::\+Runge\+\_\+\+Kutta (
-\begin{DoxyParamCaption}
-\item[{double $\ast$}]{y, }
-\item[{double}]{x, }
-\item[{double}]{h, }
-\item[{{\bf Oscillator} $\ast$}]{osc}
-\end{DoxyParamCaption}
-)}}\label{class_atrial_machine2d_a2d181080d4da8598ce58dc29d3ee707a}
-\hypertarget{class_atrial_machine2d_aab1d925f08bbf319b374f6d2b879878b}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Algorithm@{set\+Algorithm}}
-\index{set\+Algorithm@{set\+Algorithm}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{set\+Algorithm}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Algorithm (
-\begin{DoxyParamCaption}
-\item[{{\bf S\+W\+\_\+\+A\+L\+G\+O\+R\+I\+T\+H\+M\+S}}]{type}
-\end{DoxyParamCaption}
-)}}\label{class_atrial_machine2d_aab1d925f08bbf319b374f6d2b879878b}
-\hypertarget{class_atrial_machine2d_a80f97d261da5f2ca116592b07455425a}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Atrium@{set\+Atrium}}
-\index{set\+Atrium@{set\+Atrium}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{set\+Atrium}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Atrium (
-\begin{DoxyParamCaption}
-\item[{{\bf atrial\+Parameters} $\ast$}]{definitions, }
-\item[{{\bf Cardiac\+Mesh} $\ast$}]{grid}
-\end{DoxyParamCaption}
-)}}\label{class_atrial_machine2d_a80f97d261da5f2ca116592b07455425a}
-\hypertarget{class_atrial_machine2d_a23d7a0f70a9ddda7dfffc13df9c9964a}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Diffusion\+Coefficients@{set\+Diffusion\+Coefficients}}
-\index{set\+Diffusion\+Coefficients@{set\+Diffusion\+Coefficients}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{set\+Diffusion\+Coefficients}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Diffusion\+Coefficients (
+\hypertarget{class_atrial_machine2d_af808c57f5af0c0c26aadcf4c812cb21f}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Allexandre\+Strategy@{set\+Allexandre\+Strategy}}
+\index{set\+Allexandre\+Strategy@{set\+Allexandre\+Strategy}!Atrial\+Machine2d@{Atrial\+Machine2d}}
+\subsubsection[{set\+Allexandre\+Strategy}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Allexandre\+Strategy (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_a23d7a0f70a9ddda7dfffc13df9c9964a}
+)}}\label{class_atrial_machine2d_af808c57f5af0c0c26aadcf4c812cb21f}
 \hypertarget{class_atrial_machine2d_afeca8099f6767e7850ba1bd305dc9ed7}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Ecto\+Mod\+Time@{set\+Ecto\+Mod\+Time}}
 \index{set\+Ecto\+Mod\+Time@{set\+Ecto\+Mod\+Time}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{set\+Ecto\+Mod\+Time}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Ecto\+Mod\+Time (
@@ -307,6 +164,13 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_afeca8099f6767e7850ba1bd305dc9ed7}
+\hypertarget{class_atrial_machine2d_ab4833c86a56f23867915d876fac581e0}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Forward\+Euler\+Strategy@{set\+Forward\+Euler\+Strategy}}
+\index{set\+Forward\+Euler\+Strategy@{set\+Forward\+Euler\+Strategy}!Atrial\+Machine2d@{Atrial\+Machine2d}}
+\subsubsection[{set\+Forward\+Euler\+Strategy}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Forward\+Euler\+Strategy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_atrial_machine2d_ab4833c86a56f23867915d876fac581e0}
 \hypertarget{class_atrial_machine2d_abc84bef4b3b1a84a4959e820dea21fc3}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Global\+Time@{set\+Global\+Time}}
 \index{set\+Global\+Time@{set\+Global\+Time}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{set\+Global\+Time}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Global\+Time (
@@ -314,6 +178,20 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 \item[{double}]{t}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_abc84bef4b3b1a84a4959e820dea21fc3}
+\hypertarget{class_atrial_machine2d_adda0c3f022e32b53d89f42b440336cd0}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+S1\+\_\+\+Cycle@{set\+S1\+\_\+\+Cycle}}
+\index{set\+S1\+\_\+\+Cycle@{set\+S1\+\_\+\+Cycle}!Atrial\+Machine2d@{Atrial\+Machine2d}}
+\subsubsection[{set\+S1\+\_\+\+Cycle}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+S1\+\_\+\+Cycle (
+\begin{DoxyParamCaption}
+\item[{double}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_adda0c3f022e32b53d89f42b440336cd0}
+\hypertarget{class_atrial_machine2d_a4edba6c43406c28e00e90acd0d8a1f1d}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+S1\+\_\+\+Duration@{set\+S1\+\_\+\+Duration}}
+\index{set\+S1\+\_\+\+Duration@{set\+S1\+\_\+\+Duration}!Atrial\+Machine2d@{Atrial\+Machine2d}}
+\subsubsection[{set\+S1\+\_\+\+Duration}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+S1\+\_\+\+Duration (
+\begin{DoxyParamCaption}
+\item[{double}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_a4edba6c43406c28e00e90acd0d8a1f1d}
 \hypertarget{class_atrial_machine2d_a5e5d865f2142795acca445437cc2346d}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Skip@{set\+Skip}}
 \index{set\+Skip@{set\+Skip}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{set\+Skip}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Skip (
@@ -321,6 +199,13 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 \item[{int}]{skip}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_a5e5d865f2142795acca445437cc2346d}
+\hypertarget{class_atrial_machine2d_a2bc748b9fda32f5efe515474df2c85e6}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Uniform\+Diffusion@{set\+Uniform\+Diffusion}}
+\index{set\+Uniform\+Diffusion@{set\+Uniform\+Diffusion}!Atrial\+Machine2d@{Atrial\+Machine2d}}
+\subsubsection[{set\+Uniform\+Diffusion}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::set\+Uniform\+Diffusion (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_atrial_machine2d_a2bc748b9fda32f5efe515474df2c85e6}
 \hypertarget{class_atrial_machine2d_aa0503c0b65de1d0a3353fa60001b7c7b}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!step\+Finished@{step\+Finished}}
 \index{step\+Finished@{step\+Finished}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{step\+Finished}]{\setlength{\rightskip}{0pt plus 5cm}void Atrial\+Machine2d\+::step\+Finished (
@@ -331,24 +216,12 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 
 
 \subsection{Member Data Documentation}
-\hypertarget{class_atrial_machine2d_a57773395f154207dbbac601624586559}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!current\+Algorithm@{current\+Algorithm}}
-\index{current\+Algorithm@{current\+Algorithm}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{current\+Algorithm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\+W\+\_\+\+A\+L\+G\+O\+R\+I\+T\+H\+M\+S} Atrial\+Machine2d\+::current\+Algorithm}}\label{class_atrial_machine2d_a57773395f154207dbbac601624586559}
-\hypertarget{class_atrial_machine2d_a15d1c77b3cd28c073e221905f4cc6493}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!current\+Function@{current\+Function}}
-\index{current\+Function@{current\+Function}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{current\+Function}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+E\+A\+R\+T\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N} Atrial\+Machine2d\+::current\+Function}}\label{class_atrial_machine2d_a15d1c77b3cd28c073e221905f4cc6493}
 \hypertarget{class_atrial_machine2d_a4ee41f8430aca76d5c6411cd37c92d38}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!generator@{generator}}
 \index{generator@{generator}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{generator}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Random\+Generator} Atrial\+Machine2d\+::generator}}\label{class_atrial_machine2d_a4ee41f8430aca76d5c6411cd37c92d38}
-\hypertarget{class_atrial_machine2d_abd24f8eb85fef1ffa94d910e1a87dda8}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+anisotrophy\+Coefficients@{m\+\_\+anisotrophy\+Coefficients}}
-\index{m\+\_\+anisotrophy\+Coefficients@{m\+\_\+anisotrophy\+Coefficients}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+anisotrophy\+Coefficients}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::vector$<$double$>$ $>$ Atrial\+Machine2d\+::m\+\_\+anisotrophy\+Coefficients}}\label{class_atrial_machine2d_abd24f8eb85fef1ffa94d910e1a87dda8}
 \hypertarget{class_atrial_machine2d_aeafb998f5621fb19749014161d7d600d}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+definitions@{m\+\_\+definitions}}
 \index{m\+\_\+definitions@{m\+\_\+definitions}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{m\+\_\+definitions}]{\setlength{\rightskip}{0pt plus 5cm}{\bf atrial\+Parameters}$\ast$ Atrial\+Machine2d\+::m\+\_\+definitions}}\label{class_atrial_machine2d_aeafb998f5621fb19749014161d7d600d}
-\hypertarget{class_atrial_machine2d_a13e43c0cfd52339dac5ac7ed5a88a88a}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+diffusion\+Coefficients@{m\+\_\+diffusion\+Coefficients}}
-\index{m\+\_\+diffusion\+Coefficients@{m\+\_\+diffusion\+Coefficients}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+diffusion\+Coefficients}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::vector$<$double$>$ $>$ Atrial\+Machine2d\+::m\+\_\+diffusion\+Coefficients}}\label{class_atrial_machine2d_a13e43c0cfd52339dac5ac7ed5a88a88a}
 \hypertarget{class_atrial_machine2d_a951f2f5f1bee9505ee93df61121bf5d2}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+global\+Time@{m\+\_\+global\+Time}}
 \index{m\+\_\+global\+Time@{m\+\_\+global\+Time}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{m\+\_\+global\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::m\+\_\+global\+Time}}\label{class_atrial_machine2d_a951f2f5f1bee9505ee93df61121bf5d2}
@@ -358,63 +231,21 @@ int \hyperlink{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{m\+\_\+
 \hypertarget{class_atrial_machine2d_a784a6fb0c363c6858e992957279a28ea}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+hormonal\+Toggle@{m\+\_\+hormonal\+Toggle}}
 \index{m\+\_\+hormonal\+Toggle@{m\+\_\+hormonal\+Toggle}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{m\+\_\+hormonal\+Toggle}]{\setlength{\rightskip}{0pt plus 5cm}bool Atrial\+Machine2d\+::m\+\_\+hormonal\+Toggle}}\label{class_atrial_machine2d_a784a6fb0c363c6858e992957279a28ea}
-\hypertarget{class_atrial_machine2d_a5ff92394b2f3e615b7c36c8adf7286d6}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+initial\+\_\+c@{m\+\_\+initial\+\_\+c}}
-\index{m\+\_\+initial\+\_\+c@{m\+\_\+initial\+\_\+c}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+initial\+\_\+c}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::m\+\_\+initial\+\_\+c}}\label{class_atrial_machine2d_a5ff92394b2f3e615b7c36c8adf7286d6}
-\hypertarget{class_atrial_machine2d_a14baf4c478ff64494b38eee78955a472}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+initial\+\_\+c\+\_\+2@{m\+\_\+initial\+\_\+c\+\_\+2}}
-\index{m\+\_\+initial\+\_\+c\+\_\+2@{m\+\_\+initial\+\_\+c\+\_\+2}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+initial\+\_\+c\+\_\+2}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::m\+\_\+initial\+\_\+c\+\_\+2}}\label{class_atrial_machine2d_a14baf4c478ff64494b38eee78955a472}
-\hypertarget{class_atrial_machine2d_af93ce7ff7615bf27467eb765623c720c}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+initial\+\_\+v@{m\+\_\+initial\+\_\+v}}
-\index{m\+\_\+initial\+\_\+v@{m\+\_\+initial\+\_\+v}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+initial\+\_\+v}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::m\+\_\+initial\+\_\+v}}\label{class_atrial_machine2d_af93ce7ff7615bf27467eb765623c720c}
-\hypertarget{class_atrial_machine2d_a792a54d1811f886bf93f9546aac0120f}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+main\+Timestep@{m\+\_\+main\+Timestep}}
-\index{m\+\_\+main\+Timestep@{m\+\_\+main\+Timestep}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+main\+Timestep}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::m\+\_\+main\+Timestep}}\label{class_atrial_machine2d_a792a54d1811f886bf93f9546aac0120f}
 \hypertarget{class_atrial_machine2d_a08a7d022fbd6733e52775651b5f139dc}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+skip@{m\+\_\+skip}}
 \index{m\+\_\+skip@{m\+\_\+skip}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{m\+\_\+skip}]{\setlength{\rightskip}{0pt plus 5cm}int Atrial\+Machine2d\+::m\+\_\+skip}}\label{class_atrial_machine2d_a08a7d022fbd6733e52775651b5f139dc}
-\hypertarget{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+stimulation\+I\+D@{m\+\_\+stimulation\+I\+D}}
-\index{m\+\_\+stimulation\+I\+D@{m\+\_\+stimulation\+I\+D}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+stimulation\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}int Atrial\+Machine2d\+::m\+\_\+stimulation\+I\+D}}\label{class_atrial_machine2d_ae73fef18f9b4e2d46689756b1478e025}
 \hypertarget{class_atrial_machine2d_afa218ce1cafcf45895c0317953b97977}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+strategy@{m\+\_\+strategy}}
 \index{m\+\_\+strategy@{m\+\_\+strategy}!Atrial\+Machine2d@{Atrial\+Machine2d}}
 \subsubsection[{m\+\_\+strategy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Numeric\+Strategy}$\ast$ Atrial\+Machine2d\+::m\+\_\+strategy}}\label{class_atrial_machine2d_afa218ce1cafcf45895c0317953b97977}
-\hypertarget{class_atrial_machine2d_aea2f8cb631c24f1dbec8859d50a7918f}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+wall\+Cells@{m\+\_\+wall\+Cells}}
-\index{m\+\_\+wall\+Cells@{m\+\_\+wall\+Cells}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+wall\+Cells}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::pair$<${\bf Oscillator}$\ast$,{\bf Oscillator}$\ast$$>$ $>$ Atrial\+Machine2d\+::m\+\_\+wall\+Cells}}\label{class_atrial_machine2d_aea2f8cb631c24f1dbec8859d50a7918f}
-\hypertarget{class_atrial_machine2d_a74ecd78d3016ae5a6a5c6004aa43ad96}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!m\+\_\+which\+Flag@{m\+\_\+which\+Flag}}
-\index{m\+\_\+which\+Flag@{m\+\_\+which\+Flag}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{m\+\_\+which\+Flag}]{\setlength{\rightskip}{0pt plus 5cm}int Atrial\+Machine2d\+::m\+\_\+which\+Flag}}\label{class_atrial_machine2d_a74ecd78d3016ae5a6a5c6004aa43ad96}
-\hypertarget{class_atrial_machine2d_ae037f3658a7c3f9af7e05cd19a0a94b7}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!next\+Current@{next\+Current}}
-\index{next\+Current@{next\+Current}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{next\+Current}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::next\+Current\mbox{[}3\mbox{]}}}\label{class_atrial_machine2d_ae037f3658a7c3f9af7e05cd19a0a94b7}
-\hypertarget{class_atrial_machine2d_a50c29aa024f47633087f27e0f70607cf}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!next\+Potential@{next\+Potential}}
-\index{next\+Potential@{next\+Potential}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{next\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::next\+Potential}}\label{class_atrial_machine2d_a50c29aa024f47633087f27e0f70607cf}
-\hypertarget{class_atrial_machine2d_a8f3931073e39c8c188d5ca65631b704b}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!next\+Time@{next\+Time}}
-\index{next\+Time@{next\+Time}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{next\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::next\+Time}}\label{class_atrial_machine2d_a8f3931073e39c8c188d5ca65631b704b}
-\hypertarget{class_atrial_machine2d_aa279d4e4ab1193bb6c358541d52424ff}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!next\+Timestep@{next\+Timestep}}
-\index{next\+Timestep@{next\+Timestep}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{next\+Timestep}]{\setlength{\rightskip}{0pt plus 5cm}double Atrial\+Machine2d\+::next\+Timestep}}\label{class_atrial_machine2d_aa279d4e4ab1193bb6c358541d52424ff}
-\hypertarget{class_atrial_machine2d_a0f0e192be32cbbfa3f327cfe6e174f5e}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!probe\+Oscillator@{probe\+Oscillator}}
+\hypertarget{class_atrial_machine2d_a524fc9fd5d07a9f6f93611ee7839c99c}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!probe\+Oscillator@{probe\+Oscillator}}
 \index{probe\+Oscillator@{probe\+Oscillator}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{probe\+Oscillator}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Oscillator}$\ast$$>$ Atrial\+Machine2d\+::probe\+Oscillator}}\label{class_atrial_machine2d_a0f0e192be32cbbfa3f327cfe6e174f5e}
-\hypertarget{class_atrial_machine2d_ae73cbdaac9845bd587afefab6c8c94fa}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!probe\+R\+R\+\_\+4@{probe\+R\+R\+\_\+4}}
-\index{probe\+R\+R\+\_\+4@{probe\+R\+R\+\_\+4}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{probe\+R\+R\+\_\+4}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Oscillator}$\ast$ Atrial\+Machine2d\+::probe\+R\+R\+\_\+4}}\label{class_atrial_machine2d_ae73cbdaac9845bd587afefab6c8c94fa}
-\hypertarget{class_atrial_machine2d_ace665fff3f0583d9d1e285f4775adfa6}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!R\+Rcalc\+\_\+1@{R\+Rcalc\+\_\+1}}
-\index{R\+Rcalc\+\_\+1@{R\+Rcalc\+\_\+1}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{R\+Rcalc\+\_\+1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\+Rcalculator}$\ast$ Atrial\+Machine2d\+::\+R\+Rcalc\+\_\+1}}\label{class_atrial_machine2d_ace665fff3f0583d9d1e285f4775adfa6}
-\hypertarget{class_atrial_machine2d_a34b1581457faa0fec1579cf51a187598}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!R\+Rcalc\+\_\+2@{R\+Rcalc\+\_\+2}}
-\index{R\+Rcalc\+\_\+2@{R\+Rcalc\+\_\+2}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{R\+Rcalc\+\_\+2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\+Rcalculator}$\ast$ Atrial\+Machine2d\+::\+R\+Rcalc\+\_\+2}}\label{class_atrial_machine2d_a34b1581457faa0fec1579cf51a187598}
-\hypertarget{class_atrial_machine2d_a0bcbe6368dd8bb0eb66efaafc5a4dbfb}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!R\+Rcalc\+\_\+3@{R\+Rcalc\+\_\+3}}
-\index{R\+Rcalc\+\_\+3@{R\+Rcalc\+\_\+3}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{R\+Rcalc\+\_\+3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\+Rcalculator}$\ast$ Atrial\+Machine2d\+::\+R\+Rcalc\+\_\+3}}\label{class_atrial_machine2d_a0bcbe6368dd8bb0eb66efaafc5a4dbfb}
-\hypertarget{class_atrial_machine2d_aa2ede01ca50864789c112cca567c1444}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!R\+Rcalc\+\_\+4@{R\+Rcalc\+\_\+4}}
-\index{R\+Rcalc\+\_\+4@{R\+Rcalc\+\_\+4}!Atrial\+Machine2d@{Atrial\+Machine2d}}
-\subsubsection[{R\+Rcalc\+\_\+4}]{\setlength{\rightskip}{0pt plus 5cm}{\bf R\+Rcalculator}$\ast$ Atrial\+Machine2d\+::\+R\+Rcalc\+\_\+4}}\label{class_atrial_machine2d_aa2ede01ca50864789c112cca567c1444}
+\subsubsection[{probe\+Oscillator}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Probe\+Electrode}$\ast$$>$ Atrial\+Machine2d\+::probe\+Oscillator}}\label{class_atrial_machine2d_a524fc9fd5d07a9f6f93611ee7839c99c}
+\hypertarget{class_atrial_machine2d_aaeb0690b1fbd433bd0c25f2162b7b4bb}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!set\+Strategy@{set\+Strategy}}
+\index{set\+Strategy@{set\+Strategy}!Atrial\+Machine2d@{Atrial\+Machine2d}}
+\subsubsection[{set\+Strategy}]{\setlength{\rightskip}{0pt plus 5cm}void(Atrial\+Machine2d\+::$\ast$ Atrial\+Machine2d\+::set\+Strategy)()}}\label{class_atrial_machine2d_aaeb0690b1fbd433bd0c25f2162b7b4bb}
+\hypertarget{class_atrial_machine2d_a9d4b451c3384c6cac71bd06662e30b55}{\index{Atrial\+Machine2d@{Atrial\+Machine2d}!structure\+Updated@{structure\+Updated}}
+\index{structure\+Updated@{structure\+Updated}!Atrial\+Machine2d@{Atrial\+Machine2d}}
+\subsubsection[{structure\+Updated}]{\setlength{\rightskip}{0pt plus 5cm}bool Atrial\+Machine2d\+::structure\+Updated}}\label{class_atrial_machine2d_a9d4b451c3384c6cac71bd06662e30b55}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

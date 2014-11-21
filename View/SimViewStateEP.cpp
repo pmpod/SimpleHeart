@@ -28,10 +28,10 @@ SimViewState* SimViewStateEP::Instance()
 	return _instance;
 }
 //--------------------------------------------------
-void SimViewStateEP::setDisplayMode(const int mode)
+void SimViewStateEP::setMode(const int mode)
 {
 	_dataDisplayMode = mode;
-}\
+}
 void SimViewStateEP::setOutlineStyle(const  BRUSH_OUTLINE outline)
 {
 
@@ -145,8 +145,8 @@ void SimViewStateEP::paintModel(glAtrium* view)
 	int vertexNumber = msh->m_vertexList.size();
 
 	GLfloat val1;
-	GLfloat vmin = msh->m_minElectrogram;
-	GLfloat vmax = msh->m_maxElectrogram;
+	GLfloat vmin = msh->minElectrogram;
+	GLfloat vmax = msh->maxElectrogram;
 	
 	for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
 	{

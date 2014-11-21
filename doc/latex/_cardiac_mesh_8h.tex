@@ -2,16 +2,21 @@
 \label{_cardiac_mesh_8h}\index{Model/\+Cardiac\+Mesh.\+h@{Model/\+Cardiac\+Mesh.\+h}}
 }
 {\ttfamily \#include $<$Q\+Object$>$}\\*
+{\ttfamily \#include $<$Q\+Message\+Box$>$}\\*
 {\ttfamily \#include $<$vector$>$}\\*
 {\ttfamily \#include \char`\"{}Model\textbackslash{}\+Oscillator.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}Model\textbackslash{}v3model.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}heart\+Defines.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}Numeric\+Strategy\textbackslash{}\+Time\+Tree.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}Support\textbackslash{}\+Vectors.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$matio.\+h$>$}\\*
+{\ttfamily \#include $<$qgl.\+h$>$}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{struct_vertex_triangle}{Vertex\+Triangle}
-\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{struct_vertex_triangle}{Vertex\+Triangle} is a three-\/int-\/structure containing the I\+Ds of each oscillator (vertex on the mesh) forming a valid face on a mesh \hyperlink{struct_vertex_triangle}{Vertex\+Triangle} is a three-\/int-\/structure containing the I\+Ds of each oscillator (vertex on the mesh) forming a valid face on a mesh. vertex triangles are stored in \hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} container m\+\_\+vertex\+List and build on the initialization of the mesh. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_s_vertex}{S\+Vertex}
+\begin{DoxyCompactList}\small\item\em \hyperlink{struct_s_vertex}{S\+Vertex} is a structure for Open\+G\+L 2.\+0 Vertex Buffer Object. It stores information about location and color of each vertex. Location values are created on the initialization of the mesh, while color is changed due to the View settings / at each simulation frame. \end{DoxyCompactList}\item 
 class \hyperlink{class_cardiac_mesh}{Cardiac\+Mesh}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Class contatining the full information about the model and helper functions to build it. \end{DoxyCompactList}\end{DoxyCompactItemize}

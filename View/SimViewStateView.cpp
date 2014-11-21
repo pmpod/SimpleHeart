@@ -6,7 +6,7 @@ SimViewStateView* SimViewStateView::_instance = nullptr;
 SimViewStateView::SimViewStateView()
 {
 	cursorRadius = 2.0;
-	_dataDisplayMode = 1;//POTENTIAL
+	_mode = 1;//POTENTIAL
 	setPalette(DP_HOTTOCOLD);
 
 
@@ -28,9 +28,9 @@ SimViewState* SimViewStateView::Instance()
 }
 //--------------------------------------------------
 //--------------------------------------------------
-void SimViewStateView::setDisplayMode(const int mode)
+void SimViewStateView::setMode(const int mode)
 {
-	_dataDisplayMode = mode;
+	_mode = mode;
 }\
 void SimViewStateView::setOutlineStyle(const  BRUSH_OUTLINE outline)
 {
@@ -136,14 +136,14 @@ void SimViewStateView::paintModel(glAtrium* view)
 	int vertexNumber = msh->m_vertexList.size();
 
 	GLfloat val1;
-	GLfloat vmin = msh->m_minElectrogram;
-	GLfloat vmax = msh->m_maxElectrogram;
+	GLfloat vmin = msh->minElectrogram;
+	GLfloat vmax = msh->maxElectrogram;
 	
 	for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
 	{
 		if (oscs[currentVertex]->m_type != SOLID_WALL)
 		{
-			switch (_dataDisplayMode)
+			switch (_mode)
 			{
 			case 1:
 				val1 = oscs[currentVertex]->m_v_scaledPotential;
@@ -311,8 +311,8 @@ void SimViewStateView::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 		view->testProbe.x = view->linkToMesh->m_mesh[item]->m_x;
 		view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
 		view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
-		view->linkToMesh->m_stimulationID = view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z);
-		view->linkToMachine->m_definitions->m_ectopicActivity = true;
+		view->linkToMachine->stimulator.setStimulationSiteID(view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z));
+		view->linkToMachine->stimulatorOn();
 	}	
 }
 void SimViewStateView::handleMouseRightPress(glAtrium* view, QMouseEvent *event)
@@ -324,10 +324,9 @@ void SimViewStateView::handleMouseRelease(glAtrium* view, QMouseEvent *event)
 {
 	view->setLastPos(event->pos());
 
+	view->linkToMachine->stimulatorOff();
 	//if (Qt::LeftButton)
 	//{
-		view->linkToMachine->m_definitions->m_ectopicActivity = false;
-
 	//	glGetFloatv(GL_MODELVIEW_MATRIX, view->m);
 	//	view->modelMatrix = view->m;
 	//	int meshSize = view->linkToMesh->m_mesh.size();

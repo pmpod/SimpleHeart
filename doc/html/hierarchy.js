@@ -32,6 +32,7 @@ var hierarchy =
         [ "vanDerGru", "classvan_der_gru.html", null ]
       ] ],
       [ "Probe", "class_probe.html", null ],
+      [ "ProbeElectrode", "class_probe_electrode.html", null ],
       [ "RRcalculator", "class_r_rcalculator.html", null ]
     ] ],
     [ "QwtPlot", null, [
@@ -41,6 +42,13 @@ var hierarchy =
       ] ]
     ] ],
     [ "RandomGenerator", "class_random_generator.html", null ],
+    [ "SimViewState", "class_sim_view_state.html", [
+      [ "SimViewStateDiffusion", "class_sim_view_state_diffusion.html", null ],
+      [ "SimViewStateEP", "class_sim_view_state_e_p.html", null ],
+      [ "SimViewStateStructure", "class_sim_view_state_structure.html", null ],
+      [ "SimViewStateView", "class_sim_view_state_view.html", null ]
+    ] ],
+    [ "SVertex", "struct_s_vertex.html", null ],
     [ "TimestepNode", "struct_timestep_node.html", null ],
     [ "TimeTree", "struct_time_tree.html", null ],
     [ "tVector3", "structt_vector3.html", null ],

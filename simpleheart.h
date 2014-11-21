@@ -63,6 +63,17 @@ public slots:
 	void stopCalculation();
 	void startCalculation();
 
+	void setState(int val);
+	void setFreeTouch(bool val);
+
+	void setPaintERP(bool b);
+	void setPaintConductivity(bool b);
+	void setPaintValue(int val);
+	void setPaintValue(double val);
+	void paintUniform();
+
+
+
 	void openInstruction();
 	void openSettings();
 	void resetDiffusion();
@@ -84,10 +95,6 @@ public slots:
 	void plotPotentialClear();
 	void plotRRClear();
 	void plotEntClear();
-
-
-	void setProbeElectrode(int electrode, int id_y, int id_x);
-	void switchElectrode();
 
 	void setBmpSaving(bool t);
 	
