@@ -6,7 +6,6 @@ var files =
     [ "View", "dir_f2ee84e8e3a17eaa7015d788fa443c27.html", "dir_f2ee84e8e3a17eaa7015d788fa443c27" ],
     [ "AtrialMachine2d.cpp", "_atrial_machine2d_8cpp.html", "_atrial_machine2d_8cpp" ],
     [ "AtrialMachine2d.h", "_atrial_machine2d_8h.html", [
-      [ "burster", "classburster.html", "classburster" ],
       [ "AtrialMachine2d", "class_atrial_machine2d.html", "class_atrial_machine2d" ]
     ] ],
     [ "atrialParameters.cpp", "atrial_parameters_8cpp.html", null ],

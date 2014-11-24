@@ -37,6 +37,12 @@ void Oscillator::reset()
 		m_v_current[k] = 0.0;
 		m_currentPRIM[k] = 0.0;
 	}
+	m_lastActivationTime = 0;
+	for (short k = 0; k < OSC_HISTORY_SIZE; ++k)
+	{
+		m_potentialHistory[k] = 0;
+	}
+
 	m_currentTime = 0.0;
 	m_previousTime = -0.1;
 }

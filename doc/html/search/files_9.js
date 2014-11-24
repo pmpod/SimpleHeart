@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['oscillator_2ecpp',['Oscillator.cpp',['../_oscillator_8cpp.html',1,'']]],
-  ['oscillator_2eh',['Oscillator.h',['../_oscillator_8h.html',1,'']]]
+  ['numericstrategy_2ecpp',['NumericStrategy.cpp',['../_numeric_strategy_8cpp.html',1,'']]],
+  ['numericstrategy_2eh',['NumericStrategy.h',['../_numeric_strategy_8h.html',1,'']]]
 ];

@@ -15,5 +15,6 @@ var searchData=
   ['rotategl',['rotateGL',['../_g_lfunc_8cpp.html#adb638195ebb714dd5a18934580a762eb',1,'rotateGL(int coord, int angle_X, int angle_Y, int angle_Z):&#160;GLfunc.cpp'],['../_g_lfunc_8h.html#adb638195ebb714dd5a18934580a762eb',1,'rotateGL(int coord, int angle_X, int angle_Y, int angle_Z):&#160;GLfunc.cpp']]],
   ['round',['round',['../gl_atrium_8cpp.html#a582dbae5783888558714e0de9bf4ad43',1,'glAtrium.cpp']]],
   ['rrcalculator',['RRcalculator',['../class_r_rcalculator.html#a1c8424d714a284daa7a87f634b4f8c1e',1,'RRcalculator']]],
-  ['rrplot',['rrPlot',['../classrr_plot.html#a1670fc13172e2a65ed9c10fe2c65f53a',1,'rrPlot']]]
+  ['rrplot',['rrPlot',['../classrr_plot.html#a1670fc13172e2a65ed9c10fe2c65f53a',1,'rrPlot']]],
+  ['run',['run',['../class_ep_stimulator.html#a9c7b67a145c50fb0c29656f9080b9be8',1,'EpStimulator']]]
 ];

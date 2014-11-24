@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>1032</height>
+    <height>1035</height>
    </rect>
   </property>
   <property name="font">
@@ -514,13 +514,13 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
          <widget class="QGroupBox" name="panelSettings">
           <property name="minimumSize">
            <size>
-            <width>350</width>
+            <width>300</width>
             <height>0</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>270</width>
+            <width>260</width>
             <height>16777215</height>
            </size>
           </property>
@@ -561,19 +561,109 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
                 <number>1</number>
                </property>
                <item>
-                <widget class="QPushButton" name="b_freeTouchMode">
-                 <property name="text">
-                  <string>FREE TOUCH MODE</string>
+                <widget class="QFrame" name="frame_6">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
                  </property>
-                 <property name="checkable">
-                  <bool>true</bool>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
                  </property>
-                 <property name="checked">
-                  <bool>false</bool>
+                 <layout class="QHBoxLayout" name="horizontalLayout_17">
+                  <item>
+                   <widget class="QPushButton" name="b_freeTouchMode">
+                    <property name="text">
+                     <string>FREE TOUCH </string>
+                    </property>
+                    <property name="checkable">
+                     <bool>true</bool>
+                    </property>
+                    <property name="checked">
+                     <bool>false</bool>
+                    </property>
+                    <property name="autoExclusive">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="b_pacingModeFixed">
+                    <property name="text">
+                     <string>FIXED</string>
+                    </property>
+                    <property name="checkable">
+                     <bool>true</bool>
+                    </property>
+                    <property name="autoExclusive">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="b_pacingModeSensing">
+                    <property name="text">
+                     <string>SENSING</string>
+                    </property>
+                    <property name="checkable">
+                     <bool>true</bool>
+                    </property>
+                    <property name="autoExclusive">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_7">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
                  </property>
-                 <property name="autoExclusive">
-                  <bool>false</bool>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
                  </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_9">
+                  <item>
+                   <widget class="QLabel" name="label_16">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QLabel{
+color: rgb(255, 170, 0);
+}</string>
+                    </property>
+                    <property name="text">
+                     <string>► PACE FROM</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="comboBox">
+                    <item>
+                     <property name="text">
+                      <string>Electrode 1</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Electrode 2</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Electrode 3</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item>
@@ -595,413 +685,16 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
                    <number>0</number>
                   </property>
                   <item>
-                   <widget class="QFrame" name="stimEP_frame_5">
-                    <property name="minimumSize">
-                     <size>
-                      <width>80</width>
-                      <height>160</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>80</width>
-                      <height>160</height>
-                     </size>
-                    </property>
-                    <property name="sizeIncrement">
-                     <size>
-                      <width>1</width>
-                      <height>1</height>
-                     </size>
-                    </property>
-                    <property name="baseSize">
-                     <size>
-                      <width>90</width>
-                      <height>160</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">QFrame
-{
-	border: 0px;
-}</string>
-                    </property>
-                    <property name="frameShape">
-                     <enum>QFrame::StyledPanel</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Raised</enum>
-                    </property>
-                    <property name="lineWidth">
-                     <number>0</number>
-                    </property>
-                    <layout class="QGridLayout" name="gridLayout_6">
-                     <property name="margin">
-                      <number>0</number>
-                     </property>
-                     <property name="spacing">
-                      <number>1</number>
-                     </property>
-                     <item row="0" column="0">
-                      <layout class="QHBoxLayout" name="horizontalLayout_26" stretch="1,1,1">
-                       <property name="spacing">
-                        <number>1</number>
-                       </property>
-                       <item>
-                        <spacer name="horizontalSpacer_21">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="b_increaseCycleLength_5">
-                         <property name="minimumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="sizeIncrement">
-                          <size>
-                           <width>0</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="baseSize">
-                          <size>
-                           <width>100</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string>+</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <spacer name="horizontalSpacer_18">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                      </layout>
-                     </item>
-                     <item row="1" column="0">
-                      <widget class="QFrame" name="stimEP_display_5">
-                       <property name="styleSheet">
-                        <string notr="true">QObject
-{
-	border: 1px;
-background: #111111;
-border-radius: 6px;
-}
-QFrame
-{
-	border: 2px;
-}</string>
-                       </property>
-                       <property name="frameShape">
-                        <enum>QFrame::StyledPanel</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Raised</enum>
-                       </property>
-                       <property name="lineWidth">
-                        <number>0</number>
-                       </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_17" stretch="1,1,0,0,0">
-                        <property name="spacing">
-                         <number>1</number>
-                        </property>
-                        <property name="margin">
-                         <number>0</number>
-                        </property>
-                        <item>
-                         <widget class="QLabel" name="label_34">
-                          <property name="text">
-                           <string>stimulus 
- [mA]</string>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <spacer name="verticalSpacer_6">
-                          <property name="orientation">
-                           <enum>Qt::Vertical</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>20</width>
-                            <height>10</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                        <item>
-                         <widget class="QDoubleSpinBox" name="sb_stimulusAmplitude">
-                          <property name="font">
-                           <font>
-                            <pointsize>20</pointsize>
-                           </font>
-                          </property>
-                          <property name="layoutDirection">
-                           <enum>Qt::LeftToRight</enum>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">QSpinBox
-{
-	border: 0px;
-}</string>
-                          </property>
-                          <property name="wrapping">
-                           <bool>false</bool>
-                          </property>
-                          <property name="frame">
-                           <bool>false</bool>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignBottom|Qt::AlignHCenter</set>
-                          </property>
-                          <property name="buttonSymbols">
-                           <enum>QAbstractSpinBox::NoButtons</enum>
-                          </property>
-                          <property name="decimals">
-                           <number>1</number>
-                          </property>
-                          <property name="maximum">
-                           <double>20.000000000000000</double>
-                          </property>
-                          <property name="singleStep">
-                           <double>0.100000000000000</double>
-                          </property>
-                          <property name="value">
-                           <double>1.000000000000000</double>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QSpinBox" name="sb_stimulusWidth">
-                          <property name="minimumSize">
-                           <size>
-                            <width>0</width>
-                            <height>15</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>16777215</width>
-                            <height>15</height>
-                           </size>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>8</pointsize>
-                           </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">QSpinBox
-{
-	border: 0px;
-}</string>
-                          </property>
-                          <property name="wrapping">
-                           <bool>false</bool>
-                          </property>
-                          <property name="frame">
-                           <bool>false</bool>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                          <property name="buttonSymbols">
-                           <enum>QAbstractSpinBox::NoButtons</enum>
-                          </property>
-                          <property name="suffix">
-                           <string> ms</string>
-                          </property>
-                          <property name="prefix">
-                           <string>width: </string>
-                          </property>
-                          <property name="minimum">
-                           <number>1</number>
-                          </property>
-                          <property name="maximum">
-                           <number>50</number>
-                          </property>
-                          <property name="value">
-                           <number>2</number>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <spacer name="verticalSpacer_7">
-                          <property name="orientation">
-                           <enum>Qt::Vertical</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>20</width>
-                            <height>10</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                       </layout>
-                      </widget>
-                     </item>
-                     <item row="2" column="0">
-                      <layout class="QHBoxLayout" name="horizontalLayout_27" stretch="1,1,1">
-                       <property name="spacing">
-                        <number>1</number>
-                       </property>
-                       <item>
-                        <spacer name="horizontalSpacer_19">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="b_decreaseCycleLength_5">
-                         <property name="minimumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>30</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="sizeIncrement">
-                          <size>
-                           <width>0</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="baseSize">
-                          <size>
-                           <width>100</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string>-</string>
-                         </property>
-                         <property name="autoRepeat">
-                          <bool>true</bool>
-                         </property>
-                         <property name="autoRepeatInterval">
-                          <number>10</number>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <spacer name="horizontalSpacer_20">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                      </layout>
-                     </item>
-                     <item row="1" column="1">
-                      <widget class="QSlider" name="b_stimulusWidthSlider">
-                       <property name="minimumSize">
-                        <size>
-                         <width>10</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="minimum">
-                        <number>1</number>
-                       </property>
-                       <property name="maximum">
-                        <number>50</number>
-                       </property>
-                       <property name="pageStep">
-                        <number>5</number>
-                       </property>
-                       <property name="value">
-                        <number>2</number>
-                       </property>
-                       <property name="sliderPosition">
-                        <number>2</number>
-                       </property>
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="invertedAppearance">
-                        <bool>false</bool>
-                       </property>
-                       <property name="invertedControls">
-                        <bool>false</bool>
-                       </property>
-                       <property name="tickPosition">
-                        <enum>QSlider::TicksAbove</enum>
-                       </property>
-                       <property name="tickInterval">
-                        <number>5</number>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </widget>
-                  </item>
-                  <item>
                    <widget class="QFrame" name="stimEP_frame">
                     <property name="minimumSize">
                      <size>
-                      <width>90</width>
+                      <width>85</width>
                       <height>160</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>90</width>
+                      <width>85</width>
                       <height>160</height>
                      </size>
                     </property>
@@ -1086,6 +779,12 @@ QFrame
                          <property name="text">
                           <string>+</string>
                          </property>
+                         <property name="autoRepeat">
+                          <bool>true</bool>
+                         </property>
+                         <property name="autoRepeatInterval">
+                          <number>5</number>
+                         </property>
                         </widget>
                        </item>
                        <item>
@@ -1157,7 +856,7 @@ QFrame
                           <bool>true</bool>
                          </property>
                          <property name="autoRepeatInterval">
-                          <number>10</number>
+                          <number>5</number>
                          </property>
                         </widget>
                        </item>
@@ -1253,7 +952,7 @@ QFrame
                             </spacer>
                            </item>
                            <item>
-                            <widget class="QSpinBox" name="sb_cycleLength">
+                            <widget class="QSpinBox" name="sb_cycleLength_S1">
                              <property name="font">
                               <font>
                                <pointsize>20</pointsize>
@@ -1314,7 +1013,7 @@ QFrame
                             </widget>
                            </item>
                            <item>
-                            <widget class="QSpinBox" name="sb_cycleCount">
+                            <widget class="QSpinBox" name="sb_cycleCount_S1">
                              <property name="minimumSize">
                               <size>
                                <width>0</width>
@@ -1417,13 +1116,13 @@ QFrame
                    <widget class="QFrame" name="stimEP_frame_2">
                     <property name="minimumSize">
                      <size>
-                      <width>90</width>
+                      <width>85</width>
                       <height>160</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>90</width>
+                      <width>85</width>
                       <height>160</height>
                      </size>
                     </property>
@@ -1464,7 +1163,7 @@ QFrame
                         <number>1</number>
                        </property>
                        <item>
-                        <widget class="QCheckBox" name="checkBox_2">
+                        <widget class="QCheckBox" name="cb_S2">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                            <horstretch>0</horstretch>
@@ -1500,8 +1199,8 @@ QFrame
                          </property>
                          <property name="iconSize">
                           <size>
-                           <width>3</width>
-                           <height>3030</height>
+                           <width>30</width>
+                           <height>30</height>
                           </size>
                          </property>
                          <property name="checked">
@@ -1540,6 +1239,12 @@ QFrame
                          </property>
                          <property name="text">
                           <string>+</string>
+                         </property>
+                         <property name="autoRepeat">
+                          <bool>true</bool>
+                         </property>
+                         <property name="autoRepeatInterval">
+                          <number>5</number>
                          </property>
                         </widget>
                        </item>
@@ -1612,7 +1317,7 @@ QFrame
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="sb_cycleLength_2">
+                         <widget class="QSpinBox" name="sb_cycleLength_S2">
                           <property name="font">
                            <font>
                             <pointsize>20</pointsize>
@@ -1673,7 +1378,7 @@ QFrame
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="sb_cycleCount_2">
+                         <widget class="QSpinBox" name="sb_cycleCount_S2">
                           <property name="minimumSize">
                            <size>
                             <width>0</width>
@@ -1780,7 +1485,7 @@ QFrame
                           <bool>true</bool>
                          </property>
                          <property name="autoRepeatInterval">
-                          <number>10</number>
+                          <number>5</number>
                          </property>
                         </widget>
                        </item>
@@ -1846,13 +1551,13 @@ QFrame
                    <widget class="QFrame" name="stimEP_frame_3">
                     <property name="minimumSize">
                      <size>
-                      <width>90</width>
+                      <width>85</width>
                       <height>160</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>90</width>
+                      <width>85</width>
                       <height>160</height>
                      </size>
                     </property>
@@ -1893,7 +1598,7 @@ QFrame
                         <number>1</number>
                        </property>
                        <item>
-                        <widget class="QCheckBox" name="checkBox_3">
+                        <widget class="QCheckBox" name="cb_S3">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                            <horstretch>0</horstretch>
@@ -1970,6 +1675,12 @@ QFrame
                          <property name="text">
                           <string>+</string>
                          </property>
+                         <property name="autoRepeat">
+                          <bool>true</bool>
+                         </property>
+                         <property name="autoRepeatInterval">
+                          <number>5</number>
+                         </property>
                         </widget>
                        </item>
                        <item>
@@ -2041,7 +1752,7 @@ QFrame
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="sb_cycleLength_3">
+                         <widget class="QSpinBox" name="sb_cycleLength_S3">
                           <property name="font">
                            <font>
                             <pointsize>20</pointsize>
@@ -2102,7 +1813,7 @@ QFrame
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="sb_cycleCount_3">
+                         <widget class="QSpinBox" name="sb_cycleCount_S3">
                           <property name="minimumSize">
                            <size>
                             <width>0</width>
@@ -2209,7 +1920,7 @@ QFrame
                           <bool>true</bool>
                          </property>
                          <property name="autoRepeatInterval">
-                          <number>10</number>
+                          <number>5</number>
                          </property>
                         </widget>
                        </item>
@@ -2284,108 +1995,16 @@ QFrame
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_13">
                   <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_16">
-                    <item>
-                     <widget class="QLabel" name="label_16">
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>30</height>
-                       </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QLabel{
-color: rgb(255, 170, 0);
-}</string>
-                      </property>
-                      <property name="text">
-                       <string>► PACING MODE</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="b_pacingModeFree">
-                      <property name="text">
-                       <string>FREE</string>
-                      </property>
-                      <property name="checkable">
-                       <bool>true</bool>
-                      </property>
-                      <property name="checked">
-                       <bool>true</bool>
-                      </property>
-                      <property name="autoExclusive">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="b_pacingModeFixed">
-                      <property name="text">
-                       <string>FIXED
-SINGLE</string>
-                      </property>
-                      <property name="checkable">
-                       <bool>true</bool>
-                      </property>
-                      <property name="autoExclusive">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="b_pacingModeCycle">
-                      <property name="text">
-                       <string>FIXED
-LOOP</string>
-                      </property>
-                      <property name="checkable">
-                       <bool>true</bool>
-                      </property>
-                      <property name="autoExclusive">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QSpinBox" name="sb_pacingCycles">
-                      <property name="enabled">
-                       <bool>false</bool>
-                      </property>
-                      <property name="frame">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="b_pacingModeSensing">
-                      <property name="text">
-                       <string>SENSING</string>
-                      </property>
-                      <property name="checkable">
-                       <bool>true</bool>
-                      </property>
-                      <property name="autoExclusive">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <widget class="QFrame" name="stimEP_frame_4">
+                   <widget class="QFrame" name="stimEP_frame_7">
                     <property name="minimumSize">
                      <size>
-                      <width>90</width>
+                      <width>70</width>
                       <height>160</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>90</width>
+                      <width>70</width>
                       <height>160</height>
                      </size>
                     </property>
@@ -2413,15 +2032,18 @@ LOOP</string>
                     <property name="frameShadow">
                      <enum>QFrame::Raised</enum>
                     </property>
-                    <layout class="QGridLayout" name="gridLayout_5">
+                    <property name="lineWidth">
+                     <number>0</number>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_8">
                      <property name="margin">
-                      <number>1</number>
+                      <number>0</number>
                      </property>
                      <property name="spacing">
                       <number>1</number>
                      </property>
-                     <item row="0" column="1">
-                      <layout class="QHBoxLayout" name="horizontalLayout_24" stretch="1,1,1">
+                     <item row="0" column="0">
+                      <layout class="QHBoxLayout" name="horizontalLayout_30" stretch="0,1,1">
                        <property name="spacing">
                         <number>1</number>
                        </property>
@@ -2475,7 +2097,7 @@ LOOP</string>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="b_increaseCycleLength_4">
+                        <widget class="QPushButton" name="b_increaseCycleLength_7">
                          <property name="minimumSize">
                           <size>
                            <width>30</width>
@@ -2506,10 +2128,16 @@ LOOP</string>
                          <property name="text">
                           <string>+</string>
                          </property>
+                         <property name="autoRepeat">
+                          <bool>true</bool>
+                         </property>
+                         <property name="autoRepeatInterval">
+                          <number>5</number>
+                         </property>
                         </widget>
                        </item>
                        <item>
-                        <spacer name="horizontalSpacer_15">
+                        <spacer name="horizontalSpacer_28">
                          <property name="orientation">
                           <enum>Qt::Horizontal</enum>
                          </property>
@@ -2523,8 +2151,8 @@ LOOP</string>
                        </item>
                       </layout>
                      </item>
-                     <item row="1" column="1">
-                      <widget class="QFrame" name="stimEP_display_4">
+                     <item row="1" column="0">
+                      <widget class="QFrame" name="stimEP_display_7">
                        <property name="styleSheet">
                         <string notr="true">QObject
 {
@@ -2546,7 +2174,7 @@ QFrame
                        <property name="lineWidth">
                         <number>0</number>
                        </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_15" stretch="1,1,3,0">
+                       <layout class="QVBoxLayout" name="verticalLayout_20" stretch="1,1,0,0">
                         <property name="spacing">
                          <number>1</number>
                         </property>
@@ -2554,10 +2182,10 @@ QFrame
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QLabel" name="label_33">
+                         <widget class="QLabel" name="label_36">
                           <property name="text">
-                           <string>COUPLING 
-INTERVAL [ms]</string>
+                           <string>number of 
+ pacing trains</string>
                           </property>
                           <property name="alignment">
                            <set>Qt::AlignCenter</set>
@@ -2565,7 +2193,7 @@ INTERVAL [ms]</string>
                          </widget>
                         </item>
                         <item>
-                         <spacer name="verticalSpacer_4">
+                         <spacer name="verticalSpacer_10">
                           <property name="orientation">
                            <enum>Qt::Vertical</enum>
                           </property>
@@ -2578,7 +2206,346 @@ INTERVAL [ms]</string>
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="sb_cycleLength_4">
+                         <widget class="QSpinBox" name="sb_stimulusAmplitude_3">
+                          <property name="font">
+                           <font>
+                            <pointsize>20</pointsize>
+                           </font>
+                          </property>
+                          <property name="layoutDirection">
+                           <enum>Qt::LeftToRight</enum>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">QSpinBox
+{
+	border: 0px;
+}</string>
+                          </property>
+                          <property name="wrapping">
+                           <bool>false</bool>
+                          </property>
+                          <property name="frame">
+                           <bool>false</bool>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+                          </property>
+                          <property name="buttonSymbols">
+                           <enum>QAbstractSpinBox::NoButtons</enum>
+                          </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>150</number>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="verticalSpacer_11">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>10</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item row="2" column="0">
+                      <layout class="QHBoxLayout" name="horizontalLayout_31" stretch="1,1,1">
+                       <property name="spacing">
+                        <number>1</number>
+                       </property>
+                       <item>
+                        <spacer name="horizontalSpacer_29">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="b_decreaseCycleLength_7">
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="sizeIncrement">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="baseSize">
+                          <size>
+                           <width>100</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>-</string>
+                         </property>
+                         <property name="autoRepeat">
+                          <bool>true</bool>
+                         </property>
+                         <property name="autoRepeatInterval">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_30">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="stimEP_frame_8">
+                    <property name="minimumSize">
+                     <size>
+                      <width>70</width>
+                      <height>160</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>70</width>
+                      <height>160</height>
+                     </size>
+                    </property>
+                    <property name="sizeIncrement">
+                     <size>
+                      <width>1</width>
+                      <height>1</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>90</width>
+                      <height>160</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QFrame
+{
+	border: 0px;
+}</string>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <property name="lineWidth">
+                     <number>0</number>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_9">
+                     <property name="margin">
+                      <number>0</number>
+                     </property>
+                     <property name="spacing">
+                      <number>1</number>
+                     </property>
+                     <item row="0" column="0">
+                      <layout class="QHBoxLayout" name="horizontalLayout_32" stretch="0,1,1">
+                       <property name="spacing">
+                        <number>1</number>
+                       </property>
+                       <item>
+                        <widget class="QCheckBox" name="checkBox_5">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>16</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>29</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="sizeIncrement">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="baseSize">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>3</width>
+                           <height>3030</height>
+                          </size>
+                         </property>
+                         <property name="checked">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="b_increaseCouplingInterval">
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="sizeIncrement">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="baseSize">
+                          <size>
+                           <width>100</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>+</string>
+                         </property>
+                         <property name="autoRepeat">
+                          <bool>true</bool>
+                         </property>
+                         <property name="autoRepeatInterval">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_31">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QFrame" name="stimEP_display_8">
+                       <property name="styleSheet">
+                        <string notr="true">QObject
+{
+	border: 1px;
+background: #111111;
+border-radius: 6px;
+}
+QFrame
+{
+	border: 2px;
+}</string>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <property name="lineWidth">
+                        <number>0</number>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_21" stretch="1,1,0,0">
+                        <property name="spacing">
+                         <number>1</number>
+                        </property>
+                        <property name="margin">
+                         <number>0</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_37">
+                          <property name="text">
+                           <string>coupling 
+ interval [ms]</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignCenter</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="verticalSpacer_12">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>10</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="sb_couplingInterval">
                           <property name="font">
                            <font>
                             <pointsize>20</pointsize>
@@ -2617,7 +2584,7 @@ INTERVAL [ms]</string>
                          </widget>
                         </item>
                         <item>
-                         <spacer name="verticalSpacer_5">
+                         <spacer name="verticalSpacer_13">
                           <property name="orientation">
                            <enum>Qt::Vertical</enum>
                           </property>
@@ -2632,13 +2599,13 @@ INTERVAL [ms]</string>
                        </layout>
                       </widget>
                      </item>
-                     <item row="2" column="1">
-                      <layout class="QHBoxLayout" name="horizontalLayout_25" stretch="1,1,1">
+                     <item row="2" column="0">
+                      <layout class="QHBoxLayout" name="horizontalLayout_33" stretch="1,1,1">
                        <property name="spacing">
                         <number>1</number>
                        </property>
                        <item>
-                        <spacer name="horizontalSpacer_16">
+                        <spacer name="horizontalSpacer_32">
                          <property name="orientation">
                           <enum>Qt::Horizontal</enum>
                          </property>
@@ -2651,7 +2618,7 @@ INTERVAL [ms]</string>
                         </spacer>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="b_decreaseCycleLength_4">
+                        <widget class="QPushButton" name="b_decreaseCouplingInterval">
                          <property name="minimumSize">
                           <size>
                            <width>30</width>
@@ -2686,12 +2653,12 @@ INTERVAL [ms]</string>
                           <bool>true</bool>
                          </property>
                          <property name="autoRepeatInterval">
-                          <number>10</number>
+                          <number>5</number>
                          </property>
                         </widget>
                        </item>
                        <item>
-                        <spacer name="horizontalSpacer_17">
+                        <spacer name="horizontalSpacer_33">
                          <property name="orientation">
                           <enum>Qt::Horizontal</enum>
                          </property>
@@ -2708,27 +2675,430 @@ INTERVAL [ms]</string>
                     </layout>
                    </widget>
                   </item>
+                  <item>
+                   <widget class="QFrame" name="stimEP_frame_6">
+                    <property name="minimumSize">
+                     <size>
+                      <width>80</width>
+                      <height>160</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>80</width>
+                      <height>160</height>
+                     </size>
+                    </property>
+                    <property name="sizeIncrement">
+                     <size>
+                      <width>1</width>
+                      <height>1</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>90</width>
+                      <height>160</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QFrame
+{
+	border: 0px;
+}</string>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <property name="lineWidth">
+                     <number>0</number>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_7">
+                     <property name="margin">
+                      <number>0</number>
+                     </property>
+                     <property name="spacing">
+                      <number>1</number>
+                     </property>
+                     <item row="0" column="0">
+                      <layout class="QHBoxLayout" name="horizontalLayout_28" stretch="1,1,1">
+                       <property name="spacing">
+                        <number>1</number>
+                       </property>
+                       <item>
+                        <spacer name="horizontalSpacer_23">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="b_increaseCycleLength_6">
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="sizeIncrement">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="baseSize">
+                          <size>
+                           <width>100</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>+</string>
+                         </property>
+                         <property name="autoRepeat">
+                          <bool>true</bool>
+                         </property>
+                         <property name="autoRepeatInterval">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_24">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QFrame" name="stimEP_display_6">
+                       <property name="styleSheet">
+                        <string notr="true">QObject
+{
+	border: 1px;
+background: #111111;
+border-radius: 6px;
+}
+QFrame
+{
+	border: 2px;
+}</string>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <property name="lineWidth">
+                        <number>0</number>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_19" stretch="1,1,0,0,0">
+                        <property name="spacing">
+                         <number>1</number>
+                        </property>
+                        <property name="margin">
+                         <number>0</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_35">
+                          <property name="text">
+                           <string>stimulus 
+ amp[mA]</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignCenter</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="verticalSpacer_8">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>10</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item>
+                         <widget class="QDoubleSpinBox" name="sb_stimulusAmplitude_2">
+                          <property name="font">
+                           <font>
+                            <pointsize>20</pointsize>
+                           </font>
+                          </property>
+                          <property name="layoutDirection">
+                           <enum>Qt::LeftToRight</enum>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">QSpinBox
+{
+	border: 0px;
+}</string>
+                          </property>
+                          <property name="wrapping">
+                           <bool>false</bool>
+                          </property>
+                          <property name="frame">
+                           <bool>false</bool>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+                          </property>
+                          <property name="buttonSymbols">
+                           <enum>QAbstractSpinBox::NoButtons</enum>
+                          </property>
+                          <property name="decimals">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <double>20.000000000000000</double>
+                          </property>
+                          <property name="singleStep">
+                           <double>0.100000000000000</double>
+                          </property>
+                          <property name="value">
+                           <double>1.000000000000000</double>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QSpinBox" name="sb_stimulusWidth_2">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>15</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>15</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>8</pointsize>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">QSpinBox
+{
+	border: 0px;
+}</string>
+                          </property>
+                          <property name="wrapping">
+                           <bool>false</bool>
+                          </property>
+                          <property name="frame">
+                           <bool>false</bool>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignCenter</set>
+                          </property>
+                          <property name="buttonSymbols">
+                           <enum>QAbstractSpinBox::NoButtons</enum>
+                          </property>
+                          <property name="suffix">
+                           <string> ms</string>
+                          </property>
+                          <property name="prefix">
+                           <string>width: </string>
+                          </property>
+                          <property name="minimum">
+                           <number>1</number>
+                          </property>
+                          <property name="maximum">
+                           <number>50</number>
+                          </property>
+                          <property name="value">
+                           <number>2</number>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="verticalSpacer_9">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>10</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item row="2" column="0">
+                      <layout class="QHBoxLayout" name="horizontalLayout_29" stretch="1,1,1">
+                       <property name="spacing">
+                        <number>1</number>
+                       </property>
+                       <item>
+                        <spacer name="horizontalSpacer_25">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="b_decreaseCycleLength_6">
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="sizeIncrement">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="baseSize">
+                          <size>
+                           <width>100</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>-</string>
+                         </property>
+                         <property name="autoRepeat">
+                          <bool>true</bool>
+                         </property>
+                         <property name="autoRepeatInterval">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_26">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QSlider" name="b_stimulusWidthSlider_2">
+                       <property name="minimumSize">
+                        <size>
+                         <width>10</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="minimum">
+                        <number>1</number>
+                       </property>
+                       <property name="maximum">
+                        <number>50</number>
+                       </property>
+                       <property name="pageStep">
+                        <number>5</number>
+                       </property>
+                       <property name="value">
+                        <number>2</number>
+                       </property>
+                       <property name="sliderPosition">
+                        <number>2</number>
+                       </property>
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="invertedAppearance">
+                        <bool>false</bool>
+                       </property>
+                       <property name="invertedControls">
+                        <bool>false</bool>
+                       </property>
+                       <property name="tickPosition">
+                        <enum>QSlider::TicksAbove</enum>
+                       </property>
+                       <property name="tickInterval">
+                        <number>5</number>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
                  </layout>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_8">
-                 <property name="text">
-                  <string>Load Protocol</string>
+                <widget class="QPushButton" name="b_startStimulationProcedure">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>50</height>
+                  </size>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_6">
-                 <property name="text">
-                  <string>Save Protocol</string>
+                 <property name="font">
+                  <font>
+                   <pointsize>-1</pointsize>
+                  </font>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_5">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
                  <property name="text">
-                  <string>STIMULATE</string>
+                  <string>START STIMULATION PROTOCOL</string>
                  </property>
                 </widget>
                </item>
@@ -8092,7 +8462,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_decreaseCycleLength</sender>
    <signal>clicked()</signal>
-   <receiver>sb_cycleLength</receiver>
+   <receiver>sb_cycleLength_S1</receiver>
    <slot>stepDown()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8108,7 +8478,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_increaseCycleLength</sender>
    <signal>clicked()</signal>
-   <receiver>sb_cycleLength</receiver>
+   <receiver>sb_cycleLength_S1</receiver>
    <slot>stepUp()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8124,7 +8494,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_cycleCountSlider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>sb_cycleCount</receiver>
+   <receiver>sb_cycleCount_S1</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8140,7 +8510,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_increaseCycleLength_2</sender>
    <signal>clicked()</signal>
-   <receiver>sb_cycleLength_2</receiver>
+   <receiver>sb_cycleLength_S2</receiver>
    <slot>stepUp()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8156,7 +8526,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_increaseCycleLength_3</sender>
    <signal>clicked()</signal>
-   <receiver>sb_cycleLength_3</receiver>
+   <receiver>sb_cycleLength_S3</receiver>
    <slot>stepUp()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8172,7 +8542,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_decreaseCycleLength_2</sender>
    <signal>clicked()</signal>
-   <receiver>sb_cycleLength_2</receiver>
+   <receiver>sb_cycleLength_S2</receiver>
    <slot>stepDown()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8188,7 +8558,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_decreaseCycleLength_3</sender>
    <signal>clicked()</signal>
-   <receiver>sb_cycleLength_3</receiver>
+   <receiver>sb_cycleLength_S3</receiver>
    <slot>stepDown()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8204,7 +8574,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_cycleCountSlider_2</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>sb_cycleCount_2</receiver>
+   <receiver>sb_cycleCount_S2</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8220,7 +8590,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
   <connection>
    <sender>b_cycleCountSlider_3</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>sb_cycleCount_3</receiver>
+   <receiver>sb_cycleCount_S3</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -8230,22 +8600,6 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
     <hint type="destinationlabel">
      <x>283</x>
      <y>191</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>b_pacingModeCycle</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>sb_pacingCycles</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>97</x>
-     <y>296</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>97</x>
-     <y>317</y>
     </hint>
    </hints>
   </connection>
@@ -8278,6 +8632,102 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
     <hint type="destinationlabel">
      <x>192</x>
      <y>427</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sb_cycleCount_S1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>b_cycleCountSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>128</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>170</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sb_cycleCount_S2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>b_cycleCountSlider_2</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>255</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sb_cycleCount_S3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>b_cycleCountSlider_3</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>298</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cb_S2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>stimEP_display_2</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>213</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>b_increaseCouplingInterval</sender>
+   <signal>clicked()</signal>
+   <receiver>sb_couplingInterval</receiver>
+   <slot>stepUp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>148</x>
+     <y>352</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>149</x>
+     <y>435</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>b_decreaseCouplingInterval</sender>
+   <signal>clicked()</signal>
+   <receiver>sb_couplingInterval</receiver>
+   <slot>stepDown()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>149</x>
+     <y>480</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>149</x>
+     <y>435</y>
     </hint>
    </hints>
   </connection>

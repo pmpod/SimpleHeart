@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['d_5fcurve',['d_curve',['../class_default_plot.html#a154b2bb7e4528185f88ff204da70e4de',1,'DefaultPlot']]],
-  ['d_5fdata',['d_data',['../class_default_plot.html#aa78c1b3ad9d6328731ecae5a27b9d0b1',1,'DefaultPlot']]],
-  ['d_5fmrk1',['d_mrk1',['../class_default_plot.html#ada5a5d4e6f0996d79b0a4ba353f12726',1,'DefaultPlot']]],
-  ['d_5fmrk2',['d_mrk2',['../class_default_plot.html#a8021357960017f7338d48981e32b8ae4',1,'DefaultPlot']]],
-  ['d_5fpicker',['d_picker',['../class_default_plot.html#afc5eba9a9ff1a5fa825fd34dc5637b68',1,'DefaultPlot']]],
-  ['diffusionpainter',['diffusionPainter',['../class_simple_heart.html#ad1a89c2f1818a2e2e548d98e1c49a7dc',1,'SimpleHeart']]]
+  ['earliernode',['earlierNode',['../struct_time_tree.html#a46ade43f75331b3d9582a3f0da6431c9',1,'TimeTree']]],
+  ['electrode1_5fpositionx',['electrode1_positionX',['../classatrial_parameters.html#a44f5668473c695b3aa2ed0c4ebb9c29b',1,'atrialParameters']]],
+  ['electrode1_5fpositiony',['electrode1_positionY',['../classatrial_parameters.html#acd80064efc3a239b403182cb924df0ee',1,'atrialParameters']]],
+  ['electrode2_5fpositionx',['electrode2_positionX',['../classatrial_parameters.html#a027e2b6f3c68a236396d959331870fbe',1,'atrialParameters']]],
+  ['electrode2_5fpositiony',['electrode2_positionY',['../classatrial_parameters.html#a24f980562239743387bf28ecec77b466',1,'atrialParameters']]],
+  ['electrode3_5fpositionx',['electrode3_positionX',['../classatrial_parameters.html#a59a747cd77415eb3beb5f80b3ef9b2ce',1,'atrialParameters']]],
+  ['electrode3_5fpositiony',['electrode3_positionY',['../classatrial_parameters.html#a295e8d16e09fedea5046689b16bac8ff',1,'atrialParameters']]]
 ];

@@ -8,6 +8,7 @@ var searchData=
   ['_7edefaultplot',['~DefaultPlot',['../class_default_plot.html#a102c42148b1e4c49dd77d0e4cf8cb05a',1,'DefaultPlot']]],
   ['_7ediffusionmatrix',['~DiffusionMatrix',['../class_diffusion_matrix.html#a175bf7eb84803e6cda2b7b5fb044cbe8',1,'DiffusionMatrix']]],
   ['_7ediffusionpainter',['~DiffusionPainter',['../class_diffusion_painter.html#a4e93ad45e684e622a6923bbf9871d04e',1,'DiffusionPainter']]],
+  ['_7eepstimulator',['~EpStimulator',['../class_ep_stimulator.html#a2ec12a7fa398e175ad6f60294f749db8',1,'EpStimulator']]],
   ['_7efitzhughnagumo',['~FitzHughNagumo',['../class_fitz_hugh_nagumo.html#a1bc8c62851f3b2306b403ea65f9034ca',1,'FitzHughNagumo']]],
   ['_7eforwardeulerstrategy',['~ForwardEulerStrategy',['../class_forward_euler_strategy.html#a2c712bdc098b10499d8033b14302526c',1,'ForwardEulerStrategy']]],
   ['_7eglatrium',['~glAtrium',['../classgl_atrium.html#aab01fe62e0f7734e3b91b42a11d32db7',1,'glAtrium']]],

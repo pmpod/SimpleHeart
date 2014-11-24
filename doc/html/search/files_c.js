@@ -1,15 +1,11 @@
 var searchData=
 [
-  ['simpleheart_2ecpp',['simpleheart.cpp',['../simpleheart_8cpp.html',1,'']]],
-  ['simpleheart_2eh',['simpleheart.h',['../simpleheart_8h.html',1,'']]],
-  ['simviewstate_2ecpp',['SimViewState.cpp',['../_sim_view_state_8cpp.html',1,'']]],
-  ['simviewstate_2eh',['SimViewState.h',['../_sim_view_state_8h.html',1,'']]],
-  ['simviewstatediffusion_2ecpp',['SimViewStateDiffusion.cpp',['../_sim_view_state_diffusion_8cpp.html',1,'']]],
-  ['simviewstatediffusion_2eh',['SimViewStateDiffusion.h',['../_sim_view_state_diffusion_8h.html',1,'']]],
-  ['simviewstateep_2ecpp',['SimViewStateEP.cpp',['../_sim_view_state_e_p_8cpp.html',1,'']]],
-  ['simviewstateep_2eh',['SimViewStateEP.h',['../_sim_view_state_e_p_8h.html',1,'']]],
-  ['simviewstatestructure_2ecpp',['SimViewStateStructure.cpp',['../_sim_view_state_structure_8cpp.html',1,'']]],
-  ['simviewstatestructure_2eh',['SimViewStateStructure.h',['../_sim_view_state_structure_8h.html',1,'']]],
-  ['simviewstateview_2ecpp',['SimViewStateView.cpp',['../_sim_view_state_view_8cpp.html',1,'']]],
-  ['simviewstateview_2eh',['SimViewStateView.h',['../_sim_view_state_view_8h.html',1,'']]]
+  ['randomgenerator_2ecpp',['RandomGenerator.cpp',['../_random_generator_8cpp.html',1,'']]],
+  ['randomgenerator_2eh',['RandomGenerator.h',['../_random_generator_8h.html',1,'']]],
+  ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
+  ['resource_2eh',['resource.h',['../resource_8h.html',1,'']]],
+  ['rrcalculator_2ecpp',['RRcalculator.cpp',['../_r_rcalculator_8cpp.html',1,'']]],
+  ['rrcalculator_2eh',['RRcalculator.h',['../_r_rcalculator_8h.html',1,'']]],
+  ['rrplot_2ecpp',['rrPlot.cpp',['../rr_plot_8cpp.html',1,'']]],
+  ['rrplot_2eh',['rrPlot.h',['../rr_plot_8h.html',1,'']]]
 ];

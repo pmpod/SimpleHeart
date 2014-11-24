@@ -7,7 +7,6 @@ var searchData=
   ['calculatevaren',['calculateVarEn',['../class_r_rcalculator.html#ac55486650721726e4193bdc77b2f6bbe',1,'RRcalculator']]],
   ['cardiacmesh',['CardiacMesh',['../class_cardiac_mesh.html#a864c30e0e6cdab5e1a1e39ab99a45e5b',1,'CardiacMesh']]],
   ['cartesiangrid',['CartesianGrid',['../class_cartesian_grid.html#a6d38240514f179ef0b9e88f821841aff',1,'CartesianGrid']]],
-  ['changenode',['changeNode',['../class_cardiac_mesh.html#a5131c310815bf636bd6de60e61dc7c5e',1,'CardiacMesh']]],
   ['changestate',['ChangeState',['../class_sim_view_state.html#a272419ea4de89cc111205ebde1c8c820',1,'SimViewState']]],
   ['clear',['clear',['../class_curve_data.html#ae898810872a274a681ab60131ecf922b',1,'CurveData::clear()'],['../class_default_plot.html#ad5983e28b973fa6050d1d38243c4d18d',1,'DefaultPlot::clear()'],['../class_diffusion_matrix.html#a61a64d3a554984ac14ecaf8751eb4fce',1,'DiffusionMatrix::clear()'],['../classrr_plot.html#aa967ef18a8edb8ecd196198f10ecb97c',1,'rrPlot::clear()'],['../class_time_plot.html#a60cb1a4789413379c9d520a329d766f0',1,'TimePlot::clear()'],['../_time_tree_8cpp.html#ac2198b4b6be4df9987b8560f8190064c',1,'clear(TimeTree *&amp;node):&#160;TimeTree.cpp'],['../_time_tree_8h.html#ac2198b4b6be4df9987b8560f8190064c',1,'clear(TimeTree *&amp;node):&#160;TimeTree.cpp']]],
   ['clearwallcells',['clearWallCells',['../class_cardiac_mesh.html#a45cb6c32debebdc827e2c4f48e8f5ce2',1,'CardiacMesh']]],
@@ -21,7 +20,5 @@ var searchData=
   ['constructupdatetimetree',['constructUpdateTimeTree',['../class_allexandre_strategy.html#a19227368bd05ee1d3df2f655387a2dda',1,'AllexandreStrategy']]],
   ['count',['count',['../class_curve_data.html#a6d3c0bbc2069cc39f265aa8e9ee5ad73',1,'CurveData']]],
   ['curindex',['curIndex',['../class_r_rcalculator.html#aa0c89346708b0ec0b64b4256a0120c1f',1,'RRcalculator::curIndex()'],['../class_probe_electrode.html#a46067c4a2b7476692e48fb69c6ff5c77',1,'ProbeElectrode::curIndex()']]],
-  ['currentoscilatorpotential',['currentOscilatorPotential',['../class_atrial_machine2d.html#ab95917c203cf726da282efcfb26241a3',1,'AtrialMachine2d']]],
-  ['currentoscilatorpotential_5ftab',['currentOscilatorPotential_tab',['../class_atrial_machine2d.html#a8a2f2c40ae228ee8a2cf6f7457acfd28',1,'AtrialMachine2d']]],
   ['curvedata',['CurveData',['../class_curve_data.html#a4e9a1bb778f0cb2e7d573b88163cfd38',1,'CurveData']]]
 ];

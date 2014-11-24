@@ -6,10 +6,10 @@ SimViewStateView* SimViewStateView::_instance = nullptr;
 SimViewStateView::SimViewStateView()
 {
 	cursorRadius = 2.0;
-	_mode = 1;//POTENTIAL
+	_mode = 6;//POTENTIAL
 	setPalette(DP_HOTTOCOLD);
-
-
+	_minRefractoryTreshold = 50.0; //[ms]
+	_derivativeTreshold = 0.1;
 
 
 }
@@ -129,6 +129,29 @@ void SimViewStateView::paintCursor(glAtrium* view)
 	view->setCursor(QCursor(*m_LPixmap));
 }
 //--------------------------------------------------
+
+void SimViewStateView::processActivationTimes(glAtrium* view, int oscillatorID)
+{
+	CardiacMesh *msh = view->linkToMesh;
+	//[0] Read the Transmembrane potential value from the cell
+	//double potential = msh->m_mesh[oscillatorID]->m_v_scaledPotential;
+	Oscillator* osc = msh->m_mesh[oscillatorID];
+	double dtime = osc->getCurrentTime() - osc->getPreviousTime();
+	//double derivative = (osc->m_v_scaledPotential - osc->m_previous_scaledPotential) / dtime;
+	double derivative = (osc->m_v_scaledPotential - osc->m_potentialHistory[0]);
+
+	//[1] Simple peak (depolarisation) detection algorithm for transmembrane potential;
+
+	//osc->m_lastHistoryIterator
+	//osc->m_potentialHistory[(osc->m_lastHistoryIterator + 1) % OSC_HISTORY_SIZE] = osc->m_v_scaledPotential;
+	if (derivative > _derivativeTreshold &&
+		(osc->getCurrentTime() - osc->m_lastActivationTime) > _minRefractoryTreshold)
+	{
+		osc->m_lastActivationTime = osc->getCurrentTime();
+	}
+	osc->m_potentialHistory[0] = osc->m_v_scaledPotential;
+	
+}
 void SimViewStateView::paintModel(glAtrium* view)
 {
 	CardiacMesh *msh = view->linkToMesh;
@@ -136,9 +159,35 @@ void SimViewStateView::paintModel(glAtrium* view)
 	int vertexNumber = msh->m_vertexList.size();
 
 	GLfloat val1;
-	GLfloat vmin = msh->minElectrogram;
-	GLfloat vmax = msh->maxElectrogram;
-	
+
+
+	switch (_mode)
+	{
+	case 1:
+		vmin = msh->minPotential;
+		vmax = msh->maxPotential;
+		break;
+	case 2:
+		vmin = -1;
+		vmax = 1;
+		break;
+	case 3:
+		vmin = 0;
+		vmax = 1;
+		break;
+	case 4:
+		break;
+	case 5:
+		vmin = msh->minElectrogram;
+		vmax = msh->maxElectrogram;
+		break;
+	case 6: //ActivationTime _ Wzglednie
+		vmax = previous_vmax;
+		vmin = previous_vmin;
+		previous_vmin = previous_vmax;
+		break;
+	}
+
 	for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
 	{
 		if (oscs[currentVertex]->m_type != SOLID_WALL)
@@ -159,6 +208,12 @@ void SimViewStateView::paintModel(glAtrium* view)
 				break;
 			case 5:
 				val1 = oscs[currentVertex]->m_v_electrogram;
+				break;
+			case 6: //ActivationTime _ Wzglednie
+				processActivationTimes(view, currentVertex);
+				val1 = oscs[currentVertex]->m_lastActivationTime;
+				val1 > previous_vmax ? previous_vmax = val1 : 0;
+				val1 < previous_vmin ? previous_vmin = val1 : 0;
 				break;
 			}
 			colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
@@ -311,8 +366,8 @@ void SimViewStateView::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 		view->testProbe.x = view->linkToMesh->m_mesh[item]->m_x;
 		view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
 		view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
-		view->linkToMachine->stimulator.setStimulationSiteID(view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z));
-		view->linkToMachine->stimulatorOn();
+		view->linkToMachine->stimulator->setStimulationSiteID(view->itemAt(view->directionRay.x, view->directionRay.y, view->directionRay.z));
+		view->linkToMachine->stimulator->start(view->linkToMesh);
 	}	
 }
 void SimViewStateView::handleMouseRightPress(glAtrium* view, QMouseEvent *event)
@@ -324,7 +379,8 @@ void SimViewStateView::handleMouseRelease(glAtrium* view, QMouseEvent *event)
 {
 	view->setLastPos(event->pos());
 
-	view->linkToMachine->stimulatorOff();
+	view->linkToMachine->stimulator->stop(view->linkToMesh);
+	view->linkToMachine->stimulator->setStimulationSiteID(view->linkToMachine->probeOscillator[0]->getOscillatorID());
 	//if (Qt::LeftButton)
 	//{
 	//	glGetFloatv(GL_MODELVIEW_MATRIX, view->m);
@@ -441,4 +497,76 @@ void SimViewStateView::handleMouseMove(glAtrium* view, QMouseEvent *event)
 		//view->lastPos = event->pos();
 	}
 	view->updateGL();
+}
+
+
+float FindLargestEntry(const Matrix3 &m){
+	float result = 0.0f;
+	for (int i = 0; i<3; i++){
+		for (int j = 0; j<3; j++){
+			float entry = fabs(m[3*i+j]);
+			result = max(entry, result);
+		}
+	}
+	return result;
+}
+
+Vector3 FindEigenVectorAssociatedWithLargestEigenValue(const Matrix3 &m){
+	//pre-condition
+	float scale = FindLargestEntry(m);
+	Matrix3 mc = (1.0f / scale)*m;
+	mc = mc*mc;
+	mc = mc*mc;
+	mc = mc*mc;
+	Vector3 v(1, 1, 1);
+	Vector3 lastV = v;
+	for (int i = 0; i<100; i++){
+		v = (mc*v).normalize();
+		if ((v.distance(lastV)*v.distance(lastV))<1e-16f)
+		{
+			break;
+		}
+		lastV = v;
+	}
+	return v;
+}
+
+void FindLLSQPlane(Vector3 *points, int count, Vector3 *destCenter, Vector3 *destNormal){
+	assert(count>0);
+	Vector3 sum(0, 0, 0);
+	for (int i = 0; i<count; i++){
+		sum += points[i];
+	}
+	Vector3 center = sum*(1.0f / count);
+	if (destCenter){
+		*destCenter = center;
+	}
+	if (!destNormal){
+		return;
+	}
+	float sumXX = 0.0f, sumXY = 0.0f, sumXZ = 0.0f;
+	float sumYY = 0.0f, sumYZ = 0.0f;
+	float sumZZ = 0.0f;
+	for (int i = 0; i<count; i++){
+		float diffX = points[i].x - center.x;
+		float diffY = points[i].y - center.y;
+		float diffZ = points[i].z - center.z;
+		sumXX += diffX*diffX;
+		sumXY += diffX*diffY;
+		sumXZ += diffX*diffZ;
+		sumYY += diffY*diffY;
+		sumYZ += diffY*diffZ;
+		sumZZ += diffZ*diffZ;
+	}
+	Matrix3 m(sumXX, sumXY, sumXZ, \
+		sumXY, sumYY, sumYZ, \
+		sumXZ, sumYZ, sumZZ);
+
+	float det = m.getDeterminant();
+	if (det == 0.0f){
+		//m.GetNullSpace(destNormal, NULL, NULL);
+		return;
+	}
+	Matrix3 mInverse = m.invert();
+	*destNormal = FindEigenVectorAssociatedWithLargestEigenValue(mInverse);
 }

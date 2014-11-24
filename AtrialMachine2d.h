@@ -39,14 +39,13 @@ public:
 	std::vector<ProbeElectrode*> probeOscillator;
 	CardiacMesh* m_grid;
 	NumericStrategy* m_strategy;
-	EpStimulator	stimulator;
+	EpStimulator*	stimulator;
 	//-------------------------------------------------------------
 	double m_globalTime;
 
 	//bool structureUpdated;
 
 private:
-	bool			_stimulatorOn;
 	int				_skip;
 
 	//TODO - the same in Mesh??
@@ -59,9 +58,9 @@ public slots:
 	void setForwardEulerStrategy();
 	void setAllexandreStrategy();
 	double processStep();
+
+	void startStimulatorProcedure();
 	void reset();
-	void stimulatorOn();
-	void stimulatorOff();
 
 
 	void calculateFullElectrogramMap();

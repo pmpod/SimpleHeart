@@ -31,10 +31,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_allexandre_strategy_8cpp.html",
-"class_cardiac_mesh.html#abf74825fdb7bc14445c25877f06e36af",
-"class_probe.html#a2cad80c5851ce1ab165f41e56075853d",
-"classatrial_parameters.html#a510dcbc3ee2997b618474595176ae1bf",
-"functions_func.html"
+"class_cartesian_grid.html#a18e5aa40e8b9cd1871110dc1746400b8",
+"class_probe.html#a740a926e11b7723f3069d163a0b44c57",
+"classatrial_parameters.html#a50517d9e60f1b3e94d1ec7d8e1f9c761",
+"functions_f.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

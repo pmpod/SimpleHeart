@@ -8,6 +8,7 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 {
 	m_strategy = nullptr;
 	m_definitions = definitions;
+	stimulator = EpStimulator::Instance();
 	init();
 
 	m_grid = grid;
@@ -45,7 +46,6 @@ void AtrialMachine2d::init()
 {
 	 m_globalTime = 0;
 	 _skip = m_definitions->m_mainSkip;
-	 _stimulatorOn = false;
 }
 //------------------------------------------------------------------------------------------
 void AtrialMachine2d::reset()
@@ -66,14 +66,14 @@ double AtrialMachine2d::processStep()
 	m_grid->minElectrogram = m_grid->minPotential;
 	m_grid->maxElectrogram = m_grid->maxPotential;
 
-	if (_stimulatorOn)
+	if (stimulator->stimulatorIsOn())
 	{
-		stimulator.run(m_grid);
+		stimulator->run(m_grid, m_globalTime);
 	}
-	else {
-		stimulator.stop(m_grid);
+	//else {
+	//	stimulator.stop(m_grid);
+	//}
 
-	}
 	//if (m_definitions->m_ectopicActivity && stimulationBegun == false)
 	//{
 	//	startStimulation(m_grid->m_mesh[m_grid->m_stimulationID], m_grid->m_stimulationID, 2, 0.1);
@@ -138,5 +138,7 @@ void AtrialMachine2d::setUniformERP(double value)
 	}
 }
 
-void AtrialMachine2d::stimulatorOn() { _stimulatorOn = true; }
-void AtrialMachine2d::stimulatorOff(){ _stimulatorOn = false; }
+void AtrialMachine2d::startStimulatorProcedure()
+{
+	stimulator->start(m_grid);
+}

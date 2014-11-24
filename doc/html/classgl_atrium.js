@@ -44,5 +44,7 @@ var classgl_atrium =
     [ "SimViewStateEP", "classgl_atrium.html#a76eb2c10fcf71ef86e90466fa0becdcb", null ],
     [ "SimViewStateStructure", "classgl_atrium.html#a05f31e8af7a8b263cc06dbc57b20f144", null ],
     [ "SimViewStateView", "classgl_atrium.html#a3784e26d08f8db67d4187df43944ad76", null ],
-    [ "linkToMesh", "classgl_atrium.html#a8ded24946b8c91b4e1fb7f4f0545a6b0", null ]
+    [ "linkToMesh", "classgl_atrium.html#a8ded24946b8c91b4e1fb7f4f0545a6b0", null ],
+    [ "paintValueDiffusion", "classgl_atrium.html#a2dc7a9f9a09eeb04eee7fd51e2b6d889", null ],
+    [ "paintValueERP", "classgl_atrium.html#a501f9f86fd740a933a6e20efad9ff599", null ]
 ];

@@ -11,7 +11,6 @@ var searchData=
   ['allexandrestrategy',['AllexandreStrategy',['../class_allexandre_strategy.html',1,'AllexandreStrategy'],['../class_allexandre_strategy.html#ac14cc10857d943bd555f828fd3c8004d',1,'AllexandreStrategy::AllexandreStrategy()']]],
   ['allexandrestrategy_2ecpp',['AllexandreStrategy.cpp',['../_allexandre_strategy_8cpp.html',1,'']]],
   ['allexandrestrategy_2eh',['AllexandreStrategy.h',['../_allexandre_strategy_8h.html',1,'']]],
-  ['amp',['amp',['../classburster.html#aa638e8e2506c3d30f078c0b87154f998',1,'burster']]],
   ['append',['append',['../class_curve_data.html#aa5a619af9980fa45612c98d438444b07',1,'CurveData']]],
   ['appenddata',['appendData',['../class_default_plot.html#a854d9542172051ce35f1a0c4feb53f33',1,'DefaultPlot::appendData(double x, double y, int curve_id)'],['../class_default_plot.html#acff90f7cdbbd829abfca06ed24507da7',1,'DefaultPlot::appendData(double *x, double *y, int size, int curve_id)']]],
   ['appendrr',['appendRR',['../classrr_plot.html#ae2dd42e0e8f94bc4b1f9b4bc5e917bcb',1,'rrPlot']]],

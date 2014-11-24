@@ -3,6 +3,7 @@
 #include <vector>
 #include <heartDefines.h>
 
+#define OSC_HISTORY_SIZE 4
 class TimeTree;
 
 /*! \class Oscillator
@@ -49,6 +50,10 @@ public:
 	double m_sigmaY;
 	double m_sigmaZ;
 	double m_ConnexinSum;
+	double m_potentialHistory[OSC_HISTORY_SIZE];
+	short m_lastHistoryIterator;
+	double m_lastActivationTime;
+
 	std::vector<Oscillator*> m_wallCells;		///Vector of pointers to neighbour oscillators
 	std::vector<Oscillator*> m_neighbours;		///Vector of pointers to neighbour oscillators
 	std::vector<double> m_connexin;			///Vector of diffusion coefficients associated with neighbours

@@ -17,7 +17,7 @@ var searchData=
   ['diffusionmatrix',['DiffusionMatrix',['../class_diffusion_matrix.html',1,'DiffusionMatrix'],['../class_diffusion_matrix.html#af115adf5551344dbe3f138f1bd322366',1,'DiffusionMatrix::DiffusionMatrix()']]],
   ['diffusionmatrix_2ecpp',['DiffusionMatrix.cpp',['../_diffusion_matrix_8cpp.html',1,'']]],
   ['diffusionmatrix_2eh',['DiffusionMatrix.h',['../_diffusion_matrix_8h.html',1,'']]],
-  ['diffusionpainter',['DiffusionPainter',['../class_diffusion_painter.html',1,'DiffusionPainter'],['../class_simple_heart.html#ad1a89c2f1818a2e2e548d98e1c49a7dc',1,'SimpleHeart::diffusionPainter()'],['../class_diffusion_painter.html#a171b9c615611e9f225187f81807c00cf',1,'DiffusionPainter::DiffusionPainter()']]],
+  ['diffusionpainter',['DiffusionPainter',['../class_diffusion_painter.html',1,'DiffusionPainter'],['../class_diffusion_painter.html#a171b9c615611e9f225187f81807c00cf',1,'DiffusionPainter::DiffusionPainter()'],['../class_simple_heart.html#ad1a89c2f1818a2e2e548d98e1c49a7dc',1,'SimpleHeart::diffusionPainter()']]],
   ['diffusionpainter_2ecpp',['DiffusionPainter.cpp',['../_diffusion_painter_8cpp.html',1,'']]],
   ['diffusionpainter_2eh',['DiffusionPainter.h',['../_diffusion_painter_8h.html',1,'']]],
   ['disp_5fpalette',['DISP_PALETTE',['../_sim_view_state_8h.html#aac0f40b4af712e3b80d1b769cb0161d3',1,'SimViewState.h']]],

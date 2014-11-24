@@ -10,17 +10,6 @@ Class contatining the full information about the model and helper functions to b
 
 {\ttfamily \#include $<$Cardiac\+Mesh.\+h$>$}
 
-Inheritance diagram for Cardiac\+Mesh\+:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{class_cardiac_mesh}
-\end{center}
-\end{figure}
-\subsection*{Public Slots}
-\begin{DoxyCompactItemize}
-\item 
-int \hyperlink{class_cardiac_mesh_a5131c310815bf636bd6de60e61dc7c5e}{change\+Node} (int x, int y, \hyperlink{heart_defines_8h_a2f059cd81f362503874790462d535f5b}{C\+E\+L\+L\+\_\+\+T\+Y\+P\+E} m\+\_\+type)
-\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,13 +29,9 @@ void \hyperlink{class_cardiac_mesh_a45cb6c32debebdc827e2c4f48e8f5ce2}{clear\+Wal
 \item 
 void \hyperlink{class_cardiac_mesh_a5fb6507c440aeb2d947663047fbdac92}{set\+Diffusion\+Coefficients} ()
 \item 
-double \hyperlink{class_cardiac_mesh_a67e146331d7c41e3d528861594ac577e}{get\+Size\+In\+Mm} ()
+const double \hyperlink{class_cardiac_mesh_a42566f30cadab259f5905bb118220f6a}{size\+In\+Mm} ()
 \begin{DoxyCompactList}\small\item\em Returns the distance between two most distant nodes in mm(estimate of the size of the mesh) \end{DoxyCompactList}\item 
-double \hyperlink{class_cardiac_mesh_ab4705e8f6f5657337295f076494e9a45}{get\+Delta\+R} ()
-\item 
-void \hyperlink{class_cardiac_mesh_afb67d1d5f4e382916e9c8f044739887b}{start\+Stimulation} (\hyperlink{class_oscillator}{Oscillator} $\ast$osc, const int \&id, const double radius, const double strength)
-\item 
-void \hyperlink{class_cardiac_mesh_a5b11cbba123533dcf60e5bf1a7bba9cc}{stop\+Stimulation} ()
+const double \hyperlink{class_cardiac_mesh_a219a641ed3e91234a3fb76f51cec326f}{min\+Nodal\+Spacing} ()
 \item 
 double \hyperlink{class_cardiac_mesh_abf74825fdb7bc14445c25877f06e36af}{calculate\+Electrogram} (\hyperlink{class_oscillator}{Oscillator} $\ast$osc)
 \end{DoxyCompactItemize}
@@ -62,41 +47,31 @@ static \hyperlink{class_cardiac_mesh}{Cardiac\+Mesh} $\ast$ \hyperlink{class_car
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{class_cardiac_mesh_ac14b1f228c8426e067df4a925824348e}{stimulation\+Begun}
-\item 
-double \hyperlink{class_cardiac_mesh_a4eeec3a9a09b9bc7e68ca3f7b34ea36c}{m\+\_\+ectopic\+Amplitude}
-\item 
-int \hyperlink{class_cardiac_mesh_a196d79c37896623ae3957949525c1e1d}{m\+\_\+stimulation\+I\+D}
-\item 
 std\+::vector$<$ \hyperlink{class_oscillator}{Oscillator} $\ast$ $>$ \hyperlink{class_cardiac_mesh_acd49de8f8f878f45c927d4b75851ced6}{m\+\_\+mesh}
 \item 
 std\+::vector$<$ \hyperlink{class_oscillator}{Oscillator} $\ast$ $>$ \hyperlink{class_cardiac_mesh_a21749f0b4af8fe59552f97058982f695}{m\+\_\+under\+Stimulation}
 \item 
+bool \hyperlink{class_cardiac_mesh_ac14b1f228c8426e067df4a925824348e}{stimulation\+Begun}
+\item 
 double \hyperlink{class_cardiac_mesh_ad1bf6fc56cbc55f30f9a3855cdafc316}{m\+\_\+simulation\+Time}
 \item 
-double \hyperlink{class_cardiac_mesh_a48ee051becaeae6be8d4d1b1569645d2}{m\+\_\+maximum\+C\+V}
+double \hyperlink{class_cardiac_mesh_a368d38e1e90d407ffff649c9b7a3e188}{maximum\+C\+V}
 \item 
-double \hyperlink{class_cardiac_mesh_a6856db8aafe754a849a77412106deda9}{m\+\_\+max\+Electrogram}
+double \hyperlink{class_cardiac_mesh_a086be28c59e4edcebade42b3bdf51f01}{max\+Electrogram}
 \item 
-double \hyperlink{class_cardiac_mesh_abbc3c7dce57ceccaa344cbbaae6eed21}{m\+\_\+min\+Electrogram}
+double \hyperlink{class_cardiac_mesh_a6b6807ee55b0b31ff4b9c34bd94eace1}{min\+Electrogram}
 \item 
-double \hyperlink{class_cardiac_mesh_acf9c4e05fe3e0b13f5ca4a849748118d}{m\+\_\+max\+Potential}
+double \hyperlink{class_cardiac_mesh_afda78e5c2917e42ba401dc1be7f84f1f}{max\+Potential}
 \item 
-double \hyperlink{class_cardiac_mesh_a7b0d715081602222475ff5c6ae8f2acc}{m\+\_\+min\+Potential}
+double \hyperlink{class_cardiac_mesh_af4837ac47dd1c8f12b400a0ca7c1c94f}{min\+Potential}
 \item 
-double \hyperlink{class_cardiac_mesh_ac7968bb85917957180118029870ce108}{\+\_\+max\+Diffusion}
+double \hyperlink{class_cardiac_mesh_a12c5bfc555eca8ecff53e9a5977d8be4}{max\+Diffusion}
 \item 
-double \hyperlink{class_cardiac_mesh_ad5332ffd84e257d3c194b875df2c972f}{\+\_\+min\+Diffusion}
+double \hyperlink{class_cardiac_mesh_a5f461b34861dc6f7a343bcdbd79a35d3}{min\+Diffusion}
 \item 
-double \hyperlink{class_cardiac_mesh_a3450acbee174effe8dae1ea148a0ae73}{\+\_\+max\+E\+R\+P}
+double \hyperlink{class_cardiac_mesh_a6a0691957ee41597ea241be5bb740bf2}{max\+E\+R\+P}
 \item 
-double \hyperlink{class_cardiac_mesh_adb965ba95cdba95f197d1e4dc8cb339a}{\+\_\+min\+E\+R\+P}
-\item 
-int \hyperlink{class_cardiac_mesh_aea33a4be0162859a292958757ac934fc}{m\+\_\+size}
-\item 
-double \hyperlink{class_cardiac_mesh_a100654a6bb2237fc09cef29c517818ad}{m\+\_\+minimum\+Distance}
-\item 
-double \hyperlink{class_cardiac_mesh_a05ed4402cf331198ee5021c65ac37e23}{m\+\_\+maximum\+Distance}
+double \hyperlink{class_cardiac_mesh_a4aae36cc4fd814771864c32d52d24480}{min\+E\+R\+P}
 \item 
 bool \hyperlink{class_cardiac_mesh_aa23210cc3b7de35c82ebbcde43e053c2}{structure\+Updated}
 \item 
@@ -151,15 +126,6 @@ calculate the rotation and display center of the mesh (geometrical center)
 \item[{{\bf Oscillator} $\ast$}]{osc}
 \end{DoxyParamCaption}
 )}}\label{class_cardiac_mesh_abf74825fdb7bc14445c25877f06e36af}
-\hypertarget{class_cardiac_mesh_a5131c310815bf636bd6de60e61dc7c5e}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!change\+Node@{change\+Node}}
-\index{change\+Node@{change\+Node}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{change\+Node}]{\setlength{\rightskip}{0pt plus 5cm}int Cardiac\+Mesh\+::change\+Node (
-\begin{DoxyParamCaption}
-\item[{int}]{x, }
-\item[{int}]{y, }
-\item[{{\bf C\+E\+L\+L\+\_\+\+T\+Y\+P\+E}}]{m\+\_\+type}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{class_cardiac_mesh_a5131c310815bf636bd6de60e61dc7c5e}
 \hypertarget{class_cardiac_mesh_a45cb6c32debebdc827e2c4f48e8f5ce2}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!clear\+Wall\+Cells@{clear\+Wall\+Cells}}
 \index{clear\+Wall\+Cells@{clear\+Wall\+Cells}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{clear\+Wall\+Cells}]{\setlength{\rightskip}{0pt plus 5cm}void Cardiac\+Mesh\+::clear\+Wall\+Cells (
@@ -229,24 +195,6 @@ A static function constructing cylindrical \hyperlink{class_cardiac_mesh}{Cardia
 {}
 \end{DoxyParamCaption}
 )}}\label{class_cardiac_mesh_ac4e6a0774e1b1abf2ddbf2cc59434a92}
-\hypertarget{class_cardiac_mesh_ab4705e8f6f5657337295f076494e9a45}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!get\+Delta\+R@{get\+Delta\+R}}
-\index{get\+Delta\+R@{get\+Delta\+R}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{get\+Delta\+R}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::get\+Delta\+R (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{class_cardiac_mesh_ab4705e8f6f5657337295f076494e9a45}
-\hypertarget{class_cardiac_mesh_a67e146331d7c41e3d528861594ac577e}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!get\+Size\+In\+Mm@{get\+Size\+In\+Mm}}
-\index{get\+Size\+In\+Mm@{get\+Size\+In\+Mm}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{get\+Size\+In\+Mm}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::get\+Size\+In\+Mm (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{class_cardiac_mesh_a67e146331d7c41e3d528861594ac577e}
-
-
-Returns the distance between two most distant nodes in mm(estimate of the size of the mesh) 
-
 \hypertarget{class_cardiac_mesh_a85a7a7118237e9e2b238a4c3eb50fdc2}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!import\+Grid@{import\+Grid}}
 \index{import\+Grid@{import\+Grid}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{import\+Grid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cardiac\+Mesh} $\ast$ Cardiac\+Mesh\+::import\+Grid (
@@ -254,6 +202,13 @@ Returns the distance between two most distant nodes in mm(estimate of the size o
 \item[{const char $\ast$}]{inname}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{class_cardiac_mesh_a85a7a7118237e9e2b238a4c3eb50fdc2}
+\hypertarget{class_cardiac_mesh_a219a641ed3e91234a3fb76f51cec326f}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!min\+Nodal\+Spacing@{min\+Nodal\+Spacing}}
+\index{min\+Nodal\+Spacing@{min\+Nodal\+Spacing}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{min\+Nodal\+Spacing}]{\setlength{\rightskip}{0pt plus 5cm}const double Cardiac\+Mesh\+::min\+Nodal\+Spacing (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_cardiac_mesh_a219a641ed3e91234a3fb76f51cec326f}
 \hypertarget{class_cardiac_mesh_a5fb6507c440aeb2d947663047fbdac92}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!set\+Diffusion\+Coefficients@{set\+Diffusion\+Coefficients}}
 \index{set\+Diffusion\+Coefficients@{set\+Diffusion\+Coefficients}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{set\+Diffusion\+Coefficients}]{\setlength{\rightskip}{0pt plus 5cm}void Cardiac\+Mesh\+::set\+Diffusion\+Coefficients (
@@ -284,83 +239,35 @@ Create a list of all faces.
 {}
 \end{DoxyParamCaption}
 )}}\label{class_cardiac_mesh_ae84e8d8f86a437e47ea99d1bf212e2ce}
-\hypertarget{class_cardiac_mesh_afb67d1d5f4e382916e9c8f044739887b}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!start\+Stimulation@{start\+Stimulation}}
-\index{start\+Stimulation@{start\+Stimulation}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{start\+Stimulation}]{\setlength{\rightskip}{0pt plus 5cm}void Cardiac\+Mesh\+::start\+Stimulation (
-\begin{DoxyParamCaption}
-\item[{{\bf Oscillator} $\ast$}]{osc, }
-\item[{const int \&}]{id, }
-\item[{const double}]{radius, }
-\item[{const double}]{strength}
-\end{DoxyParamCaption}
-)}}\label{class_cardiac_mesh_afb67d1d5f4e382916e9c8f044739887b}
-\hypertarget{class_cardiac_mesh_a5b11cbba123533dcf60e5bf1a7bba9cc}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!stop\+Stimulation@{stop\+Stimulation}}
-\index{stop\+Stimulation@{stop\+Stimulation}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{stop\+Stimulation}]{\setlength{\rightskip}{0pt plus 5cm}void Cardiac\+Mesh\+::stop\+Stimulation (
+\hypertarget{class_cardiac_mesh_a42566f30cadab259f5905bb118220f6a}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!size\+In\+Mm@{size\+In\+Mm}}
+\index{size\+In\+Mm@{size\+In\+Mm}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{size\+In\+Mm}]{\setlength{\rightskip}{0pt plus 5cm}const double Cardiac\+Mesh\+::size\+In\+Mm (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{class_cardiac_mesh_a5b11cbba123533dcf60e5bf1a7bba9cc}
+)}}\label{class_cardiac_mesh_a42566f30cadab259f5905bb118220f6a}
+
+
+Returns the distance between two most distant nodes in mm(estimate of the size of the mesh) 
+
 
 
 \subsection{Member Data Documentation}
-\hypertarget{class_cardiac_mesh_ac7968bb85917957180118029870ce108}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!\+\_\+max\+Diffusion@{\+\_\+max\+Diffusion}}
-\index{\+\_\+max\+Diffusion@{\+\_\+max\+Diffusion}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{\+\_\+max\+Diffusion}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::\+\_\+max\+Diffusion}}\label{class_cardiac_mesh_ac7968bb85917957180118029870ce108}
-\hypertarget{class_cardiac_mesh_a3450acbee174effe8dae1ea148a0ae73}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!\+\_\+max\+E\+R\+P@{\+\_\+max\+E\+R\+P}}
-\index{\+\_\+max\+E\+R\+P@{\+\_\+max\+E\+R\+P}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{\+\_\+max\+E\+R\+P}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::\+\_\+max\+E\+R\+P}}\label{class_cardiac_mesh_a3450acbee174effe8dae1ea148a0ae73}
-\hypertarget{class_cardiac_mesh_ad5332ffd84e257d3c194b875df2c972f}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!\+\_\+min\+Diffusion@{\+\_\+min\+Diffusion}}
-\index{\+\_\+min\+Diffusion@{\+\_\+min\+Diffusion}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{\+\_\+min\+Diffusion}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::\+\_\+min\+Diffusion}}\label{class_cardiac_mesh_ad5332ffd84e257d3c194b875df2c972f}
-\hypertarget{class_cardiac_mesh_adb965ba95cdba95f197d1e4dc8cb339a}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!\+\_\+min\+E\+R\+P@{\+\_\+min\+E\+R\+P}}
-\index{\+\_\+min\+E\+R\+P@{\+\_\+min\+E\+R\+P}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{\+\_\+min\+E\+R\+P}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::\+\_\+min\+E\+R\+P}}\label{class_cardiac_mesh_adb965ba95cdba95f197d1e4dc8cb339a}
 \hypertarget{class_cardiac_mesh_a671a783c6a63a79cc29e0b0baf8eda08}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!center\+Geom@{center\+Geom}}
 \index{center\+Geom@{center\+Geom}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{center\+Geom}]{\setlength{\rightskip}{0pt plus 5cm}Vector3 Cardiac\+Mesh\+::center\+Geom}}\label{class_cardiac_mesh_a671a783c6a63a79cc29e0b0baf8eda08}
-\hypertarget{class_cardiac_mesh_a4eeec3a9a09b9bc7e68ca3f7b34ea36c}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+ectopic\+Amplitude@{m\+\_\+ectopic\+Amplitude}}
-\index{m\+\_\+ectopic\+Amplitude@{m\+\_\+ectopic\+Amplitude}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+ectopic\+Amplitude}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+ectopic\+Amplitude}}\label{class_cardiac_mesh_a4eeec3a9a09b9bc7e68ca3f7b34ea36c}
 \hypertarget{class_cardiac_mesh_a38f8cd7d06495c84b553eba41c9cb6be}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+indices\+Matrix@{m\+\_\+indices\+Matrix}}
 \index{m\+\_\+indices\+Matrix@{m\+\_\+indices\+Matrix}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{m\+\_\+indices\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint$\ast$ Cardiac\+Mesh\+::m\+\_\+indices\+Matrix}}\label{class_cardiac_mesh_a38f8cd7d06495c84b553eba41c9cb6be}
-\hypertarget{class_cardiac_mesh_a6856db8aafe754a849a77412106deda9}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+max\+Electrogram@{m\+\_\+max\+Electrogram}}
-\index{m\+\_\+max\+Electrogram@{m\+\_\+max\+Electrogram}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+max\+Electrogram}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+max\+Electrogram}}\label{class_cardiac_mesh_a6856db8aafe754a849a77412106deda9}
-\hypertarget{class_cardiac_mesh_a48ee051becaeae6be8d4d1b1569645d2}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+maximum\+C\+V@{m\+\_\+maximum\+C\+V}}
-\index{m\+\_\+maximum\+C\+V@{m\+\_\+maximum\+C\+V}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+maximum\+C\+V}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+maximum\+C\+V}}\label{class_cardiac_mesh_a48ee051becaeae6be8d4d1b1569645d2}
-\hypertarget{class_cardiac_mesh_a05ed4402cf331198ee5021c65ac37e23}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+maximum\+Distance@{m\+\_\+maximum\+Distance}}
-\index{m\+\_\+maximum\+Distance@{m\+\_\+maximum\+Distance}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+maximum\+Distance}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+maximum\+Distance}}\label{class_cardiac_mesh_a05ed4402cf331198ee5021c65ac37e23}
-\hypertarget{class_cardiac_mesh_acf9c4e05fe3e0b13f5ca4a849748118d}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+max\+Potential@{m\+\_\+max\+Potential}}
-\index{m\+\_\+max\+Potential@{m\+\_\+max\+Potential}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+max\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+max\+Potential}}\label{class_cardiac_mesh_acf9c4e05fe3e0b13f5ca4a849748118d}
 \hypertarget{class_cardiac_mesh_acd49de8f8f878f45c927d4b75851ced6}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+mesh@{m\+\_\+mesh}}
 \index{m\+\_\+mesh@{m\+\_\+mesh}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{m\+\_\+mesh}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Oscillator}$\ast$$>$ Cardiac\+Mesh\+::m\+\_\+mesh}}\label{class_cardiac_mesh_acd49de8f8f878f45c927d4b75851ced6}
-\hypertarget{class_cardiac_mesh_abbc3c7dce57ceccaa344cbbaae6eed21}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+min\+Electrogram@{m\+\_\+min\+Electrogram}}
-\index{m\+\_\+min\+Electrogram@{m\+\_\+min\+Electrogram}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+min\+Electrogram}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+min\+Electrogram}}\label{class_cardiac_mesh_abbc3c7dce57ceccaa344cbbaae6eed21}
-\hypertarget{class_cardiac_mesh_a100654a6bb2237fc09cef29c517818ad}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+minimum\+Distance@{m\+\_\+minimum\+Distance}}
-\index{m\+\_\+minimum\+Distance@{m\+\_\+minimum\+Distance}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+minimum\+Distance}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+minimum\+Distance}}\label{class_cardiac_mesh_a100654a6bb2237fc09cef29c517818ad}
-\hypertarget{class_cardiac_mesh_a7b0d715081602222475ff5c6ae8f2acc}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+min\+Potential@{m\+\_\+min\+Potential}}
-\index{m\+\_\+min\+Potential@{m\+\_\+min\+Potential}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+min\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+min\+Potential}}\label{class_cardiac_mesh_a7b0d715081602222475ff5c6ae8f2acc}
 \hypertarget{class_cardiac_mesh_a4ebcb3d40ec7fbfea0b8f230a1677a00}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+radius@{m\+\_\+radius}}
 \index{m\+\_\+radius@{m\+\_\+radius}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{m\+\_\+radius}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+radius}}\label{class_cardiac_mesh_a4ebcb3d40ec7fbfea0b8f230a1677a00}
 \hypertarget{class_cardiac_mesh_ad1bf6fc56cbc55f30f9a3855cdafc316}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+simulation\+Time@{m\+\_\+simulation\+Time}}
 \index{m\+\_\+simulation\+Time@{m\+\_\+simulation\+Time}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{m\+\_\+simulation\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::m\+\_\+simulation\+Time}}\label{class_cardiac_mesh_ad1bf6fc56cbc55f30f9a3855cdafc316}
-\hypertarget{class_cardiac_mesh_aea33a4be0162859a292958757ac934fc}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+size@{m\+\_\+size}}
-\index{m\+\_\+size@{m\+\_\+size}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}int Cardiac\+Mesh\+::m\+\_\+size}}\label{class_cardiac_mesh_aea33a4be0162859a292958757ac934fc}
-\hypertarget{class_cardiac_mesh_a196d79c37896623ae3957949525c1e1d}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+stimulation\+I\+D@{m\+\_\+stimulation\+I\+D}}
-\index{m\+\_\+stimulation\+I\+D@{m\+\_\+stimulation\+I\+D}!Cardiac\+Mesh@{Cardiac\+Mesh}}
-\subsubsection[{m\+\_\+stimulation\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}int Cardiac\+Mesh\+::m\+\_\+stimulation\+I\+D}}\label{class_cardiac_mesh_a196d79c37896623ae3957949525c1e1d}
 \hypertarget{class_cardiac_mesh_a21749f0b4af8fe59552f97058982f695}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+under\+Stimulation@{m\+\_\+under\+Stimulation}}
 \index{m\+\_\+under\+Stimulation@{m\+\_\+under\+Stimulation}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{m\+\_\+under\+Stimulation}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Oscillator}$\ast$$>$ Cardiac\+Mesh\+::m\+\_\+under\+Stimulation}}\label{class_cardiac_mesh_a21749f0b4af8fe59552f97058982f695}
@@ -370,6 +277,33 @@ Create a list of all faces.
 \hypertarget{class_cardiac_mesh_a0d622a665e0305897c133c8c4fe8733a}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!m\+\_\+vertex\+Matrix@{m\+\_\+vertex\+Matrix}}
 \index{m\+\_\+vertex\+Matrix@{m\+\_\+vertex\+Matrix}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{m\+\_\+vertex\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\+Vertex}$\ast$ Cardiac\+Mesh\+::m\+\_\+vertex\+Matrix}}\label{class_cardiac_mesh_a0d622a665e0305897c133c8c4fe8733a}
+\hypertarget{class_cardiac_mesh_a12c5bfc555eca8ecff53e9a5977d8be4}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!max\+Diffusion@{max\+Diffusion}}
+\index{max\+Diffusion@{max\+Diffusion}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{max\+Diffusion}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::max\+Diffusion}}\label{class_cardiac_mesh_a12c5bfc555eca8ecff53e9a5977d8be4}
+\hypertarget{class_cardiac_mesh_a086be28c59e4edcebade42b3bdf51f01}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!max\+Electrogram@{max\+Electrogram}}
+\index{max\+Electrogram@{max\+Electrogram}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{max\+Electrogram}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::max\+Electrogram}}\label{class_cardiac_mesh_a086be28c59e4edcebade42b3bdf51f01}
+\hypertarget{class_cardiac_mesh_a6a0691957ee41597ea241be5bb740bf2}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!max\+E\+R\+P@{max\+E\+R\+P}}
+\index{max\+E\+R\+P@{max\+E\+R\+P}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{max\+E\+R\+P}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::max\+E\+R\+P}}\label{class_cardiac_mesh_a6a0691957ee41597ea241be5bb740bf2}
+\hypertarget{class_cardiac_mesh_a368d38e1e90d407ffff649c9b7a3e188}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!maximum\+C\+V@{maximum\+C\+V}}
+\index{maximum\+C\+V@{maximum\+C\+V}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{maximum\+C\+V}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::maximum\+C\+V}}\label{class_cardiac_mesh_a368d38e1e90d407ffff649c9b7a3e188}
+\hypertarget{class_cardiac_mesh_afda78e5c2917e42ba401dc1be7f84f1f}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!max\+Potential@{max\+Potential}}
+\index{max\+Potential@{max\+Potential}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{max\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::max\+Potential}}\label{class_cardiac_mesh_afda78e5c2917e42ba401dc1be7f84f1f}
+\hypertarget{class_cardiac_mesh_a5f461b34861dc6f7a343bcdbd79a35d3}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!min\+Diffusion@{min\+Diffusion}}
+\index{min\+Diffusion@{min\+Diffusion}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{min\+Diffusion}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::min\+Diffusion}}\label{class_cardiac_mesh_a5f461b34861dc6f7a343bcdbd79a35d3}
+\hypertarget{class_cardiac_mesh_a6b6807ee55b0b31ff4b9c34bd94eace1}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!min\+Electrogram@{min\+Electrogram}}
+\index{min\+Electrogram@{min\+Electrogram}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{min\+Electrogram}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::min\+Electrogram}}\label{class_cardiac_mesh_a6b6807ee55b0b31ff4b9c34bd94eace1}
+\hypertarget{class_cardiac_mesh_a4aae36cc4fd814771864c32d52d24480}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!min\+E\+R\+P@{min\+E\+R\+P}}
+\index{min\+E\+R\+P@{min\+E\+R\+P}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{min\+E\+R\+P}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::min\+E\+R\+P}}\label{class_cardiac_mesh_a4aae36cc4fd814771864c32d52d24480}
+\hypertarget{class_cardiac_mesh_af4837ac47dd1c8f12b400a0ca7c1c94f}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!min\+Potential@{min\+Potential}}
+\index{min\+Potential@{min\+Potential}!Cardiac\+Mesh@{Cardiac\+Mesh}}
+\subsubsection[{min\+Potential}]{\setlength{\rightskip}{0pt plus 5cm}double Cardiac\+Mesh\+::min\+Potential}}\label{class_cardiac_mesh_af4837ac47dd1c8f12b400a0ca7c1c94f}
 \hypertarget{class_cardiac_mesh_ac14b1f228c8426e067df4a925824348e}{\index{Cardiac\+Mesh@{Cardiac\+Mesh}!stimulation\+Begun@{stimulation\+Begun}}
 \index{stimulation\+Begun@{stimulation\+Begun}!Cardiac\+Mesh@{Cardiac\+Mesh}}
 \subsubsection[{stimulation\+Begun}]{\setlength{\rightskip}{0pt plus 5cm}bool Cardiac\+Mesh\+::stimulation\+Begun}}\label{class_cardiac_mesh_ac14b1f228c8426e067df4a925824348e}

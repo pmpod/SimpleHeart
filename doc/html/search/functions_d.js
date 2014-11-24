@@ -15,6 +15,7 @@ var searchData=
   ['paintprobe',['paintProbe',['../_g_lfunc_8cpp.html#a4c049ee72792efa1f90a7445f3275e62',1,'paintProbe(int CellsX, int CellsY, float deltaX, float deltaY, float coloura, float colourb, float colourc):&#160;GLfunc.cpp'],['../_g_lfunc_8h.html#a4c049ee72792efa1f90a7445f3275e62',1,'paintProbe(int CellsX, int CellsY, float deltaX, float deltaY, float coloura, float colourb, float colourc):&#160;GLfunc.cpp']]],
   ['paintscale',['paintScale',['../class_sim_view_state.html#a4b4827ed55ec2cfd5b2ceb6c977425cf',1,'SimViewState']]],
   ['painttheray',['paintTheRay',['../_g_lfunc_8cpp.html#a091655d1bca2a1f81adacb4c720371c1',1,'paintTheRay(float x, float y, float z):&#160;GLfunc.cpp'],['../_g_lfunc_8h.html#a091655d1bca2a1f81adacb4c720371c1',1,'paintTheRay(float x, float y, float z):&#160;GLfunc.cpp']]],
+  ['paintuniform',['paintUniform',['../class_simple_heart.html#a9daca5f353575b8ebad0e106dbe03a68',1,'SimpleHeart']]],
   ['panedown',['paneDown',['../classrr_plot.html#aeff81faaf8baf44874d58796298f2643',1,'rrPlot::paneDown()'],['../class_time_plot.html#a08ae17f53a7df7ad3bd3f2262bd83ebd',1,'TimePlot::paneDown()']]],
   ['paneleft',['paneLeft',['../classrr_plot.html#a4330236961be8adaf9fb44ce45b5b63a',1,'rrPlot::paneLeft()'],['../class_time_plot.html#aa97d05708f827591712ee6fc487d6433',1,'TimePlot::paneLeft()']]],
   ['paneright',['paneRight',['../classrr_plot.html#a1294ab460597423936b3e07bc009c174',1,'rrPlot::paneRight()'],['../class_time_plot.html#a0fcaf8e55c91bb77bc5fe277f479c4c4',1,'TimePlot::paneRight()']]],

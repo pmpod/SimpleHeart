@@ -251,6 +251,12 @@
     <ClCompile Include="Control\epStimulator.cpp">
       <Filter>Control</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_epStimulator.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_epStimulator.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="simpleheart.h">
@@ -370,6 +376,9 @@
     <CustomBuild Include="Control\ProbeElectrode.h">
       <Filter>Control</Filter>
     </CustomBuild>
+    <CustomBuild Include="Control\epStimulator.h">
+      <Filter>Control</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SimpleHeart.rc" />
@@ -401,9 +410,6 @@
     </ClInclude>
     <ClInclude Include="Model\CardiacMesh.h">
       <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\epStimulator.h">
-      <Filter>Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

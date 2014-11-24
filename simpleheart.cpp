@@ -44,19 +44,19 @@ void SimpleHeart::reset()
 {
 	ui.statusBar->showMessage(tr("Simulation reset"));
 
-	//QObject::disconnect( Machine2d->RRcalc_1, SIGNAL(nextRR(double)),plotRR_el1, SLOT(appendRR(double)));	
-	//QObject::disconnect( Machine2d->RRcalc_2, SIGNAL(nextRR(double)),plotRR_el2, SLOT(appendRR(double)));	
-	//QObject::disconnect( Machine2d->RRcalc_3, SIGNAL(nextRR(double)),plotRR_el3, SLOT(appendRR(double)));	
+	QObject::disconnect(Machine2d->probeOscillator[0], SIGNAL(nextRR(double)), plotRR[0], SLOT(appendRR(double)));
+	QObject::disconnect(Machine2d->probeOscillator[1], SIGNAL(nextRR(double)), plotRR[1], SLOT(appendRR(double)));
+	QObject::disconnect(Machine2d->probeOscillator[2], SIGNAL(nextRR(double)), plotRR[2], SLOT(appendRR(double)));
 	for (short k = 0; k < plotRR.size(); ++k)
 	{
 		plotRR[k]->clear();
 	}
 	plotRR[0]->d_curve.back()->setPen(QPen(QBrush(QColor(255, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
 	plotRR[1]->d_curve.back()->setPen(QPen(QBrush(QColor(255,0,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-	plotRR[2]->d_curve.back()->setPen(QPen(QBrush(QColor(0,255,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
-	//QObject::connect( Machine2d->RRcalc_1, SIGNAL(nextRR(double)),plotRR_el1, SLOT(appendRR(double)));	
-	//QObject::connect( Machine2d->RRcalc_2, SIGNAL(nextRR(double)),plotRR_el2, SLOT(appendRR(double)));	
-	//QObject::connect( Machine2d->RRcalc_3, SIGNAL(nextRR(double)),plotRR_el3, SLOT(appendRR(double)));	
+	plotRR[2]->d_curve.back()->setPen(QPen(QBrush(QColor(0, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
+	QObject::connect(Machine2d->probeOscillator[0], SIGNAL(nextRR(double)), plotRR[0], SLOT(appendRR(double)));
+	QObject::connect(Machine2d->probeOscillator[1], SIGNAL(nextRR(double)), plotRR[1], SLOT(appendRR(double)));
+	QObject::connect(Machine2d->probeOscillator[2], SIGNAL(nextRR(double)), plotRR[2], SLOT(appendRR(double)));
 
 }
 void SimpleHeart::init()
@@ -228,6 +228,10 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(saveAsBmp()));
 	
 	//ADDED
+	QObject::connect(Machine2d->probeOscillator[0], SIGNAL(nextRR(double)), plotRR[0], SLOT(appendRR(double)));
+	QObject::connect(Machine2d->probeOscillator[1], SIGNAL(nextRR(double)), plotRR[1], SLOT(appendRR(double)));
+	QObject::connect(Machine2d->probeOscillator[2], SIGNAL(nextRR(double)), plotRR[2], SLOT(appendRR(double)));
+
 	QObject::connect(ui.b_saveStructure, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentStructure()));
 	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), this, SLOT(setAtrialStructure()));
 	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
@@ -247,10 +251,28 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_setStateStructure, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
 	QObject::connect(ui.b_setStatePaintERP, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
 	QObject::connect(ui.b_setStatePaintConductivity, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
-
-
 	QObject::connect(ui.b_setStatePaintERP, SIGNAL(toggled(bool)), this, SLOT(setPaintERP(bool)));
 	QObject::connect(ui.b_setStatePaintConductivity, SIGNAL(toggled(bool)), this, SLOT(setPaintConductivity(bool)));
+
+
+
+	QObject::connect(ui.b_freeTouchMode, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setModeFree(bool)));
+	QObject::connect(ui.b_freeTouchMode, SIGNAL(toggled(bool)), this, SLOT(setFreeTouch(bool)));
+	QObject::connect(ui.b_pacingModeFixed, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setModeFixedLoop(bool)));
+	QObject::connect(ui.b_pacingModeSensing, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setModeSensing(bool)));
+
+
+	QObject::connect(ui.sb_cycleLength_S1, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCycleLength_S1(int)));
+	QObject::connect(ui.sb_cycleLength_S3, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCycleLength_S3(int)));
+	QObject::connect(ui.sb_cycleLength_S2, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCycleLength_S2(int)));
+	QObject::connect(ui.sb_cycleCount_S1, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setNumberOfCycles_S1(int)));
+	QObject::connect(ui.sb_cycleCount_S2, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setNumberOfCycles_S2(bool)));
+	QObject::connect(ui.sb_cycleCount_S3, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setNumberOfCycles_S3(int)));
+	QObject::connect(ui.cb_S2, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setS2On(bool)));
+	QObject::connect(ui.cb_S3, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setS3On(bool)));
+	QObject::connect(ui.sb_couplingInterval, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCouplingInterval(int)));
+
+	QObject::connect(ui.b_startStimulationProcedure, SIGNAL(clicked()), Machine2d, SLOT(startStimulatorProcedure()));
 
 	QObject::connect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
 	QObject::connect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));

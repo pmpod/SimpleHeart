@@ -1,10 +1,11 @@
 var hierarchy =
 [
-    [ "burster", "classburster.html", null ],
+    [ "CardiacMesh", "class_cardiac_mesh.html", null ],
     [ "CCamera", "class_c_camera.html", null ],
     [ "compare_TimestepNode", "structcompare___timestep_node.html", null ],
     [ "CurveData", "class_curve_data.html", null ],
     [ "DiffusionMatrix", "class_diffusion_matrix.html", null ],
+    [ "EpStimulator", "class_ep_stimulator.html", null ],
     [ "Node", "class_node.html", null ],
     [ "NumericStrategy", "class_numeric_strategy.html", [
       [ "AllexandreStrategy", "class_allexandre_strategy.html", null ],
@@ -23,7 +24,6 @@ var hierarchy =
     [ "QObject", null, [
       [ "AtrialMachine2d", "class_atrial_machine2d.html", null ],
       [ "atrialParameters", "classatrial_parameters.html", null ],
-      [ "CardiacMesh", "class_cardiac_mesh.html", null ],
       [ "CartesianGrid", "class_cartesian_grid.html", null ],
       [ "ioHandler", "classio_handler.html", null ],
       [ "Oscillator", "class_oscillator.html", [

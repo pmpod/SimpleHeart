@@ -27,5 +27,6 @@ var searchData=
   ['rrcalculator_2eh',['RRcalculator.h',['../_r_rcalculator_8h.html',1,'']]],
   ['rrplot',['rrPlot',['../classrr_plot.html',1,'rrPlot'],['../classrr_plot.html#a1670fc13172e2a65ed9c10fe2c65f53a',1,'rrPlot::rrPlot()']]],
   ['rrplot_2ecpp',['rrPlot.cpp',['../rr_plot_8cpp.html',1,'']]],
-  ['rrplot_2eh',['rrPlot.h',['../rr_plot_8h.html',1,'']]]
+  ['rrplot_2eh',['rrPlot.h',['../rr_plot_8h.html',1,'']]],
+  ['run',['run',['../class_ep_stimulator.html#a9c7b67a145c50fb0c29656f9080b9be8',1,'EpStimulator']]]
 ];

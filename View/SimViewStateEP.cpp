@@ -271,6 +271,9 @@ void SimViewStateEP::handleMouseMove(glAtrium* view, QMouseEvent *event)
 		if (item != -1)
 		{
 			view->linkToMachine->probeOscillator[_probeOnTheMove]->setOscillator(view->linkToMesh->m_mesh[item]);
+			if (_probeOnTheMove == 0) {
+				view->linkToMachine->stimulator->setStimulationSiteID(item);
+			}
 		}
 	}
 

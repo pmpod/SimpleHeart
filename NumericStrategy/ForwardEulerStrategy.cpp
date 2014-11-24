@@ -34,7 +34,8 @@ double ForwardEulerStrategy::nextStep()
 			{
 				osc->m_v_current[k] += nextTimestep * (osc->getCurrentPrim(k));
 			}
-
+			//osc->m_lastHistoryIterator = (osc->m_lastHistoryIterator + 1) % OSC_HISTORY_SIZE;
+			//osc->m_potentialHistory[osc->m_lastHistoryIterator] = osc->m_v_scaledPotential;
 			if (!osc->m_wallCells.empty())
 			{
 				for (short wc = 0; wc < osc->m_wallCells.size(); ++wc)

@@ -1,15 +1,9 @@
 var searchData=
 [
-  ['centergeom',['centerGeom',['../class_cardiac_mesh.html#a671a783c6a63a79cc29e0b0baf8eda08',1,'CardiacMesh']]],
-  ['color',['color',['../class_pix.html#adb434da0394ea10d83bbd65982720ef1',1,'Pix']]],
-  ['colormap',['colorMap',['../class_sim_view_state.html#ae589ccbf8ab7a064c2ea7d48d5c8bd24',1,'SimViewState']]],
-  ['coord_5fx',['COORD_X',['../_g_lfunc_8cpp.html#abc05a24561b1eb6da21cd77033c194d5',1,'GLfunc.cpp']]],
-  ['coord_5fy',['COORD_Y',['../_g_lfunc_8cpp.html#a6c026b461309ba4fe647349faf8719da',1,'GLfunc.cpp']]],
-  ['coord_5fz',['COORD_Z',['../_g_lfunc_8cpp.html#ad35f542babc3114a3e26a5798eb7975b',1,'GLfunc.cpp']]],
-  ['currentlypressed',['currentlyPressed',['../class_diffusion_painter.html#aa57b223dd919193fe1ac1b38ddeee4a4',1,'DiffusionPainter']]],
-  ['currentmoover',['currentMoover',['../class_diffusion_painter.html#a9ea99ac669bf6661a46ea41dbabc7521',1,'DiffusionPainter']]],
-  ['currentphase',['currentPhase',['../classburster.html#a7fbf16a87a9f2db0e55b598ab141fcc5',1,'burster']]],
-  ['currentphaseofpeak',['currentPhaseOfPeak',['../classburster.html#acaa8e39d8618d0a0ab7baa624d49c9c9',1,'burster']]],
-  ['currenttext',['currentText',['../class_default_plot.html#aecabd8aa4a721d21e1e01dcc41c621ea',1,'DefaultPlot']]],
-  ['cursorradius',['cursorRadius',['../class_sim_view_state.html#aa8c58229562ab48c746b601ee18c547f',1,'SimViewState']]]
+  ['d_5fcurve',['d_curve',['../class_default_plot.html#a154b2bb7e4528185f88ff204da70e4de',1,'DefaultPlot']]],
+  ['d_5fdata',['d_data',['../class_default_plot.html#aa78c1b3ad9d6328731ecae5a27b9d0b1',1,'DefaultPlot']]],
+  ['d_5fmrk1',['d_mrk1',['../class_default_plot.html#ada5a5d4e6f0996d79b0a4ba353f12726',1,'DefaultPlot']]],
+  ['d_5fmrk2',['d_mrk2',['../class_default_plot.html#a8021357960017f7338d48981e32b8ae4',1,'DefaultPlot']]],
+  ['d_5fpicker',['d_picker',['../class_default_plot.html#afc5eba9a9ff1a5fa825fd34dc5637b68',1,'DefaultPlot']]],
+  ['diffusionpainter',['diffusionPainter',['../class_simple_heart.html#ad1a89c2f1818a2e2e548d98e1c49a7dc',1,'SimpleHeart']]]
 ];

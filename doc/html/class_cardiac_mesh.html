@@ -107,7 +107,6 @@ $(document).ready(function(){initNavTree('class_cardiac_mesh.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
@@ -121,20 +120,7 @@ $(document).ready(function(){initNavTree('class_cardiac_mesh.html','');});
  <a href="class_cardiac_mesh.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_cardiac_mesh_8h_source.html">CardiacMesh.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for CardiacMesh:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_cardiac_mesh.png" usemap="#CardiacMesh_map" alt=""/>
-  <map id="CardiacMesh_map" name="CardiacMesh_map">
-</map>
- </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
-Public Slots</h2></td></tr>
-<tr class="memitem:a5131c310815bf636bd6de60e61dc7c5e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a5131c310815bf636bd6de60e61dc7c5e">changeNode</a> (int x, int y, <a class="el" href="heart_defines_8h.html#a2f059cd81f362503874790462d535f5b">CELL_TYPE</a> m_type)</td></tr>
-<tr class="separator:a5131c310815bf636bd6de60e61dc7c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a864c30e0e6cdab5e1a1e39ab99a45e5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a864c30e0e6cdab5e1a1e39ab99a45e5b">CardiacMesh</a> ()</td></tr>
@@ -155,15 +141,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a45cb6c32debebdc827e2c4f48e8f5ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fb6507c440aeb2d947663047fbdac92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a5fb6507c440aeb2d947663047fbdac92">setDiffusionCoefficients</a> ()</td></tr>
 <tr class="separator:a5fb6507c440aeb2d947663047fbdac92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67e146331d7c41e3d528861594ac577e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a67e146331d7c41e3d528861594ac577e">getSizeInMm</a> ()</td></tr>
-<tr class="memdesc:a67e146331d7c41e3d528861594ac577e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the distance between two most distant nodes in mm(estimate of the size of the mesh)  <a href="#a67e146331d7c41e3d528861594ac577e">More...</a><br /></td></tr>
-<tr class="separator:a67e146331d7c41e3d528861594ac577e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4705e8f6f5657337295f076494e9a45"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#ab4705e8f6f5657337295f076494e9a45">getDeltaR</a> ()</td></tr>
-<tr class="separator:ab4705e8f6f5657337295f076494e9a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb67d1d5f4e382916e9c8f044739887b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#afb67d1d5f4e382916e9c8f044739887b">startStimulation</a> (<a class="el" href="class_oscillator.html">Oscillator</a> *osc, const int &amp;id, const double radius, const double strength)</td></tr>
-<tr class="separator:afb67d1d5f4e382916e9c8f044739887b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b11cbba123533dcf60e5bf1a7bba9cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a5b11cbba123533dcf60e5bf1a7bba9cc">stopStimulation</a> ()</td></tr>
-<tr class="separator:a5b11cbba123533dcf60e5bf1a7bba9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42566f30cadab259f5905bb118220f6a"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a42566f30cadab259f5905bb118220f6a">sizeInMm</a> ()</td></tr>
+<tr class="memdesc:a42566f30cadab259f5905bb118220f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the distance between two most distant nodes in mm(estimate of the size of the mesh)  <a href="#a42566f30cadab259f5905bb118220f6a">More...</a><br /></td></tr>
+<tr class="separator:a42566f30cadab259f5905bb118220f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a219a641ed3e91234a3fb76f51cec326f"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a219a641ed3e91234a3fb76f51cec326f">minNodalSpacing</a> ()</td></tr>
+<tr class="separator:a219a641ed3e91234a3fb76f51cec326f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf74825fdb7bc14445c25877f06e36af"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#abf74825fdb7bc14445c25877f06e36af">calculateElectrogram</a> (<a class="el" href="class_oscillator.html">Oscillator</a> *osc)</td></tr>
 <tr class="separator:abf74825fdb7bc14445c25877f06e36af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -180,42 +162,32 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ac14b1f228c8426e067df4a925824348e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#ac14b1f228c8426e067df4a925824348e">stimulationBegun</a></td></tr>
-<tr class="separator:ac14b1f228c8426e067df4a925824348e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4eeec3a9a09b9bc7e68ca3f7b34ea36c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a4eeec3a9a09b9bc7e68ca3f7b34ea36c">m_ectopicAmplitude</a></td></tr>
-<tr class="separator:a4eeec3a9a09b9bc7e68ca3f7b34ea36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a196d79c37896623ae3957949525c1e1d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a196d79c37896623ae3957949525c1e1d">m_stimulationID</a></td></tr>
-<tr class="separator:a196d79c37896623ae3957949525c1e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd49de8f8f878f45c927d4b75851ced6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_oscillator.html">Oscillator</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#acd49de8f8f878f45c927d4b75851ced6">m_mesh</a></td></tr>
 <tr class="separator:acd49de8f8f878f45c927d4b75851ced6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21749f0b4af8fe59552f97058982f695"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_oscillator.html">Oscillator</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a21749f0b4af8fe59552f97058982f695">m_underStimulation</a></td></tr>
 <tr class="separator:a21749f0b4af8fe59552f97058982f695"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac14b1f228c8426e067df4a925824348e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#ac14b1f228c8426e067df4a925824348e">stimulationBegun</a></td></tr>
+<tr class="separator:ac14b1f228c8426e067df4a925824348e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1bf6fc56cbc55f30f9a3855cdafc316"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#ad1bf6fc56cbc55f30f9a3855cdafc316">m_simulationTime</a></td></tr>
 <tr class="separator:ad1bf6fc56cbc55f30f9a3855cdafc316"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48ee051becaeae6be8d4d1b1569645d2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a48ee051becaeae6be8d4d1b1569645d2">m_maximumCV</a></td></tr>
-<tr class="separator:a48ee051becaeae6be8d4d1b1569645d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6856db8aafe754a849a77412106deda9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a6856db8aafe754a849a77412106deda9">m_maxElectrogram</a></td></tr>
-<tr class="separator:a6856db8aafe754a849a77412106deda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbc3c7dce57ceccaa344cbbaae6eed21"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#abbc3c7dce57ceccaa344cbbaae6eed21">m_minElectrogram</a></td></tr>
-<tr class="separator:abbc3c7dce57ceccaa344cbbaae6eed21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf9c4e05fe3e0b13f5ca4a849748118d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#acf9c4e05fe3e0b13f5ca4a849748118d">m_maxPotential</a></td></tr>
-<tr class="separator:acf9c4e05fe3e0b13f5ca4a849748118d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b0d715081602222475ff5c6ae8f2acc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a7b0d715081602222475ff5c6ae8f2acc">m_minPotential</a></td></tr>
-<tr class="separator:a7b0d715081602222475ff5c6ae8f2acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7968bb85917957180118029870ce108"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#ac7968bb85917957180118029870ce108">_maxDiffusion</a></td></tr>
-<tr class="separator:ac7968bb85917957180118029870ce108"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5332ffd84e257d3c194b875df2c972f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#ad5332ffd84e257d3c194b875df2c972f">_minDiffusion</a></td></tr>
-<tr class="separator:ad5332ffd84e257d3c194b875df2c972f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3450acbee174effe8dae1ea148a0ae73"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a3450acbee174effe8dae1ea148a0ae73">_maxERP</a></td></tr>
-<tr class="separator:a3450acbee174effe8dae1ea148a0ae73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb965ba95cdba95f197d1e4dc8cb339a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#adb965ba95cdba95f197d1e4dc8cb339a">_minERP</a></td></tr>
-<tr class="separator:adb965ba95cdba95f197d1e4dc8cb339a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea33a4be0162859a292958757ac934fc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#aea33a4be0162859a292958757ac934fc">m_size</a></td></tr>
-<tr class="separator:aea33a4be0162859a292958757ac934fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a100654a6bb2237fc09cef29c517818ad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a100654a6bb2237fc09cef29c517818ad">m_minimumDistance</a></td></tr>
-<tr class="separator:a100654a6bb2237fc09cef29c517818ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05ed4402cf331198ee5021c65ac37e23"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a05ed4402cf331198ee5021c65ac37e23">m_maximumDistance</a></td></tr>
-<tr class="separator:a05ed4402cf331198ee5021c65ac37e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368d38e1e90d407ffff649c9b7a3e188"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a368d38e1e90d407ffff649c9b7a3e188">maximumCV</a></td></tr>
+<tr class="separator:a368d38e1e90d407ffff649c9b7a3e188"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a086be28c59e4edcebade42b3bdf51f01"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a086be28c59e4edcebade42b3bdf51f01">maxElectrogram</a></td></tr>
+<tr class="separator:a086be28c59e4edcebade42b3bdf51f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b6807ee55b0b31ff4b9c34bd94eace1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a6b6807ee55b0b31ff4b9c34bd94eace1">minElectrogram</a></td></tr>
+<tr class="separator:a6b6807ee55b0b31ff4b9c34bd94eace1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afda78e5c2917e42ba401dc1be7f84f1f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#afda78e5c2917e42ba401dc1be7f84f1f">maxPotential</a></td></tr>
+<tr class="separator:afda78e5c2917e42ba401dc1be7f84f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4837ac47dd1c8f12b400a0ca7c1c94f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#af4837ac47dd1c8f12b400a0ca7c1c94f">minPotential</a></td></tr>
+<tr class="separator:af4837ac47dd1c8f12b400a0ca7c1c94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12c5bfc555eca8ecff53e9a5977d8be4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a12c5bfc555eca8ecff53e9a5977d8be4">maxDiffusion</a></td></tr>
+<tr class="separator:a12c5bfc555eca8ecff53e9a5977d8be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f461b34861dc6f7a343bcdbd79a35d3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a5f461b34861dc6f7a343bcdbd79a35d3">minDiffusion</a></td></tr>
+<tr class="separator:a5f461b34861dc6f7a343bcdbd79a35d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a0691957ee41597ea241be5bb740bf2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a6a0691957ee41597ea241be5bb740bf2">maxERP</a></td></tr>
+<tr class="separator:a6a0691957ee41597ea241be5bb740bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aae36cc4fd814771864c32d52d24480"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a4aae36cc4fd814771864c32d52d24480">minERP</a></td></tr>
+<tr class="separator:a4aae36cc4fd814771864c32d52d24480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa23210cc3b7de35c82ebbcde43e053c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#aa23210cc3b7de35c82ebbcde43e053c2">structureUpdated</a></td></tr>
 <tr class="separator:aa23210cc3b7de35c82ebbcde43e053c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ebcb3d40ec7fbfea0b8f230a1677a00"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cardiac_mesh.html#a4ebcb3d40ec7fbfea0b8f230a1677a00">m_radius</a></td></tr>
@@ -293,46 +265,6 @@ Public Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5131c310815bf636bd6de60e61dc7c5e"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int CardiacMesh::changeNode </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="heart_defines_8h.html#a2f059cd81f362503874790462d535f5b">CELL_TYPE</a>&#160;</td>
-          <td class="paramname"><em>m_type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -489,38 +421,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab4705e8f6f5657337295f076494e9a45"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::getDeltaR </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a67e146331d7c41e3d528861594ac577e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::getSizeInMm </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the distance between two most distant nodes in mm(estimate of the size of the mesh) </p>
-
-</div>
-</div>
 <a class="anchor" id="a85a7a7118237e9e2b238a4c3eb50fdc2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -541,6 +441,21 @@ Public Attributes</h2></td></tr>
 <span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a219a641ed3e91234a3fb76f51cec326f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double CardiacMesh::minNodalSpacing </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>
@@ -599,50 +514,12 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afb67d1d5f4e382916e9c8f044739887b"></a>
+<a class="anchor" id="a42566f30cadab259f5905bb118220f6a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void CardiacMesh::startStimulation </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_oscillator.html">Oscillator</a> *&#160;</td>
-          <td class="paramname"><em>osc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>radius</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double&#160;</td>
-          <td class="paramname"><em>strength</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5b11cbba123533dcf60e5bf1a7bba9cc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CardiacMesh::stopStimulation </td>
+          <td class="memname">const double CardiacMesh::sizeInMm </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -650,75 +527,17 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns the distance between two most distant nodes in mm(estimate of the size of the mesh) </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ac7968bb85917957180118029870ce108"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::_maxDiffusion</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3450acbee174effe8dae1ea148a0ae73"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::_maxERP</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad5332ffd84e257d3c194b875df2c972f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::_minDiffusion</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="adb965ba95cdba95f197d1e4dc8cb339a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::_minERP</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a671a783c6a63a79cc29e0b0baf8eda08"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Vector3 CardiacMesh::centerGeom</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4eeec3a9a09b9bc7e68ca3f7b34ea36c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::m_ectopicAmplitude</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -737,96 +556,12 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6856db8aafe754a849a77412106deda9"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::m_maxElectrogram</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a48ee051becaeae6be8d4d1b1569645d2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::m_maximumCV</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a05ed4402cf331198ee5021c65ac37e23"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::m_maximumDistance</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acf9c4e05fe3e0b13f5ca4a849748118d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::m_maxPotential</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="acd49de8f8f878f45c927d4b75851ced6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;<a class="el" href="class_oscillator.html">Oscillator</a>*&gt; CardiacMesh::m_mesh</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abbc3c7dce57ceccaa344cbbaae6eed21"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::m_minElectrogram</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a100654a6bb2237fc09cef29c517818ad"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::m_minimumDistance</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7b0d715081602222475ff5c6ae8f2acc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double CardiacMesh::m_minPotential</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -851,30 +586,6 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">double CardiacMesh::m_simulationTime</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aea33a4be0162859a292958757ac934fc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int CardiacMesh::m_size</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a196d79c37896623ae3957949525c1e1d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int CardiacMesh::m_stimulationID</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -917,6 +628,114 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a12c5bfc555eca8ecff53e9a5977d8be4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::maxDiffusion</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a086be28c59e4edcebade42b3bdf51f01"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::maxElectrogram</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6a0691957ee41597ea241be5bb740bf2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::maxERP</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a368d38e1e90d407ffff649c9b7a3e188"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::maximumCV</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afda78e5c2917e42ba401dc1be7f84f1f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::maxPotential</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5f461b34861dc6f7a343bcdbd79a35d3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::minDiffusion</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6b6807ee55b0b31ff4b9c34bd94eace1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::minElectrogram</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4aae36cc4fd814771864c32d52d24480"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::minERP</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af4837ac47dd1c8f12b400a0ca7c1c94f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CardiacMesh::minPotential</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac14b1f228c8426e067df4a925824348e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -951,7 +770,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_cardiac_mesh.html">CardiacMesh</a></li>
-    <li class="footer">Generated on Fri Nov 21 2014 11:31:05 for Simple Heart by
+    <li class="footer">Generated on Mon Nov 24 2014 13:41:50 for Simple Heart by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

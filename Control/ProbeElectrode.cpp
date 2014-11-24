@@ -65,6 +65,7 @@ void ProbeElectrode::processNewTime(double time)
 			emit nextRR(outer);
 			intervalsSaved.push_back(outer);
 			lastMaxRR = currentMaxRR;
+			//_osc->m_lastActivationTime = outer;
 		}
 		emit curIndex(maxRRindex);
 		currentMaxRR = -1;

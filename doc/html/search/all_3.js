@@ -15,7 +15,6 @@ var searchData=
   ['ccamera',['CCamera',['../class_c_camera.html',1,'']]],
   ['cell_5ftype',['CELL_TYPE',['../heart_defines_8h.html#a2f059cd81f362503874790462d535f5b',1,'heartDefines.h']]],
   ['centergeom',['centerGeom',['../class_cardiac_mesh.html#a671a783c6a63a79cc29e0b0baf8eda08',1,'CardiacMesh']]],
-  ['changenode',['changeNode',['../class_cardiac_mesh.html#a5131c310815bf636bd6de60e61dc7c5e',1,'CardiacMesh']]],
   ['changestate',['ChangeState',['../class_sim_view_state.html#a272419ea4de89cc111205ebde1c8c820',1,'SimViewState']]],
   ['clear',['clear',['../class_curve_data.html#ae898810872a274a681ab60131ecf922b',1,'CurveData::clear()'],['../class_default_plot.html#ad5983e28b973fa6050d1d38243c4d18d',1,'DefaultPlot::clear()'],['../class_diffusion_matrix.html#a61a64d3a554984ac14ecaf8751eb4fce',1,'DiffusionMatrix::clear()'],['../classrr_plot.html#aa967ef18a8edb8ecd196198f10ecb97c',1,'rrPlot::clear()'],['../class_time_plot.html#a60cb1a4789413379c9d520a329d766f0',1,'TimePlot::clear()'],['../_time_tree_8cpp.html#ac2198b4b6be4df9987b8560f8190064c',1,'clear(TimeTree *&amp;node):&#160;TimeTree.cpp'],['../_time_tree_8h.html#ac2198b4b6be4df9987b8560f8190064c',1,'clear(TimeTree *&amp;node):&#160;TimeTree.cpp']]],
   ['clearwallcells',['clearWallCells',['../class_cardiac_mesh.html#a45cb6c32debebdc827e2c4f48e8f5ce2',1,'CardiacMesh']]],
@@ -36,14 +35,9 @@ var searchData=
   ['curindex',['curIndex',['../class_r_rcalculator.html#aa0c89346708b0ec0b64b4256a0120c1f',1,'RRcalculator::curIndex()'],['../class_probe_electrode.html#a46067c4a2b7476692e48fb69c6ff5c77',1,'ProbeElectrode::curIndex()']]],
   ['currentlypressed',['currentlyPressed',['../class_diffusion_painter.html#aa57b223dd919193fe1ac1b38ddeee4a4',1,'DiffusionPainter']]],
   ['currentmoover',['currentMoover',['../class_diffusion_painter.html#a9ea99ac669bf6661a46ea41dbabc7521',1,'DiffusionPainter']]],
-  ['currentoscilatorpotential',['currentOscilatorPotential',['../class_atrial_machine2d.html#ab95917c203cf726da282efcfb26241a3',1,'AtrialMachine2d']]],
-  ['currentoscilatorpotential_5ftab',['currentOscilatorPotential_tab',['../class_atrial_machine2d.html#a8a2f2c40ae228ee8a2cf6f7457acfd28',1,'AtrialMachine2d']]],
-  ['currentphase',['currentPhase',['../classburster.html#a7fbf16a87a9f2db0e55b598ab141fcc5',1,'burster']]],
-  ['currentphaseofpeak',['currentPhaseOfPeak',['../classburster.html#acaa8e39d8618d0a0ab7baa624d49c9c9',1,'burster']]],
   ['currenttext',['currentText',['../class_default_plot.html#aecabd8aa4a721d21e1e01dcc41c621ea',1,'DefaultPlot']]],
   ['cursorradius',['cursorRadius',['../class_sim_view_state.html#aa8c58229562ab48c746b601ee18c547f',1,'SimViewState']]],
   ['curvedata',['CurveData',['../class_curve_data.html',1,'CurveData'],['../class_curve_data.html#a4e9a1bb778f0cb2e7d573b88163cfd38',1,'CurveData::CurveData()']]],
   ['curvedata_2ecpp',['CurveData.cpp',['../_curve_data_8cpp.html',1,'']]],
-  ['curvedata_2eh',['CurveData.h',['../_curve_data_8h.html',1,'']]],
-  ['cylinder',['CYLINDER',['../_atrial_machine2d_8cpp.html#ae3b705c995a6a9cfd62d15a472cf8036',1,'AtrialMachine2d.cpp']]]
+  ['curvedata_2eh',['CurveData.h',['../_curve_data_8h.html',1,'']]]
 ];
