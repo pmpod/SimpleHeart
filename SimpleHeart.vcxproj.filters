@@ -92,9 +92,6 @@
     <ClCompile Include="Model\CardiacMesh.cpp">
       <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="Model\cartesianGrid.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
     <ClCompile Include="Model\FitzHughNagumo.cpp">
       <Filter>Model</Filter>
     </ClCompile>
@@ -227,9 +224,6 @@
     <ClCompile Include="timePlot.cpp">
       <Filter>View\Graphs</Filter>
     </ClCompile>
-    <ClCompile Include="RRcalculator.cpp">
-      <Filter>Control</Filter>
-    </ClCompile>
     <ClCompile Include="Probe.cpp">
       <Filter>Dumpster</Filter>
     </ClCompile>
@@ -255,6 +249,15 @@
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_epStimulator.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="RRcalculator.cpp">
+      <Filter>Dumpster</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\cartesianGrid.cpp">
+      <Filter>Dumpster</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ProbeElectrode.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
   </ItemGroup>
@@ -316,9 +319,6 @@
     <CustomBuild Include="wholeHeart.struc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Model\cartesianGrid.h">
-      <Filter>Model</Filter>
-    </CustomBuild>
     <CustomBuild Include="Model\FitzHughNagumo.h">
       <Filter>Model</Filter>
     </CustomBuild>
@@ -358,9 +358,6 @@
     <CustomBuild Include="timePlot.h">
       <Filter>View\Graphs</Filter>
     </CustomBuild>
-    <CustomBuild Include="RRcalculator.h">
-      <Filter>Control</Filter>
-    </CustomBuild>
     <CustomBuild Include="Probe.h">
       <Filter>Dumpster</Filter>
     </CustomBuild>
@@ -378,6 +375,12 @@
     </CustomBuild>
     <CustomBuild Include="Control\epStimulator.h">
       <Filter>Control</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RRcalculator.h">
+      <Filter>Dumpster</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Model\cartesianGrid.h">
+      <Filter>Dumpster</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

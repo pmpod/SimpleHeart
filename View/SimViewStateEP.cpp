@@ -6,7 +6,6 @@ SimViewStateEP* SimViewStateEP::_instance = nullptr;
 SimViewStateEP::SimViewStateEP()
 {
 	cursorRadius = 1.0;
-	_dataDisplayMode = 1;//POTENTIAL
 	_probeOnTheMove = -1;
 	setPalette(DP_HOTTOCOLD);
 
@@ -26,11 +25,6 @@ SimViewState* SimViewStateEP::Instance()
 	}
 
 	return _instance;
-}
-//--------------------------------------------------
-void SimViewStateEP::setMode(const int mode)
-{
-	_dataDisplayMode = mode;
 }
 void SimViewStateEP::setOutlineStyle(const  BRUSH_OUTLINE outline)
 {
@@ -105,14 +99,8 @@ int SimViewStateEP::findElectrode(glAtrium* view, Oscillator* src, Oscillator* o
 	m_isSearchedMap[osc->oscillatorID] = true;
 
 
-	for (short k = 0; k < view->linkToMachine->probeOscillator.size(); ++k)
-	{
-		ProbeElectrode *probe = view->linkToMachine->probeOscillator[k];
-		if (probe->getOscillatorID() == osc->oscillatorID)
-		{
-			found = k;
-		}
-	}
+	found = view->linkToMachine->stimulator->isProperProbe(osc->oscillatorID);
+	
 	if (found == -1)
 	{
 		double distance;
@@ -136,84 +124,6 @@ int SimViewStateEP::findElectrode(glAtrium* view, Oscillator* src, Oscillator* o
 void SimViewStateEP::paintCursor(glAtrium* view)
 {
 	view->setCursor(Qt::OpenHandCursor);
-}
-//--------------------------------------------------
-void SimViewStateEP::paintModel(glAtrium* view)
-{
-	CardiacMesh *msh = view->linkToMesh;
-	std::vector<Oscillator*> oscs = view->linkToMesh->m_mesh;
-	int vertexNumber = msh->m_vertexList.size();
-
-	GLfloat val1;
-	GLfloat vmin = msh->minElectrogram;
-	GLfloat vmax = msh->maxElectrogram;
-	
-	for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
-	{
-		if (oscs[currentVertex]->m_type != SOLID_WALL)
-		{
-			switch (_dataDisplayMode)
-			{
-			case 1:
-				val1 = oscs[currentVertex]->m_v_scaledPotential;
-				break;
-			case 2:
-				val1 = oscs[currentVertex]->getLastCurrentSource();
-				break;
-			case 3:
-				val1 = oscs[currentVertex]->m_v_current[0];
-				break;
-			case 4:
-				val1 = oscs[currentVertex]->m_currentTime - oscs[currentVertex]->m_previousTime;
-				break;
-			case 5:
-				val1 = oscs[currentVertex]->m_v_electrogram;
-				break;
-			}
-			colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
-
-		}
-		else
-		{
-			msh->m_vertexMatrix[currentVertex].r = 0.1;
-			msh->m_vertexMatrix[currentVertex].g = 0.1; 
-			msh->m_vertexMatrix[currentVertex].b = 0.1;
-		}
-	}
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-
-		glColorPointer(3, GL_FLOAT, sizeof(SVertex), &view->linkToMesh->m_vertexMatrix[0].r);  
-
-		glVertexPointer(3, GL_FLOAT, sizeof(SVertex), view->linkToMesh->m_vertexMatrix);
-		
-		glDrawElements(GL_TRIANGLES, view->linkToMesh->m_vertexList.size()*3, GL_UNSIGNED_INT, view->linkToMesh->m_indicesMatrix);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
-	
-	glPushMatrix();
-
-
-	// [3] Paint probes
-		for (short n = 0; n < view->linkToMachine->probeOscillator.size(); ++n)
-		{
-			drawSphere(0.4, 10, 10, view->linkToMachine->probeOscillator[n]->getPositionX(),
-				view->linkToMachine->probeOscillator[n]->getPositionY(),
-				view->linkToMachine->probeOscillator[n]->getPositionZ(), 1.0f / (n + 1), 1.0f / (n + 1), 1.0f);
-
-		
-			view->renderText(view->linkToMachine->probeOscillator[n]->getPositionX(),
-				view->linkToMachine->probeOscillator[n]->getPositionY(),
-				view->linkToMachine->probeOscillator[n]->getPositionZ() + 1, "Electrode");
-		}
-		if (view->paintRay)
-		{
-			drawSphere(0.4, 10, 10, view->testProbe.x, view->testProbe.y, view->testProbe.z, 1.0f, 1.0f, 1.0f);
-		}
-
-	glPopMatrix();
 }
 //--------------------------------------------------
 void SimViewStateEP::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
@@ -270,7 +180,8 @@ void SimViewStateEP::handleMouseMove(glAtrium* view, QMouseEvent *event)
 
 		if (item != -1)
 		{
-			view->linkToMachine->probeOscillator[_probeOnTheMove]->setOscillator(view->linkToMesh->m_mesh[item]);
+			view->linkToMachine->stimulator->setProbeElectrode(view->linkToMesh, _probeOnTheMove, item);
+			//XXXX
 			if (_probeOnTheMove == 0) {
 				view->linkToMachine->stimulator->setStimulationSiteID(item);
 			}

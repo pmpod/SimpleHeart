@@ -72,7 +72,8 @@ public slots:
 	void setPaintValue(double val);
 	void paintUniform();
 
-
+	void setActivationTimePhaseZero();
+	void setActivationTimeCLlastTCL();
 
 	void openInstruction();
 	void openSettings();

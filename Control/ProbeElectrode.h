@@ -19,6 +19,8 @@ public:
 	double getPositionY();
 	double getPositionZ(); 
 	double getOscillatorID();
+	double lastRR();
+	double currentMaxRR();
 
 private:
 
@@ -31,10 +33,11 @@ private:
 	Oscillator* _osc;
 	int rangeOffocus;
 	double lastMaxRR;
-	double currentMaxRR;
+	double _currentMaxRR;
 	int maxRRindex;
 	double refractoryPeriod;
 	double potentialTreshold;
+	double _lastRR;
 
 
 public slots:

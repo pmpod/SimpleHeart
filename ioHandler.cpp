@@ -225,11 +225,12 @@ bool ioHandler::loadCurrentState()
 		for (short ll = 0; ll < noOfCurrents; ++ll)
 			osc->setCurrent(currVariables[meshSize * ll + oscID],ll);
 	}
-	for (int i = 0; i < m_handle->Machine2d->probeOscillator.size(); ++i)
+	for (int i = 0; i < m_handle->Machine2d->stimulator->probeElectrodesCount(); ++i)
 	{
 		int oscID = electrodes_ID[i];
-		osc = m_handle->m_grid->m_mesh[oscID];
-		m_handle->Machine2d->probeOscillator[i]->setOscillator(osc);
+		//osc = m_handle->m_grid->m_mesh[oscID];
+		//m_handle->Machine2d->probeOscillator[i]->setOscillator(osc);
+		m_handle->Machine2d->stimulator->setProbeElectrode(m_handle->m_grid, i, oscID);
 	}
 
 	m_handle->stopCalculation();
@@ -252,7 +253,7 @@ bool ioHandler::saveCurrentState()
 
 	//[1] Prepare matrix sizes
 	const int meshSize = m_handle->m_grid->m_mesh.size();
-	const int numberOfProbes = m_handle->Machine2d->probeOscillator.size();
+	const int numberOfProbes = m_handle->Machine2d->stimulator->probeElectrodesCount();
 	//[2] Prepare data arrays in form accepted by MAT
 	double *position_xyz  = (double *)malloc(sizeof(double) * 3 * meshSize);
 	INT32  *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
@@ -289,7 +290,7 @@ bool ioHandler::saveCurrentState()
 	}
 	for (int i = 0; i < numberOfProbes; ++i)
 	{
-		electrodes_ID[i] = m_handle->Machine2d->probeOscillator[i]->getOscillatorID();
+		electrodes_ID[i] = m_handle->Machine2d->stimulator->probeElectrodeID(i);
 	}
 
 	//[4] Setup the output variables
@@ -832,12 +833,18 @@ void ioHandler::savePotentialPlot()
 		output << "# Prepared by PP" << endl;
 		output << "" << endl;
 
-		output << "Electrode 1 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[0]->getPositionX()<<", ";
-		output <<  m_handle->Machine2d->probeOscillator[0]->getPositionY()<<") "<<endl;
-		output << "Electrode 2 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[1]->getPositionX()<<", ";
-		output <<  m_handle->Machine2d->probeOscillator[1]->getPositionY()<<") "<<endl;
-		output << "Electrode 3 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[2]->getPositionX()<<", ";
-		output <<  m_handle->Machine2d->probeOscillator[2]->getPositionY()<<") "<<endl;
+
+		int oscID = m_handle->Machine2d->stimulator->probeElectrodeID(0);
+		output << "Electrode 1 position (X,Y): \t ( " << m_handle->m_grid->m_mesh[oscID]->getPositionX() << ", ";
+		output << m_handle->m_grid->m_mesh[oscID]->getPositionY() << ") " << endl;
+
+		oscID = m_handle->Machine2d->stimulator->probeElectrodeID(1);
+		output << "Electrode 2 position (X,Y): \t ( " << m_handle->m_grid->m_mesh[oscID]->getPositionX() << ", ";
+		output << m_handle->m_grid->m_mesh[oscID]->getPositionY() << ") " << endl;
+
+		oscID = m_handle->Machine2d->stimulator->probeElectrodeID(2);
+		output << "Electrode 3 position (X,Y): \t ( " << m_handle->m_grid->m_mesh[oscID]->getPositionX()<<", ";
+		output << m_handle->m_grid->m_mesh[oscID]->getPositionY() << ") " << endl;
 		output << "time \t v[electr 1] \t v[electr_2] \t v[electr3]" <<endl <<endl;
 
 
@@ -884,8 +891,9 @@ void ioHandler::saveRRPlot_1()
 		output << "# Prepared by PP" << endl;
 		output << "" << endl;
 		output << "ISI for electrode 1" << endl;
-		output << "Electrode 1 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[0]->getPositionX()<<", ";
-		output <<  m_handle->Machine2d->probeOscillator[0]->getPositionY()<<") "<<endl;
+		int oscID = m_handle->Machine2d->stimulator->probeElectrodeID(0);
+		output << "Electrode 1 position (X,Y): \t ( " << m_handle->m_grid->m_mesh[oscID]->getPositionX() << ", ";
+		output << m_handle->m_grid->m_mesh[oscID]->getPositionY() << ") " << endl;
 
 		for (int j = 0; j < m_handle->plotRR[0]->d_data[0]->size(); ++j)
 		{
@@ -927,8 +935,9 @@ void ioHandler::saveRRPlot_2()
 		output << "# Prepared by PP" << endl;
 		output << "" << endl;
 		output << "ISI for electrode 2" << endl;
-		output << "Electrode 2 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[1]->getPositionX()<<", ";
-		output <<  m_handle->Machine2d->probeOscillator[1]->getPositionY()<<") "<<endl;
+		int oscID = m_handle->Machine2d->stimulator->probeElectrodeID(1);
+		output << "Electrode 1 position (X,Y): \t ( " << m_handle->m_grid->m_mesh[oscID]->getPositionX() << ", ";
+		output << m_handle->m_grid->m_mesh[oscID]->getPositionY() << ") " << endl;
 
 		for (int j = 0; j < m_handle->plotRR[1]->d_data[0]->size(); ++j)
 		{
@@ -970,8 +979,9 @@ void ioHandler::saveRRPlot_3()
 		output << "# Prepared by PP" << endl;
 		output << "" << endl;
 		output << "ISI for electrode 3" << endl;
-		output << "Electrode 3 position (X,Y): \t ( " << m_handle->Machine2d->probeOscillator[2]->getPositionX()<<", ";
-		output <<  m_handle->Machine2d->probeOscillator[2]->getPositionY()<<") "<<endl;
+		int oscID = m_handle->Machine2d->stimulator->probeElectrodeID(2);
+		output << "Electrode 1 position (X,Y): \t ( " << m_handle->m_grid->m_mesh[oscID]->getPositionX() << ", ";
+		output << m_handle->m_grid->m_mesh[oscID]->getPositionY() << ") " << endl;
 
 		for (int j = 0; j < m_handle->plotRR[2]->d_data[0]->size(); ++j)
 		{

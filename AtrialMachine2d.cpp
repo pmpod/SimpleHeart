@@ -13,10 +13,9 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 
 	m_grid = grid;
 
-	
-	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[129]));
-	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[16257 - 128]));
-	probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[5000]));
+	stimulator->setProbeElectrode(m_grid, 0, 129);
+	stimulator->setProbeElectrode(m_grid, 1, 16257 - 128);
+	stimulator->setProbeElectrode(m_grid, 2, 5000);
 
 	setForwardEulerStrategy();
 }
@@ -63,13 +62,8 @@ double AtrialMachine2d::processStep()
 		m_grid->structureUpdated = false;
 	}
 
-	m_grid->minElectrogram = m_grid->minPotential;
-	m_grid->maxElectrogram = m_grid->maxPotential;
-
-	if (stimulator->stimulatorIsOn())
-	{
-		stimulator->run(m_grid, m_globalTime);
-	}
+	//m_grid->minElectrogram = m_grid->minPotential;
+	//m_grid->maxElectrogram = m_grid->maxPotential;
 	//else {
 	//	stimulator.stop(m_grid);
 	//}
@@ -84,18 +78,13 @@ double AtrialMachine2d::processStep()
 	//	stopStimulation();
 	//}
 
-	for (int kk = 0; kk <= 20; ++kk)//m_skip
+
+	for (int kk = 0; kk <= 10; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}
 
-
-	//m_grid->calculateElectrogram(probeOscillator[0]);
-	//m_grid->calculateElectrogram(probeOscillator[1]);
-	//m_grid->calculateElectrogram(probeOscillator[2]);
-	probeOscillator[0]->processNewTime(m_globalTime);
-	probeOscillator[1]->processNewTime(m_globalTime);
-	probeOscillator[2]->processNewTime(m_globalTime);
+	stimulator->run(m_grid, m_globalTime);
 
 	return m_globalTime;
 
@@ -142,3 +131,4 @@ void AtrialMachine2d::startStimulatorProcedure()
 {
 	stimulator->start(m_grid);
 }
+

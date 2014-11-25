@@ -23,7 +23,7 @@ void ProbeElectrode::reset()
 	intervalsPotential.clear();
 	rangeOffocus = 5;
 	lastMaxRR = -1;
-	currentMaxRR = -1;
+	_currentMaxRR = -1;
 	maxRRindex = -1;
 	refractoryPeriod = 50; //ms
 	potentialTreshold = 0.3; //mV
@@ -56,19 +56,20 @@ void ProbeElectrode::processNewTime(double time)
 			if (intervalsPotential[i] >= intervalsPotential[i - 1] * (1 + 0.001))
 			{
 				maxRRindex = i;
-				currentMaxRR = intervalsRR[i];
+				_currentMaxRR = intervalsRR[i];
 			}
 		}
-		if (maxRRindex == rangeOffocus && currentMaxRR != -1 && (currentMaxRR > 0) && (currentMaxRR - lastMaxRR > refractoryPeriod))
+		if (maxRRindex == rangeOffocus && _currentMaxRR != -1 && (_currentMaxRR > 0) && (_currentMaxRR - lastMaxRR > refractoryPeriod))
 		{
-			double outer = currentMaxRR - lastMaxRR;
+			double outer = _currentMaxRR - lastMaxRR;
 			emit nextRR(outer);
 			intervalsSaved.push_back(outer);
-			lastMaxRR = currentMaxRR;
+			lastMaxRR = _currentMaxRR;
+			_lastRR = outer;
 			//_osc->m_lastActivationTime = outer;
 		}
 		emit curIndex(maxRRindex);
-		currentMaxRR = -1;
+		_currentMaxRR = -1;
 	}
 }
 //---------------------------------------------------------------
@@ -78,3 +79,12 @@ double ProbeElectrode::getPositionY(){ return _osc->getPositionY(); }
 //---------------------------------------------------------------
 double ProbeElectrode::getPositionZ() { return _osc->getPositionZ(); }
 double ProbeElectrode::getOscillatorID() { return _osc->oscillatorID; }
+//------------------------
+double ProbeElectrode::lastRR()
+{
+	return _lastRR;
+}
+double ProbeElectrode::currentMaxRR()
+{
+	return lastMaxRR;
+}

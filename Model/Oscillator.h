@@ -53,6 +53,8 @@ public:
 	double m_potentialHistory[OSC_HISTORY_SIZE];
 	short m_lastHistoryIterator;
 	double m_lastActivationTime;
+	double m_lastActivationPhase;
+	double m_lastPPIR_TCL;
 
 	std::vector<Oscillator*> m_wallCells;		///Vector of pointers to neighbour oscillators
 	std::vector<Oscillator*> m_neighbours;		///Vector of pointers to neighbour oscillators

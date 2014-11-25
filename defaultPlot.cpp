@@ -217,3 +217,8 @@ void  DefaultPlot::mousePressEvent(QMouseEvent *event)
 	}
 
 }
+double DefaultPlot::getLastValue()
+{
+	double val = (d_data[0]->y())[d_data[0]->count()];
+	return val;
+}

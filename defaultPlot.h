@@ -32,6 +32,8 @@ public:
 	void setAxisMaxRangeX(double minx, double maxx);
 	void setAxisMaxRangeY(double miny, double maxy);
 
+
+	double getLastValue();
 	std::vector<CurveData*> d_data;
 	QwtSymbol* s;
 	std::vector<QwtPlotCurve*> d_curve;

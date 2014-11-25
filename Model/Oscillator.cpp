@@ -23,6 +23,8 @@ void Oscillator::reset()
 	m_previous_potential = 0;
 	m_v_scaledPotential = vmin;
 	m_previous_scaledPotential = vmin;
+	m_lastActivationPhase = 0;
+	m_lastActivationTime = 0;
 	m_potentialPRIM = 0.0;
 	m_v_electrogram = 0.0;
 	m_currentSource = 0.0;

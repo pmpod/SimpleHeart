@@ -44,19 +44,15 @@ void SimpleHeart::reset()
 {
 	ui.statusBar->showMessage(tr("Simulation reset"));
 
-	QObject::disconnect(Machine2d->probeOscillator[0], SIGNAL(nextRR(double)), plotRR[0], SLOT(appendRR(double)));
-	QObject::disconnect(Machine2d->probeOscillator[1], SIGNAL(nextRR(double)), plotRR[1], SLOT(appendRR(double)));
-	QObject::disconnect(Machine2d->probeOscillator[2], SIGNAL(nextRR(double)), plotRR[2], SLOT(appendRR(double)));
 	for (short k = 0; k < plotRR.size(); ++k)
 	{
+		QObject::disconnect(Machine2d->stimulator->probeElectrode(k), SIGNAL(nextRR(double)), plotRR[k], SLOT(appendRR(double)));
 		plotRR[k]->clear();
+		QObject::connect(Machine2d->stimulator->probeElectrode(k), SIGNAL(nextRR(double)), plotRR[k], SLOT(appendRR(double)));
 	}
 	plotRR[0]->d_curve.back()->setPen(QPen(QBrush(QColor(255, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
-	plotRR[1]->d_curve.back()->setPen(QPen(QBrush(QColor(255,0,0),Qt::SolidPattern), 2.0, Qt::SolidLine));
+	plotRR[1]->d_curve.back()->setPen(QPen(QBrush(QColor(255, 0, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
 	plotRR[2]->d_curve.back()->setPen(QPen(QBrush(QColor(0, 255, 0), Qt::SolidPattern), 2.0, Qt::SolidLine));
-	QObject::connect(Machine2d->probeOscillator[0], SIGNAL(nextRR(double)), plotRR[0], SLOT(appendRR(double)));
-	QObject::connect(Machine2d->probeOscillator[1], SIGNAL(nextRR(double)), plotRR[1], SLOT(appendRR(double)));
-	QObject::connect(Machine2d->probeOscillator[2], SIGNAL(nextRR(double)), plotRR[2], SLOT(appendRR(double)));
 
 }
 void SimpleHeart::init()
@@ -211,15 +207,20 @@ void SimpleHeart::setupConnections()
 
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d, SLOT(reset()));
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), this, SLOT(reset()));
-	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+
+
+	for (short k = 0; k < Machine2d->stimulator->probeElectrodesCount(); ++k)
 	{
-		QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->probeOscillator[k], SLOT(reset()));
+		QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d->stimulator->probeElectrode(k), SLOT(reset()));
 	}
 	for (short k = 0; k < plotPotentials.size(); ++k)
 	{
 		QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentials[k], SLOT(clear()));
 	}
-
+	for (short k = 0; k < plotRR.size(); ++k)
+	{
+		QObject::connect(Machine2d->stimulator->probeElectrode(k), SIGNAL(nextRR(double)), plotRR[k], SLOT(appendRR(double)));
+	}
 
 	QObject::connect(ui.cb_saveBMP, SIGNAL(toggled()), this, SLOT(stopCalculation()));
 	QObject::connect(ui.cb_saveBMP, SIGNAL(toggled(bool)), this, SLOT(setBmpSaving(bool)));
@@ -228,9 +229,6 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_snapShot, SIGNAL(clicked()), m_ioHandler, SLOT(saveAsBmp()));
 	
 	//ADDED
-	QObject::connect(Machine2d->probeOscillator[0], SIGNAL(nextRR(double)), plotRR[0], SLOT(appendRR(double)));
-	QObject::connect(Machine2d->probeOscillator[1], SIGNAL(nextRR(double)), plotRR[1], SLOT(appendRR(double)));
-	QObject::connect(Machine2d->probeOscillator[2], SIGNAL(nextRR(double)), plotRR[2], SLOT(appendRR(double)));
 
 	QObject::connect(ui.b_saveStructure, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentStructure()));
 	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), this, SLOT(setAtrialStructure()));
@@ -244,6 +242,19 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.rb_setDisplayPotentialMode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayPotential(bool)));
 	QObject::connect(ui.rb_setDisplayC1Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent1(bool)));
 	QObject::connect(ui.rb_setDisplayC2Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent2(bool)));
+	QObject::connect(ui.rb_setDisplayActivationTime, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayActivationTime(bool)));
+
+
+	QObject::connect(ui.rb_ATCsetRelativePhase, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeRelative(bool)));
+	QObject::connect(ui.rb_ATCsetSynchronisedPhaseToS1, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeSynchronisedS1(bool)));
+	QObject::connect(ui.rb_ATCsetSynchronisedPhaseToTCL, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeSynchronisedLastTCL(bool)));
+	QObject::connect(ui.rb_ATCsetFixedPhase, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeFixed(bool)));
+
+	QObject::connect(ui.b_ATCsetPhaseZero, SIGNAL(clicked()), this, SLOT(setActivationTimePhaseZero()));
+	QObject::connect(ui.b_ATCtakeRangeFromLastTCL, SIGNAL(clicked()), this, SLOT(setActivationTimeCLlastTCL()));
+	QObject::connect(ui.sb_ATCcycleLength, SIGNAL(valueChanged(double)), EpStimulator::Instance(), SLOT(setActivationTimeCycle(double)));
+	QObject::connect(EpStimulator::Instance(), SIGNAL(progressOfStimulation(int)), ui.pb_pacingProtocol, SLOT(setValue(int)));
+	QObject::connect(EpStimulator::Instance(), SIGNAL(progressOfSinglePace(int)), ui.pb_pacingProtocol_2, SLOT(setValue(int)));
 
 
 	QObject::connect(ui.mode_tab, SIGNAL(currentChanged(int)), this, SLOT(setState(int)));
@@ -321,13 +332,15 @@ void SimpleHeart::setupConnections()
 
 //---------------------GRAPH CONNECTIONS -------------------------------------------
 	//QObject::connect(diffusionPainter, SIGNAL(positionElektrode(int, int,int)), this, SLOT(setProbeElectrode(int,int,int)));
-	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+
+	for (short k = 0; k < Machine2d->stimulator->probeElectrodesCount(); ++k)
 	{
-		QObject::connect(Machine2d->probeOscillator[k], SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
+		QObject::connect(Machine2d->stimulator->probeElectrode(k), SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
 	}
-	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+
+	for (short k = 0; k < Machine2d->stimulator->probeElectrodesCount(); ++k)
 	{
-		QObject::connect(Machine2d->probeOscillator[k], SIGNAL(clicked()), plotRR[k], SLOT(appendRR(double)));
+		QObject::connect(Machine2d->stimulator->probeElectrode(k), SIGNAL(nextRR(double)), plotRR[k], SLOT(appendRR(double)));
 	}
 
 
@@ -355,28 +368,20 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_rrlplot_save, SIGNAL(clicked()), m_ioHandler, SLOT(saveRRPlot_1()));
 	QObject::connect(ui.b_rrlplot_save, SIGNAL(clicked()), m_ioHandler, SLOT(saveRRPlot_2()));
 	QObject::connect(ui.b_rrlplot_save, SIGNAL(clicked()), m_ioHandler, SLOT(saveRRPlot_3()));
-
-	
-	//QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el1, SLOT(autoscale()));
-	//QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el1, SLOT(zoomInX()));
-	//QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el1, SLOT(zoomOutX()));
-	//QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el1, SLOT(setYmin(double)));
-	//QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el1, SLOT(setYmax(double)));
-
-	//QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el2, SLOT(autoscale()));
-	//QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el2, SLOT(zoomInX()));
-	//QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el2, SLOT(zoomOutX()));
-	//QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el2, SLOT(setYmin(double)));
-	//QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el2, SLOT(setYmax(double)));
-
-	//QObject::connect(ui.b_rrplot_autoscale_3, SIGNAL(clicked()), plotEnt_el3, SLOT(autoscale()));
-	//QObject::connect(ui.b_rrplot_zoominX_3, SIGNAL(clicked()), plotEnt_el3, SLOT(zoomInX()));
-	//QObject::connect(ui.b_rrplot_zoomoutX_3, SIGNAL(clicked()), plotEnt_el3, SLOT(zoomOutX()));
-	//QObject::connect(ui.sb_yminEnt, SIGNAL(valueChanged(double)), plotEnt_el3, SLOT(setYmin(double)));
-	//QObject::connect(ui.sb_ymaxEnt, SIGNAL(valueChanged(double)), plotEnt_el3, SLOT(setYmax(double)));
-	////QObject::connect(ui.b_rrplot_clear_3, SIGNAL(clicked()), this, SLOT(plotEntClear()));
+}
 
 
+void SimpleHeart::setActivationTimePhaseZero()
+{
+	double val = Machine2d->m_globalTime;
+	ui.sb_ATCphaseZero->setValue(val);
+	EpStimulator::Instance()->setPhaseZero(ui.sb_ATCphaseZero->value());
+}
+void SimpleHeart::setActivationTimeCLlastTCL()
+{
+	double val = EpStimulator::Instance()->probeElectrode(0)->lastRR();
+	ui.sb_ATCcycleLength->setValue(val);
+	EpStimulator::Instance()->setActivationTimeCycle(val);
 }
 void SimpleHeart::paintUniform()
 {
@@ -400,9 +405,6 @@ void SimpleHeart::paintUniform()
 	}
 
 }
-
-
-
 void SimpleHeart::setPaintERP(bool b)
 {
 	if (b)
@@ -496,11 +498,16 @@ void SimpleHeart::setState(int val)
 {
 	switch (val)
 	{
-	case 0:
-		glGraph->setStateEP(true);
-		ui.b_freeTouchMode->setChecked(false);
-		break;
 	case 1:
+		if (ui.b_freeTouchMode->isChecked()){
+			glGraph->setStateViewer(true);
+
+		} 
+		else {
+			glGraph->setStateEP(true);
+		}
+		break;
+	case 2:
 		glGraph->setStateDiffusionModifier(true);
 		ui.b_setStateStructure->setChecked(false);
 		ui.b_setStatePaintConductivity->setChecked(true);
@@ -813,9 +820,9 @@ void SimpleHeart::setAtrialStructure()
 {
 	stopCalculation();
 
-	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+	for (short k = 0; k < Machine2d->stimulator->probeElectrodesCount(); ++k)
 	{
-		QObject::disconnect(Machine2d->probeOscillator[k], SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
+		QObject::disconnect(Machine2d->stimulator->probeElectrode(k), SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
 	}
 	
 	glGraph->updateGL();
@@ -831,17 +838,17 @@ void SimpleHeart::setAtrialStructure()
 		(Machine2d->*Machine2d->setStrategy)();
 		glGraph->linkToMesh = m_grid;
 
-		Machine2d->probeOscillator.clear();
-		Machine2d->probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[0]));
-		Machine2d->probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[2000]));
-		Machine2d->probeOscillator.push_back(new ProbeElectrode(m_grid->m_mesh[5000]));
+		Machine2d->stimulator->setProbeElectrode(m_grid, 0, 129);
+		Machine2d->stimulator->setProbeElectrode(m_grid, 1, 16257 - 128);
+		Machine2d->stimulator->setProbeElectrode(m_grid, 2, 5000);
+
 		Machine2d->reset();
 		delete(tempptr);
 	}
 
-	for (short k = 0; k < Machine2d->probeOscillator.size(); ++k)
+	for (short k = 0; k < Machine2d->stimulator->probeElectrodesCount(); ++k)
 	{
-		QObject::connect(Machine2d->probeOscillator[k], SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
+		QObject::connect(Machine2d->stimulator->probeElectrode(k), SIGNAL(newElectrogramAndTime(double, double)), plotPotentials[k], SLOT(addValue_e1(double, double)));
 	}
 
 //		m_ioHandler->writeParametersToFile();

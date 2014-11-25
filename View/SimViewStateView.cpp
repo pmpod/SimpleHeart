@@ -6,10 +6,7 @@ SimViewStateView* SimViewStateView::_instance = nullptr;
 SimViewStateView::SimViewStateView()
 {
 	cursorRadius = 2.0;
-	_mode = 6;//POTENTIAL
 	setPalette(DP_HOTTOCOLD);
-	_minRefractoryTreshold = 50.0; //[ms]
-	_derivativeTreshold = 0.1;
 
 
 }
@@ -28,75 +25,12 @@ SimViewState* SimViewStateView::Instance()
 }
 //--------------------------------------------------
 //--------------------------------------------------
-void SimViewStateView::setMode(const int mode)
-{
-	_mode = mode;
-}\
+
 void SimViewStateView::setOutlineStyle(const  BRUSH_OUTLINE outline)
 {
 
 }
-void SimViewStateView::paintLegend(glAtrium* view)
-{
-	glCallList(view->displayListIndex);
-	GLfloat widthL = view->frustrumSize*_scale*0.5;
-	GLfloat heightL = view->frustrumSize*_scale*0.2;
-	view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, "-75 mV", QFont(), view->displayListIndex);
-	view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, "25 mV", QFont(), view->displayListIndex);
-	view->renderText(widthL*1.4f, 0.0*heightL - heightL / 2, 0, "0", QFont(), view->displayListIndex);
-}
-void SimViewStateView::prepareLegend(glAtrium* view)
-{
 
-	float f[1];
-	GLfloat widthL = view->frustrumSize*_scale*0.5;
-	GLfloat heightL = view->frustrumSize*_scale*0.2;
-
-	GLfloat col_w[] = { 1.0, 1.0, 1.0, 1.f };
-	GLfloat col_g[] = { .5f, .5f, .5f, .5f };
-	GLfloat col[] = { 0.0, 0.0, 1.0, 1.f };
-
-	GLfloat ccol;
-	// compile the display list, store a triangle in it
-	glNewList(view->displayListIndex, GL_COMPILE);
-
-	glBegin(GL_QUAD_STRIP);
-	for (GLfloat i = -16.0; i <= 16.0; ++i)
-	{
-		ccol = -i;
-
-		colorMap(ccol, -16.0, 16.0, col[0], col[1], col[2]);
-		glColor3f(col[0], col[1], col[2]);
-		glVertex3f(widthL, i*heightL, 0.0f);
-		glVertex3f(-widthL, i*heightL, 0.0f);
-
-	}
-	glEnd();
-	glBegin(GL_LINES);
-	glColor3fv(col_g);
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, col_g);
-	for (GLfloat i = -15.0; i <= 15.0; ++i)
-	{
-		glVertex3f(-widthL, i*heightL, 0.0f);
-		glVertex3f(widthL, i*heightL, 0.0f);
-
-	}
-	glEnd();
-
-	glBegin(GL_LINES);
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
-	glColor3fv(col_w);
-	glVertex3f(-widthL, -16.0*heightL, 0.0f);
-	glVertex3f(widthL*1.2f, -16.0*heightL, 0.0f);
-	glVertex3f(-widthL, 0.0*heightL, 0.0f);
-	glVertex3f(widthL*1.2f, 0.0*heightL, 0.0f);
-	glVertex3f(-widthL, 16.0*heightL, 0.0f);
-	glVertex3f(widthL*1.2f, 16.0*heightL, 0.0f);
-	glEnd();
-
-	glEndList();
-
-}
 void SimViewStateView::paintCursor(glAtrium* view)
 {
 	int crossSize = 5;
@@ -130,224 +64,6 @@ void SimViewStateView::paintCursor(glAtrium* view)
 }
 //--------------------------------------------------
 
-void SimViewStateView::processActivationTimes(glAtrium* view, int oscillatorID)
-{
-	CardiacMesh *msh = view->linkToMesh;
-	//[0] Read the Transmembrane potential value from the cell
-	//double potential = msh->m_mesh[oscillatorID]->m_v_scaledPotential;
-	Oscillator* osc = msh->m_mesh[oscillatorID];
-	double dtime = osc->getCurrentTime() - osc->getPreviousTime();
-	//double derivative = (osc->m_v_scaledPotential - osc->m_previous_scaledPotential) / dtime;
-	double derivative = (osc->m_v_scaledPotential - osc->m_potentialHistory[0]);
-
-	//[1] Simple peak (depolarisation) detection algorithm for transmembrane potential;
-
-	//osc->m_lastHistoryIterator
-	//osc->m_potentialHistory[(osc->m_lastHistoryIterator + 1) % OSC_HISTORY_SIZE] = osc->m_v_scaledPotential;
-	if (derivative > _derivativeTreshold &&
-		(osc->getCurrentTime() - osc->m_lastActivationTime) > _minRefractoryTreshold)
-	{
-		osc->m_lastActivationTime = osc->getCurrentTime();
-	}
-	osc->m_potentialHistory[0] = osc->m_v_scaledPotential;
-	
-}
-void SimViewStateView::paintModel(glAtrium* view)
-{
-	CardiacMesh *msh = view->linkToMesh;
-	std::vector<Oscillator*> oscs = view->linkToMesh->m_mesh;
-	int vertexNumber = msh->m_vertexList.size();
-
-	GLfloat val1;
-
-
-	switch (_mode)
-	{
-	case 1:
-		vmin = msh->minPotential;
-		vmax = msh->maxPotential;
-		break;
-	case 2:
-		vmin = -1;
-		vmax = 1;
-		break;
-	case 3:
-		vmin = 0;
-		vmax = 1;
-		break;
-	case 4:
-		break;
-	case 5:
-		vmin = msh->minElectrogram;
-		vmax = msh->maxElectrogram;
-		break;
-	case 6: //ActivationTime _ Wzglednie
-		vmax = previous_vmax;
-		vmin = previous_vmin;
-		previous_vmin = previous_vmax;
-		break;
-	}
-
-	for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
-	{
-		if (oscs[currentVertex]->m_type != SOLID_WALL)
-		{
-			switch (_mode)
-			{
-			case 1:
-				val1 = oscs[currentVertex]->m_v_scaledPotential;
-				break;
-			case 2:
-				val1 = oscs[currentVertex]->getLastCurrentSource();
-				break;
-			case 3:
-				val1 = oscs[currentVertex]->m_v_current[0];
-				break;
-			case 4:
-				val1 = oscs[currentVertex]->m_currentTime - oscs[currentVertex]->m_previousTime;
-				break;
-			case 5:
-				val1 = oscs[currentVertex]->m_v_electrogram;
-				break;
-			case 6: //ActivationTime _ Wzglednie
-				processActivationTimes(view, currentVertex);
-				val1 = oscs[currentVertex]->m_lastActivationTime;
-				val1 > previous_vmax ? previous_vmax = val1 : 0;
-				val1 < previous_vmin ? previous_vmin = val1 : 0;
-				break;
-			}
-			colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
-
-		}
-		else
-		{
-			msh->m_vertexMatrix[currentVertex].r = 0.1;
-			msh->m_vertexMatrix[currentVertex].g = 0.1; 
-			msh->m_vertexMatrix[currentVertex].b = 0.1;
-		}
-	}
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-
-		glColorPointer(3, GL_FLOAT, sizeof(SVertex), &view->linkToMesh->m_vertexMatrix[0].r);  
-
-		glVertexPointer(3, GL_FLOAT, sizeof(SVertex), view->linkToMesh->m_vertexMatrix);
-		
-		glDrawElements(GL_TRIANGLES, view->linkToMesh->m_vertexList.size()*3, GL_UNSIGNED_INT, view->linkToMesh->m_indicesMatrix);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_COLOR_ARRAY);
-
-	//glPushMatrix();
-
-	//// [1] Paint data
-
-	//CardiacMesh *msh = view->linkToMesh;
-	//std::vector<Oscillator*> oscs = view->linkToMesh->m_mesh;
-
-	//int vertexNumber = msh->m_vertexList.size();
-
-	//int t_ID1, t_ID2, t_ID3;
-	//GLfloat val1, val2, val3;
-	//GLfloat color[] = { 0.f, 0.f, 0.f, 1.f };
-	//GLfloat vmin = msh->m_minElectrogram;
-	//GLfloat vmax = msh->m_maxElectrogram;
-
-	//glBegin(GL_TRIANGLES);
-	//for (unsigned int j = 0; j < vertexNumber; j = j + 1)
-	//{
-	//	t_ID1 = msh->m_vertexList[j]->id_1;
-	//	t_ID2 = msh->m_vertexList[j]->id_2;
-	//	t_ID3 = msh->m_vertexList[j]->id_3;
-
-	//	if (oscs[t_ID1]->m_type != SOLID_WALL)
-	//	{
-
-	//		switch (_dataDisplayMode)
-	//		{
-	//		case 1:
-	//			val1 = oscs[t_ID1]->m_v_scaledPotential;
-	//			val2 = oscs[t_ID2]->m_v_scaledPotential;
-	//			val3 = oscs[t_ID3]->m_v_scaledPotential;
-	//			break;
-	//		case 2:
-	//			val1 = oscs[t_ID1]->getLastCurrentSource();
-	//			val2 = oscs[t_ID2]->getLastCurrentSource();
-	//			val3 = oscs[t_ID3]->getLastCurrentSource();
-	//			break;
-	//		case 3:
-	//			val1 = oscs[t_ID1]->m_v_current[0];
-	//			val2 = oscs[t_ID2]->m_v_current[0];
-	//			val3 = oscs[t_ID3]->m_v_current[0];
-	//			break;
-	//		case 4:
-	//			val1 = oscs[t_ID1]->m_currentTime - oscs[t_ID1]->m_previousTime;
-	//			val2 = oscs[t_ID2]->m_currentTime - oscs[t_ID2]->m_previousTime;
-	//			val3 = oscs[t_ID3]->m_currentTime - oscs[t_ID3]->m_previousTime;
-	//			break;
-	//		case 5:
-	//			val1 = oscs[t_ID1]->m_v_electrogram;
-	//			val2 = oscs[t_ID2]->m_v_electrogram;
-	//			val3 = oscs[t_ID3]->m_v_electrogram;
-	//			break;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		val1 = 0.0;
-	//		val2 = 0.0;
-	//		val3 = 0.0;
-	//	}
-
-	//	glBegin(GL_TRIANGLES);
-	//	colorMap(val1, vmin, vmax, color[0], color[1], color[2]);
-	//	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-	//	glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-	//	//glNormal3d(x1, y1, z1);
-	//	glVertex3f(msh->m_mesh[t_ID1]->m_x, msh->m_mesh[t_ID1]->m_y, msh->m_mesh[t_ID1]->m_z);
-
-	//	colorMap(val2, vmin, vmax, color[0], color[1], color[2]);
-	//	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-	//	glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-	//	//glNormal3d(x2, y2, z2);
-	//	glVertex3f(msh->m_mesh[t_ID2]->m_x, msh->m_mesh[t_ID2]->m_y, msh->m_mesh[t_ID2]->m_z);
-
-	//	colorMap(val3, vmin, vmax, color[0], color[1], color[2]);
-	//	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-	//	glMaterialfv(GL_FRONT, GL_AMBIENT, color);
-	//	//glNormal3d(x3, y3, z3);
-	//	glVertex3f(msh->m_mesh[t_ID3]->m_x, msh->m_mesh[t_ID3]->m_y, msh->m_mesh[t_ID3]->m_z);
-	//	glEnd();
-
-	//}
-	//glEnd();
-
-
-
-
-
-	glPushMatrix();
-
-
-	// [3] Paint probes
-		for (short n = 0; n < view->linkToMachine->probeOscillator.size(); ++n)
-		{
-			drawSphere(0.2, 10, 10, view->linkToMachine->probeOscillator[n]->getPositionX(),
-				view->linkToMachine->probeOscillator[n]->getPositionY(),
-				view->linkToMachine->probeOscillator[n]->getPositionZ(), 1.0f / (n + 1), 1.0f / (n + 1), 1.0f);
-
-		
-			view->renderText(view->linkToMachine->probeOscillator[n]->getPositionX(),
-				view->linkToMachine->probeOscillator[n]->getPositionY(),
-				view->linkToMachine->probeOscillator[n]->getPositionZ() + 1, "Electrode");
-		}
-		if (view->paintRay)
-		{
-			drawSphere(0.2, 10, 10, view->testProbe.x, view->testProbe.y, view->testProbe.z, 1.0f, 1.0f, 1.0f);
-		}
-	glPopMatrix();
-}
 //--------------------------------------------------
 void SimViewStateView::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 {
@@ -380,7 +96,7 @@ void SimViewStateView::handleMouseRelease(glAtrium* view, QMouseEvent *event)
 	view->setLastPos(event->pos());
 
 	view->linkToMachine->stimulator->stop(view->linkToMesh);
-	view->linkToMachine->stimulator->setStimulationSiteID(view->linkToMachine->probeOscillator[0]->getOscillatorID());
+	view->linkToMachine->stimulator->setStimulationSiteID(view->linkToMachine->stimulator->probeElectrodeID(0));
 	//if (Qt::LeftButton)
 	//{
 	//	glGetFloatv(GL_MODELVIEW_MATRIX, view->m);

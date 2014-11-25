@@ -13,10 +13,8 @@
 #include "RandomGenerator.h"
 #include "atrialParameters.h"
 #include "Model\CardiacMesh.h"
-#include "Control\ProbeElectrode.h"
 #include "NumericStrategy\NumericStrategy.h"
 #include "Control/epStimulator.h"
-
 
 class AtrialMachine2d : public QObject
 {
@@ -36,48 +34,34 @@ public:
 	atrialParameters*		m_definitions;//?
 	RandomGenerator		generator;//?
 	//-------------------------------------------------------------
-	std::vector<ProbeElectrode*> probeOscillator;
-	CardiacMesh* m_grid;
-	NumericStrategy* m_strategy;
-	EpStimulator*	stimulator;
+	CardiacMesh*					m_grid;
+	NumericStrategy*				m_strategy;
+	EpStimulator*					stimulator;
 	//-------------------------------------------------------------
 	double m_globalTime;
 
-	//bool structureUpdated;
-
 private:
 	int				_skip;
-
-	//TODO - the same in Mesh??
 	//-------------------------------------------------------------
 signals:
 	void stepFinished();
 
 
-public slots:
+	public slots:
+	void reset();
+
 	void setForwardEulerStrategy();
 	void setAllexandreStrategy();
+
 	double processStep();
 
 	void startStimulatorProcedure();
-	void reset();
 
 
 	void calculateFullElectrogramMap();
 	//----------------simulation settings
 	void setSkip(int skip);
-
 	void setUniformDiffusion(double value);
 	void setUniformERP(double value);
-	//void setS1_Duration(double val);
-	//void setS1_Cycle(double val);
-	////------------------------------------global nodes settings
-	//void setGlobalTime(double t);
-	//void setEctoModTime();
-	//---------------------------------------------------
-
-
-
-
 
 };

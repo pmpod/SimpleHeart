@@ -12,8 +12,8 @@ EpStimulator::EpStimulator()
 	_stimulatorOn = false;
 
 
-	_S2On = true;
-	_S3On = true;
+	_S2On = false;
+	_S3On = false;
 
 	_cycleLength_S1 = 500;
 	_numberOfCycles_S1 = 5;
@@ -22,14 +22,25 @@ EpStimulator::EpStimulator()
 	_cycleLength_S3 = 125;
 	_numberOfCycles_S3 = 1;
 
+	_couplingInterval = 200;
+	_activationTimeCycle = 200;
+	_minRefractoryTreshold = 50.0; //[ms]
+	_derivativeTreshold = 0.1;
+	_phaseZero = 0;
+
 	_mainCycleLength = 1;
+
+	_activationTimeMode = ATC_RELATIVE;
+
+	_probe.push_back(new ProbeElectrode());
+	_probe.push_back(new ProbeElectrode());
+	_probe.push_back(new ProbeElectrode());
+
+	_stimulationProtocolBeganOn = 0;
 }
-
-
 EpStimulator::~EpStimulator()
 {
 }
-
 EpStimulator* EpStimulator::Instance()
 {
 	if (EpStimulator::_instance == nullptr)
@@ -40,9 +51,48 @@ EpStimulator* EpStimulator::Instance()
 	return _instance;
 }
 
+
 bool EpStimulator::stimulatorIsOn()
 {
 	return _stimulatorOn;
+}
+
+ProbeElectrode* EpStimulator::probeElectrode(int num)
+{
+	return _probe[num];
+}
+int EpStimulator::probeElectrodeID(int num)
+{
+	if (num < 0 || num > _probe.size()){
+		return -1;
+	}
+	else {
+		return _probe[num]->getOscillatorID();
+	}
+
+}
+void EpStimulator::setProbeElectrode(CardiacMesh* mesh, int num, int oscID)
+{
+	if (num < 0 || num > _probe.size()){
+	}
+	else {
+		_probe[num]->setOscillator(mesh->m_mesh[oscID]);
+	}
+}
+int EpStimulator::isProperProbe(int oscID)
+{
+	for (int i = 0; i < _probe.size(); ++i)
+	{
+		if (_probe[i]->getOscillatorID() == oscID)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+int EpStimulator::probeElectrodesCount()
+{
+	return _probe.size();
 }
 
 void EpStimulator::run(CardiacMesh* mesh, double time)
@@ -51,35 +101,77 @@ void EpStimulator::run(CardiacMesh* mesh, double time)
 	//[2] On stimulator on Set the proper stimulation times vector / check if they are set
 	//[3] Start the protocol
 	//[4] If last stimulation was made -stimulator Off
-	switch (_stimulatorMode)
+	for (int i = 0; i < _probe.size(); ++i)
 	{
-	case ES_FREE:
-		if (mesh->m_mesh[_stimulationSiteID]->getCurrentTime() >= stimulationTimes.back() + _stimulationWidth && mesh->stimulationBegun == true) {
-			stopStimulation(mesh);
-		}
-		break;
-	case ES_FIXEDLOOP:
-		if (stimulationTimes.size() >= 1)
+		_probe[i]->processNewTime(time);
+	}
+
+	if (_stimulatorOn)
+	{
+		switch (_stimulatorMode)
 		{
-			if (mesh->m_mesh[_stimulationSiteID]->getCurrentTime() >= stimulationTimes.back() && mesh->stimulationBegun == false) {
-				startStimulation(mesh->m_mesh[_stimulationSiteID], _stimulationSiteID, mesh);
-			}
+		case ES_FREE:
 			if (mesh->m_mesh[_stimulationSiteID]->getCurrentTime() >= stimulationTimes.back() + _stimulationWidth && mesh->stimulationBegun == true) {
 				stopStimulation(mesh);
-				stimulationTimes.pop_back();
 			}
+			break;
+		case ES_FIXEDLOOP:
+			emit progressOfStimulation(floor(101 * abs(stimulationTimes.front() - time) / abs(stimulationTimes.front() - _stimulationProtocolBeganOn)));
+			emit progressOfSinglePace(floor(101 * abs(stimulationTimes.back() - time) / abs(stimulationTimes.back() - _lastStimulationTime)));
+			if (stimulationTimes.size() >= 1)
+			{
+				if (mesh->m_mesh[_stimulationSiteID]->getCurrentTime() >= stimulationTimes.back() && mesh->stimulationBegun == false) {
+					startStimulation(mesh->m_mesh[_stimulationSiteID], _stimulationSiteID, mesh);
+					_lastStimulationTime = stimulationTimes.back();
+
+				}
+				if (mesh->m_mesh[_stimulationSiteID]->getCurrentTime() >= stimulationTimes.back() + _stimulationWidth && mesh->stimulationBegun == true) {
+					stopStimulation(mesh);
+					stimulationTimes.pop_back();
+				}
+			}
+			else
+			{
+				stop(mesh);
+			}
+			break;
+		case ES_SENSING:
+			//TODO set probe electrode
+			if (_sensedActivationTime < 0)
+			{
+				if (_probe[0]->currentMaxRR() > _stimulationProtocolBeganOn)
+				{
+					_sensedActivationTime = _probe[0]->currentMaxRR() + _couplingInterval;
+					_stimulationProtocolBeganOn = _probe[0]->currentMaxRR();
+					setProtocol(_sensedActivationTime);
+				}
+			}
+			else
+			{
+				emit progressOfStimulation(floor(101 * abs(stimulationTimes.front() - time) / abs(stimulationTimes.front() - _stimulationProtocolBeganOn)));
+
+				emit progressOfSinglePace(floor(101 * abs(stimulationTimes.back() - time) / abs(stimulationTimes.back() - _lastStimulationTime)));
+
+				if (stimulationTimes.size() >= 1)
+				{
+					if (mesh->m_mesh[_stimulationSiteID]->getCurrentTime() >= stimulationTimes.back() && mesh->stimulationBegun == false) {
+						startStimulation(mesh->m_mesh[_stimulationSiteID], _stimulationSiteID, mesh);
+						_lastStimulationTime = stimulationTimes.back();
+					}
+					if (mesh->m_mesh[_stimulationSiteID]->getCurrentTime() >= stimulationTimes.back() + _stimulationWidth && mesh->stimulationBegun == true) {
+						stopStimulation(mesh);
+						stimulationTimes.pop_back();
+					}
+				}
+				else
+				{
+					stop(mesh);
+				}
+			}
+			break;
 		}
-		else
-		{
-			stop(mesh);
-		}
-		break;
-	case ES_SENSING:
-		break;
 	}
 }
-
-
 void EpStimulator::start(CardiacMesh* mesh)
 {
 	switch (_stimulatorMode)
@@ -87,17 +179,23 @@ void EpStimulator::start(CardiacMesh* mesh)
 	case ES_FREE:
 		if (mesh->stimulationBegun == false)
 		{
+			_stimulatorOn = true;
 			startStimulation(mesh->m_mesh[_stimulationSiteID], _stimulationSiteID, mesh);
 			stimulationTimes.clear();
 			stimulationTimes.push_back(mesh->m_mesh[_stimulationSiteID]->getCurrentTime());
-			_stimulatorOn = true;
 		}
 		break;
 	case ES_FIXEDLOOP:
-		setProtocol(mesh->m_mesh[_stimulationSiteID]->getCurrentTime());
 		_stimulatorOn = true;
+		setProtocol(mesh->m_mesh[_stimulationSiteID]->getCurrentTime());
+		_stimulationProtocolBeganOn = mesh->m_mesh[_stimulationSiteID]->getCurrentTime();
+		emit stimulatorState(true);
 		break;
 	case ES_SENSING:
+		_stimulatorOn = true;
+		_sensedActivationTime = -1;
+		_stimulationProtocolBeganOn = mesh->m_mesh[_stimulationSiteID]->getCurrentTime();
+		emit stimulatorState(true);
 		break;
 	}
 
@@ -116,6 +214,8 @@ void EpStimulator::stop(CardiacMesh* mesh)
 	}
 	stopStimulation(mesh);
 	_stimulatorOn = false;
+	emit stimulatorState(false);
+	emit progressOfStimulation(0);
 	 
 } 
 void EpStimulator::setProtocol(double zeroTime) 
@@ -126,28 +226,28 @@ void EpStimulator::setProtocol(double zeroTime)
 	 
 	int numberOfMainCycles = 1;
 	(_stimulatorMode == ES_FIXEDLOOP) ? numberOfMainCycles = _mainCycleLength : numberOfMainCycles = 1;
+
 	for (int j = 1; j <= numberOfMainCycles; ++j)
 	{
-		
+
+		stimulationTimes.push_back(currentTime);
 		for (int k = 1; k <= _numberOfCycles_S1; ++k) {
-			stimulationTimes.push_back(currentTime);
 			currentTime += _cycleLength_S1;
+			stimulationTimes.push_back(currentTime);
 		}
 		if (_S2On) {
 			for (int k = 1; k <= _numberOfCycles_S2; ++k) {
 
-				stimulationTimes.push_back(currentTime);
 				currentTime += _cycleLength_S2;
+				stimulationTimes.push_back(currentTime);
 			}
 		}
 		if (_S3On) {
 			for (int k = 1; k <= _numberOfCycles_S3; ++k) {
-
-				stimulationTimes.push_back(currentTime);
 				currentTime += _cycleLength_S3;
+				stimulationTimes.push_back(currentTime);
 			}
 		}
-		stimulationTimes.push_back(currentTime);
 	}
 	std::reverse(stimulationTimes.begin(), stimulationTimes.end());
 
@@ -221,6 +321,66 @@ void EpStimulator::setModeSensing(bool val)
 	if (val){
 		_stimulatorMode = ES_SENSING;
 	}
+}
+
+
+void EpStimulator::processActivationTimes(CardiacMesh* mesh, int oscillatorID)
+{
+	//[0] Read the Transmembrane potential value from the cell
+	Oscillator* osc = mesh->m_mesh[oscillatorID];
+
+	double derivative = (osc->m_v_scaledPotential - osc->m_potentialHistory[0]);
+
+	//[1] Simple peak (depolarisation) detection algorithm for transmembrane potential;
+
+	if (derivative > _derivativeTreshold &&
+		(osc->getCurrentTime() - osc->m_lastActivationTime) > _minRefractoryTreshold)
+	{
+		osc->m_lastActivationTime = osc->getCurrentTime();
+		osc->m_lastActivationPhase = fmod((osc->getCurrentTime() - _phaseZero), _activationTimeCycle);
+	}
+	osc->m_potentialHistory[0] = osc->m_v_scaledPotential;
+
+}
+void EpStimulator::setPhaseZero(double val){ _phaseZero = val; }
+void EpStimulator::setActivationTimeCycle(double val){ _activationTimeCycle = val; }
+ATC_MODE EpStimulator::activationTimeMode(){ return _activationTimeMode; }
+double EpStimulator::phaseZero(){ return _phaseZero; }
+double EpStimulator::activationTimeCycle(){ return _activationTimeCycle; }
+void EpStimulator::setActivationTimeRelative(bool val)
+{
+	if (val)
+	{
+		_activationTimeMode = ATC_RELATIVE;
+	}
+
+}
+void EpStimulator::setActivationTimeFixed(bool val)
+{
+	if (val)
+	{
+		_activationTimeMode = ATC_FIXED;
+	}
+
+}
+void EpStimulator::setActivationTimeSynchronisedS1(bool val)
+{
+	if (val)
+	{
+		_activationTimeMode = ATC_S1;
+	}
+
+}
+void EpStimulator::setActivationTimeSynchronisedLastTCL(bool val)
+{
+	if (val)
+	{
+		_activationTimeMode = ATC_LASTTCL;
+	}
+}
+void  EpStimulator::calculateActivationTimeOn(bool val)
+{
+	_calculateActivationTime = val;
 }
 //burster::burster()
 //{
