@@ -47,15 +47,14 @@ signals:
 	void stepFinished();
 
 
-	public slots:
+public slots:
 	void reset();
-
 	void setForwardEulerStrategy();
 	void setAllexandreStrategy();
 
 	double processStep();
-
 	void startStimulatorProcedure();
+	void resetEpStimulator();
 
 
 	void calculateFullElectrogramMap();

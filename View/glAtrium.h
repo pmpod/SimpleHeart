@@ -52,6 +52,7 @@ public slots:
 	void setDisplayCurrent1(bool b);
 	void setDisplayCurrent2(bool b);
 	void setDisplayActivationTime(bool b);
+	void setDisplayPPIRTCL(bool b);
 	void displayElectrogram();
 	void setOutlineUniform(bool b);
 	void setOutlineGauss(bool b);

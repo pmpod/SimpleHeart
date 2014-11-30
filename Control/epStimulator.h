@@ -50,7 +50,9 @@ public:
 	int stimulationSiteID();
 	double phaseZero();
 	double activationTimeCycle();
-
+	bool measurePPIR();
+	double referenceTCLforPPIR();
+	int stimulationElectrodeNumber();
 	void processActivationTimes(CardiacMesh* mesh,  int oscillatorID);
 	ATC_MODE activationTimeMode();
 public slots:
@@ -63,6 +65,11 @@ public slots:
 	void setS2On(bool val);
 	void setS3On(bool val);
 	void setCouplingInterval(int val);
+
+	void setStimulusAmplitude(double val);
+	void setStimulusWidth(int val);
+	void setStimulusRadius(double val);
+	void setStimulationElectrodeNumber(int elID);
 
 	void setModeFree(bool val);
 	void setModeFixedLoop(bool val);
@@ -77,6 +84,7 @@ public slots:
 	void setPhaseZero(double val);
 	void setActivationTimeCycle(double val);
 
+	void setMeasurePPIR(bool b);
 	void setActivationTimeRelative(bool val);
 	void setActivationTimeFixed(bool val);
 	void setActivationTimeSynchronisedS1(bool val);
@@ -85,7 +93,12 @@ public slots:
 signals:
 	void progressOfStimulation(int);
 	void progressOfSinglePace(int);
+	void currentActivationTimeCycle(int);
+	void currentActivationTimePhase(int);
 	void stimulatorState(bool);
+	void stopSimulating();
+	void displayPPIRTCL(bool);
+
 private:
 	static EpStimulator* _instance;
 
@@ -106,12 +119,15 @@ private:
 
 	double _couplingInterval;
 	double _sensedActivationTime;
+
 	double _stimulationProtocolBeganOn;
+	double _stimulationProtocolEndsOn;
 	double _lastStimulationTime;
-	double lastSpikeTime;
+	double _lastStimulationInterval;
 	
 	bool _stimulatorOn;
 	int _stimulationSiteID;
+	int _stimulationElectrodeNumber;
 	int _sensingSiteID;
 
 	double _stimulationAmplitude;
@@ -120,8 +136,9 @@ private:
 
 	bool _S2On;
 	bool _S3On;
-
-
+	bool _measurePPIR;
+	double _referenceTCLforPPIR; 
+	double _PPIRmeasurementStart;
 	std::deque<double> stimulationTimes;
 	std::vector<ProbeElectrode*>	_probe;
 

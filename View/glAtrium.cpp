@@ -103,6 +103,18 @@ void  glAtrium::setPaintERP(bool b)
 		SimViewStateDiffusion::Instance()->setMode(1);
 	updateGL();
 }
+
+void glAtrium::setDisplayPPIRTCL(bool b)
+{
+	if (b)
+	{
+		SimViewStateView::Instance()->setMode(DM_PPIR_TCL);
+		SimViewStateEP::Instance()->setMode(DM_PPIR_TCL);
+	}
+	updateGL();
+	updateGL();
+}
+
 void glAtrium::setDisplayActivationTime(bool b)
 {
 	if (b)

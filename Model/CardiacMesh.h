@@ -9,6 +9,8 @@
 #include "Support\Vectors.h"
 #include <matio.h>
 #include<qgl.h>
+#include "Support\Vectors.h"
+#include "Support\Matrices.h"
 
 
 
@@ -90,9 +92,18 @@ public:
 
 
 
-
+	void processActivationTime(Oscillator* osc);
 	double calculateElectrogram(Oscillator* osc);
+	Vector3 conductionVector(int oscID);
+	void calculateConductionVector(Oscillator* src, Oscillator* osc, const double radius);
 
+	float FindLargestEntry(const Matrix3 &m);
+	Vector3 FindEigenVectorAssociatedWithLargestEigenValue(const Matrix3 &m);
+
+	void FindLLSQPlane(Vector3 *points, int count, Vector3 *destCenter, Vector3 *destNormal);
+
+	std::vector<Oscillator*> m_markedOscillators;
+	std::map < int, bool > m_marked;
 	std::vector<Oscillator*> m_mesh;
 	std::vector<Oscillator*> m_underStimulation;
 	bool stimulationBegun;
@@ -101,6 +112,8 @@ public:
 
 
 
+	double _derivativeTreshold;
+	double _minRefractoryTreshold;
 	double maximumCV;
 
 	double maxElectrogram;

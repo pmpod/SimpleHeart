@@ -5,6 +5,8 @@ Oscillator::Oscillator(void)
 {
 	m_type = NONE;
 	m_v_current.push_back(0.0);
+	m_v_current.push_back(0.0);
+	m_currentPRIM.push_back(0.0);
 	m_currentPRIM.push_back(0.0);
 
 	m_farthestDistanceID = -1;
@@ -23,8 +25,8 @@ void Oscillator::reset()
 	m_previous_potential = 0;
 	m_v_scaledPotential = vmin;
 	m_previous_scaledPotential = vmin;
-	m_lastActivationPhase = 0;
 	m_lastActivationTime = 0;
+	m_beforeLastActivationTime = 0;
 	m_potentialPRIM = 0.0;
 	m_v_electrogram = 0.0;
 	m_currentSource = 0.0;
@@ -39,10 +41,9 @@ void Oscillator::reset()
 		m_v_current[k] = 0.0;
 		m_currentPRIM[k] = 0.0;
 	}
-	m_lastActivationTime = 0;
 	for (short k = 0; k < OSC_HISTORY_SIZE; ++k)
 	{
-		m_potentialHistory[k] = 0;
+		m_potentialHistory = 0;
 	}
 
 	m_currentTime = 0.0;
@@ -282,13 +283,6 @@ void Oscillator::setCurrentTime(const double& time)
 		m_previousTime = m_currentTime;
 	}
 	m_currentTime = time;
-}
-//---------------------------------------------------------------
-void Oscillator::stateCalculated()
-{
-	emit newPotentialValue(getElectrogram());
-	emit newState(getElectrogram(), getCurrent(0));
-	emit newPotentialTime(m_currentTime, getElectrogram());
 }
 //---------------------------------------------------------------
 void Oscillator::setType(CELL_TYPE type)

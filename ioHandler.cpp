@@ -263,6 +263,8 @@ bool ioHandler::saveCurrentState()
 	double *electrogram   = (double *)malloc(sizeof(double) * 1 * meshSize);
 	double *csd           = (double *)malloc(sizeof(double) * 1 * meshSize);
 	double *time_ms       = (double *)malloc(sizeof(double) * 1);
+	double *ppir_tcl = (double *)malloc(sizeof(double) * 1 * meshSize);
+	double *tcl		      = (double *)malloc(sizeof(double) * 1);
 
 	INT32  *electrodes_ID = (INT32 *)malloc(sizeof(INT32) * 1 * numberOfProbes);
 	char description[] = "One frame data pack";
@@ -273,6 +275,7 @@ bool ioHandler::saveCurrentState()
 	Oscillator* osc;
 
 	time_ms[0] = m_handle->m_grid->m_simulationTime;
+	tcl[0] = EpStimulator::Instance()->referenceTCLforPPIR();
 	for (int i = 0; i < meshSize; ++i) 
 	{
 		osc = m_handle->m_grid->m_mesh[i];
@@ -287,6 +290,7 @@ bool ioHandler::saveCurrentState()
 		potential[i] = osc->getPotential();
 		electrogram[i] = osc->m_v_electrogram;
 		csd[i] = osc->getLastCurrentSource();
+		ppir_tcl[i] = osc->m_lastPPIR_TCL;
 	}
 	for (int i = 0; i < numberOfProbes; ++i)
 	{
@@ -343,6 +347,19 @@ bool ioHandler::saveCurrentState()
 		dims[0] = 1;
 		matvar = Mat_VarCreate("time_ms", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, time_ms, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		matvar = Mat_VarCreate("PPIR-TCL", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, ppir_tcl, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		dims[0] = 1;
+		matvar = Mat_VarCreate("TCL", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, tcl, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 

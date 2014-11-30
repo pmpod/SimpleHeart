@@ -45,12 +45,12 @@ public:
 	virtual void handleMousewheel(glAtrium* view, QWheelEvent *event) = 0;
 	virtual void handleMouseMove(glAtrium* view, QMouseEvent *event) = 0;
 
-
 	virtual void paintModel(glAtrium* view);
 	virtual void paintCursor(glAtrium* view) = 0;
 	void paintScale(glAtrium* view);
 	virtual void paintLegend(glAtrium*);
 	virtual void prepareLegend(glAtrium*);
+	void drawVector(double size, Vector3 position, Vector3 direction, float rr, float gg, float bb);
 
 	virtual void setMode(const int mode);
 	virtual void setOutlineStyle(const  BRUSH_OUTLINE outline) = 0;
@@ -76,5 +76,6 @@ private:
 	GLfloat previous_vmax;
 
 	short _dataDisplayMode;
+	short _displayConduction;
 };
 

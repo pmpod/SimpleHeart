@@ -17,7 +17,8 @@ CardiacMesh::CardiacMesh()
 	minElectrogram = 999;
 	stimulationBegun = false;
 
-
+	_minRefractoryTreshold = 50.0; //[ms]
+	_derivativeTreshold = 0.05;
 	m_simulationTime = 0;
 	structureUpdated = false;
 	m_vertexMatrix = nullptr;
@@ -461,4 +462,135 @@ void CardiacMesh::calculateCenter()
 	centerGeom.x /= m_mesh.size();
 	centerGeom.y /= m_mesh.size();
 	centerGeom.z /= m_mesh.size();
+}
+
+
+
+
+//-----------------------------------------------------------
+void CardiacMesh::processActivationTime(Oscillator* osc)
+{
+	//[0] Read the Transmembrane potential value from the cell
+	double lastLocalTimestep = osc->m_currentTime - osc->m_previousTime;
+	double derivative = (osc->m_v_scaledPotential - osc->m_previous_scaledPotential) / lastLocalTimestep;
+
+	//[1] Simple peak (depolarisation) detection algorithm for transmembrane potential;
+
+	if (derivative > _derivativeTreshold &&
+		(osc->getCurrentTime() - osc->m_lastActivationTime) > _minRefractoryTreshold)
+	{
+		osc->m_beforeLastActivationTime = osc->m_lastActivationTime;
+		osc->m_lastActivationTime = osc->getCurrentTime();
+	}
+	//osc->m_potentialHistory = osc->m_v_scaledPotential;
+}
+//-----------------------------------------------------------
+Vector3 CardiacMesh::conductionVector(int oscID)
+{
+	double distance = 1.0;
+	m_markedOscillators.clear();
+	m_marked.clear();
+	calculateConductionVector(m_mesh[oscID], m_mesh[oscID], distance);
+
+	Vector3 *vecs = (Vector3 *)malloc(sizeof(Vector3) * m_markedOscillators.size());
+	for (short k = 0; k < m_markedOscillators.size(); ++k)
+	{
+		vecs[k] = Vector3(m_markedOscillators[k]->m_x, m_markedOscillators[k]->m_y, m_markedOscillators[k]->m_lastActivationTime);
+	}
+	Vector3 output;
+	Vector3 centerVec;
+
+	FindLLSQPlane(vecs, m_markedOscillators.size(), &centerVec, &output);
+
+	free(vecs);
+	//output.z = 0;
+		return output;
+}
+void CardiacMesh::calculateConductionVector(Oscillator* src, Oscillator* osc, const double radius)
+{
+	m_marked[osc->oscillatorID] = true;
+	m_markedOscillators.push_back(osc);
+
+	double distance;
+	for (short k = 0; k < osc->m_neighbours.size(); ++k)
+	{
+		distance = sqrt(std::pow((src->m_x - osc->m_neighbours[k]->m_x), 2) +
+			std::pow((src->m_y - osc->m_neighbours[k]->m_y), 2) +
+			std::pow((src->m_z - osc->m_neighbours[k]->m_z), 2));
+		if (distance <= radius && osc->m_neighbours[k]->getCellType() != SOLID_WALL &&!(m_marked[osc->m_neighbours[k]->oscillatorID]))
+		{
+			calculateConductionVector(src, osc->m_neighbours[k], radius);
+		}
+	}
+}
+
+
+float CardiacMesh::FindLargestEntry(const Matrix3 &m){
+	float result = 0.0f;
+	for (int i = 0; i<3; i++){
+		for (int j = 0; j<3; j++){
+			float entry = fabs(m[3 * i + j]);
+			result = max(entry, result);
+		}
+	}
+	return result;
+}
+
+Vector3 CardiacMesh::FindEigenVectorAssociatedWithLargestEigenValue(const Matrix3 &m){
+	//pre-condition
+	float scale = FindLargestEntry(m);
+	Matrix3 mc = (1.0f / scale)*m;
+	mc = mc*mc;
+	mc = mc*mc;
+	mc = mc*mc;
+	Vector3 v(1, 1, 1);
+	Vector3 lastV = v;
+	for (int i = 0; i<100; i++){
+		v = (mc*v).normalize();
+		if ((v.distance(lastV)*v.distance(lastV))<1e-16f)
+		{
+			break;
+		}
+		lastV = v;
+	}
+	return v;
+}
+
+void CardiacMesh::FindLLSQPlane(Vector3 *points, int count, Vector3 *destCenter, Vector3 *destNormal){
+	Vector3 sum(0, 0, 0);
+	for (int i = 0; i<count; i++){
+		sum += points[i];
+	}
+	Vector3 center = sum*(1.0f / count);
+	if (destCenter){
+		*destCenter = center;
+	}
+	if (!destNormal){
+		return;
+	}
+	float sumXX = 0.0f, sumXY = 0.0f, sumXZ = 0.0f;
+	float sumYY = 0.0f, sumYZ = 0.0f;
+	float sumZZ = 0.0f;
+	for (int i = 0; i<count; i++){
+		float diffX = points[i].x - center.x;
+		float diffY = points[i].y - center.y;
+		float diffZ = points[i].z - center.z;
+		sumXX += diffX*diffX;
+		sumXY += diffX*diffY;
+		sumXZ += diffX*diffZ;
+		sumYY += diffY*diffY;
+		sumYZ += diffY*diffZ;
+		sumZZ += diffZ*diffZ;
+	}
+	Matrix3 m(sumXX, sumXY, sumXZ, \
+		sumXY, sumYY, sumYZ, \
+		sumXZ, sumYZ, sumZZ);
+
+	float det = m.getDeterminant();
+	if (det == 0.0f){
+		//m.GetNullSpace(destNormal, NULL, NULL);
+		return;
+	}
+	Matrix3 mInverse = m.invert();
+	*destNormal = FindEigenVectorAssociatedWithLargestEigenValue(mInverse);
 }

@@ -1,4 +1,7 @@
 #include "GLfunc.h"
+#include "Support\Vectors.h"
+#include "Support\Matrices.h"
+#include <cmath>
 
 const int COORD_X = 1;
 const int COORD_Y = 2;
@@ -621,6 +624,10 @@ bool invertMatrix(const GLfloat m[16], double invOut[16])
 	return true;
 }
 
+
+
+
+
 void drawSphere(double r, int lats, int longs, double xorg, double yorg, double zorg, float rr, float gg, float bb) {
 	int i, j;
 	for (i = 0; i <= lats; i++) {
@@ -851,3 +858,5 @@ GLfloat* quaternionToMatrix(QQuaternion q, GLfloat* m)
 	m = z;
 	return m;
 }
+
+

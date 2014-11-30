@@ -51,7 +51,8 @@ double ForwardEulerStrategy::nextStep()
 						osc->m_wallCells[wc]->m_v_current[k] = osc->m_v_current[k];
 					}
 				}
-			}
+			}	
+			m_mesh->processActivationTime(osc);
 		}
 
 	}

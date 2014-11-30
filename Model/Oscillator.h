@@ -26,18 +26,12 @@ public:
 	double m_v_potential;		/// Last cardiac potential V(t) - in model units [model]
 	double m_previous_potential;	/// Previous cardiac potential V(t-1) - in model units [model]
 	std::vector<double> m_v_current;/// Vector of last cardiac currents/gating variables/model variables - in model units [model]
-
-	double m_v_electrogram;
-
-
-
-
+	
 	double m_currentTime;			//t(current)
 	double m_previousTime;			//t(current-1)
 	double guardTimestep;
 
 	double m_stimulation;			//t(current)
-
 	bool m_underStimulation;
 
 
@@ -46,15 +40,17 @@ public:
 	double m_x;
 	double m_y;
 	double m_z;
+
 	double m_sigmaX;
 	double m_sigmaY;
 	double m_sigmaZ;
 	double m_ConnexinSum;
-	double m_potentialHistory[OSC_HISTORY_SIZE];
-	short m_lastHistoryIterator;
+
+	double m_v_electrogram;
 	double m_lastActivationTime;
-	double m_lastActivationPhase;
+	double m_beforeLastActivationTime;
 	double m_lastPPIR_TCL;
+	double m_potentialHistory;
 
 	std::vector<Oscillator*> m_wallCells;		///Vector of pointers to neighbour oscillators
 	std::vector<Oscillator*> m_neighbours;		///Vector of pointers to neighbour oscillators
@@ -63,17 +59,14 @@ public:
 	double m_closestDistanceID;
 	double m_farthestDistanceID;
 
-
 	//TODO Skalowanie modelu external scaling
 	double vmax;					///Model scaling values - V maximum [mV]
 	double vmin;					///Model scaling values - V minimum [mV]
 	double vzero;					///Model scaling values - V resting [mV]
 
-	//TODO to drop:
 	double m_potentialPRIM;		/// Last calculated value of dV/dt (TODO check if necessary/useful??)
 	std::vector<double>  m_currentPRIM;/// Last calculated values of dC/dt (TODO check if necessary/useful??)
 	double m_currentSource;
-	double m_hormonalActivity;
 	double m_v_scaledPotential;
 	double m_previous_scaledPotential;
 
@@ -82,15 +75,16 @@ public:
 	~Oscillator(void);
 
 	void stateCalculated();	/// Qt emitter of full new state signal set
-signals:
-	void newPotentialValue(double potValue);		/// Qt signal of new (scaled) potential
-	void newState(double potValue, double curValue);	/// Qt signal of new (scaled) potential & total current
-	void newPotentialTime(double time, double potValue);	/// Qt signal of new (scaled) potential & time [ms]
+//signals:
+//	void newPotentialValue(double potValue);		/// Qt signal of new (scaled) potential
+//	void newState(double potValue, double curValue);	/// Qt signal of new (scaled) potential & total current
+//	void newPotentialTime(double time, double potValue);	/// Qt signal of new (scaled) potential & time [ms]
 public slots:
-	virtual void setParameter(double value, OSC_PARAMETER parameter); ///virtual function for parameter setting
-	virtual void setERP(double value); ///virtual function for refractory period setting
 
 public:
+
+	virtual void setParameter(double value, OSC_PARAMETER parameter); ///virtual function for parameter setting
+	virtual void setERP(double value); ///virtual function for refractory period setting
 
 	double& getRefPotential();				//zwraca m_v_potential
 	double& getRefPreviousPotential();				//zwraca m_v_potential

@@ -15,9 +15,7 @@ public:
 	void handleMouseRelease(glAtrium*, QMouseEvent *event);
 	void handleMousewheel(glAtrium*, QWheelEvent *event);
 	void handleMouseMove(glAtrium*, QMouseEvent *event);
-	void paintLegend(glAtrium*);
 	void paintCursor(glAtrium*);
-	void prepareLegend(glAtrium*);
 protected:
 	int findElectrode(glAtrium* view, Oscillator* src, Oscillator* osc);
 private:

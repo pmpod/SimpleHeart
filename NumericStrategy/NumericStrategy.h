@@ -34,7 +34,6 @@ public:
 	*/
 	virtual double synchronise() = 0;  ///< Main function
 
-
 	/**
 	* \brief Resets all the Oscillators to the resting state and the time to 0
 	*/
@@ -51,5 +50,11 @@ public:
 	*/
 	CardiacMesh* m_mesh;
 
+
+
+	//Activation Time Display
+	//---------------------------------------------------
+
+	bool _calculateActivationTime;
 };
 

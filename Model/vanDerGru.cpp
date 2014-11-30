@@ -35,12 +35,10 @@ double vanDerGru::vanDerGruFunction(double potential, double current)
 	{
 		func = (-1) * m_alpha * ( potential - m_v2) * ( potential - m_v1 ) * current;
 		func -= m_f * potential * ( potential + m_d ) * ( potential + m_e);
-		func+= m_hormonalActivity;
 	}
 	else
 	{
-		func = (m_f) *(( potential * ( potential + m_d ) * ( potential + m_e)) - 0 )  ;
-		func+= m_hormonalActivity;
+		func = (m_f) *(( potential * ( potential + m_d ) * ( potential + m_e)) - 0 );
 	}
 	return func;
 }

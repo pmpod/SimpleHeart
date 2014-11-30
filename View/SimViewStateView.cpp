@@ -5,7 +5,6 @@ SimViewStateView* SimViewStateView::_instance = nullptr;
 
 SimViewStateView::SimViewStateView()
 {
-	cursorRadius = 2.0;
 	setPalette(DP_HOTTOCOLD);
 
 
@@ -37,7 +36,7 @@ void SimViewStateView::paintCursor(glAtrium* view)
 	int sizepix = floor(abs(cursorRadius*view->height() * view->frustrumSize * view->nearClippingPlaneDistance / (view->distanceToCamera)));
 
 	int pixmapsize;
-	sizepix < 60 ? pixmapsize = 62 : pixmapsize = sizepix + 2;
+	sizepix < 10 ? pixmapsize = 62 : pixmapsize = sizepix + 2;
 	QPixmap* m_LPixmap = new QPixmap(pixmapsize, pixmapsize);
 	m_LPixmap->fill(Qt::transparent);
 	QPainter painter(m_LPixmap);
@@ -54,11 +53,11 @@ void SimViewStateView::paintCursor(glAtrium* view)
 	painter.drawLine(floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize, floor(1 + sizepix / 2.0));
 	painter.drawLine(floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) - crossSize, floor(1 + sizepix / 2.0), floor(1 + sizepix / 2.0) + crossSize);
 
-	painter.setBrush(QColor(256, 256, 256, 256));
-	char buff[20];
-	sprintf(buff, "%1.1f", cursorRadius * 2);
-	std::string str(buff);
-	painter.drawText(floor(3 + sizepix / 2.0), floor(-2 + sizepix / 2.0), QString(str.c_str()) + "mm");
+	//painter.setBrush(QColor(256, 256, 256, 256));
+	//char buff[20];
+	//sprintf(buff, "%1.1f", cursorRadius * 2);
+	//std::string str(buff);
+	//painter.drawText(floor(3 + sizepix / 2.0), floor(-2 + sizepix / 2.0), QString(str.c_str()) + "mm");
 
 	view->setCursor(QCursor(*m_LPixmap));
 }
@@ -213,76 +212,4 @@ void SimViewStateView::handleMouseMove(glAtrium* view, QMouseEvent *event)
 		//view->lastPos = event->pos();
 	}
 	view->updateGL();
-}
-
-
-float FindLargestEntry(const Matrix3 &m){
-	float result = 0.0f;
-	for (int i = 0; i<3; i++){
-		for (int j = 0; j<3; j++){
-			float entry = fabs(m[3*i+j]);
-			result = max(entry, result);
-		}
-	}
-	return result;
-}
-
-Vector3 FindEigenVectorAssociatedWithLargestEigenValue(const Matrix3 &m){
-	//pre-condition
-	float scale = FindLargestEntry(m);
-	Matrix3 mc = (1.0f / scale)*m;
-	mc = mc*mc;
-	mc = mc*mc;
-	mc = mc*mc;
-	Vector3 v(1, 1, 1);
-	Vector3 lastV = v;
-	for (int i = 0; i<100; i++){
-		v = (mc*v).normalize();
-		if ((v.distance(lastV)*v.distance(lastV))<1e-16f)
-		{
-			break;
-		}
-		lastV = v;
-	}
-	return v;
-}
-
-void FindLLSQPlane(Vector3 *points, int count, Vector3 *destCenter, Vector3 *destNormal){
-	assert(count>0);
-	Vector3 sum(0, 0, 0);
-	for (int i = 0; i<count; i++){
-		sum += points[i];
-	}
-	Vector3 center = sum*(1.0f / count);
-	if (destCenter){
-		*destCenter = center;
-	}
-	if (!destNormal){
-		return;
-	}
-	float sumXX = 0.0f, sumXY = 0.0f, sumXZ = 0.0f;
-	float sumYY = 0.0f, sumYZ = 0.0f;
-	float sumZZ = 0.0f;
-	for (int i = 0; i<count; i++){
-		float diffX = points[i].x - center.x;
-		float diffY = points[i].y - center.y;
-		float diffZ = points[i].z - center.z;
-		sumXX += diffX*diffX;
-		sumXY += diffX*diffY;
-		sumXZ += diffX*diffZ;
-		sumYY += diffY*diffY;
-		sumYZ += diffY*diffZ;
-		sumZZ += diffZ*diffZ;
-	}
-	Matrix3 m(sumXX, sumXY, sumXZ, \
-		sumXY, sumYY, sumYZ, \
-		sumXZ, sumYZ, sumZZ);
-
-	float det = m.getDeterminant();
-	if (det == 0.0f){
-		//m.GetNullSpace(destNormal, NULL, NULL);
-		return;
-	}
-	Matrix3 mInverse = m.invert();
-	*destNormal = FindEigenVectorAssociatedWithLargestEigenValue(mInverse);
 }

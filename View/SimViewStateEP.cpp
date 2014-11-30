@@ -5,7 +5,6 @@ SimViewStateEP* SimViewStateEP::_instance = nullptr;
 
 SimViewStateEP::SimViewStateEP()
 {
-	cursorRadius = 1.0;
 	_probeOnTheMove = -1;
 	setPalette(DP_HOTTOCOLD);
 
@@ -28,67 +27,6 @@ SimViewState* SimViewStateEP::Instance()
 }
 void SimViewStateEP::setOutlineStyle(const  BRUSH_OUTLINE outline)
 {
-
-}
-void SimViewStateEP::paintLegend(glAtrium* view)
-{
-	glCallList(view->displayListIndex);
-	GLfloat widthL = view->frustrumSize*_scale*0.5;
-	GLfloat heightL = view->frustrumSize*_scale*0.2;
-	view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, "-75 mV", QFont(), view->displayListIndex);
-	view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, "25 mV", QFont(), view->displayListIndex);
-	view->renderText(widthL*1.4f, 0.0*heightL - heightL / 2, 0, "0", QFont(), view->displayListIndex);
-}
-void SimViewStateEP::prepareLegend(glAtrium* view)
-{
-
-	float f[1];
-	GLfloat widthL = view->frustrumSize*_scale*0.5;
-	GLfloat heightL = view->frustrumSize*_scale*0.2;
-
-	GLfloat col_w[] = { 1.0, 1.0, 1.0, 1.f };
-	GLfloat col_g[] = { .5f, .5f, .5f, .5f };
-	GLfloat col[] = { 0.0, 0.0, 1.0, 1.f };
-
-	GLfloat ccol;
-	// compile the display list, store a triangle in it
-	glNewList(view->displayListIndex, GL_COMPILE);
-
-	glBegin(GL_QUAD_STRIP);
-	for (GLfloat i = -16.0; i <= 16.0; ++i)
-	{
-		ccol = -i;
-
-		colorMap(ccol, -16.0, 16.0, col[0], col[1], col[2]);
-		glColor3f(col[0], col[1], col[2]);
-		glVertex3f(widthL, i*heightL, 0.0f);
-		glVertex3f(-widthL, i*heightL, 0.0f);
-
-	}
-	glEnd();
-	glBegin(GL_LINES);
-	glColor3fv(col_g);
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, col_g);
-	for (GLfloat i = -15.0; i <= 15.0; ++i)
-	{
-		glVertex3f(-widthL, i*heightL, 0.0f);
-		glVertex3f(widthL, i*heightL, 0.0f);
-
-	}
-	glEnd();
-
-	glBegin(GL_LINES);
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
-	glColor3fv(col_w);
-	glVertex3f(-widthL, -16.0*heightL, 0.0f);
-	glVertex3f(widthL*1.2f, -16.0*heightL, 0.0f);
-	glVertex3f(-widthL, 0.0*heightL, 0.0f);
-	glVertex3f(widthL*1.2f, 0.0*heightL, 0.0f);
-	glVertex3f(-widthL, 16.0*heightL, 0.0f);
-	glVertex3f(widthL*1.2f, 16.0*heightL, 0.0f);
-	glEnd();
-
-	glEndList();
 
 }
 //--------------------------------------------------

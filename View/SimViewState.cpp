@@ -4,11 +4,12 @@
 
 SimViewState::SimViewState()
 {
+	cursorRadius = 0.5;
 	_scale = 0.1;
 	// Initialize them at bottom of setupGL
 	_quat = QQuaternion(1, 0, 0, 0);
 	_quatStart = QQuaternion(1, 0, 0, 0);
-
+	_displayConduction = true;
 	_dataDisplayMode = DM_POTENTIAL;//POTENTIAL
 }
 
@@ -25,6 +26,10 @@ void SimViewState::ChangeState(glAtrium* view, SimViewState* s)
 void SimViewState::setMode(const int mode)
 {
 	_dataDisplayMode = mode;
+	vmax = 0;
+	vmin = 0;
+	previous_vmin = 0;
+	previous_vmax = 0;
 }
 const double SimViewState::getRadius(){ return cursorRadius; }
 void  SimViewState::setPalette(const DISP_PALETTE pal)
@@ -46,7 +51,6 @@ void  SimViewState::setPalette(const DISP_PALETTE pal)
 		break;
 	}
 }
-
 void SimViewState::computeIncremental(Vector3 last, Vector3 next)
 {
 	Vector3 vec = last.cross(next);
@@ -61,7 +65,6 @@ void SimViewState::computeIncremental(Vector3 last, Vector3 next)
 	_quat = Q_rot * _quatStart;
 
 }
-
 void SimViewState::paintScale(glAtrium* view)
 {
 	double scaledisplay = 5.0;
@@ -96,8 +99,6 @@ void SimViewState::paintScale(glAtrium* view)
 	glColor3fv(col_w);
 	view->renderText(0.02f, 0.02f, 0.0f, str.c_str());
 }
-
-
 void SimViewState::paintLegend(glAtrium* view)
 {
 	glCallList(view->displayListIndex);
@@ -111,27 +112,27 @@ void SimViewState::paintLegend(glAtrium* view)
 		view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, "25 mV", QFont(), view->displayListIndex);
 		break;
 	case DM_CSD:
-		str = QString::number(vmin, 'f', 2);
-		str += " [mA/cm^2]";
+		str = QString::number(vmin, 'f', 2) + " [mA/cm^2]";
 		view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
-		str = QString::number(vmax, 'f', 2);
-		str += " [mA/cm^2]";
+		str = QString::number(vmax, 'f', 2) + " [mA/cm^2]";
 		view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
 		break;
 	case DM_ACT_TIME:
-		str = QString::number(vmin, 'f', 2);
-		str += " [ms]";
+		str = QString::number(vmin, 'f', 2) + " [ms]";
 		view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
-		str = QString::number(vmax, 'f', 2);
-		str += " [ms]";
+		str = QString::number(vmax, 'f', 2) + " [ms]";
+		view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
+		break;
+	case DM_PPIR_TCL:
+		str = QString::number(vmin, 'f', 2) + " [ms]";
+		view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
+		str = QString::number(vmax, 'f', 2) + " [ms]";
 		view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
 		break;
 	case DM_ELECTROGRAM:
-		str = QString::number(vmin, 'f', 2);
-		str += " [mV]";
+		str = QString::number(vmin, 'f', 2) + " [mV]";
 		view->renderText(widthL*1.4f, 16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
-		str = QString::number(vmax, 'f', 2);
-		str += " [mV]";
+		str = QString::number(vmax, 'f', 2) + " [mV]";
 		view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
 		break;
 	}
@@ -195,7 +196,8 @@ void SimViewState::paintModel(glAtrium* view)
 	int vertexNumber = msh->m_vertexList.size();
 
 	GLfloat val1;
-
+	EpStimulator * stimulator;
+	stimulator = view->linkToMachine->stimulator;
 	switch (_dataDisplayMode)
 	{
 	case DM_POTENTIAL:
@@ -205,31 +207,44 @@ void SimViewState::paintModel(glAtrium* view)
 	case DM_CSD:
 		vmax = previous_vmax;
 		vmin = previous_vmin;
-		previous_vmin = 10000;
-		previous_vmax = -10000;
+		previous_vmin = 0.95*previous_vmin;
+		previous_vmax = 0.95*previous_vmax;
 		break;
 	case DM_CUR1:
 		vmin = 0;
 		vmax = 1;
 		break;
 	case DM_CUR2:
+		vmin = 0;
+		vmax = 1;
 		break;
 	case DM_ELECTROGRAM:
 		vmin = msh->minElectrogram;
 		vmax = msh->maxElectrogram;
 		break;
-	case DM_ACT_TIME: //ActivationTime _ Wzglednie
+	case DM_ACT_TIME: //ActivationTime_Wzglednie
 		vmax = previous_vmax;
 		vmin = previous_vmin;
-		previous_vmin = 10000;
-		previous_vmax = -10000;
+		previous_vmin = DBL_MAX;
+		previous_vmax = -DBL_MAX;
 		break;
+
+	case DM_PPIR_TCL: //ActivationTime_Wzglednie
+		vmax = previous_vmax;
+		vmin = previous_vmin;
+		previous_vmin = DBL_MAX;
+		previous_vmax = -DBL_MAX;
+		break;
+
+
+
 	}
 
 	for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
 	{
 		if (oscs[currentVertex]->m_type != SOLID_WALL)
 		{
+			//stimulator->processActivationTimes(msh, currentVertex);
 			switch (_dataDisplayMode)
 			{
 			case DM_POTENTIAL:
@@ -247,7 +262,7 @@ void SimViewState::paintModel(glAtrium* view)
 				colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
 				break;
 			case DM_CUR2:
-				val1 = oscs[currentVertex]->m_currentTime - oscs[currentVertex]->m_previousTime;
+				val1 = oscs[currentVertex]->m_v_current[1];
 				colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
 				break;
 			case DM_ELECTROGRAM:
@@ -255,36 +270,32 @@ void SimViewState::paintModel(glAtrium* view)
 				colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
 				break;
 			case DM_ACT_TIME: //ActivationTime _ Wzglednie
-				if (view->linkToMachine->stimulator->activationTimeMode() == ATC_RELATIVE)
+				if (stimulator->activationTimeMode() == ATC_RELATIVE)
 				{
-					view->linkToMachine->stimulator->processActivationTimes(msh, currentVertex);
+					//stimulator->processActivationTimes(msh, currentVertex);
 					val1 = oscs[currentVertex]->m_lastActivationTime;
 					val1 > previous_vmax ? previous_vmax = val1 : 0;
 					val1 < previous_vmin ? previous_vmin = val1 : 0;
-					hotMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
+					colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
 				}
-				else if (view->linkToMachine->stimulator->activationTimeMode() == ATC_FIXED || view->linkToMachine->stimulator->activationTimeMode() == ATC_S1)
+				else
 				{
-					view->linkToMachine->stimulator->processActivationTimes(msh, currentVertex);
-					//val1 = oscs[currentVertex]->m_lastActivationPhase;
-					val1 = fmod((view->linkToMachine->stimulator->phaseZero()), view->linkToMachine->stimulator->activationTimeCycle());
-					val1 = fmod((oscs[currentVertex]->m_lastActivationTime - val1), view->linkToMachine->stimulator->activationTimeCycle());
-
+					//stimulator->processActivationTimes(msh, currentVertex);
+					val1 = fmod(stimulator->phaseZero(), stimulator->activationTimeCycle());
+					val1 = fmod((oscs[currentVertex]->m_lastActivationTime - val1), stimulator->activationTimeCycle());
 					vmin = 0;
-					vmax = view->linkToMachine->stimulator->activationTimeCycle();
-					hotMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
-				}
-				else 
-				{
-					view->linkToMachine->stimulator->processActivationTimes(msh, currentVertex);
-					val1 = oscs[currentVertex]->m_lastActivationPhase;
-					vmin = 0;
-					vmax = view->linkToMachine->stimulator->activationTimeCycle();
-					val1 = fmod(val1, vmax);
-					hotMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
+					vmax = stimulator->activationTimeCycle();
+					colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
 				}
 				break;
+			case DM_PPIR_TCL:
+				val1 = oscs[currentVertex]->m_lastPPIR_TCL;
+				val1 > previous_vmax ? previous_vmax = val1 : 0;
+				val1 < previous_vmin ? previous_vmin = val1 : 0;
+				colorMap(val1, vmin, vmax, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
+				break;
 			}
+
 
 		}
 		else
@@ -311,6 +322,19 @@ void SimViewState::paintModel(glAtrium* view)
 	glPushMatrix();
 
 
+	if (_displayConduction)
+	{
+		Vector3 pos;
+		for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
+		{
+			if (oscs[currentVertex]->m_type != SOLID_WALL)
+			{
+				pos = Vector3(oscs[currentVertex]->getPositionX(), oscs[currentVertex]->getPositionY(), oscs[currentVertex]->getPositionZ());
+				drawVector(0.3, pos,msh->conductionVector(currentVertex), 1, 1, 1);
+			}
+		}
+	}
+
 		int oscID;
 		// [3] Paint probes
 		for (short n = 0; n < view->linkToMachine->stimulator->probeElectrodesCount(); ++n)
@@ -333,4 +357,55 @@ void SimViewState::paintModel(glAtrium* view)
 			drawSphere(0.2, 10, 10, view->testProbe.x, view->testProbe.y, view->testProbe.z, 1.0f, 1.0f, 1.0f);
 		}
 	glPopMatrix();
+}
+
+
+void SimViewState::drawVector(double size, Vector3 position, Vector3 direction, float rr, float gg, float bb) {
+
+	Vector3 v;
+	double orientation = 1;
+	Matrix3 m = Matrix3(cos(2 * M_PI / 3), -sin(2 * M_PI / 3), 0, sin(2 * M_PI / 3), cos(2 * M_PI / 3), 0, 0, 0, 1);
+
+	if(direction.z < 0)
+		size = -size;
+
+	v = direction.normalize();
+	GLfloat col_g[] = { rr, gg, bb, 0.6f };
+	double x, y, z;
+	glColor3fv(col_g);
+	//glBegin(GL_LINES);
+
+	//	x = position.x + size* v.x / 2;
+	//	y = position.y + size * v.y / 2;
+	//	z = position.z + size * v.z + 0.2;
+	//	glVertex3f(x, y, z);
+
+	//	x = position.x - size *v.x / 2;
+	//	y = position.y - size *v.y / 2;
+	//	glVertex3f(x, y, z);
+
+	//glEnd();
+	glBegin(GL_TRIANGLES);
+
+		x = position.x + size * v.x / 2;
+		y = position.y + size * v.y / 2;
+		z = position.z + abs(size) * v.z + 0.2;
+		glVertex3f(x, y, z);
+
+		v = m * v;
+
+		x = position.x + size *v.x / 2;
+		y = position.y + size *v.y / 2;
+		z = position.z + abs(size) * v.z + 0.2;
+		glVertex3f(x, y, z);
+
+		v = m * v;
+
+		x = position.x + size *v.x / 2;
+		y = position.y + size *v.y / 2;
+		z = position.z + abs(size) * v.z + 0.2;
+		glVertex3f(x, y, z);
+
+	glEnd();
+
 }

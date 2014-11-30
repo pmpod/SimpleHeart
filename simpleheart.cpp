@@ -217,10 +217,6 @@ void SimpleHeart::setupConnections()
 	{
 		QObject::connect(ui.b_reset, SIGNAL(clicked()), plotPotentials[k], SLOT(clear()));
 	}
-	for (short k = 0; k < plotRR.size(); ++k)
-	{
-		QObject::connect(Machine2d->stimulator->probeElectrode(k), SIGNAL(nextRR(double)), plotRR[k], SLOT(appendRR(double)));
-	}
 
 	QObject::connect(ui.cb_saveBMP, SIGNAL(toggled()), this, SLOT(stopCalculation()));
 	QObject::connect(ui.cb_saveBMP, SIGNAL(toggled(bool)), this, SLOT(setBmpSaving(bool)));
@@ -235,7 +231,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
 	QObject::connect(ui.b_loadState, SIGNAL(clicked()), m_ioHandler, SLOT(loadCurrentState()));
 
-	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(stopCalculation()));
+	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), this, SLOT(stopCalculation()));
 	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(calculateFullElectrogramMap()));
 
 	QObject::connect(ui.rb_setDisplayCsdMode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCSD(bool)));
@@ -243,6 +239,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.rb_setDisplayC1Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent1(bool)));
 	QObject::connect(ui.rb_setDisplayC2Mode, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayCurrent2(bool)));
 	QObject::connect(ui.rb_setDisplayActivationTime, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayActivationTime(bool)));
+	QObject::connect(ui.rb_setDisplayPPIRTCL, SIGNAL(toggled(bool)), glGraph, SLOT(setDisplayPPIRTCL(bool)));
 
 
 	QObject::connect(ui.rb_ATCsetRelativePhase, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeRelative(bool)));
@@ -253,10 +250,16 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_ATCsetPhaseZero, SIGNAL(clicked()), this, SLOT(setActivationTimePhaseZero()));
 	QObject::connect(ui.b_ATCtakeRangeFromLastTCL, SIGNAL(clicked()), this, SLOT(setActivationTimeCLlastTCL()));
 	QObject::connect(ui.sb_ATCcycleLength, SIGNAL(valueChanged(double)), EpStimulator::Instance(), SLOT(setActivationTimeCycle(double)));
+
+	QObject::connect(EpStimulator::Instance(), SIGNAL(currentActivationTimeCycle(int)), ui.sb_ATCcycleLength, SLOT(setValue(int)));
+	QObject::connect(EpStimulator::Instance(), SIGNAL(currentActivationTimePhase(int)), ui.sb_ATCphaseZero, SLOT(setValue(int)));
+
 	QObject::connect(EpStimulator::Instance(), SIGNAL(progressOfStimulation(int)), ui.pb_pacingProtocol, SLOT(setValue(int)));
 	QObject::connect(EpStimulator::Instance(), SIGNAL(progressOfSinglePace(int)), ui.pb_pacingProtocol_2, SLOT(setValue(int)));
 
-
+	QObject::connect(EpStimulator::Instance(), SIGNAL(stimulatorState(bool)), ui.indicateStimulationProcedure, SLOT(setEnabled(bool)));
+	QObject::connect(ui.b_resetStimulationProcedure, SIGNAL(clicked()), Machine2d, SLOT(resetEpStimulator()));
+	
 	QObject::connect(ui.mode_tab, SIGNAL(currentChanged(int)), this, SLOT(setState(int)));
 
 	QObject::connect(ui.b_setStateStructure, SIGNAL(toggled(bool)), glGraph, SLOT(setStateStructureModifier(bool)));
@@ -265,6 +268,11 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_setStatePaintERP, SIGNAL(toggled(bool)), this, SLOT(setPaintERP(bool)));
 	QObject::connect(ui.b_setStatePaintConductivity, SIGNAL(toggled(bool)), this, SLOT(setPaintConductivity(bool)));
 
+	QObject::connect(ui.cb_measurePPIRTCL, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setMeasurePPIR(bool)));
+
+	QObject::connect(EpStimulator::Instance(), SIGNAL(stopSimulating()), this, SLOT(stopCalculation()));
+	QObject::connect(EpStimulator::Instance(), SIGNAL(displayPPIRTCL(bool)), glGraph, SLOT(setDisplayPPIRTCL(bool)));
+
 
 
 	QObject::connect(ui.b_freeTouchMode, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setModeFree(bool)));
@@ -272,6 +280,8 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_pacingModeFixed, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setModeFixedLoop(bool)));
 	QObject::connect(ui.b_pacingModeSensing, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setModeSensing(bool)));
 
+	QObject::connect(ui.sb_stimulusAmplitude, SIGNAL(valueChanged(double)), EpStimulator::Instance(), SLOT(setStimulusAmplitude(double)));
+	QObject::connect(ui.sb_stimulusWidth, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setStimulusWidth(int)));
 
 	QObject::connect(ui.sb_cycleLength_S1, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCycleLength_S1(int)));
 	QObject::connect(ui.sb_cycleLength_S3, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCycleLength_S3(int)));
@@ -282,6 +292,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.cb_S2, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setS2On(bool)));
 	QObject::connect(ui.cb_S3, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setS3On(bool)));
 	QObject::connect(ui.sb_couplingInterval, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCouplingInterval(int)));
+	QObject::connect(ui.cb_setPacingElectrode, SIGNAL(currentIndexChanged(int)), EpStimulator::Instance(), SLOT(setStimulationElectrodeNumber(int)));
 
 	QObject::connect(ui.b_startStimulationProcedure, SIGNAL(clicked()), Machine2d, SLOT(startStimulatorProcedure()));
 
@@ -483,6 +494,7 @@ void SimpleHeart::setPaintValue(double val)
 }
 void SimpleHeart::setFreeTouch(bool val)
 {
+	EpStimulator::Instance()->stop(m_grid);
 	if (val)
 	{
 		glGraph->setStateViewer(true);
@@ -498,6 +510,15 @@ void SimpleHeart::setState(int val)
 {
 	switch (val)
 	{
+	case 0:
+		if (ui.b_freeTouchMode->isChecked()){
+			glGraph->setStateViewer(true);
+
+		}
+		else {
+			glGraph->setStateEP(true);
+		}
+		break;
 	case 1:
 		if (ui.b_freeTouchMode->isChecked()){
 			glGraph->setStateViewer(true);

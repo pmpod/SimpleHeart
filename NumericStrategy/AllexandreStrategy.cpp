@@ -184,6 +184,10 @@ double AllexandreStrategy::nextStep()
 	else
 		timeStepHeap->update(m_oscillatorTimestepDictionary[osc->oscillatorID].timestepHandle);
 
+	//[6] Check the activation time
+	m_mesh->processActivationTime(osc);
+
+
 	return m_mesh->m_simulationTime;
 }
 double AllexandreStrategy::stepModifiedBackwardEuler(Oscillator * osc, double nextTimestep)
