@@ -65,6 +65,7 @@ bool ioHandler::saveCurrentStructure()
 	//[2] Prepare data arrays in form accepted by MAT
 	double *position_xyz = (double *)malloc(sizeof(double) * 3 * meshSize);
 	double *sigma = (double *)malloc(sizeof(double) * 1 * meshSize);
+	double *erp_parameter = (double *)malloc(sizeof(double) * 1 * meshSize);
 	INT32 *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
 	INT32 *oscillator_TYPE = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
 	INT32 *neighbours_ID = (INT32 *)malloc(sizeof(INT32) * 6 * meshSize);
@@ -80,6 +81,7 @@ bool ioHandler::saveCurrentStructure()
 		position_xyz[meshSize * 1 + i] = osc->m_y;
 		position_xyz[meshSize * 2 + i] = osc->m_z;
 		sigma[i] = osc->m_sigmaX;
+		erp_parameter[i] = osc->getERP();
 
 		type = osc->m_type;
 		oscillator_TYPE[i] = static_cast<INT32> (type);
@@ -133,6 +135,12 @@ bool ioHandler::saveCurrentStructure()
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
+		dims[1] = 1;
+		matvar = Mat_VarCreate("erp_parameter", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, erp_parameter, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
 		//[5.2] Close output
 		Mat_Close(mat);
 	}
@@ -144,6 +152,7 @@ bool ioHandler::saveCurrentStructure()
 	free(oscillator_TYPE);
 	free(oscillator_ID);
 	free(neighbours_ID);
+	free(erp_parameter);
 	free(sigma);
 
 	return true;
@@ -167,6 +176,9 @@ CardiacMesh* ioHandler::loadCustomStructure()
 
 	return CardiacMesh::importGrid(inname);
 
+	m_handle->glGraph->updateGL();
+	m_handle->reset();
+	m_handle->Machine2d->reset();
 }
 //------------------------------------------------
 bool ioHandler::loadCurrentState()
@@ -263,8 +275,10 @@ bool ioHandler::saveCurrentState()
 	double *electrogram   = (double *)malloc(sizeof(double) * 1 * meshSize);
 	double *csd           = (double *)malloc(sizeof(double) * 1 * meshSize);
 	double *time_ms       = (double *)malloc(sizeof(double) * 1);
-	double *ppir_tcl = (double *)malloc(sizeof(double) * 1 * meshSize);
+	double *ppir_tcl	  =	(double *)malloc(sizeof(double) * 1 * meshSize);
 	double *tcl		      = (double *)malloc(sizeof(double) * 1);
+
+
 
 	INT32  *electrodes_ID = (INT32 *)malloc(sizeof(INT32) * 1 * numberOfProbes);
 	char description[] = "One frame data pack";
@@ -308,38 +322,51 @@ bool ioHandler::saveCurrentState()
 	{
 		//[5.2] Save the second variable matvalues
 		dims[1] = 3;
+		dims[0] = meshSize;
 		matvar = Mat_VarCreate("position_xyz", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, position_xyz, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
 		dims[1] = 1;
+		dims[0] = meshSize;
 		matvar = Mat_VarCreate("oscillator_ID", MAT_C_INT32, MAT_T_INT32, 2,
 			dims, oscillator_ID, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
 		dims[1] = 1;
+		dims[0] = meshSize;
 		matvar = Mat_VarCreate("potential", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, potential, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
 		dims[1] = m_handle->m_grid->m_mesh[0]->getNumberOfCurrents(); //TODO multiple number of currents
+		dims[0] = meshSize;
 		matvar = Mat_VarCreate("currVariables", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, variables, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
 		dims[1] = 1;
+		dims[0] = meshSize;
 		matvar = Mat_VarCreate("electrogram", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, electrogram, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
 		dims[1] = 1;
+		dims[0] = meshSize;
 		matvar = Mat_VarCreate("curerntSourceDensity", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, csd, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		dims[0] = meshSize;
+		matvar = Mat_VarCreate("PPIR_TCL", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, ppir_tcl, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
@@ -347,12 +374,6 @@ bool ioHandler::saveCurrentState()
 		dims[0] = 1;
 		matvar = Mat_VarCreate("time_ms", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, time_ms, 0);
-		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
-		Mat_VarFree(matvar);
-
-		dims[1] = 1;
-		matvar = Mat_VarCreate("PPIR-TCL", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
-			dims, ppir_tcl, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
@@ -392,6 +413,8 @@ bool ioHandler::saveCurrentState()
 	free(time_ms);
 	free(oscillator_ID);
 	free(electrodes_ID);
+	free(ppir_tcl);
+	free(tcl);
 
 	return true;
 }

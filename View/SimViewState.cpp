@@ -9,7 +9,6 @@ SimViewState::SimViewState()
 	// Initialize them at bottom of setupGL
 	_quat = QQuaternion(1, 0, 0, 0);
 	_quatStart = QQuaternion(1, 0, 0, 0);
-	_displayConduction = true;
 	_dataDisplayMode = DM_POTENTIAL;//POTENTIAL
 }
 
@@ -322,7 +321,7 @@ void SimViewState::paintModel(glAtrium* view)
 	glPushMatrix();
 
 
-	if (_displayConduction)
+	if (view->displayConduction())
 	{
 		Vector3 pos;
 		for (int currentVertex = 0; currentVertex < oscs.size(); ++currentVertex)
@@ -330,7 +329,7 @@ void SimViewState::paintModel(glAtrium* view)
 			if (oscs[currentVertex]->m_type != SOLID_WALL)
 			{
 				pos = Vector3(oscs[currentVertex]->getPositionX(), oscs[currentVertex]->getPositionY(), oscs[currentVertex]->getPositionZ());
-				drawVector(0.3, pos,msh->conductionVector(currentVertex), 1, 1, 1);
+				drawVector(0.4, pos,msh->conductionVector(currentVertex), 1, 1, 1);
 			}
 		}
 	}
@@ -366,11 +365,11 @@ void SimViewState::drawVector(double size, Vector3 position, Vector3 direction, 
 	double orientation = 1;
 	Matrix3 m = Matrix3(cos(2 * M_PI / 3), -sin(2 * M_PI / 3), 0, sin(2 * M_PI / 3), cos(2 * M_PI / 3), 0, 0, 0, 1);
 
-	if(direction.z < 0)
+	if(direction.z > 0)
 		size = -size;
-
+	direction.z = 0;
 	v = direction.normalize();
-	GLfloat col_g[] = { rr, gg, bb, 0.6f };
+	GLfloat col_g[] = { rr, gg, bb, 0.3f };
 	double x, y, z;
 	glColor3fv(col_g);
 	//glBegin(GL_LINES);
@@ -394,15 +393,15 @@ void SimViewState::drawVector(double size, Vector3 position, Vector3 direction, 
 
 		v = m * v;
 
-		x = position.x + size *v.x / 2;
-		y = position.y + size *v.y / 2;
+		x = position.x + size *v.x / 4;
+		y = position.y + size *v.y / 4;
 		z = position.z + abs(size) * v.z + 0.2;
 		glVertex3f(x, y, z);
 
 		v = m * v;
 
-		x = position.x + size *v.x / 2;
-		y = position.y + size *v.y / 2;
+		x = position.x + size *v.x / 4;
+		y = position.y + size *v.y / 4;
 		z = position.z + abs(size) * v.z + 0.2;
 		glVertex3f(x, y, z);
 

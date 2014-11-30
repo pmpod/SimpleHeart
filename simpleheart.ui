@@ -612,7 +612,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="pushButton">
+                   <widget class="QPushButton" name="b_showConductionDirections">
                     <property name="text">
                      <string>Show Condution Directions</string>
                     </property>

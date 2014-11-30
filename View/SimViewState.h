@@ -76,6 +76,5 @@ private:
 	GLfloat previous_vmax;
 
 	short _dataDisplayMode;
-	short _displayConduction;
 };
 

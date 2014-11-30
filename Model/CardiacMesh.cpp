@@ -190,6 +190,11 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 	double *sigma = (double *)malloc(sizeof(double) * 1 * meshSize);
 	sigma = static_cast<double*>(matvar->data);
 
+	matvar = Mat_VarRead(matfp, "erp_parameter");
+
+	double *erp_parameter = (double *)malloc(sizeof(double) * 1 * meshSize);
+	erp_parameter = static_cast<double*>(matvar->data);
+
 	//[3] Read matlab variable oscillator_TYPE
 	matvar = Mat_VarRead(matfp, "oscillator_TYPE");
 
@@ -276,6 +281,8 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 	for (int j = 0; j < totalSize; ++j)
 	{
 		grid->m_mesh[j]->setSigma(sigma[j], sigma[j], 0);
+		grid->m_mesh[j]->setERP(erp_parameter[j]);
+		
 	}
 
 	grid->_minNodalSpacing = deltaMin;
@@ -396,44 +403,44 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 					tr->id_2 = m_mesh[currentVertex]->m_neighbours[currentNeighbour]->oscillatorID;
 					tr->id_3 = m_mesh[currentVertex]->m_neighbours[i]->oscillatorID;
 
-					first.x = m_mesh[tr->id_2]->m_x - m_mesh[tr->id_1]->m_x;
-					first.y = m_mesh[tr->id_2]->m_y - m_mesh[tr->id_1]->m_y;
-					first.z = m_mesh[tr->id_2]->m_z - m_mesh[tr->id_1]->m_z;
-					second.x = m_mesh[tr->id_3]->m_x - m_mesh[tr->id_1]->m_x;
-					second.y = m_mesh[tr->id_3]->m_y - m_mesh[tr->id_1]->m_y;
-					second.z = m_mesh[tr->id_3]->m_z - m_mesh[tr->id_1]->m_z;
+first.x = m_mesh[tr->id_2]->m_x - m_mesh[tr->id_1]->m_x;
+first.y = m_mesh[tr->id_2]->m_y - m_mesh[tr->id_1]->m_y;
+first.z = m_mesh[tr->id_2]->m_z - m_mesh[tr->id_1]->m_z;
+second.x = m_mesh[tr->id_3]->m_x - m_mesh[tr->id_1]->m_x;
+second.y = m_mesh[tr->id_3]->m_y - m_mesh[tr->id_1]->m_y;
+second.z = m_mesh[tr->id_3]->m_z - m_mesh[tr->id_1]->m_z;
 
-					if (first.normalize().dot(second.normalize()) < -0.99)
-					{
-						isok = false;
-					}
+if (first.normalize().dot(second.normalize()) < -0.99)
+{
+	isok = false;
+}
 
-					if (isok == true)
-					{
-						VertexTriangle *tr2 = new VertexTriangle;
-						tr2->id_1 = currentVertex;
-						tr2->id_2 = m_mesh[currentVertex]->m_neighbours[i]->oscillatorID;
-						tr2->id_3 = m_mesh[currentVertex]->m_neighbours[currentNeighbour]->oscillatorID;
-						if (doublesided)
-						{
-							m_vertexList.push_back(tr2);
-							m_vertexList.push_back(tr);
-						}
-						else
-						{
-							if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr2);
-							else if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr);
-							else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr);
-							else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr2);
-							else if (first.cross(second).normalize().z >-0.05 && first.cross(second).normalize().z <0.05)
-							{
-								m_vertexList.push_back(tr);
-								m_vertexList.push_back(tr2);
+if (isok == true)
+{
+	VertexTriangle *tr2 = new VertexTriangle;
+	tr2->id_1 = currentVertex;
+	tr2->id_2 = m_mesh[currentVertex]->m_neighbours[i]->oscillatorID;
+	tr2->id_3 = m_mesh[currentVertex]->m_neighbours[currentNeighbour]->oscillatorID;
+	if (doublesided)
+	{
+		m_vertexList.push_back(tr2);
+		m_vertexList.push_back(tr);
+	}
+	else
+	{
+		if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr2);
+		else if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr);
+		else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr);
+		else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr2);
+		else if (first.cross(second).normalize().z > -0.05 && first.cross(second).normalize().z < 0.05)
+		{
+			m_vertexList.push_back(tr);
+			m_vertexList.push_back(tr2);
 
-							}
+		}
 
-						}
-					}
+	}
+}
 				}
 			}
 		}
@@ -442,8 +449,8 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 	for (int currentVertex = 0; currentVertex < m_vertexList.size(); currentVertex = ++currentVertex)
 	{
 		m_indicesMatrix[3 * currentVertex] = m_vertexList[currentVertex]->id_1;
-		m_indicesMatrix[3 * currentVertex+1] = m_vertexList[currentVertex]->id_2;
-		m_indicesMatrix[3 * currentVertex+2] = m_vertexList[currentVertex]->id_3;
+		m_indicesMatrix[3 * currentVertex + 1] = m_vertexList[currentVertex]->id_2;
+		m_indicesMatrix[3 * currentVertex + 2] = m_vertexList[currentVertex]->id_3;
 	}
 }
 //-----------------------------------------------------------
@@ -492,6 +499,35 @@ Vector3 CardiacMesh::conductionVector(int oscID)
 	m_marked.clear();
 	calculateConductionVector(m_mesh[oscID], m_mesh[oscID], distance);
 
+	std::vector<double> scores;
+	for (short k = 0; k < m_markedOscillators.size(); ++k)
+	{
+		scores.push_back(m_markedOscillators[k]->m_lastActivationTime);
+	}
+	 double median;
+	  size_t size = scores.size();
+
+	  sort(scores.begin(), scores.end());
+
+	  if (size  % 2 == 0)
+	  {
+		  median = (scores[size / 2 - 1] + scores[size / 2]) / 2;
+	  }
+	  else 
+	  {
+		  median = scores[size / 2];
+	  }
+	  median = median; //TODO 10 ms difference
+	int counter = 0;
+	while (counter < m_markedOscillators.size())
+	{
+		if (abs(m_markedOscillators[counter]->m_lastActivationTime- median) > 10) {
+			m_markedOscillators.erase(m_markedOscillators.begin() + counter);
+		}
+		else {
+			++counter;
+		}
+	}
 	Vector3 *vecs = (Vector3 *)malloc(sizeof(Vector3) * m_markedOscillators.size());
 	for (short k = 0; k < m_markedOscillators.size(); ++k)
 	{

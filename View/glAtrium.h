@@ -27,7 +27,7 @@ public:
 	void setLastPos(const QPoint& pos);
 	CardiacMesh *linkToMesh;		///Link to the Model
 
-	
+	bool displayConduction();
 	double paintValueDiffusion;
 	double paintValueERP;
 private:
@@ -56,6 +56,9 @@ public slots:
 	void displayElectrogram();
 	void setOutlineUniform(bool b);
 	void setOutlineGauss(bool b);
+	void setDisplayConduction(bool b);
+	void displayConductionOff();
+	void displayConductionOn();
 signals:
     void xRotationChanged(int angle);
     void yRotationChanged(int angle);
@@ -132,4 +135,6 @@ private:
 	friend class SimViewStateEP;
 	void ChangeState(SimViewState*);
 	SimViewState* _state;
+
+	short _displayConduction;
 };

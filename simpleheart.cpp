@@ -144,9 +144,9 @@ void SimpleHeart::init()
 
 	simpleParameters = new atrialParameters();
 	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
-	m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
+	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
 	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.375, 0.375, ATRIAL_V3);// 48 mm
-	//m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm
+	m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm
 	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	//m_matrix = new DiffusionMatrix(m_grid);
@@ -203,6 +203,9 @@ void SimpleHeart::setupConnections()
 	//QObject::connect(this, SIGNAL(tajmer()), Machine2d, SLOT(processStep()));
 	QObject::connect(ui.b_start, SIGNAL(clicked()),this, SLOT(startCalculation()));
 	QObject::connect(ui.b_stop, SIGNAL(clicked()), this, SLOT(stopCalculation()));
+	QObject::connect(ui.b_stop, SIGNAL(clicked()), glGraph, SLOT(displayConductionOff()));
+	QObject::connect(ui.b_showConductionDirections, SIGNAL(clicked()), glGraph, SLOT(displayConductionOn()));
+	QObject::connect(ui.b_showConductionDirections, SIGNAL(clicked()), this, SLOT(stopCalculation()));
 	//QObject::connect(ui.b_stop, SIGNAL(clicked()), m_ioHandler, SLOT(getParametersFromFile()));
 
 	QObject::connect(ui.b_reset, SIGNAL(clicked()), Machine2d, SLOT(reset()));

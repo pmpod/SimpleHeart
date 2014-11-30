@@ -62,6 +62,7 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 	//TODO where should I put those?
 	paintValueDiffusion = 0.01;
 	paintValueERP = 30;
+	_displayConduction = false;
 }
 //----------------------------------------
 glAtrium::~glAtrium(void)
@@ -546,4 +547,20 @@ Vector3 glAtrium::screenToWorld(double x, double y, double width, double height)
 void glAtrium::ChangeState(SimViewState* state)
 {
 	_state = state;
+}
+bool glAtrium::displayConduction()
+{
+	return _displayConduction;
+}
+void glAtrium::setDisplayConduction(bool b)
+{
+	_displayConduction = b;
+}
+void glAtrium::displayConductionOff()
+{
+	_displayConduction = false;
+}
+void glAtrium::displayConductionOn()
+{
+	_displayConduction = true;
 }
