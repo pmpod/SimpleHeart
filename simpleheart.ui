@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>1035</height>
+    <height>868</height>
    </rect>
   </property>
   <property name="font">
@@ -529,7 +529,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <property name="spacing">
-            <number>2</number>
+            <number>1</number>
            </property>
            <property name="margin">
             <number>2</number>
@@ -562,8 +562,14 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_6">
-                  <item>
+                 <layout class="QGridLayout" name="gridLayout_5">
+                  <property name="margin">
+                   <number>1</number>
+                  </property>
+                  <property name="spacing">
+                   <number>2</number>
+                  </property>
+                  <item row="0" column="0">
                    <widget class="QRadioButton" name="rb_setDisplayPotentialMode">
                     <property name="text">
                      <string>Transmembrane potential [mV]</string>
@@ -576,52 +582,52 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
                     </property>
                    </widget>
                   </item>
-                  <item>
+                  <item row="1" column="0">
                    <widget class="QRadioButton" name="rb_setDisplayActivationTime">
                     <property name="text">
                      <string>Activation Time [ms]</string>
                     </property>
                    </widget>
                   </item>
-                  <item>
+                  <item row="2" column="0">
                    <widget class="QRadioButton" name="rb_setDisplayCsdMode">
                     <property name="text">
                      <string>Current Source Density</string>
                     </property>
                    </widget>
                   </item>
-                  <item>
+                  <item row="0" column="1">
                    <widget class="QRadioButton" name="rb_setDisplayC1Mode">
                     <property name="text">
                      <string>Cur1</string>
                     </property>
                    </widget>
                   </item>
-                  <item>
+                  <item row="1" column="1">
                    <widget class="QRadioButton" name="rb_setDisplayC2Mode">
                     <property name="text">
                      <string>Cur2</string>
                     </property>
                    </widget>
                   </item>
-                  <item>
+                  <item row="2" column="1">
                    <widget class="QRadioButton" name="rb_setDisplayPPIRTCL">
                     <property name="text">
-                     <string>Last measured PPIR - TCL</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="b_showConductionDirections">
-                    <property name="text">
-                     <string>Show Condution Directions</string>
-                    </property>
-                    <property name="checkable">
-                     <bool>false</bool>
+                     <string>Last  PPIR - TCL</string>
                     </property>
                    </widget>
                   </item>
                  </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="b_showConductionDirections">
+                 <property name="text">
+                  <string>Show Condution Directions</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -630,34 +636,12 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
                   <string>Display Electrogram Settings</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_17">
-                  <item>
-                   <widget class="QLabel" name="label_19">
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">QLabel{
-color: rgb(255, 170, 0);
-}</string>
-                    </property>
-                    <property name="text">
-                     <string>► Distance of electrode from tissue:</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-                    <property name="enabled">
-                     <bool>false</bool>
-                    </property>
-                   </widget>
-                  </item>
+                  <property name="spacing">
+                   <number>2</number>
+                  </property>
+                  <property name="margin">
+                   <number>2</number>
+                  </property>
                   <item>
                    <widget class="QRadioButton" name="rb_setDisplayCsdMode_4">
                     <property name="enabled">
@@ -720,20 +704,6 @@ color: rgb(255, 170, 0);
                        </property>
                        <property name="checked">
                         <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QRadioButton" name="rb_ATCsetSynchronisedPhaseToS1">
-                       <property name="text">
-                        <string>Synchronised with Pacing Cycle (S1)</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QRadioButton" name="rb_ATCsetSynchronisedPhaseToTCL">
-                       <property name="text">
-                        <string>Synchronised with last TCL before Pacing</string>
                        </property>
                       </widget>
                      </item>
@@ -891,10 +861,10 @@ color: rgb(255, 170, 0);
                <string>EP Study</string>
               </attribute>
               <layout class="QVBoxLayout" name="verticalLayout_14">
-               <property name="leftMargin">
+               <property name="spacing">
                 <number>1</number>
                </property>
-               <property name="rightMargin">
+               <property name="margin">
                 <number>1</number>
                </property>
                <item>
@@ -906,6 +876,12 @@ color: rgb(255, 170, 0);
                   <enum>QFrame::Raised</enum>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_17">
+                  <property name="spacing">
+                   <number>2</number>
+                  </property>
+                  <property name="margin">
+                   <number>2</number>
+                  </property>
                   <item>
                    <widget class="QPushButton" name="b_freeTouchMode">
                     <property name="text">
@@ -960,6 +936,9 @@ color: rgb(255, 170, 0);
                   <enum>QFrame::Raised</enum>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_9">
+                  <property name="margin">
+                   <number>2</number>
+                  </property>
                   <item>
                    <widget class="QLabel" name="label_16">
                     <property name="maximumSize">
@@ -3435,7 +3414,7 @@ QFrame
                    <property name="minimumSize">
                     <size>
                      <width>0</width>
-                     <height>50</height>
+                     <height>30</height>
                     </size>
                    </property>
                    <property name="font">
@@ -3490,18 +3469,22 @@ QFrame
                 </layout>
                </item>
                <item>
-                <widget class="QProgressBar" name="pb_pacingProtocol">
-                 <property name="value">
-                  <number>0</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QProgressBar" name="pb_pacingProtocol_2">
-                 <property name="value">
-                  <number>0</number>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_24">
+                 <item>
+                  <widget class="QProgressBar" name="pb_pacingProtocol">
+                   <property name="value">
+                    <number>0</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QProgressBar" name="pb_pacingProtocol_2">
+                   <property name="value">
+                    <number>0</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>
@@ -8675,7 +8658,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="font">

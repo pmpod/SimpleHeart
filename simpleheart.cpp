@@ -144,9 +144,9 @@ void SimpleHeart::init()
 
 	simpleParameters = new atrialParameters();
 	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
-	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
+	m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
 	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.375, 0.375, ATRIAL_V3);// 48 mm
-	m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm
+	//m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm
 	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	//m_matrix = new DiffusionMatrix(m_grid);
@@ -246,8 +246,8 @@ void SimpleHeart::setupConnections()
 
 
 	QObject::connect(ui.rb_ATCsetRelativePhase, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeRelative(bool)));
-	QObject::connect(ui.rb_ATCsetSynchronisedPhaseToS1, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeSynchronisedS1(bool)));
-	QObject::connect(ui.rb_ATCsetSynchronisedPhaseToTCL, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeSynchronisedLastTCL(bool)));
+//QObject::connect(ui.rb_ATCsetSynchronisedPhaseToS1, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeSynchronisedS1(bool)));
+	//QObject::connect(ui.rb_ATCsetSynchronisedPhaseToTCL, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeSynchronisedLastTCL(bool)));
 	QObject::connect(ui.rb_ATCsetFixedPhase, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setActivationTimeFixed(bool)));
 
 	QObject::connect(ui.b_ATCsetPhaseZero, SIGNAL(clicked()), this, SLOT(setActivationTimePhaseZero()));

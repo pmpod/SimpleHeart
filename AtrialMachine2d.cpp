@@ -17,8 +17,8 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 	stimulator->setProbeElectrode(m_grid, 1, 16257 - 128);
 	stimulator->setProbeElectrode(m_grid, 2, 5000);
 
-	//setForwardEulerStrategy();
-	setAllexandreStrategy();
+	setForwardEulerStrategy();
+	//setAllexandreStrategy();
 }
 //-------------------------------------------------------------------------
 AtrialMachine2d::~AtrialMachine2d(void)
@@ -78,12 +78,16 @@ double AtrialMachine2d::processStep()
 	//{
 	//	stopStimulation();
 	//}
+	
 
-
-	for (int kk = 0; kk <= 50000; ++kk)//m_skip
+	for (int kk = 0; kk <= 20; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}
+
+	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(0)->getOscillatorID()]);
+	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(1)->getOscillatorID()]);
+	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(2)->getOscillatorID()]);
 
 	stimulator->run(m_grid, m_globalTime);
 
@@ -118,7 +122,6 @@ void AtrialMachine2d::setUniformDiffusion(double value)
 	{
 		m_grid->m_mesh[j]->setSigma(value, value, 0);
 	}
-
 }
 void AtrialMachine2d::setUniformERP(double value)
 {
