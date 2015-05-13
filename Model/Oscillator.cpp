@@ -182,28 +182,36 @@ void Oscillator::setConnexins()
 //--------------------------------------------------------------
 void Oscillator::addNeighbour(Oscillator* neighbour)
 {
-	double deltaRX = std::abs(neighbour->getPositionX() - m_x);
-	double deltaRY = std::abs(neighbour->getPositionY() - m_y);
-	double deltaRZ = std::abs(neighbour->getPositionZ() - m_z);
+	float neighbourIsPresent = false;
+	for (int i = 0; i < m_neighbours.size(); ++i)
+	{
+		if (m_neighbours[i]->oscillatorID == neighbour->oscillatorID)
+			neighbourIsPresent = true;
+	}
+	if (!neighbourIsPresent)
+	{
+		double deltaRX = std::abs(neighbour->getPositionX() - m_x);
+		double deltaRY = std::abs(neighbour->getPositionY() - m_y);
+		double deltaRZ = std::abs(neighbour->getPositionZ() - m_z);
 
-	double deltaR = sqrt(std::pow(deltaRX, 2) + std::pow(deltaRY, 2) + std::pow(deltaRZ, 2));
+		double deltaR = sqrt(std::pow(deltaRX, 2) + std::pow(deltaRY, 2) + std::pow(deltaRZ, 2));
 
 
-	if (m_farthestDistanceID == -1)
-		m_farthestDistanceID = deltaR;
-	if (m_farthestDistanceID < deltaR)
-		m_farthestDistanceID = deltaR;
+		if (m_farthestDistanceID == -1)
+			m_farthestDistanceID = deltaR;
+		if (m_farthestDistanceID < deltaR)
+			m_farthestDistanceID = deltaR;
 
-	if (m_closestDistanceID == -1)
-		m_closestDistanceID = deltaR;
-	if (m_closestDistanceID > deltaR)
-		m_closestDistanceID = deltaR;
+		if (m_closestDistanceID == -1)
+			m_closestDistanceID = deltaR;
+		if (m_closestDistanceID > deltaR)
+			m_closestDistanceID = deltaR;
 
-	m_neighbours.push_back(neighbour);
-	m_neighboursDistance.push_back(deltaR);
-	m_connexin.push_back(0.0);
-	void setConnexins();
-
+		m_neighbours.push_back(neighbour);
+		m_neighboursDistance.push_back(deltaR);
+		m_connexin.push_back(0.0);
+		void setConnexins();
+	}
 }
 //--------------------------------------------------------------
 double Oscillator::getExtrapolatedNeighbourSource()
@@ -297,6 +305,17 @@ void Oscillator::setERP(double value)
 
 }
 double Oscillator::getERP()
+{
+	return 1;
+}
+//---------------------------------------------------------------
+void Oscillator::setExcitability(double value)
+{
+
+
+
+}
+double Oscillator::getExcitability()
 {
 	return 1;
 }

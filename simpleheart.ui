@@ -547,7 +547,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>2</number>
              </property>
              <widget class="QWidget" name="tab">
               <attribute name="title">
@@ -3515,6 +3515,19 @@ QFrame
                   <widget class="QPushButton" name="b_setStatePaintERP">
                    <property name="text">
                     <string> ERP</string>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="b_setStatePaintExcitability">
+                   <property name="text">
+                    <string>EXCITABILITY</string>
                    </property>
                    <property name="checkable">
                     <bool>true</bool>

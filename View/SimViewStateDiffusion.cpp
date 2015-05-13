@@ -23,6 +23,7 @@ SimViewStateDiffusion::SimViewStateDiffusion()
 
 	_diffPaintingStrengthValue = 0.5;
 	_ERPpaintingStrengthValue = 100;
+	_ExcitabilityPaintingStrengthValue = 40;
 }
 SimViewStateDiffusion::~SimViewStateDiffusion()
 {
@@ -157,10 +158,16 @@ void SimViewStateDiffusion::paintModel(glAtrium* view)
 				colorMap(val, msh->minDiffusion, msh->maxDiffusion, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
 
 			}
-			else if (_whatToPaint == 1) //diffusion
+			else if (_whatToPaint == 1) //ERP
 			{
 				val = oscs[currentVertex]->getERP();
 				colorMap(val, msh->minERP, msh->maxERP, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
+				//TODO fix max/min values;
+			}
+			else if (_whatToPaint == 2) //Excitability
+			{
+				val = oscs[currentVertex]->getExcitability();
+				colorMap(val, msh->minExcitability, msh->maxExcitability, msh->m_vertexMatrix[currentVertex].r, msh->m_vertexMatrix[currentVertex].g, msh->m_vertexMatrix[currentVertex].b);
 				//TODO fix max/min values;
 			}
 		}
@@ -258,6 +265,23 @@ void SimViewStateDiffusion::paintDiffusionInRadius(Oscillator* src, Oscillator* 
 
 		osc->setERP(val);
 	}
+	else if (_whatToPaint == 2) //Excitability
+	{
+		double val = osc->getExcitability();
+		double valsign = (value >= val) ? +1.0 : -1.0;
+		switch (_outline)
+		{
+		case BRUSH_GAUSS:
+			val += valsign*_ExcitabilityPaintingStrengthValue*gaussFunction(distance, 0, cursorRadius / 2) / SRPAY_PRESSURE;
+			if (valsign * val >= valsign *value) val = value;
+			break;
+		case BRUSH_UNI:
+			if (distance <= cursorRadius)
+				val = value;
+		}
+
+		osc->setExcitability(val);
+	}
 }
 //--------------------------------------------------
 void SimViewStateDiffusion::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
@@ -314,6 +338,9 @@ void SimViewStateDiffusion::handleMouseMove(glAtrium* view, QMouseEvent *event)
 			else if (_whatToPaint == 1) //ERP
 		
 				paintDiffusionInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], view->paintValueERP);
+			else if (_whatToPaint == 2) //Excitability
+
+				paintDiffusionInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], view->paintValueExcitability);
 		}
 
 		view->lastPos = event->pos();

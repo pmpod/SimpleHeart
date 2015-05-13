@@ -101,6 +101,14 @@ double v3model::getERP()
 {
 	return tau_r; //ERP ok 200
 }
+double v3model::getExcitability()
+{
+	return g_fi_max;
+}
+void v3model::setExcitability(double value)
+{
+	g_fi_max = value;
+}
 //-------------------------------------------------------------
 void v3model::setParameter(double value, OSC_PARAMETER parameter)
 {	
@@ -113,7 +121,7 @@ void v3model::setParameter(double value, OSC_PARAMETER parameter)
 		tau_w_minus = 100;
 		tau_0 = 64.7;
 		//tau_r = 222.9;
-		tau_r = 140; //ERP ok 200
+		tau_r = 70; //ERP ok 200
 		//tau_r = 30; //ERP ok 170
 		u_cs1 = 0.85;
 		tau_s1 = 226.9;

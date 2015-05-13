@@ -5,6 +5,7 @@
 #include <matio.h>
 #include <stdlib.h>
 #include <baseTSD.h>
+#include <fstream>
 
 CardiacMesh::CardiacMesh()
 {
@@ -13,6 +14,8 @@ CardiacMesh::CardiacMesh()
 	minDiffusion = 0.0;
 	maxERP = 300;
 	minERP = 10;
+	maxExcitability = 20;
+	minExcitability= 0.1;
 	maxElectrogram = -1999;
 	minElectrogram = 999;
 	stimulationBegun = false;
@@ -57,26 +60,9 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 	grid->_minNodalSpacing = max(dx, dy);
 	grid->_maxNodalSpacing = min(dx, dy);
 	grid->_sizeInMm = sqrt(static_cast<double>(x*x + y*y))*dx;
-	Oscillator *node = NULL;
 	for (int j = 0; j < totalSize; ++j)
 	{
-		if (type == ATRIAL_V3)
-			node = new v3model();
-		else
-			node = new Oscillator();
-		
-		node->setPositionX( static_cast<double>(j % x) * dx );
-		node->setPositionY( dy * floor(static_cast<double>(j) / static_cast<double>(x)) );
-		node->setPositionZ( 0.0 );
-		node->setType(type);
-		node->oscillatorID = j;
-		grid->m_mesh.push_back(node);
-
-		if (grid->maxElectrogram < node->vmax)
-			grid->maxElectrogram = node->vmax;
-
-		if (grid->minElectrogram > node->vmin)
-			grid->minElectrogram = node->vmin;
+		grid->addNode(j, static_cast<double>(j % x) * dx, dy * floor(static_cast<double>(j) / static_cast<double>(x)), 0, type);
 	}
 	grid->maxPotential = grid->maxElectrogram;
 	grid->minPotential = grid->minElectrogram;
@@ -151,6 +137,150 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 	}
 
 	grid->setVertexTriangleList(false);
+	grid->calculateCenter();
+	grid->setWallCells();
+	grid->setDiffusionCoefficients();
+	return grid;
+}
+
+CardiacMesh* CardiacMesh::constructStl(std::string inname, CELL_TYPE type)
+{
+	CardiacMesh *grid = new CardiacMesh();
+
+	grid->m_vertexList.clear();
+
+
+	std::ifstream myFile( inname.c_str(), ios::in | ios::binary);
+	char header_info[80] = "";
+	char nTri[4];
+	unsigned long nTriLong;
+
+	//read 80 byte header
+	if (myFile) 
+	{
+		myFile.read(header_info, 80);
+	}
+	//read 4-byte ulong
+	if (myFile) 
+	{
+		myFile.read(nTri, 4);
+		nTriLong = *((unsigned long*)nTri);
+	}
+
+	int totalSize = nTriLong;
+	Oscillator *node = NULL;
+	int oscillatorIDerator = 0;
+	int currentID = -1;
+	double scaleFactor  = 3;
+
+	//Fill vertex matrix and indices matrix for OpenGL handling
+	grid->m_vertexMatrix = (SVertex *)malloc(sizeof(SVertex) * 1 * totalSize);
+
+	//now read in all the triangles
+	for (int i = 0; i < totalSize; i++)
+	{
+		char facet[50];
+		double m_x, m_y, m_z;
+		SVertex vertex[3];
+		SVertex normalV;
+		if (myFile) {
+
+			//read one 50-byte triangle
+			myFile.read(facet, 50);
+
+			//read normal
+			char f1[4] = { facet[0], facet[1], facet[2], facet[3] };
+			char f2[4] = { facet[4], facet[5], facet[6], facet[7] };
+			char f3[4] = { facet[8], facet[9], facet[10], facet[11] };
+			normalV.x = *((float*)f1);
+			normalV.y = *((float*)f2);
+			normalV.z = *((float*)f3);
+
+			//facet + 12 skips the triangle's unit normal
+			int vertexNum = 0;
+			for (int vertIt = 12; vertIt < 40; vertIt = vertIt + 12)
+			{
+				char f1[4] = { facet[vertIt + 0], facet[vertIt + 1], facet[vertIt + 2], facet[vertIt + 3] };
+				char f2[4] = { facet[vertIt + 4], facet[vertIt + 5], facet[vertIt + 6], facet[vertIt + 7] };
+				char f3[4] = { facet[vertIt + 8], facet[vertIt + 9], facet[vertIt + 10], facet[vertIt + 11] };
+
+				vertex[vertexNum].x = *((float*)f1);
+				vertex[vertexNum].y = *((float*)f2);
+				vertex[vertexNum].z = *((float*)f3);
+				vertex[vertexNum].x *= scaleFactor;
+				vertex[vertexNum].y *= scaleFactor;
+				vertex[vertexNum].z *= scaleFactor;
+				++vertexNum;
+			}
+
+			//decide, if notde is present or not and add it
+			VertexTriangle *tri = new VertexTriangle;
+			int idis[3];
+			for (int vertIt = 0; vertIt < 3; vertIt++)
+			{
+				currentID = -1;
+				for (int j = 0; j < grid->m_mesh.size(); ++j)
+				{
+					if (abs(grid->m_mesh[j]->m_x - vertex[vertIt].x) < 0.001 &&
+						abs(grid->m_mesh[j]->m_y - vertex[vertIt].y) < 0.001 &&
+						abs(grid->m_mesh[j]->m_z - vertex[vertIt].z) < 0.001)
+					{
+						currentID = grid->m_mesh[j]->oscillatorID;
+						break;
+					}
+				}
+				if (currentID == -1)
+				{
+					grid->addNode(oscillatorIDerator, vertex[vertIt].x, vertex[vertIt].y, vertex[vertIt].z, type);
+					currentID = oscillatorIDerator;
+
+					//add currentVertex here?
+					grid->m_vertexMatrix[oscillatorIDerator].x = vertex[vertIt].x;
+					grid->m_vertexMatrix[oscillatorIDerator].y = vertex[vertIt].y;
+					grid->m_vertexMatrix[oscillatorIDerator].z = vertex[vertIt].z;
+					grid->m_vertexMatrix[oscillatorIDerator].r = 0.0;
+					grid->m_vertexMatrix[oscillatorIDerator].g = 1.0;
+					grid->m_vertexMatrix[oscillatorIDerator].b = 1.0;
+					grid->m_vertexMatrix[oscillatorIDerator].nx = normalV.x;
+					grid->m_vertexMatrix[oscillatorIDerator].ny = normalV.y;
+					grid->m_vertexMatrix[oscillatorIDerator].nz = normalV.z;
+					oscillatorIDerator++;
+				}
+				idis[vertIt] = currentID;
+			}
+			tri->id_1 = idis[1];
+			tri->id_3 = idis[2];
+			tri->id_2 = idis[0];
+			//add neighbors
+			for (int vertIt = 0; vertIt < 3; vertIt++)
+			{
+				grid->m_mesh[tri->id_1]->addNeighbour(grid->m_mesh[tri->id_2]);
+				grid->m_mesh[tri->id_2]->addNeighbour(grid->m_mesh[tri->id_1]);
+
+				grid->m_mesh[tri->id_1]->addNeighbour(grid->m_mesh[tri->id_3]);
+				grid->m_mesh[tri->id_3]->addNeighbour(grid->m_mesh[tri->id_1]);
+
+				grid->m_mesh[tri->id_2]->addNeighbour(grid->m_mesh[tri->id_3]);
+				grid->m_mesh[tri->id_3]->addNeighbour(grid->m_mesh[tri->id_2]);
+			}
+			//add triangle
+			grid->m_vertexList.push_back(tri);
+		}
+	}
+
+	grid->maxPotential = grid->maxElectrogram;
+	grid->minPotential = grid->minElectrogram;
+	//for (int currentVertex = 0; currentVertex < grid->m_mesh.size(); ++currentVertex)
+	//{
+	//}
+	grid->m_indicesMatrix = (GLuint *)malloc(sizeof(GLuint) * 3 * grid->m_vertexList.size());
+	for (int currentVertex = 0; currentVertex < grid->m_vertexList.size(); currentVertex = ++currentVertex)
+	{
+		grid->m_indicesMatrix[3 * currentVertex] = grid->m_vertexList[currentVertex]->id_1;
+		grid->m_indicesMatrix[3 * currentVertex + 1] = grid->m_vertexList[currentVertex]->id_2;
+		grid->m_indicesMatrix[3 * currentVertex + 2] = grid->m_vertexList[currentVertex]->id_3;
+	}
+
 	grid->calculateCenter();
 	grid->setWallCells();
 	grid->setDiffusionCoefficients();
@@ -296,6 +426,29 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 	return grid;
 }
 //------------------------------------------------------------------------------------------
+void CardiacMesh::addNode(int idnode, double x, double y, double z, CELL_TYPE type)
+{
+	Oscillator *node = NULL;
+	if (type == ATRIAL_V3)
+		node = new v3model();
+	else
+		node = new Oscillator();
+
+	node->setPositionX(x);
+	node->setPositionY(y);
+	node->setPositionZ(z);
+
+	node->setType(type);
+	node->oscillatorID = idnode;
+	m_mesh.push_back(node);
+
+	if (maxElectrogram < node->vmax)
+		maxElectrogram = node->vmax;
+
+	if (minElectrogram > node->vmin)
+		minElectrogram = node->vmin;
+
+}
 void CardiacMesh::clearWallCells()
 {
 	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
@@ -330,7 +483,7 @@ void CardiacMesh::setDiffusionCoefficients()
 	int gridSize = m_mesh.size();
 	for (int j = 0; j < gridSize; ++j)
 	{
-		m_mesh[j]->setSigma(0.1, 0.1, 0);
+		m_mesh[j]->setSigma(0.01, 0.01, 0);
 	}
 }
 //---------------------------------------------------------------------------
@@ -403,44 +556,44 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 					tr->id_2 = m_mesh[currentVertex]->m_neighbours[currentNeighbour]->oscillatorID;
 					tr->id_3 = m_mesh[currentVertex]->m_neighbours[i]->oscillatorID;
 
-first.x = m_mesh[tr->id_2]->m_x - m_mesh[tr->id_1]->m_x;
-first.y = m_mesh[tr->id_2]->m_y - m_mesh[tr->id_1]->m_y;
-first.z = m_mesh[tr->id_2]->m_z - m_mesh[tr->id_1]->m_z;
-second.x = m_mesh[tr->id_3]->m_x - m_mesh[tr->id_1]->m_x;
-second.y = m_mesh[tr->id_3]->m_y - m_mesh[tr->id_1]->m_y;
-second.z = m_mesh[tr->id_3]->m_z - m_mesh[tr->id_1]->m_z;
+					first.x = m_mesh[tr->id_2]->m_x - m_mesh[tr->id_1]->m_x;
+					first.y = m_mesh[tr->id_2]->m_y - m_mesh[tr->id_1]->m_y;
+					first.z = m_mesh[tr->id_2]->m_z - m_mesh[tr->id_1]->m_z;
+					second.x = m_mesh[tr->id_3]->m_x - m_mesh[tr->id_1]->m_x;
+					second.y = m_mesh[tr->id_3]->m_y - m_mesh[tr->id_1]->m_y;
+					second.z = m_mesh[tr->id_3]->m_z - m_mesh[tr->id_1]->m_z;
 
-if (first.normalize().dot(second.normalize()) < -0.99)
-{
-	isok = false;
-}
+					if (first.normalize().dot(second.normalize()) < -0.99)
+					{
+						isok = false;
+					}
 
-if (isok == true)
-{
-	VertexTriangle *tr2 = new VertexTriangle;
-	tr2->id_1 = currentVertex;
-	tr2->id_2 = m_mesh[currentVertex]->m_neighbours[i]->oscillatorID;
-	tr2->id_3 = m_mesh[currentVertex]->m_neighbours[currentNeighbour]->oscillatorID;
-	if (doublesided)
-	{
-		m_vertexList.push_back(tr2);
-		m_vertexList.push_back(tr);
-	}
-	else
-	{
-		if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr2);
-		else if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr);
-		else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr);
-		else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr2);
-		else if (first.cross(second).normalize().z > -0.05 && first.cross(second).normalize().z < 0.05)
-		{
-			m_vertexList.push_back(tr);
-			m_vertexList.push_back(tr2);
+					if (isok == true)
+					{
+						VertexTriangle *tr2 = new VertexTriangle;
+						tr2->id_1 = currentVertex;
+						tr2->id_2 = m_mesh[currentVertex]->m_neighbours[i]->oscillatorID;
+						tr2->id_3 = m_mesh[currentVertex]->m_neighbours[currentNeighbour]->oscillatorID;
+						if (doublesided)
+						{
+							m_vertexList.push_back(tr2);
+							m_vertexList.push_back(tr);
+						}
+						else
+						{
+							if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr2);
+							else if (first.cross(second).z >= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr);
+							else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z >= 0) m_vertexList.push_back(tr);
+							else if (first.cross(second).z <= 0 && m_mesh[currentVertex]->m_z <= 0) m_vertexList.push_back(tr2);
+							else if (first.cross(second).normalize().z > -0.05 && first.cross(second).normalize().z < 0.05)
+							{
+								m_vertexList.push_back(tr);
+								m_vertexList.push_back(tr2);
 
-		}
+							}
 
-	}
-}
+						}
+					}
 				}
 			}
 		}
@@ -470,9 +623,6 @@ void CardiacMesh::calculateCenter()
 	centerGeom.y /= m_mesh.size();
 	centerGeom.z /= m_mesh.size();
 }
-
-
-
 
 //-----------------------------------------------------------
 void CardiacMesh::processActivationTime(Oscillator* osc)

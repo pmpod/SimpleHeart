@@ -85,6 +85,7 @@ public:
 
 	virtual void setParameter(double value, OSC_PARAMETER parameter); ///virtual function for parameter setting
 	virtual void setERP(double value); ///virtual function for refractory period setting
+	virtual void setExcitability(double value); ///virtual function for refractory period setting
 
 	double& getRefPotential();				//zwraca m_v_potential
 	double& getRefPreviousPotential();				//zwraca m_v_potential
@@ -97,6 +98,7 @@ public:
 	virtual double getCurrentPrim(const int& which);	//podaj wynik wzoru na pochodn¹ pr¹du
 	virtual double getPotentialPrim();  //podaj wynik wzoru na pochodn¹ potencja³u
 	virtual double getERP(); ///virtual function for refractory period setting
+	virtual double getExcitability(); ///virtual function for refractory period setting
 
 	double getCurrentTime();
 	double getPreviousTime();

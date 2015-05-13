@@ -40,6 +40,7 @@ private:
 
 	double _diffPaintingStrengthValue;
 	double _ERPpaintingStrengthValue;
+	double _ExcitabilityPaintingStrengthValue;
 	double _gaussSigma;
 	BRUSH_OUTLINE _outline;
 	short _whatToPaint;

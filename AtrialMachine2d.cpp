@@ -13,9 +13,9 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 
 	m_grid = grid;
 
-	stimulator->setProbeElectrode(m_grid, 0, 129);
-	stimulator->setProbeElectrode(m_grid, 1, 16257 - 128);
-	stimulator->setProbeElectrode(m_grid, 2, 5000);
+	stimulator->setProbeElectrode(m_grid, 0, 1);// 129);
+	stimulator->setProbeElectrode(m_grid, 1, 2);// 16257 - 128);
+	stimulator->setProbeElectrode(m_grid, 2, 3);// 5000);
 
 	setForwardEulerStrategy();
 	//setAllexandreStrategy();

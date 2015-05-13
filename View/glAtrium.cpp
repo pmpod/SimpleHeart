@@ -39,9 +39,9 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 
 
 
-	LightAmbient[0] = 1.0f;
-	LightAmbient[1] = 1.0f;
-	LightAmbient[2] = 1.0f;
+	LightAmbient[0] = 0.1f;
+	LightAmbient[1] = 0.1f;
+	LightAmbient[2] = 0.1f;
 	LightAmbient[3] = 1.0f;
 
 	LightDiffuse[0] = 1.0f;
@@ -62,6 +62,7 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 	//TODO where should I put those?
 	paintValueDiffusion = 0.01;
 	paintValueERP = 30;
+	paintValueExcitability = 10;
 	_displayConduction = false;
 }
 //----------------------------------------
@@ -105,6 +106,12 @@ void  glAtrium::setPaintERP(bool b)
 	updateGL();
 }
 
+void  glAtrium::setPaintExcitability(bool b)
+{
+	if (b)
+		SimViewStateDiffusion::Instance()->setMode(2);
+	updateGL();
+}
 void glAtrium::setDisplayPPIRTCL(bool b)
 {
 	if (b)
@@ -282,13 +289,16 @@ void glAtrium::initializeGL()
 
 
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 
 	glEnable(GL_LIGHTING);
+		glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 		glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, LightPosition);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);
 		glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);
-		glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.01f);
+		glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.03f);
+		glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.01);
+		glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.0);
 		glEnable(GL_LIGHT1);
 
 	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
@@ -398,7 +408,7 @@ void glAtrium::paintGL()
 		modelMatrix = modelMatrix * modelRotation;
 		glLoadMatrixf(modelMatrix.get());
 
-		glTranslatef(-linkToMesh->centerGeom.x, -linkToMesh->centerGeom.y, linkToMesh->centerGeom.z);
+		glTranslatef(-linkToMesh->centerGeom.x, -linkToMesh->centerGeom.y, -linkToMesh->centerGeom.z);
 
 		_state->paintModel(this);
 

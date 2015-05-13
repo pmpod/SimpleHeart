@@ -68,6 +68,7 @@ public slots:
 
 	void setPaintERP(bool b);
 	void setPaintConductivity(bool b);
+	void setPaintExcitability(bool b);
 	void setPaintValue(int val);
 	void setPaintValue(double val);
 	void paintUniform();

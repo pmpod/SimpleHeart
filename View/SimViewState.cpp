@@ -175,7 +175,7 @@ void SimViewState::prepareLegend(glAtrium* view)
 	glEnd();
 
 	glBegin(GL_LINES);
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, col_w);
 	glColor3fv(col_w);
 	glVertex3f(-widthL, -16.0*heightL, 0.0f);
 	glVertex3f(widthL*1.2f, -16.0*heightL, 0.0f);
@@ -187,6 +187,13 @@ void SimViewState::prepareLegend(glAtrium* view)
 
 	glEndList();
 
+	//GLfloat mat_emission[] = { 0.5, 0.5, 0.0, 1.0 };
+
+	////glClearColor(0.0, 0.0, 0.0, 0.0);
+	////glShadeModel(GL_SMOOTH);
+	//glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	//glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+	//glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
 }
 void SimViewState::paintModel(glAtrium* view)
 {
@@ -307,16 +314,17 @@ void SimViewState::paintModel(glAtrium* view)
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
-
+	glEnableClientState(GL_NORMAL_ARRAY);
 	glColorPointer(3, GL_FLOAT, sizeof(SVertex), &view->linkToMesh->m_vertexMatrix[0].r);
 
 	glVertexPointer(3, GL_FLOAT, sizeof(SVertex), view->linkToMesh->m_vertexMatrix);
+	glNormalPointer( GL_FLOAT, sizeof(SVertex), &view->linkToMesh->m_vertexMatrix[0].nx);   //The starting point of normals, 12 bytes away
 
 	glDrawElements(GL_TRIANGLES, view->linkToMesh->m_vertexList.size() * 3, GL_UNSIGNED_INT, view->linkToMesh->m_indicesMatrix);
 
+	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
-
 
 	glPushMatrix();
 

@@ -144,9 +144,13 @@ void SimpleHeart::init()
 
 	simpleParameters = new atrialParameters();
 	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
-	m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
+	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
 	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.375, 0.375, ATRIAL_V3);// 48 mm
 	//m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm
+	m_grid = CardiacMesh::constructStl("artia_1layer.stl", ATRIAL_V3);// 80 mm
+
+
+
 	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	//m_matrix = new DiffusionMatrix(m_grid);
@@ -270,6 +274,7 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_setStatePaintConductivity, SIGNAL(toggled(bool)), glGraph, SLOT(setStateDiffusionModifier(bool)));
 	QObject::connect(ui.b_setStatePaintERP, SIGNAL(toggled(bool)), this, SLOT(setPaintERP(bool)));
 	QObject::connect(ui.b_setStatePaintConductivity, SIGNAL(toggled(bool)), this, SLOT(setPaintConductivity(bool)));
+	QObject::connect(ui.b_setStatePaintExcitability, SIGNAL(toggled(bool)), this, SLOT(setPaintExcitability(bool)));
 
 	QObject::connect(ui.cb_measurePPIRTCL, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setMeasurePPIR(bool)));
 
@@ -439,6 +444,26 @@ void SimpleHeart::setPaintERP(bool b)
 	}
 
 }
+void SimpleHeart::setPaintExcitability(bool b)
+{
+	if (b)
+	{
+		QObject::disconnect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+		QObject::disconnect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+		glGraph->setPaintExcitability(b);
+		ui.sb_paintValue->setMaximum(m_grid->maxExcitability);
+		ui.sb_paintValue->setMinimum(m_grid->minExcitability);
+		ui.sb_paintValue->setValue(glGraph->paintValueExcitability);
+		ui.l_maxPaintValue->setText(QString::number(m_grid->maxExcitability));
+		ui.l_minPaintValue->setText(QString::number(m_grid->minExcitability));
+
+		int val = floor(ui.dial_paintValue->maximum() * (glGraph->paintValueExcitability - m_grid->minExcitability) / (m_grid->maxExcitability - m_grid->minExcitability));
+		ui.dial_paintValue->setValue(val);
+		QObject::connect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
+		QObject::connect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
+	}
+
+}
 void SimpleHeart::setPaintConductivity(bool b)
 {
 	if (b)
@@ -475,6 +500,12 @@ void SimpleHeart::setPaintValue(int val)
 		ui.sb_paintValue->setValue(setval);
 		glGraph->paintValueERP = setval;
 	}
+	else if (ui.b_setStatePaintExcitability->isChecked())
+	{
+		double setval = (static_cast<double>(val) / ui.dial_paintValue->maximum())* (m_grid->maxExcitability - m_grid->minExcitability) + m_grid->minExcitability;
+		ui.sb_paintValue->setValue(setval);
+		glGraph->paintValueExcitability = setval;
+	}
 	QObject::connect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
 }
 void SimpleHeart::setPaintValue(double val)
@@ -490,7 +521,13 @@ void SimpleHeart::setPaintValue(double val)
 	else if (ui.b_setStatePaintERP->isChecked())
 	{
 		glGraph->paintValueERP = val;
-		int setval = floor(ui.dial_paintValue->maximum() * (glGraph->paintValueDiffusion - m_grid->minERP) / (m_grid->maxERP - m_grid->minERP));
+		int setval = floor(ui.dial_paintValue->maximum() * (glGraph->paintValueERP - m_grid->minERP) / (m_grid->maxERP - m_grid->minERP));
+		ui.dial_paintValue->setValue(setval);
+	}
+	else if (ui.b_setStatePaintExcitability->isChecked())
+	{
+		glGraph->paintValueExcitability = val;
+		int setval = floor(ui.dial_paintValue->maximum() * (glGraph->paintValueExcitability - m_grid->minExcitability) / (m_grid->maxExcitability - m_grid->minExcitability));
 		ui.dial_paintValue->setValue(setval);
 	}
 	QObject::connect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));

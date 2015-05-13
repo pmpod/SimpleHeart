@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QMessageBox>
+#include <string>
 #include <vector>
 #include "Model\Oscillator.h"
 #include "Model\v3model.h"
@@ -36,7 +37,9 @@ struct SVertex
 {
 	GLfloat x, y, z;
 	GLfloat r, g, b;
+	GLfloat nx, ny, nz;
 };
+
 
 /*! \class CardiacMesh
 * \brief Class contatining the full information about the model and helper functions to build it.
@@ -69,6 +72,7 @@ public:
 	*/
 	static CardiacMesh* constructCylindricalGrid(int x, int y, double dx, double dy);
 	static CardiacMesh* importGrid(const char *inname);
+	static CardiacMesh* constructStl(std::string inname, CELL_TYPE type);
 
 	///\brief calculate the rotation and display center of the mesh (geometrical center)
 	void calculateCenter();
@@ -78,7 +82,7 @@ public:
 	* @param doublesided - should both side of face be created (doubles the size of the list).
 	*/
 	void setVertexTriangleList(bool doublesided);
-	
+	void addNode(int idnode, double x, double y, double z, CELL_TYPE type);
 	void setWallCells();
 	void clearWallCells();
 
@@ -126,6 +130,8 @@ public:
 	double minDiffusion;
 	double maxERP;
 	double minERP;
+	double maxExcitability;
+	double minExcitability;
 
 
 

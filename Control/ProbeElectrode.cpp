@@ -40,7 +40,7 @@ void ProbeElectrode::processNewTime(double time)
 	//[1] Emit the state calculated signal
 	//emit _osc->stateCalculated();
 	
-	emit newElectrogramAndTime(_osc->m_currentTime, _osc->m_v_electrogram);
+	emit newElectrogramAndTime(_osc->m_currentTime, _osc->m_v_scaledPotential);
 	//[1] Simple peak (depolarisation) detection algorithm for transmembrane potential;
 	intervalsRR.push_back(time);
 	intervalsPotential.push_back(potential);

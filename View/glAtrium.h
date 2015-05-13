@@ -30,6 +30,7 @@ public:
 	bool displayConduction();
 	double paintValueDiffusion;
 	double paintValueERP;
+	double paintValueExcitability;
 private:
 
 public slots:
@@ -45,6 +46,8 @@ public slots:
 	void setStateEP(bool b);
 	void setPaintConductivity(bool b);
 	void setPaintERP(bool b);
+	void setPaintExcitability(bool b);
+
 	void setPaletteHSV();
 	void setPaletteGray();
 	void setDisplayPotential(bool b);
