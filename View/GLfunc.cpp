@@ -805,23 +805,27 @@ Vector3 get_arcball_vector(double width, double height, int x, int y)
 	//view->directionRay = view->screenToWorld(x, y, view->width(), view->height());
 
 	// Flip the y-axis because pixel coords increase toward the bottom.
-	Vector3 P = Vector3(x, y, 0) - center;
-	P = Vector3(-P.x, -P.y, 0);
+	Vector3 P = Vector3(2 * x / width - 1.0, 2* y / height -1.0, 0);
+	//Vector3 P = Vector3(x, y, 0) - center;
+	P = Vector3(P.x, P.y, 0);
 
 	float radius2 = radius * radius;
 	float length2 = P.x*P.x + P.y*P.y;
 
-	if (length2 <= radius2)
-		P.z = sqrt(radius2 - length2);
+	if (length2 <= 1.1)
+	{
+		P.z = -sqrt(1.1 - length2);
+	}
 	else
 	{
-		P.x *= radius / sqrt(length2);
-		P.y *= radius / sqrt(length2);
-		P.z = 0;
-/*
-		P.z = radius2 / (2.0 * sqrt(length2));
-		float length = sqrt(length2 + P.z * P.z);
-		P = (P / length);*/
+		P.normalize();
+		//P.x *= radius / sqrt(length2);
+		//P.y *= radius / sqrt(length2);
+		//P.z = 0;
+
+		//P.z = radius / sqrt(length2);
+		//float length = sqrt(length2 + P.z * P.z);
+		//P = (P / length);
 	}
 
 	return P.normalize();

@@ -320,6 +320,8 @@ void glAtrium::initializeGL()
 //--------------------------------------------
 void glAtrium::paintOrigin(float scale)
 {
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHTING);
 	float f[1];
 	GLfloat length = frustrumSize*scale;
 	GLfloat col1[] = { 1.0, 0.0, 0.0, 1.f };
@@ -344,10 +346,12 @@ void glAtrium::paintOrigin(float scale)
 		glVertex3f(0.0f, 0.0f, length);
 	glEnd();
 	glColor3fv(col_w);
-	renderText(length, 0.0f, 0.0f, "x");
-	renderText( 0.0f, -length, 0.0f, "y");
-	renderText(0.0f, 0.0f, length, "z");
+	renderText(length, 0.0f, 0.0f, "front");
+	renderText( 0.0f, -length, 0.0f, "side");
+	renderText(0.0f, 0.0f, length, "up");
 	glLineWidth(f[0]);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT1);
 }
 void glAtrium::paintGL()
 {
@@ -446,34 +450,39 @@ void glAtrium::resizeGL(int width, int height)
 //----------------------------------------
 int glAtrium::itemAt(double xx, double yy, double zz)
 {
-	double length = 100;
-	double epsilon = 0;
+	double length = 100000;
+	double epsilon = 1;
 	double index = -1;
 
 	double temp = 0;
 	double templ = 0;
-
+	Vector4 distancer;
 	Vector3 rayClicked(xx, yy, zz);
 
 	glGetFloatv(GL_MODELVIEW_MATRIX, m);
 	modelMatrix = m;
 	int meshSize = linkToMesh->m_mesh.size();
+
+	distancer = (modelMatrix * Vector4(linkToMesh->minNodalSpacing(), 0, 0, 1.0));
+	Vector3 distancer2(distancer.x, distancer.y, distancer.z);
+	double distancerVal = 2 * distancer2.length();
 	for (unsigned int j = 0; j < meshSize; ++j)
 	{
 		pointRays[j] = modelMatrix * Vector4(linkToMesh->m_mesh[j]->m_x, linkToMesh->m_mesh[j]->m_y, linkToMesh->m_mesh[j]->m_z, 1.0);
 		
 		Vector3 rayTested(pointRays[j].x, pointRays[j].y, pointRays[j].z);
 		templ = pointRays[j].length();
-		temp = (rayTested.normalize()).cross(rayClicked.normalize()).length();
+		//temp = (rayTested.normalize()).cross(rayClicked.normalize()).length();
+		temp = rayTested.distance( (rayClicked.normalize()*templ));
 
-		if (temp <0.007)
+		if (temp < 2* linkToMesh->minNodalSpacing())
 		{
 			if (templ < length)
 			{
 				epsilon = temp;
 				index = j;
 				length = templ;
-				break;
+				//break;
 			}
 		}
 

@@ -50,18 +50,22 @@ void  SimViewState::setPalette(const DISP_PALETTE pal)
 		break;
 	}
 }
-void SimViewState::computeIncremental(Vector3 last, Vector3 next)
+void SimViewState::computeIncremental(glAtrium* view, Vector3 last, Vector3 next)
 {
 	Vector3 vec = last.cross(next);
 	QVector3D axis = QVector3D(vec.x, vec.y, vec.z);
 	float dott = last.dot(next);
-	float angle = 30 * acosf(dott);
+	float angle = 2 * acosf(dott);
 
+	Matrix4 eye2ObjSpaceMat = view->modelRotation.invert();
+
+	vec = eye2ObjSpaceMat.operator*(vec);
+	axis = QVector3D(vec.x, vec.y, vec.z);
 
 	QQuaternion Q_rot = QQuaternion::fromAxisAndAngle(axis, angle * 2);
 	Q_rot.normalize();
 
-	_quat = Q_rot * _quatStart;
+	_quat = Q_rot * _quat;
 
 }
 void SimViewState::paintScale(glAtrium* view)
@@ -100,6 +104,9 @@ void SimViewState::paintScale(glAtrium* view)
 }
 void SimViewState::paintLegend(glAtrium* view)
 {
+
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHTING);
 	glCallList(view->displayListIndex);
 	GLfloat widthL = view->frustrumSize*_scale*0.5;
 	GLfloat heightL = view->frustrumSize*_scale*0.2;
@@ -135,9 +142,14 @@ void SimViewState::paintLegend(glAtrium* view)
 		view->renderText(widthL*1.4f, -16.0*heightL - heightL / 2, 0, str, QFont(), view->displayListIndex);
 		break;
 	}
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT1);
 }
 void SimViewState::prepareLegend(glAtrium* view)
 {
+
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHTING);
 
 	float f[1];
 	GLfloat widthL = view->frustrumSize*_scale*0.5;
@@ -194,6 +206,8 @@ void SimViewState::prepareLegend(glAtrium* view)
 	//glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	//glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 	//glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT1);
 }
 void SimViewState::paintModel(glAtrium* view)
 {

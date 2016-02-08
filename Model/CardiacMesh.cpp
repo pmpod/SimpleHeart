@@ -168,6 +168,8 @@ CardiacMesh* CardiacMesh::constructStl(std::string inname, CELL_TYPE type)
 	}
 
 	int totalSize = nTriLong;
+	grid->_minNodalSpacing = 1;
+	grid->_maxNodalSpacing = 1;
 	Oscillator *node = NULL;
 	int oscillatorIDerator = 0;
 	int currentID = -1;
@@ -232,6 +234,7 @@ CardiacMesh* CardiacMesh::constructStl(std::string inname, CELL_TYPE type)
 				if (currentID == -1)
 				{
 					grid->addNode(oscillatorIDerator, vertex[vertIt].x, vertex[vertIt].y, vertex[vertIt].z, type);
+
 					currentID = oscillatorIDerator;
 
 					//add currentVertex here?
@@ -252,6 +255,8 @@ CardiacMesh* CardiacMesh::constructStl(std::string inname, CELL_TYPE type)
 			tri->id_3 = idis[2];
 			tri->id_2 = idis[0];
 			//add neighbors
+
+			double distance;
 			for (int vertIt = 0; vertIt < 3; vertIt++)
 			{
 				grid->m_mesh[tri->id_1]->addNeighbour(grid->m_mesh[tri->id_2]);
@@ -262,6 +267,18 @@ CardiacMesh* CardiacMesh::constructStl(std::string inname, CELL_TYPE type)
 
 				grid->m_mesh[tri->id_2]->addNeighbour(grid->m_mesh[tri->id_3]);
 				grid->m_mesh[tri->id_3]->addNeighbour(grid->m_mesh[tri->id_2]);
+
+				distance = sqrt(pow((grid->m_mesh[tri->id_1]->m_x - grid->m_mesh[tri->id_2]->m_x), 2) +
+					pow((grid->m_mesh[tri->id_1]->m_y - grid->m_mesh[tri->id_2]->m_y), 2) +
+					pow((grid->m_mesh[tri->id_1]->m_z - grid->m_mesh[tri->id_2]->m_z), 2));
+				if (grid->_minNodalSpacing > distance)
+				{
+					grid->_minNodalSpacing = distance;
+				}
+				if (grid->_maxNodalSpacing < distance)
+				{
+					grid->_maxNodalSpacing = distance;
+				}
 			}
 			//add triangle
 			grid->m_vertexList.push_back(tri);
@@ -501,7 +518,7 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 		{
 			ele_val += osc2->getLastCurrentSource() / (pow(osc->getPositionX() - osc2->getPositionX(), 2) +
 				pow(osc->getPositionY() - osc2->getPositionY(), 2) +
-				0.7);
+				0.2);
 		}
 	}
 	osc->m_v_electrogram = ele_val;

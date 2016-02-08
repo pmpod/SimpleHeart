@@ -166,7 +166,7 @@ void SimViewStateView::handleMouseMove(glAtrium* view, QMouseEvent *event)
 		next = get_arcball_vector(view->width(), view->height(), event->x(), event->y());
 		previous = get_arcball_vector(view->width(),view->height(), view->lastPos.x(), view->lastPos.y());
 
-		computeIncremental(previous, next);
+		computeIncremental(view, previous, next);
 
 		GLfloat m[16];
 

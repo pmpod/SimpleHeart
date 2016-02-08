@@ -59,7 +59,7 @@ public:
 	const double getRadius();
 
 protected:
-	void computeIncremental(Vector3 last, Vector3 next);
+	void computeIncremental(glAtrium* view, Vector3 last, Vector3 next);
 	void(*colorMap)(GLfloat &v, const GLfloat &vmin, const GLfloat &vmax, GLfloat &rr, GLfloat &gg, GLfloat &bb);
 	void ChangeState(glAtrium* view, SimViewState* s);
 	double cursorRadius;

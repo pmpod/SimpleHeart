@@ -7,10 +7,6 @@ SimViewStateEP::SimViewStateEP()
 {
 	_probeOnTheMove = -1;
 	setPalette(DP_HOTTOCOLD);
-
-
-
-
 }
 SimViewStateEP::~SimViewStateEP()
 {
@@ -48,7 +44,7 @@ int SimViewStateEP::findElectrode(glAtrium* view, Oscillator* src, Oscillator* o
 				std::pow((src->m_y - osc->m_neighbours[k]->m_y), 2) +
 				std::pow((src->m_z - osc->m_neighbours[k]->m_z), 2));
 
-			if (distance <= cursorRadius * 2 && !(m_isSearchedMap[osc->m_neighbours[k]->oscillatorID]))
+			if (distance <= cursorRadius * 4 && !(m_isSearchedMap[osc->m_neighbours[k]->oscillatorID]))
 			{
 				temp = findElectrode(view, src, osc->m_neighbours[k]);
 				if (temp != -1)
@@ -134,7 +130,7 @@ void SimViewStateEP::handleMouseMove(glAtrium* view, QMouseEvent *event)
 		next = get_arcball_vector(view->width(), view->height(), event->x(), event->y());
 		previous = get_arcball_vector(view->width(),view->height(), view->lastPos.x(), view->lastPos.y());
 
-		computeIncremental(previous, next);
+		computeIncremental(view, previous, next);
 
 		GLfloat m[16];
 
