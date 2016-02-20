@@ -6,15 +6,16 @@ SimViewStateStructure* SimViewStateStructure::_instance = nullptr;
 SimViewStateStructure::SimViewStateStructure()
 {
 	cursorRadius = 2.0;
-	m_paintType = SOLID_WALL;
 	m_clearType = ATRIAL_V3;
-	m_currentDrawType = m_paintType;
+	//m_currentDrawType = m_paintType;
 	setPalette(DP_GRAY);
 
 
 	//Colormap for structures
 	m_structureColorMap[SOLID_WALL] = 0.0;
-	m_structureColorMap[ATRIAL_V3] = 24;
+	m_structureColorMap[ATRIAL_V3] = 1.0;
+	m_structureColorMap[SA_NODE] = 0.33;
+	m_structureColorMap[AV_NODE] = 0.66;
 }
 SimViewStateStructure::~SimViewStateStructure()
 {
@@ -174,7 +175,7 @@ void SimViewStateStructure::paintModel(glAtrium* view)
 
 }
 //--------------------------------------------------
-void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* osc, const double radius, CELL_TYPE type)
+void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* osc, glAtrium* atrium, const double radius, CELL_TYPE type)
 {
 	m_isPaintedMap[osc->oscillatorID] = true;
 	
@@ -186,15 +187,77 @@ void SimViewStateStructure::paintStructureInRadius(Oscillator* src, Oscillator* 
 			std::pow((src->m_z - osc->m_neighbours[k]->m_z), 2));
 		if (distance <= radius && !(m_isPaintedMap[osc->m_neighbours[k]->oscillatorID]))
 		{
-			paintStructureInRadius(src, osc->m_neighbours[k], radius, type);
+			paintStructureInRadius(src, osc->m_neighbours[k], atrium,radius, type);
 		}
+	}
+	
+	Oscillator *node = NULL;
+	bool isWall = false;
+	if (type == ATRIAL_V3)
+		node = new v3model();
+	else if (type == ATRIAL_FHN)
+		node = new FitzHughNagumo();
+	else if (type == SA_NODE)
+		node = new vanDerGru(SA_NODE);
+	else if (type == AV_NODE)
+		node = new vanDerGru(AV_NODE);
+	else
+	{
+		isWall = true;
+		osc->m_type = type;
+	}
+
+	if (!isWall)
+	{
+		node->setPositionX(osc->getPositionX());
+		node->setPositionY(osc->getPositionY());
+		node->setPositionZ(osc->getPositionZ());
+
+		node->setType(type);
+		node->oscillatorID = osc->oscillatorID;
+
+		node->m_currentTime = osc->m_currentTime;
+		node->m_previousTime = osc->m_previousTime;
+		node->guardTimestep = osc->guardTimestep;
+
+		node->m_neighbours = osc->m_neighbours; //is it copy constructor?
+		node->m_connexin = osc->m_connexin;
+		node->m_neighboursDistance = osc->m_neighboursDistance; //is it copy constructor?
+		node->m_closestDistanceID = osc->m_closestDistanceID; //is it copy constructor?
+		node->m_farthestDistanceID = osc->m_farthestDistanceID; //is it copy constructor?
+		node->setSigma(osc->m_sigmaX, osc->m_sigmaY, osc->m_sigmaZ);
+
+		// Change references from other oscillators
+		Oscillator* neigh;
+		for (unsigned int i = 0; i < node->m_neighbours.size(); ++i)
+		{
+			neigh = node->m_neighbours[i];
+			for (unsigned int k = 0; k < neigh->m_neighbours.size(); ++k)
+			{
+				if (neigh->m_neighbours[k]->oscillatorID == node->oscillatorID)
+				{
+					neigh->m_neighbours[k] = node;
+				}
+			}
+		}
+		//TODO: what if the electrode references particular oscillator?
+
+		node->m_v_potential = osc->m_v_potential;
+		node->m_previous_potential = osc->m_previous_potential;
+		node->m_lastActivationTime = osc->m_lastActivationTime;
+		node->m_beforeLastActivationTime = osc->m_beforeLastActivationTime;
+		node->m_lastPPIR_TCL = osc->m_lastPPIR_TCL;
+		node->m_potentialHistory = osc->m_potentialHistory;
+
+		osc = node;
+		atrium->linkToMesh->m_mesh[node->oscillatorID] = node;
 	}
 	osc->m_type = type;
 }
 //--------------------------------------------------
 void SimViewStateStructure::handleMouseLeftPress(glAtrium* view, QMouseEvent *event)
 {
-	m_currentDrawType = m_paintType;
+	m_currentDrawType = view->m_paintType;
 	handleMouseMove(view, event);
 }
 void SimViewStateStructure::handleMouseRightPress(glAtrium* view, QMouseEvent *event)
@@ -241,7 +304,7 @@ void SimViewStateStructure::handleMouseMove(glAtrium* view, QMouseEvent *event)
 			view->testProbe.y = view->linkToMesh->m_mesh[item]->m_y;
 			view->testProbe.z = view->linkToMesh->m_mesh[item]->m_z;
 			view->linkToMesh->structureUpdated = true;
-			paintStructureInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], cursorRadius, m_currentDrawType);
+			paintStructureInRadius(view->linkToMesh->m_mesh[item], view->linkToMesh->m_mesh[item], view, cursorRadius, m_currentDrawType);
 		}
 
 		view->lastPos = event->pos();

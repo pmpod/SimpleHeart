@@ -7,14 +7,15 @@ v3model::v3model(void) : Oscillator()
 	m_v_current.clear();
 	m_v_current.push_back(0.0);//V, 0
 	m_v_current.push_back(0.0);//W, 1
+	m_currentPRIM.clear();
 	m_currentPRIM.push_back(0.0);
 	m_currentPRIM.push_back(0.0);
 	m_currentTime = 0.0;
 	m_previousTime = -0.1;
 
-	vzero = 0; //[mV]
-	vmax = 1.0;  //[mV]
-	vmin = 0;  //[mV]
+	vzero = -75; //[mV]
+	vmax = 20.0;  //[mV]
+	vmin = -75;  //[mV]
 	m_v_potential = 0;
 	m_previous_potential = 0;
 	m_v_scaledPotential = vmin;
@@ -121,7 +122,7 @@ void v3model::setParameter(double value, OSC_PARAMETER parameter)
 		tau_w_minus = 100;
 		tau_0 = 64.7;
 		//tau_r = 222.9;
-		tau_r = 70; //ERP ok 200
+		tau_r = 120; //ERP ok 200
 		//tau_r = 30; //ERP ok 170
 		u_cs1 = 0.85;
 		tau_s1 = 226.9;

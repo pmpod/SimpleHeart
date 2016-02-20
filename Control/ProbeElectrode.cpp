@@ -27,17 +27,25 @@ void ProbeElectrode::reset()
 	maxRRindex = -1;
 	refractoryPeriod = 50; //ms
 	potentialTreshold = 0.3; //mV
+	displayGraphValue = 2;
 }
 void ProbeElectrode::setOscillator(Oscillator*osc)
 {
 	_osc = osc;
 }
 
+void ProbeElectrode::setDisplayValue(int value)
+{
+	displayGraphValue = value;
+}
 void ProbeElectrode::processNewTime(double time)
 {
 	//[0] Read the Transmembrane potential value from the cell
-	//double potential = _osc->m_v_scaledPotential;
-	double potential = _osc->m_v_electrogram;
+	double potential;
+	if (displayGraphValue == 2)
+		potential = _osc->m_v_scaledPotential;
+	else
+		potential = _osc->m_v_electrogram;
 	//[1] Emit the state calculated signal
 	//emit _osc->stateCalculated();
 	

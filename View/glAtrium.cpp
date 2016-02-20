@@ -42,7 +42,7 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 	LightAmbient[0] = 0.1f;
 	LightAmbient[1] = 0.1f;
 	LightAmbient[2] = 0.1f;
-	LightAmbient[3] = 1.0f;
+	LightAmbient[3] = 0.0f;
 
 	LightDiffuse[0] = 1.0f;
 	LightDiffuse[1] = 1.0f;
@@ -64,6 +64,9 @@ glAtrium::glAtrium(CardiacMesh *linkMesh, AtrialMachine2d *link, QWidget *parent
 	paintValueERP = 30;
 	paintValueExcitability = 10;
 	_displayConduction = false;
+
+
+	m_paintType = SOLID_WALL;
 }
 //----------------------------------------
 glAtrium::~glAtrium(void)
@@ -88,6 +91,24 @@ void  glAtrium::setPaletteGray()
 	m_palette = 1;
 }
 //----------------------------------------
+
+void glAtrium::setPaintTypeSA()
+{
+	m_paintType = SA_NODE;
+}
+void glAtrium::setPaintTypeAV()
+{
+	m_paintType = AV_NODE;
+}
+void glAtrium::setPaintTypeATRIUM()
+{
+	m_paintType = ATRIAL_V3;
+}
+void glAtrium::setPaintTypeWALL()
+{
+	m_paintType = SOLID_WALL;
+}
+
 QSize glAtrium::sizeHint() const
 {
 	return QSize(this->width(), this->height());
@@ -257,21 +278,37 @@ void glAtrium::setZRotation(int angle)
 }
 void glAtrium::setTop()
 {
-	setXRotation(0);
-	setYRotation(0);
-	setZRotation(0);
+	_state->setTop(this);
+	updateGL();
 }
 void glAtrium::setSide1()
 {
-	setXRotation(700);
-	setYRotation(0);
-	setZRotation(350);
+	_state->setFront(this);
+	updateGL();
 }
 void glAtrium::setSide2()
 {
-	setXRotation(1000);
-	setYRotation(0);
-	setZRotation(-650);
+	_state->setSide(this);
+	updateGL();
+}
+void glAtrium::setAmbient()
+{
+	if (LightAmbient[0] == 0.1f)
+	{
+		LightAmbient[0] = 1.0f;
+		LightAmbient[1] = 1.0f;
+		LightAmbient[2] = 1.0f;
+		LightAmbient[3] = 0.0f;
+	}
+	else
+	{
+		LightAmbient[0] = 0.1f;
+		LightAmbient[1] = 0.1f;
+		LightAmbient[2] = 0.1f;
+		LightAmbient[3] = 0.0f;
+	}
+	glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
+	updateGL();
 }
 //----------------------------------------
 void glAtrium::initializeGL()
@@ -409,6 +446,10 @@ void glAtrium::paintGL()
 
 		glGetFloatv(GL_MODELVIEW_MATRIX, m);
 		modelMatrix = m;
+
+
+
+
 		modelMatrix = modelMatrix * modelRotation;
 		glLoadMatrixf(modelMatrix.get());
 

@@ -81,6 +81,9 @@ public slots:
 	int probeElectrodesCount();
 
 
+	void setDisplayElectrogramOnGraph(bool b);
+	void setDisplayPotentialOnGraph(bool b);
+
 	void setPhaseZero(double val);
 	void setActivationTimeCycle(double val);
 
@@ -119,6 +122,8 @@ private:
 
 	double _couplingInterval;
 	double _sensedActivationTime;
+
+	int displayGraphValue;
 
 	double _stimulationProtocolBeganOn;
 	double _stimulationProtocolEndsOn;

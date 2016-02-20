@@ -55,6 +55,9 @@ public:
 	virtual void setMode(const int mode);
 	virtual void setOutlineStyle(const  BRUSH_OUTLINE outline) = 0;
 	void setPalette(const DISP_PALETTE pal);
+	void setTop(glAtrium* view);
+	void setFront(glAtrium* view );
+	void setSide(glAtrium* view);
 	
 	const double getRadius();
 

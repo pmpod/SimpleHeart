@@ -26,14 +26,13 @@ protected:
 
 private:
 	static SimViewStateStructure* _instance;
-	void paintStructureInRadius(Oscillator* src, Oscillator* osc, const double radius, CELL_TYPE type);
+	void paintStructureInRadius(Oscillator* src, Oscillator* osc,glAtrium* atrium, const double radius, CELL_TYPE type);
 
 	//painting handling
 	std::map < int, bool > m_isPaintedMap;
 
 	std::map < CELL_TYPE, GLfloat > m_structureColorMap;
 	CELL_TYPE m_currentDrawType;
-	CELL_TYPE m_paintType;
 	CELL_TYPE m_clearType;
 
 	//cursor handling

@@ -7,6 +7,9 @@
 #include <baseTSD.h>
 #include <fstream>
 
+
+#define ELECTR_DEPTH 50
+ #define CALCULATE_ELECTR_TOTAL 1
 CardiacMesh::CardiacMesh()
 {
 	maximumCV = 1; // [cm/ms]
@@ -35,35 +38,47 @@ CardiacMesh::~CardiacMesh()
 	free(m_vertexMatrix);
 	this->destroyGrid();
 }
-void CardiacMesh::destroyGrid()
+
+CardiacMesh* CardiacMesh::constructCartesianGridPlain(int x, int y, double dx, double dy, CELL_TYPE type)
 {
-	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();
+	CardiacMesh *grid = new CardiacMesh();
+	int totalSize = y*x;
+	for (int j = 0; j < totalSize; ++j)
+	{
+		grid->addNode(j, static_cast<double>(j % x) * dx, dy * floor(static_cast<double>(j) / static_cast<double>(x)), 0, ATRIAL_V3);
+	}
+	constructCartesianGrid(x, y, dx, dy, grid);
+	return grid;
+
 }
-
-
-const double CardiacMesh::sizeInMm()
-{
-	return _sizeInMm;
-
-}
-const double CardiacMesh::minNodalSpacing()
-{
-	return (this->_minNodalSpacing);
-}
-
-
-CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double dy, CELL_TYPE type)
+CardiacMesh* CardiacMesh::constructCartesianGridRightAtrium(int x, int y, double dx, double dy, double percentageOfWidth)
 {
 	CardiacMesh *grid = new CardiacMesh();
 	int totalSize = y*x;
 
+	for (int j = 0; j < totalSize; ++j)
+	{
+		if (static_cast<double>(j % x) < (x *percentageOfWidth) && j < totalSize *percentageOfWidth)
+			grid->addNode(j, static_cast<double>(j % x) * dx, dy * floor(static_cast<double>(j) / static_cast<double>(x)), 0, SA_NODE);
+		else if (static_cast<double>(j % x) >(x - x *percentageOfWidth) && j > totalSize - totalSize *percentageOfWidth)
+			grid->addNode(j, static_cast<double>(j % x) * dx, dy * floor(static_cast<double>(j) / static_cast<double>(x)), 0, AV_NODE);
+		else
+			grid->addNode(j, static_cast<double>(j % x) * dx, dy * floor(static_cast<double>(j) / static_cast<double>(x)), 0, ATRIAL_V3);
+	}
+	constructCartesianGrid(x, y, dx, dy, grid);
+	return grid;
+}
+
+
+CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double dy, CardiacMesh *grid)
+{
+	int totalSize = y*x;
+
+
 	grid->_minNodalSpacing = max(dx, dy);
 	grid->_maxNodalSpacing = min(dx, dy);
 	grid->_sizeInMm = sqrt(static_cast<double>(x*x + y*y))*dx;
-	for (int j = 0; j < totalSize; ++j)
-	{
-		grid->addNode(j, static_cast<double>(j % x) * dx, dy * floor(static_cast<double>(j) / static_cast<double>(x)), 0, type);
-	}
+	//XXXXX
 	grid->maxPotential = grid->maxElectrogram;
 	grid->minPotential = grid->minElectrogram;
 
@@ -142,7 +157,6 @@ CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double
 	grid->setDiffusionCoefficients();
 	return grid;
 }
-
 CardiacMesh* CardiacMesh::constructStl(std::string inname, CELL_TYPE type)
 {
 	CardiacMesh *grid = new CardiacMesh();
@@ -442,12 +456,26 @@ CardiacMesh* CardiacMesh::importGrid(const char *inname)
 
 	return grid;
 }
+
+void CardiacMesh::destroyGrid()
+{
+	while (!m_mesh.empty()) delete m_mesh.back(), m_mesh.pop_back();
+}
+
 //------------------------------------------------------------------------------------------
 void CardiacMesh::addNode(int idnode, double x, double y, double z, CELL_TYPE type)
 {
 	Oscillator *node = NULL;
 	if (type == ATRIAL_V3)
 		node = new v3model();
+	else if (type == ATRIAL_FHN)
+		node = new FitzHughNagumo();
+
+	else if (type == SA_NODE)
+		node = new vanDerGru(SA_NODE);
+
+	else if (type == AV_NODE)
+		node = new vanDerGru(AV_NODE);
 	else
 		node = new Oscillator();
 
@@ -466,65 +494,6 @@ void CardiacMesh::addNode(int idnode, double x, double y, double z, CELL_TYPE ty
 		minElectrogram = node->vmin;
 
 }
-void CardiacMesh::clearWallCells()
-{
-	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
-	{
-		m_mesh[currentOsc]->m_wallCells.clear();
-	}
-}
-void CardiacMesh::setWallCells()
-{
-	clearWallCells();
-	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
-	{
-		if (m_mesh[currentOsc]->m_type == SOLID_WALL)
-		{
-			Oscillator* neigh;
-			for (int currentNeighbour = 0; currentNeighbour < m_mesh[currentOsc]->m_neighbours.size(); ++currentNeighbour)
-			{
-				neigh = m_mesh[currentOsc]->m_neighbours[currentNeighbour];
-				if (neigh->getCellType() != SOLID_WALL &&
-					neigh->getCellType() != NONE)
-				{
-					neigh->m_wallCells.push_back(m_mesh[currentOsc]);
-					break;
-				}
-			}
-		}
-	}
-}
-//------------------------------------------------------------------------------------------
-void CardiacMesh::setDiffusionCoefficients()
-{
-	int gridSize = m_mesh.size();
-	for (int j = 0; j < gridSize; ++j)
-	{
-		m_mesh[j]->setSigma(0.01, 0.01, 0);
-	}
-}
-//---------------------------------------------------------------------------
-double CardiacMesh::calculateElectrogram(Oscillator* osc)
-{
-	int meshSize = m_mesh.size();
-
-	//ELECTROGRAM
-	double ele_val = 0;
-	Oscillator *osc2;
-	for (int j2 = 0; j2 < meshSize; ++j2)//12; ++j)//
-	{
-		osc2 = m_mesh[j2];
-		if (m_mesh[j2]->getCellType() != SOLID_WALL)
-		{
-			ele_val += osc2->getLastCurrentSource() / (pow(osc->getPositionX() - osc2->getPositionX(), 2) +
-				pow(osc->getPositionY() - osc2->getPositionY(), 2) +
-				0.2);
-		}
-	}
-	osc->m_v_electrogram = ele_val;
-	return ele_val;
-	//END ELECTROGRAM
-}
 void CardiacMesh::setVertexTriangleList(bool doublesided)
 {
 	int meshSize = m_mesh.size();
@@ -533,7 +502,7 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 
 	if (m_indicesMatrix != nullptr)
 		free(m_indicesMatrix);
-	
+
 	m_vertexMatrix = (SVertex *)malloc(sizeof(SVertex) * 1 * meshSize);
 	for (int currentVertex = 0; currentVertex < m_mesh.size(); ++currentVertex)
 	{
@@ -623,7 +592,6 @@ void CardiacMesh::setVertexTriangleList(bool doublesided)
 		m_indicesMatrix[3 * currentVertex + 2] = m_vertexList[currentVertex]->id_3;
 	}
 }
-//-----------------------------------------------------------
 void CardiacMesh::calculateCenter()
 {
 	centerGeom.x = 0;
@@ -640,7 +608,111 @@ void CardiacMesh::calculateCenter()
 	centerGeom.y /= m_mesh.size();
 	centerGeom.z /= m_mesh.size();
 }
+const double CardiacMesh::sizeInMm()
+{
+	return _sizeInMm;
 
+}
+const double CardiacMesh::minNodalSpacing()
+{
+	return (this->_minNodalSpacing);
+}
+
+//------------------------------------------------------------------------------------------
+void CardiacMesh::clearWallCells()
+{
+	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
+	{
+		m_mesh[currentOsc]->m_wallCells.clear();
+	}
+}
+void CardiacMesh::setWallCells()
+{
+	clearWallCells();
+	for (int currentOsc = 0; currentOsc < m_mesh.size(); ++currentOsc)
+	{
+		if (m_mesh[currentOsc]->m_type == SOLID_WALL)
+		{
+			Oscillator* neigh;
+			for (int currentNeighbour = 0; currentNeighbour < m_mesh[currentOsc]->m_neighbours.size(); ++currentNeighbour)
+			{
+				neigh = m_mesh[currentOsc]->m_neighbours[currentNeighbour];
+				if (neigh->getCellType() != SOLID_WALL &&
+					neigh->getCellType() != NONE)
+				{
+					neigh->m_wallCells.push_back(m_mesh[currentOsc]);
+					break;
+				}
+			}
+		}
+	}
+}
+void CardiacMesh::setDiffusionCoefficients()
+{
+	int gridSize = m_mesh.size();
+	for (int j = 0; j < gridSize; ++j)
+	{
+		m_mesh[j]->setSigma(0.00013, 0.00013, 0);
+	}
+}
+//---------------------------------------------------------------------------
+double CardiacMesh::calculateElectrogramRecursively(Oscillator* srcosc, Oscillator* osc, int currentLevel, std::set<int>& setOfadded)
+{
+	double ele_val = 0;
+
+	for (unsigned int i = 0; i < osc->m_neighbours.size(); ++i)
+	{
+		//check if an oscillator were not added before
+		if (setOfadded.find(osc->m_neighbours[i]->oscillatorID) == setOfadded.end())
+		{
+			setOfadded.insert(osc->m_neighbours[i]->oscillatorID);
+
+			double distanceSQ = pow(srcosc->getPositionX() - osc->m_neighbours[i]->getPositionX(), 2) +
+				pow(srcosc->getPositionY() - osc->m_neighbours[i]->getPositionY(), 2) +
+				pow(srcosc->getPositionZ() - osc->m_neighbours[i]->getPositionZ(), 2);
+
+			ele_val += osc->getLastCurrentSource() / (distanceSQ + 0.2);
+			
+
+			if (currentLevel > 0 && sqrt(distanceSQ) > this->minNodalSpacing()*ELECTR_DEPTH)
+			{
+				ele_val += calculateElectrogramRecursively(srcosc, osc->m_neighbours[i], currentLevel - 1, setOfadded);
+			}
+		}
+	}
+
+	return ele_val;
+}
+double CardiacMesh::calculateElectrogram(Oscillator* osc)
+{
+	int meshSize = m_mesh.size();
+	double ele_val = 0;
+
+	#ifdef CALCULATE_ELECTR_TOTAL
+		Oscillator *osc2;
+		for (int j2 = 0; j2 < meshSize; ++j2)//12; ++j)//
+		{
+			osc2 = m_mesh[j2];
+			if (m_mesh[j2]->getCellType() != SOLID_WALL)
+			{
+				ele_val += osc2->getLastCurrentSource() / (pow(osc->getPositionX() - osc2->getPositionX(), 2) +
+					pow(osc->getPositionY() - osc2->getPositionY(), 2) +
+					pow(osc->getPositionZ() - osc2->getPositionZ(), 2) +
+					0.2);
+			}
+		}
+		osc->m_v_electrogram = ele_val;
+	#else
+		int search_levels = ELECTR_DEPTH;
+		std::set<int> myset;
+
+		ele_val = calculateElectrogramRecursively(osc, osc, search_levels, myset);
+		osc->m_v_electrogram = ele_val;
+
+	#endif
+	return ele_val;
+}
+//-----------------------------------------------------------
 //-----------------------------------------------------------
 void CardiacMesh::processActivationTime(Oscillator* osc)
 {
@@ -727,7 +799,6 @@ void CardiacMesh::calculateConductionVector(Oscillator* src, Oscillator* osc, co
 	}
 }
 
-
 float CardiacMesh::FindLargestEntry(const Matrix3 &m){
 	float result = 0.0f;
 	for (int i = 0; i<3; i++){
@@ -738,7 +809,6 @@ float CardiacMesh::FindLargestEntry(const Matrix3 &m){
 	}
 	return result;
 }
-
 Vector3 CardiacMesh::FindEigenVectorAssociatedWithLargestEigenValue(const Matrix3 &m){
 	//pre-condition
 	float scale = FindLargestEntry(m);
@@ -758,7 +828,6 @@ Vector3 CardiacMesh::FindEigenVectorAssociatedWithLargestEigenValue(const Matrix
 	}
 	return v;
 }
-
 void CardiacMesh::FindLLSQPlane(Vector3 *points, int count, Vector3 *destCenter, Vector3 *destNormal){
 	Vector3 sum(0, 0, 0);
 	for (int i = 0; i<count; i++){

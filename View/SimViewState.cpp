@@ -50,6 +50,40 @@ void  SimViewState::setPalette(const DISP_PALETTE pal)
 		break;
 	}
 }
+void SimViewState::setTop(glAtrium* view)
+{
+	QQuaternion Q_rot = QQuaternion::fromAxisAndAngle(QVector3D(1, 0, 0), 90);
+	QQuaternion Q_rot2 = QQuaternion::fromAxisAndAngle(QVector3D(0, 0, 1), 185);
+	Q_rot.normalize();
+	Q_rot2.normalize();
+	GLfloat mRotation[16];
+	_quat = Q_rot*Q_rot2;
+
+	quaternionToMatrix(_quat, mRotation);
+	view->modelRotation = mRotation;
+}
+void SimViewState::setFront(glAtrium* view)
+{
+	QQuaternion Q_rot = QQuaternion::fromAxisAndAngle(QVector3D(1, 0, 0), 0);
+	Q_rot.normalize();
+	GLfloat mRotation[16];
+
+	quaternionToMatrix(Q_rot, mRotation);
+	view->modelRotation = mRotation;
+	_quat = Q_rot;
+}
+void SimViewState::setSide(glAtrium* view)
+{
+	QQuaternion Q_rot = QQuaternion::fromAxisAndAngle(QVector3D(0, 0, 1), 180);
+	QQuaternion Q_rot2 = QQuaternion::fromAxisAndAngle(QVector3D(0, 1, 0), -45);
+	Q_rot.normalize();
+	Q_rot2.normalize();
+	GLfloat mRotation[16];
+	_quat = Q_rot*Q_rot2;
+
+	quaternionToMatrix(_quat, mRotation);
+	view->modelRotation = mRotation;
+}
 void SimViewState::computeIncremental(glAtrium* view, Vector3 last, Vector3 next)
 {
 	Vector3 vec = last.cross(next);

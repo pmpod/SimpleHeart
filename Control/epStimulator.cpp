@@ -41,6 +41,11 @@ EpStimulator::EpStimulator()
 	_probe.push_back(new ProbeElectrode());
 	_probe.push_back(new ProbeElectrode());
 
+	displayGraphValue = 2;
+	for (int i = 0; i < _probe.size(); ++i)
+	{
+		_probe[i]->setDisplayValue(displayGraphValue);
+	}
 	_stimulationProtocolBeganOn = 0;
 	_lastStimulationInterval = 0;
 }
@@ -77,6 +82,24 @@ int EpStimulator::probeElectrodeID(int num)
 	}
 
 }
+
+void EpStimulator::setDisplayElectrogramOnGraph(bool b)
+{
+	displayGraphValue = 1;
+	for (int i = 0; i < _probe.size(); ++i)
+	{
+		_probe[i]->setDisplayValue(displayGraphValue);
+	}
+}
+void EpStimulator::setDisplayPotentialOnGraph(bool b)
+{
+	displayGraphValue = 2;
+	for (int i = 0; i < _probe.size(); ++i)
+	{
+		_probe[i]->setDisplayValue(displayGraphValue);
+	}
+}
+
 void EpStimulator::setProbeElectrode(CardiacMesh* mesh, int num, int oscID)
 {
 	if (num < 0 || num > _probe.size()){

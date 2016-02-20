@@ -21,6 +21,7 @@ public:
 	double getOscillatorID();
 	double lastRR();
 	double currentMaxRR();
+	void setDisplayValue(int value);
 
 private:
 
@@ -38,6 +39,7 @@ private:
 	double refractoryPeriod;
 	double potentialTreshold;
 	double _lastRR;
+	int displayGraphValue;
 
 
 public slots:

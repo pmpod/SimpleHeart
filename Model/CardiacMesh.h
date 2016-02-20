@@ -3,8 +3,11 @@
 #include <QMessageBox>
 #include <string>
 #include <vector>
+#include <set>
 #include "Model\Oscillator.h"
 #include "Model\v3model.h"
+#include "Model\FitzHughNagumo.h"
+#include "Model\vanDerGru.h"
 #include "heartDefines.h"
 #include "NumericStrategy\TimeTree.h"
 #include "Support\Vectors.h"
@@ -60,7 +63,9 @@ public:
 	* @param dy - vertical spacing between cells
 	* @param type - cell type to be set for every cell (accepts CELL_TYPE enum value).
 	*/
-	static CardiacMesh* constructCartesianGrid(int x, int y, double dx, double dy, CELL_TYPE type);
+	static CardiacMesh* constructCartesianGrid(int x, int y, double dx, double dy, CardiacMesh *grid);
+	static CardiacMesh* constructCartesianGridPlain(int x, int y, double dx, double dy, CELL_TYPE type);
+	static CardiacMesh* constructCartesianGridRightAtrium(int x, int y, double dx, double dy, double percentageOfWidth);
 
 	/**
 	* \brief A static function constructing cylindrical CardiacMesh object consisting of one type of the cell
@@ -98,6 +103,7 @@ public:
 
 	void processActivationTime(Oscillator* osc);
 	double calculateElectrogram(Oscillator* osc);
+	double calculateElectrogramRecursively(Oscillator* srcosc, Oscillator* osc, int currentLevel, std::set<int>& setOfadded);
 	Vector3 conductionVector(int oscID);
 	void calculateConductionVector(Oscillator* src, Oscillator* osc, const double radius);
 

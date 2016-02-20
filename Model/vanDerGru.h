@@ -8,14 +8,22 @@ class vanDerGru : public Oscillator
 public:
 	vanDerGru(void);
 	~vanDerGru(void);
+	vanDerGru(CELL_TYPE type);
+
+	void create(CELL_TYPE type);
 	
 	double vanDerGruFunction(double potential, double current);
-	double getCurrentPrim(int which);
+	double getCurrentPrim(const int& which);
 	double getPotentialPrim();
+	double getERP(); ///virtual function for refractory period 
+	double getExcitability(); ///virtual function for refractory period setting
 
 	void setDefaultAvParameters();
  public slots:
-    void setParameter(double value, OSC_PARAMETER parameter);
+	void setParameter(double value, OSC_PARAMETER parameter);
+	void setERP(double value); ///virtual function for refractory period setting
+	void setExcitability(double value);
+
     void setValueAlpha(double value);
     void setValueF(double value);
     void setValueD(double value);
@@ -36,8 +44,5 @@ private:
 	double m_v1;
 	double m_v2;
 	int m_vdPtype;
-	double vzero;//-0.5;
-	double vmax;////1.3;
-	double vmin;//-0.5;
 	//ouble m_timeScaler;
 };

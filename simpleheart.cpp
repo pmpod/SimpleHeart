@@ -143,15 +143,17 @@ void SimpleHeart::init()
 
 
 	simpleParameters = new atrialParameters();
-	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
-	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
-	//m_grid = CardiacMesh::constructCartesianGrid(128, 128, 0.375, 0.375, ATRIAL_V3);// 48 mm
-	//m_grid = CardiacMesh::constructCartesianGrid(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm
-	m_grid = CardiacMesh::constructStl("artia_1layer.stl", ATRIAL_V3);// 80 mm
+	m_grid = CardiacMesh::constructCartesianGridPlain(256, 256, 0.3125, 0.3125, ATRIAL_V3);
+	//m_grid = CardiacMesh::constructCartesianGridPlain(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
+	//m_grid = CardiacMesh::constructCartesianGridPlain(128, 128, 0.375, 0.375, SA_NODE);// 48 mm
+	//m_grid = CardiacMesh::constructCartesianGridRightAtrium(128, 128, 0.375, 0.375, 0.12);// 48 mm
+	
+	//m_grid = CardiacMesh::constructCartesianGridPlain(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm
+	//m_grid = CardiacMesh::constructStl("artia_2layer.stl", ATRIAL_V3);// 80 mm
 
 
 
-	//m_grid = CardiacMesh::constructCartesianGrid(256, 256, 0.3125, 0.3125, ATRIAL_V3);
+	//m_grid = CardiacMesh::constructCartesianGridPlain(256, 256, 0.3125, 0.3125, ATRIAL_V3);
 	//m_grid = new CartesianGrid(256,256,0.05,0.05);
 	//m_matrix = new DiffusionMatrix(m_grid);
 	//m_anisotrophy = new DiffusionMatrix(m_grid);
@@ -233,6 +235,11 @@ void SimpleHeart::setupConnections()
 	
 	//ADDED
 
+	QObject::connect(ui.b_viewTop, SIGNAL(clicked()), glGraph, SLOT(setTop()));
+	QObject::connect(ui.b_viewFront, SIGNAL(clicked()), glGraph, SLOT(setSide1()));
+	QObject::connect(ui.b_viewSide, SIGNAL(clicked()), glGraph, SLOT(setSide2()));
+	QObject::connect(ui.b_viewLight, SIGNAL(clicked()), glGraph, SLOT(setAmbient()));
+
 	QObject::connect(ui.b_saveStructure, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentStructure()));
 	QObject::connect(ui.b_loadStructure, SIGNAL(clicked()), this, SLOT(setAtrialStructure()));
 	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
@@ -291,6 +298,10 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.sb_stimulusAmplitude, SIGNAL(valueChanged(double)), EpStimulator::Instance(), SLOT(setStimulusAmplitude(double)));
 	QObject::connect(ui.sb_stimulusWidth, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setStimulusWidth(int)));
 
+	QObject::connect(ui.rb_setDisplayElectrogramOnGraphs, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setDisplayElectrogramOnGraph(bool)));
+	QObject::connect(ui.rb_setDisplayPotentialOnGraphs, SIGNAL(toggled(bool)), EpStimulator::Instance(), SLOT(setDisplayPotentialOnGraph(bool)));
+
+
 	QObject::connect(ui.sb_cycleLength_S1, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCycleLength_S1(int)));
 	QObject::connect(ui.sb_cycleLength_S3, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCycleLength_S3(int)));
 	QObject::connect(ui.sb_cycleLength_S2, SIGNAL(valueChanged(int)), EpStimulator::Instance(), SLOT(setCycleLength_S2(int)));
@@ -307,6 +318,11 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.dial_paintValue, SIGNAL(valueChanged(int)), this, SLOT(setPaintValue(int)));
 	QObject::connect(ui.sb_paintValue, SIGNAL(valueChanged(double)), this, SLOT(setPaintValue(double)));
 	QObject::connect(ui.b_clearDiffusion, SIGNAL(clicked()), this, SLOT(paintUniform()));
+
+	QObject::connect(ui.b_setPaintWall, SIGNAL(clicked()), glGraph, SLOT(setPaintTypeWALL()));
+	QObject::connect(ui.b_setPaintSA, SIGNAL(clicked()), glGraph, SLOT(setPaintTypeSA()));
+	QObject::connect(ui.b_setPaintAV, SIGNAL(clicked()), glGraph, SLOT(setPaintTypeAV()));
+	QObject::connect(ui.b_setPaintTISSUE, SIGNAL(clicked()), glGraph, SLOT(setPaintTypeATRIUM()));
 
 	QObject::connect(ui.b_freeTouchMode, SIGNAL(toggled(bool)), this, SLOT(setFreeTouch(bool)));
 /*

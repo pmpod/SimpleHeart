@@ -31,15 +31,21 @@ public:
 	double paintValueDiffusion;
 	double paintValueERP;
 	double paintValueExcitability;
+	CELL_TYPE m_paintType;
 private:
 
 public slots:
     void setXRotation(int angle);
     void setYRotation(int angle);
 	void setZRotation(int angle);
+	void setPaintTypeSA();
+	void setPaintTypeAV();
+	void setPaintTypeATRIUM();
+	void setPaintTypeWALL();
 	void setTop();
 	void setSide1();
 	void setSide2();
+	void setAmbient();
 	void setStateStructureModifier(bool b);
 	void setStateDiffusionModifier(bool b);
 	void setStateViewer(bool b);

@@ -3,7 +3,7 @@
 
 ForwardEulerStrategy::ForwardEulerStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)
 {
-	m_mainTimestep = 0.1;
+	m_mainTimestep = 0.08;
 }
 
 double ForwardEulerStrategy::nextStep()
@@ -48,7 +48,8 @@ double ForwardEulerStrategy::nextStep()
 					numberOfEquations = osc->m_wallCells[wc]->getNumberOfCurrents();
 					for (int k = 0; k < numberOfEquations; ++k)
 					{
-						osc->m_wallCells[wc]->m_v_current[k] = osc->m_v_current[k];
+						if (osc->getNumberOfCurrents()<k)
+							osc->m_wallCells[wc]->m_v_current[k] = osc->m_v_current[k];
 					}
 				}
 			}	
