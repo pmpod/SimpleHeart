@@ -263,6 +263,9 @@
     <ClCompile Include="Support\Pawel_Numerical_Library.cpp">
       <Filter>Support</Filter>
     </ClCompile>
+    <ClCompile Include="GridElectrode.cpp">
+      <Filter>Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="simpleheart.h">
@@ -384,6 +387,9 @@
     </CustomBuild>
     <CustomBuild Include="Model\cartesianGrid.h">
       <Filter>Dumpster</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GridElectrode.h">
+      <Filter>Control</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

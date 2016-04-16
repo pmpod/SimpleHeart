@@ -137,6 +137,7 @@ public:
 
 	double maxDiffusion;
 	double minDiffusion;
+	double diffusion_CV20;
 	double maxERP;
 	double minERP;
 	double maxExcitability;

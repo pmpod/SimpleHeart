@@ -15,6 +15,7 @@ CardiacMesh::CardiacMesh()
 	maximumCV = 1; // [cm/ms]
 	maxDiffusion = 0.5;
 	minDiffusion = 0.0;
+	diffusion_CV20 = 0.0003;
 	maxERP = 300;
 	minERP = 10;
 	maxExcitability = 20;
@@ -81,7 +82,7 @@ CardiacMesh* CardiacMesh::constructCartesianGridBlockTest(int x, int y, double d
 
 
 	int gridSize = grid->m_mesh.size();
-	double sigg = 0.00013;
+	double sigg = grid->diffusion_CV20;
 	for (int j = 0; j < gridSize; ++j)
 	{
 		grid->m_mesh[j]->setSigma(sigg, sigg, 0);
@@ -686,7 +687,7 @@ void CardiacMesh::setDiffusionCoefficients()
 	int gridSize = m_mesh.size();
 	for (int j = 0; j < gridSize; ++j)
 	{
-		m_mesh[j]->setSigma(0.00013, 0.00013, 0);
+		m_mesh[j]->setSigma(diffusion_CV20, diffusion_CV20, 0);
 	}
 }
 //---------------------------------------------------------------------------
@@ -732,7 +733,7 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 				ele_val += osc2->getLastCurrentSource() / (pow(osc->getPositionX() - osc2->getPositionX(), 2) +
 					pow(osc->getPositionY() - osc2->getPositionY(), 2) +
 					pow(osc->getPositionZ() - osc2->getPositionZ(), 2) +
-					0.2);
+					0.7);
 			}
 		}
 		osc->m_v_electrogram = ele_val;
