@@ -260,6 +260,9 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_ProbeElectrode.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="Support\Pawel_Numerical_Library.cpp">
+      <Filter>Support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="simpleheart.h">
@@ -413,6 +416,9 @@
     </ClInclude>
     <ClInclude Include="Model\CardiacMesh.h">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Support\Pawel_Numerical_Library.h">
+      <Filter>Support</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

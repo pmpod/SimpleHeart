@@ -69,6 +69,40 @@ CardiacMesh* CardiacMesh::constructCartesianGridRightAtrium(int x, int y, double
 	return grid;
 }
 
+CardiacMesh* CardiacMesh::constructCartesianGridBlockTest(int x, int y, double dx, double dy)
+{
+	CardiacMesh *grid = new CardiacMesh();
+	int totalSize = y*x;
+	for (int j = 0; j < totalSize; ++j)
+	{
+		grid->addNode(j, static_cast<double>(j % x) * dx, dy * floor(static_cast<double>(j) / static_cast<double>(x)), 0, ATRIAL_V3);
+	}
+	constructCartesianGrid(x, y, dx, dy, grid);
+
+
+	int gridSize = grid->m_mesh.size();
+	double sigg = 0.00013;
+	for (int j = 0; j < gridSize; ++j)
+	{
+		grid->m_mesh[j]->setSigma(sigg, sigg, 0);
+		if ((j % x) == (x / 2) )
+		{
+			grid->m_mesh[j]->m_connexin[1] = 0;
+				grid->m_mesh[j]->m_ConnexinSum = 3*grid->m_mesh[j]->m_ConnexinSum / 4;
+			
+		}
+
+		if ((j % x) == (x / 2)+1)
+		{
+			grid->m_mesh[j]->m_connexin[0] = 0;
+			grid->m_mesh[j]->m_ConnexinSum = 3 * grid->m_mesh[j]->m_ConnexinSum / 4;
+
+		}
+
+	}
+	return grid;
+}
+
 
 CardiacMesh* CardiacMesh::constructCartesianGrid(int x, int y, double dx, double dy, CardiacMesh *grid)
 {

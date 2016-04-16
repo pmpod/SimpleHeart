@@ -21,7 +21,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -213,6 +213,7 @@
     <ClCompile Include="rrPlot.cpp" />
     <ClCompile Include="simpleheart.cpp" />
     <ClCompile Include="Support\Matrices.cpp" />
+    <ClCompile Include="Support\Pawel_Numerical_Library.cpp" />
     <ClCompile Include="timePlot.cpp" />
     <ClCompile Include="View\glAtrium.cpp" />
     <ClCompile Include="View\GLfunc.cpp" />
@@ -773,6 +774,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTRID)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Support\Matrices.h" />
+    <ClInclude Include="Support\Pawel_Numerical_Library.h" />
     <ClInclude Include="Support\Vectors.h" />
     <CustomBuild Include="View\glAtrium.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-I$(QTDIR)1\include" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\qtmain" "-I$(QTDIR)\include\QtOpenGL" "-I.\GeneratedFiles" "-I.\GeneratedFiles\$(ConfigurationName)\." -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_OPENGL_LIB -DQWT_DLL -DUNICODE -DWIN32</Command>

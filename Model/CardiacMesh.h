@@ -66,7 +66,8 @@ public:
 	static CardiacMesh* constructCartesianGrid(int x, int y, double dx, double dy, CardiacMesh *grid);
 	static CardiacMesh* constructCartesianGridPlain(int x, int y, double dx, double dy, CELL_TYPE type);
 	static CardiacMesh* constructCartesianGridRightAtrium(int x, int y, double dx, double dy, double percentageOfWidth);
-
+	static CardiacMesh* constructCartesianGridBlockTest(int x, int y, double dx, double dy);
+	
 	/**
 	* \brief A static function constructing cylindrical CardiacMesh object consisting of one type of the cell
 	* @param x - number of horizontal cells
@@ -113,6 +114,8 @@ public:
 	void FindLLSQPlane(Vector3 *points, int count, Vector3 *destCenter, Vector3 *destNormal);
 
 	std::vector<Oscillator*> m_markedOscillators;
+
+	std::vector<double> m_timeHistory;
 	std::map < int, bool > m_marked;
 	std::vector<Oscillator*> m_mesh;
 	std::vector<Oscillator*> m_underStimulation;

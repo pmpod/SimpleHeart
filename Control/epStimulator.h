@@ -132,6 +132,7 @@ private:
 	
 	bool _stimulatorOn;
 	int _stimulationSiteID;
+	int _stimulationSite2ID;
 	int _stimulationElectrodeNumber;
 	int _sensingSiteID;
 

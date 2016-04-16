@@ -27,6 +27,8 @@ public:
 	double m_previous_potential;	/// Previous cardiac potential V(t-1) - in model units [model]
 	std::vector<double> m_v_current;/// Vector of last cardiac currents/gating variables/model variables - in model units [model]
 	
+	std::vector<double> m_history;
+	std::vector<double> m_historyAfterHilbert;
 	double m_currentTime;			//t(current)
 	double m_previousTime;			//t(current-1)
 	double guardTimestep;

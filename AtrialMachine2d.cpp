@@ -17,8 +17,8 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 	stimulator->setProbeElectrode(m_grid, 1, 2);// 16257 - 128);
 	stimulator->setProbeElectrode(m_grid, 2, 3);// 5000);
 
-	//setForwardEulerStrategy();
-	setAllexandreStrategy();
+	setForwardEulerStrategy();
+	//setAllexandreStrategy();
 }
 //-------------------------------------------------------------------------
 AtrialMachine2d::~AtrialMachine2d(void)
@@ -80,7 +80,7 @@ double AtrialMachine2d::processStep()
 	//}
 	
 
-	for (int kk = 0; kk <= 20000; ++kk)//m_skip
+	for (int kk = 0; kk <= 20; ++kk)//m_skip
 	{ 
 		m_globalTime = m_strategy->nextStep();
 	}

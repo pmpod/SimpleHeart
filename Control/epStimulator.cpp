@@ -11,6 +11,7 @@ EpStimulator::EpStimulator()
 	_stimulationRadius = 0.5;
 	_stimulatorMode = ES_FREE;
 	_stimulationSiteID = 2200;
+	_stimulationSite2ID = 4200;
 	_stimulationElectrodeNumber = 0;
 	_stimulatorOn = false;
 	_measurePPIR = false;
@@ -187,6 +188,7 @@ void EpStimulator::run(CardiacMesh* mesh, double time)
 				emit progressOfSinglePace(floor(100 * abs(stimulationTimes.back() - time) / abs(stimulationTimes.back() - _lastStimulationTime)));
 				if (mesh->m_mesh[_stimulationSiteID]->getCurrentTime() >= stimulationTimes.back() && mesh->stimulationBegun == false) {
 					startStimulation(mesh->m_mesh[_stimulationSiteID], _stimulationSiteID, mesh);
+					startStimulation(mesh->m_mesh[_stimulationSite2ID], _stimulationSite2ID, mesh);
 					//_lastStimulationTime = stimulationTimes.back();
 					_lastStimulationTime = mesh->m_mesh[_stimulationSiteID]->getCurrentTime();
 				}
@@ -296,6 +298,8 @@ void EpStimulator::setProtocol(double zeroTime)
 
 	double currentTime = zeroTime; 
 	_stimulationSiteID = _probe[_stimulationElectrodeNumber]->getOscillatorID();
+	_stimulationSiteID = _probe[0]->getOscillatorID();//XXXblockTest
+	_stimulationSite2ID = _probe[1]->getOscillatorID();//XXXblockTest
 	int numberOfMainCycles = 1;
 	(_stimulatorMode == ES_FIXEDLOOP) ? numberOfMainCycles = _mainCycleLength : numberOfMainCycles = 1;
 
