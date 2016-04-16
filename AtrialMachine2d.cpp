@@ -32,6 +32,7 @@ void AtrialMachine2d::setForwardEulerStrategy()
 		delete(m_strategy);
 	m_strategy = new ForwardEulerStrategy(m_grid);
 	setStrategy = &AtrialMachine2d::setForwardEulerStrategy;
+	whichStrategy = 1;
 }
 //-------------------------------------------------------------------------
 void AtrialMachine2d::setAllexandreStrategy()
@@ -40,6 +41,7 @@ void AtrialMachine2d::setAllexandreStrategy()
 		delete(m_strategy);
 	m_strategy = new AllexandreStrategy(m_grid);
 	setStrategy = &AtrialMachine2d::setAllexandreStrategy;
+	whichStrategy = 2;
 }
 //-------------------------------------------------------------------------
 void AtrialMachine2d::init()
@@ -78,11 +80,21 @@ double AtrialMachine2d::processStep()
 	//{
 	//	stopStimulation();
 	//}
-	
+	if (whichStrategy == 2)
+	{
+		int msize = m_grid->m_mesh.size();
 
-	for (int kk = 0; kk <= 20000; ++kk)//m_skip
-	{ 
-		m_globalTime = m_strategy->nextStep();
+		for (int kk = 0; kk <= msize; ++kk)//m_skip
+		{
+			m_globalTime = m_strategy->nextStep();
+		}
+	}
+	else
+	{
+		for (int kk = 0; kk <= 20; ++kk)//m_skip
+		{
+			m_globalTime = m_strategy->nextStep();
+		}
 	}
 
 	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(0)->getOscillatorID()]);

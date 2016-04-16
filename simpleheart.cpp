@@ -143,9 +143,9 @@ void SimpleHeart::init()
 
 
 	simpleParameters = new atrialParameters();
-	m_grid = CardiacMesh::constructCartesianGridPlain(256, 256, 0.3125, 0.3125, ATRIAL_V3);
+	//m_grid = CardiacMesh::constructCartesianGridPlain(256, 256, 0.3125, 0.3125, ATRIAL_V3);
 	//m_grid = CardiacMesh::constructCartesianGridPlain(128, 128, 0.3125, 0.3125, ATRIAL_V3);// 4 
-	//m_grid = CardiacMesh::constructCartesianGridPlain(128, 128, 0.375, 0.375, SA_NODE);// 48 mm
+	m_grid = CardiacMesh::constructCartesianGridPlain(128, 128, 0.375, 0.375, SA_NODE);// 48 mm
 	//m_grid = CardiacMesh::constructCartesianGridRightAtrium(128, 128, 0.375, 0.375, 0.12);// 48 mm
 	
 	//m_grid = CardiacMesh::constructCartesianGridPlain(200, 200, 0.4, 0.4, ATRIAL_V3);// 80 mm

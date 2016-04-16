@@ -39,7 +39,7 @@ public:
 	EpStimulator*					stimulator;
 	//-------------------------------------------------------------
 	double m_globalTime;
-
+	int whichStrategy;
 private:
 	int				_skip;
 	//-------------------------------------------------------------

@@ -12,7 +12,7 @@
  #define CALCULATE_ELECTR_TOTAL 1
 CardiacMesh::CardiacMesh()
 {
-	maximumCV = 1; // [cm/ms]
+	maximumCV = 0.60; // [cm/ms]
 	maxDiffusion = 0.5;
 	minDiffusion = 0.0;
 	maxERP = 300;
@@ -653,6 +653,7 @@ void CardiacMesh::setDiffusionCoefficients()
 	for (int j = 0; j < gridSize; ++j)
 	{
 		m_mesh[j]->setSigma(0.00013, 0.00013, 0);
+		m_mesh[j]->setSigma(0.01, 0.01, 0);
 	}
 }
 //---------------------------------------------------------------------------

@@ -13,9 +13,9 @@ v3model::v3model(void) : Oscillator()
 	m_currentTime = 0.0;
 	m_previousTime = -0.1;
 
-	vzero = -75; //[mV]
-	vmax = 20.0;  //[mV]
-	vmin = -75;  //[mV]
+	vzero = 0;//-75; //[mV]
+	vmax = 1;//20.0;  //[mV]
+	vmin = 0;//-75;  //[mV]
 	m_v_potential = 0;
 	m_previous_potential = 0;
 	m_v_scaledPotential = vmin;

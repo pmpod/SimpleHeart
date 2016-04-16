@@ -8,7 +8,7 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 	deltaTimestepIncMean = oscillators->minNodalSpacing()*oscillators->minNodalSpacing() / (2 * oscillators->maximumCV);//
 	deltaTdiff = oscillators->minNodalSpacing() * oscillators->minNodalSpacing();
 	guardUpdateTimestep = oscillators->maximumCV / oscillators->minNodalSpacing();
-	kappaAccuracy = 0.05;
+	kappaAccuracy = 0.1;
 	Kguard = 2;
 
 	//[1] Create time trees
@@ -17,7 +17,6 @@ AllexandreStrategy::AllexandreStrategy(CardiacMesh* oscillators) : NumericStrate
 	constructTimestepTree();
 
 	//[2] Initialize transient parameters
-
 	latestTime = 0;
 	lastGuardUpdate = -guardUpdateTimestep - 1;
 	resetTime(m_updateTimeTree, 0.0);
