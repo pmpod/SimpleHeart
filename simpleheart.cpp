@@ -246,6 +246,9 @@ void SimpleHeart::setupConnections()
 	QObject::connect(ui.b_saveCurrentState, SIGNAL(clicked()), m_ioHandler, SLOT(saveCurrentState()));
 	QObject::connect(ui.b_loadState, SIGNAL(clicked()), m_ioHandler, SLOT(loadCurrentState()));
 
+	QObject::connect(ui.b_saveElectrodeGrid, SIGNAL(clicked()), m_ioHandler, SLOT(saveElectrodeGrid()));
+
+
 	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), this, SLOT(stopCalculation()));
 	QObject::connect(ui.b_calculateFullElectrogram, SIGNAL(clicked()), Machine2d, SLOT(calculateFullElectrogramMap()));
 

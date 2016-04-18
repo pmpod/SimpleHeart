@@ -83,13 +83,26 @@ CardiacMesh* CardiacMesh::constructCartesianGridBlockTest(int x, int y, double d
 
 	int gridSize = grid->m_mesh.size();
 	double sigg = grid->diffusion_CV20;
+
+
+
 	for (int j = 0; j < gridSize; ++j)
 	{
 		grid->m_mesh[j]->setSigma(sigg, sigg, 0);
-		if ((j % x) == (x / 2) )
+		if ((j % x) == (x / 2))
 		{
 			grid->m_mesh[j]->m_connexin[1] = 0;
-				grid->m_mesh[j]->m_ConnexinSum = 3*grid->m_mesh[j]->m_ConnexinSum / 4;
+			grid->m_mesh[j]->m_ConnexinSum = 3 * grid->m_mesh[j]->m_ConnexinSum / 4;
+
+		}
+		if ((j % x) == (x / 2) )
+		{
+			//grid->m_mesh[j]->m_connexin[1] = 0;
+			//	grid->m_mesh[j]->m_connexin[0] = 0;
+			//	grid->m_mesh[j]->m_connexin[2] = 0;
+			//	grid->m_mesh[j]->m_connexin[3] = 0;
+			//grid->m_mesh[j]->m_ConnexinSum = 3 * grid->m_mesh[j]->m_ConnexinSum / 4;
+			//	grid->m_mesh[j]->m_ConnexinSum = 0;
 			
 		}
 
@@ -99,8 +112,39 @@ CardiacMesh* CardiacMesh::constructCartesianGridBlockTest(int x, int y, double d
 			grid->m_mesh[j]->m_ConnexinSum = 3 * grid->m_mesh[j]->m_ConnexinSum / 4;
 
 		}
+		//SET UP GRID ELECTRODES
+		if ((j % x) == (x / 2) + 1)
+		{
+			grid->m_mesh[j]->m_connexin[0] = 0;
+			grid->m_mesh[j]->m_ConnexinSum = 3 * grid->m_mesh[j]->m_ConnexinSum / 4;
 
+		}
 	}
+
+	grid->gridElectrode = new GridElectrode(5, 10, 75, 16, 16);
+	for (int j = grid->gridElectrode->posX + grid->gridElectrode->posY*x; j < gridSize; j = j + x)
+	{
+		for (int k = j; k < j + grid->gridElectrode->_numberOfElectrodesX*grid->gridElectrode->_spacingXY; k = k + grid->gridElectrode->_spacingXY)
+		{
+			grid->gridElectrode->_oscMatrix.push_back(grid->m_mesh[k]->oscillatorID);
+			std::vector<double> seriesH;
+			grid->gridElectrode->m_historyElectrogram.push_back(seriesH);
+			std::vector<double> seriesAT;
+			grid->gridElectrode->m_historyActivationTimes.push_back(seriesAT);
+			std::vector<double> seriesHE;
+			grid->gridElectrode->m_historyAfterHilbert.push_back(seriesHE);
+			std::vector<double> seriesT;
+			grid->gridElectrode->m_historyTime.push_back(seriesT);
+			std::vector<double> seriesP;
+			grid->gridElectrode->m_historyPotential.push_back(seriesP);
+			
+		}
+		if (grid->gridElectrode->_oscMatrix.size() >= (grid->gridElectrode->_numberOfElectrodesX * grid->gridElectrode->_numberOfElectrodesY))
+		{
+			break;
+		}
+	}
+
 	return grid;
 }
 
@@ -746,6 +790,19 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 
 	#endif
 	return ele_val;
+}
+void CardiacMesh::calculateElectrogramGrid()
+{
+	double ele_val = 0;
+
+	for (int j = 0; j < gridElectrode->_oscMatrix.size(); ++j)
+	{
+		Oscillator * osc = m_mesh[gridElectrode->_oscMatrix[j]];
+		gridElectrode->m_historyPotential[j].push_back(osc->m_v_scaledPotential);// osc->m_v_scaledPotential);
+		double electrogram = calculateElectrogram(osc);
+		gridElectrode->m_historyElectrogram[j].push_back(electrogram);// osc->m_v_scaledPotential);
+		gridElectrode->m_historyTime[j].push_back(osc->getCurrentTime());// osc->m_v_scaledPotential);
+	}
 }
 //-----------------------------------------------------------
 //-----------------------------------------------------------

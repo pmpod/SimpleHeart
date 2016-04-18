@@ -3,7 +3,7 @@
 
 ForwardEulerStrategy::ForwardEulerStrategy(CardiacMesh* oscillators) : NumericStrategy(oscillators)
 {
-	m_mainTimestep = 0.08;
+	m_mainTimestep = 0.05;
 }
 
 double ForwardEulerStrategy::nextStep()
@@ -54,12 +54,12 @@ double ForwardEulerStrategy::nextStep()
 				}
 			}	
 			m_mesh->processActivationTime(osc);
-			osc->m_history.push_back(osc->m_v_scaledPotential);
+			//osc->m_history.push_back(osc->m_v_scaledPotential);
 		}
 
 	}
 	m_mesh->m_simulationTime = osc->m_currentTime;
-	m_mesh->m_timeHistory.push_back(m_mesh->m_simulationTime);
+	//m_mesh->m_timeHistory.push_back(m_mesh->m_simulationTime);
 
 	return (osc->m_currentTime);
 }

@@ -15,7 +15,7 @@
 #include<qgl.h>
 #include "Support\Vectors.h"
 #include "Support\Matrices.h"
-
+#include "GridElectrode.h"
 
 
 /*! \struct VertexTriangle
@@ -104,6 +104,10 @@ public:
 
 	void processActivationTime(Oscillator* osc);
 	double calculateElectrogram(Oscillator* osc);
+
+	void calculateElectrogramGrid();
+	GridElectrode *gridElectrode;
+
 	double calculateElectrogramRecursively(Oscillator* srcosc, Oscillator* osc, int currentLevel, std::set<int>& setOfadded);
 	Vector3 conductionVector(int oscID);
 	void calculateConductionVector(Oscillator* src, Oscillator* osc, const double radius);

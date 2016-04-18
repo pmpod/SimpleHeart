@@ -31,7 +31,7 @@ public slots:
 	bool loadCurrentState();
 	CardiacMesh* loadCustomStructure();
 	bool saveCurrentState();
-
+	bool saveElectrodeGrid();
 
 
 

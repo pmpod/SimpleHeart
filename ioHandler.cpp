@@ -419,6 +419,186 @@ bool ioHandler::saveCurrentState()
 	return true;
 }
 //------------------------------------------------
+
+bool ioHandler::saveElectrodeGrid()
+{
+
+	//[0] Creat proper filename
+	QString newPath = QFileDialog::getSaveFileName(m_handle, tr("Save current electrode grid state. The path should not contain Polish letters!"), pathParameters, tr("MATLAB FILES (*.mat)"));
+	if (newPath.isEmpty())
+	{
+		QMessageBox::information(m_handle, "Simple Heart", "Unable to save currentsimulation state.\n"
+			"The path and filename were not specified correctly");
+		return false;
+	}
+	pathParameters = newPath;
+	QByteArray ba = pathParameters.replace(" ", "\x20").toLatin1();
+	const char *outname = ba.data();
+
+
+	m_handle->m_grid->gridElectrode->calculateHilbert();
+	//[1] Prepare matrix sizes
+	const int meshSize = m_handle->m_grid->gridElectrode->_oscMatrix.size();
+	const int signalSize = m_handle->m_grid->gridElectrode->m_historyElectrogram[0].size();
+
+	//[2] Prepare data arrays in form accepted by MAT
+	double *electrogram = (double *)malloc(sizeof(double) * signalSize * meshSize);
+	double *potential = (double *)malloc(sizeof(double) * signalSize * meshSize);
+	double *phase = (double *)malloc(sizeof(double) * signalSize * meshSize);
+
+	double *time_ms = (double *)malloc(sizeof(double) * signalSize * meshSize);
+
+	double *position_absolute = (double *)malloc(sizeof(double) * 3 * meshSize);
+	double *position_relative = (double *)malloc(sizeof(double) * 3 * meshSize);
+	INT32  *oscillator_ID = (INT32 *)malloc(sizeof(INT32) * 1 * meshSize);
+
+	double *electrode_spacing = (double *)malloc(sizeof(double) * 1);
+	int *electrode_grid_size_X = (INT32 *)malloc(sizeof(INT32) * 1);
+	int *electrode_grid_size_Y = (INT32 *)malloc(sizeof(INT32) * 1);
+	//TODO Handling multiple cell types with different variables number
+
+	char description[] = "Grid electrode data pack";
+
+	//[3] Fill data to 2d double array form
+	int type;
+	Oscillator* osc;
+
+	for (int i = 0; i < meshSize; ++i)
+	{
+		osc = m_handle->m_grid->m_mesh[m_handle->m_grid->gridElectrode->_oscMatrix[i]];
+		position_absolute[meshSize * 0 + i] = osc->m_x;
+		position_absolute[meshSize * 1 + i] = osc->m_y;
+		position_absolute[meshSize * 2 + i] = osc->m_z;
+
+		position_relative[meshSize * 0 + i] = m_handle->m_grid->gridElectrode->_spacingXY*static_cast<double>(i % m_handle->m_grid->gridElectrode->_numberOfElectrodesX);
+		position_relative[meshSize * 1 + i] = m_handle->m_grid->gridElectrode->_spacingXY*floor(static_cast<double>(i) / static_cast<double>(m_handle->m_grid->gridElectrode->_numberOfElectrodesY));
+		position_relative[meshSize * 2 + i] = 0;
+		oscillator_ID[i] = osc->oscillatorID;
+
+		for (int j = 0; j < signalSize; ++j)
+		{
+			potential[signalSize * i + j] = m_handle->m_grid->gridElectrode->m_historyPotential[i][j];
+			electrogram[signalSize * i + j] = m_handle->m_grid->gridElectrode->m_historyElectrogram[i][j];
+			phase[signalSize * i + j] = m_handle->m_grid->gridElectrode->m_historyAfterHilbert[i][j];
+			time_ms[signalSize * i + j] = m_handle->m_grid->gridElectrode->m_historyTime[i][j];
+		}
+	}
+
+	electrode_spacing[0] = m_handle->m_grid->gridElectrode->_spacingXY;
+	electrode_grid_size_X[0] = m_handle->m_grid->gridElectrode->_numberOfElectrodesX;
+	electrode_grid_size_Y[0] = m_handle->m_grid->gridElectrode->_numberOfElectrodesY;
+	//[4] Setup the output variables
+	mat_t *mat = Mat_CreateVer(outname, NULL, MAT_FT_DEFAULT);
+	matvar_t *matvar;
+	size_t dims[2];
+	dims[0] = meshSize;
+
+	//[5] Save to mat file
+	if (mat)
+	{
+		//[5.2] Save the second variable matvalues
+
+
+		dims[1] = 1;
+		dims[0] = 1;
+		matvar = Mat_VarCreate("electrode_grid_size_X", MAT_C_INT32, MAT_T_INT32, 2,
+			dims, electrode_grid_size_X, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		dims[0] = 1;
+		matvar = Mat_VarCreate("electrode_grid_size_Y", MAT_C_INT32, MAT_T_INT32, 2,
+			dims, electrode_grid_size_Y, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		dims[0] = 1;
+		matvar = Mat_VarCreate("electrode_spacing", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, electrode_spacing, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 3;
+		dims[0] = meshSize;
+		matvar = Mat_VarCreate("position_absolute", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, position_absolute, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 3;
+		dims[0] = meshSize;
+		matvar = Mat_VarCreate("position_relative", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, position_relative, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		dims[0] = meshSize;
+		matvar = Mat_VarCreate("oscillator_ID", MAT_C_INT32, MAT_T_INT32, 2,
+			dims, oscillator_ID, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = meshSize;
+		dims[0] = signalSize;
+		matvar = Mat_VarCreate("time", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, time_ms, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = meshSize;
+		dims[0] = signalSize;
+		matvar = Mat_VarCreate("unipolar_potential", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, potential, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = meshSize;
+		dims[0] = signalSize;
+		matvar = Mat_VarCreate("electrogram", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, phase, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+		
+
+		dims[1] = meshSize;
+		dims[0] = signalSize;
+		matvar = Mat_VarCreate("hilbert_phase", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, electrogram, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+
+		dims[1] = strlen(description);
+		dims[0] = 1;
+		matvar = Mat_VarCreate("description", MAT_C_CHAR, MAT_T_UINT8, 2,
+			dims, description, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		//[5.3] Close output
+		Mat_Close(mat);
+	}
+	else
+	{
+		return false;
+	}
+	free(position_absolute);
+	free(position_relative);
+	free(potential);
+	free(electrogram);
+	free(phase);
+	free(time_ms);
+	free(oscillator_ID);
+	free(electrode_grid_size_X);
+	free(electrode_grid_size_Y);
+	free(electrode_spacing);
+
+	return true;
+
+}
 void ioHandler::writeParametersToFile()
 {
 	

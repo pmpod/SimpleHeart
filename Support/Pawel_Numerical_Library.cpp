@@ -498,7 +498,7 @@ int Pawel_Numerical_Library::median_filter(vector<double> &Signal,long Window_Le
 
 	for(long t=Window_Length/2;t<N-Window_Length/2;t++)
 	Signal[t] = Filtered_Signal[t];
-
+	return 1;
 }
 //---------------------------------------------------------------------------
 
