@@ -547,7 +547,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>2</number>
              </property>
              <widget class="QWidget" name="tab">
               <attribute name="title">
@@ -3959,7 +3959,10 @@ color: rgb(255, 170, 0);
                          <enum>QAbstractSpinBox::NoButtons</enum>
                         </property>
                         <property name="decimals">
-                         <number>3</number>
+                         <number>5</number>
+                        </property>
+                        <property name="singleStep">
+                         <double>0.000010000000000</double>
                         </property>
                         <property name="value">
                          <double>0.040000000000000</double>

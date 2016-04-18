@@ -85,7 +85,7 @@ double AtrialMachine2d::processStep()
 		m_globalTime = m_strategy->nextStep();
 	}
 
-	m_grid->calculateElectrogramGrid();
+	//m_grid->calculateElectrogramGrid();
 	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(0)->getOscillatorID()]);
 	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(1)->getOscillatorID()]);
 	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(2)->getOscillatorID()]);

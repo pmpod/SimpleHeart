@@ -13,7 +13,7 @@
 CardiacMesh::CardiacMesh()
 {
 	maximumCV = 1; // [cm/ms]
-	maxDiffusion = 0.5;
+	maxDiffusion = 0.001;
 	minDiffusion = 0.0;
 	diffusion_CV20 = 0.0003;
 	maxERP = 300;
@@ -777,7 +777,7 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 				ele_val += osc2->getLastCurrentSource() / (pow(osc->getPositionX() - osc2->getPositionX(), 2) +
 					pow(osc->getPositionY() - osc2->getPositionY(), 2) +
 					pow(osc->getPositionZ() - osc2->getPositionZ(), 2) +
-					0.7);
+					2.7);
 			}
 		}
 		osc->m_v_electrogram = ele_val;
