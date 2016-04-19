@@ -121,8 +121,8 @@ CardiacMesh* CardiacMesh::constructCartesianGridBlockTest(int x, int y, double d
 		}
 	}
 
-	grid->gridElectrode = new GridElectrode(5, 10, 75, 16, 16);
-	for (int j = grid->gridElectrode->posX + grid->gridElectrode->posY*x; j < gridSize; j = j + x)
+	grid->gridElectrode = new GridElectrode(5, 10, 165, 16, 16);
+	for (int j = grid->gridElectrode->posX + grid->gridElectrode->posY*x; j < gridSize; j = j + x*grid->gridElectrode->_spacingXY)
 	{
 		for (int k = j; k < j + grid->gridElectrode->_numberOfElectrodesX*grid->gridElectrode->_spacingXY; k = k + grid->gridElectrode->_spacingXY)
 		{
@@ -777,7 +777,7 @@ double CardiacMesh::calculateElectrogram(Oscillator* osc)
 				ele_val += osc2->getLastCurrentSource() / (pow(osc->getPositionX() - osc2->getPositionX(), 2) +
 					pow(osc->getPositionY() - osc2->getPositionY(), 2) +
 					pow(osc->getPositionZ() - osc2->getPositionZ(), 2) +
-					2.7);
+					0.7);
 			}
 		}
 		osc->m_v_electrogram = ele_val;

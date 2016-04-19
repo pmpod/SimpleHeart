@@ -42,7 +42,7 @@ EpStimulator::EpStimulator()
 	_probe.push_back(new ProbeElectrode());
 	_probe.push_back(new ProbeElectrode());
 
-	displayGraphValue = 2;
+	displayGraphValue = 1;
 	for (int i = 0; i < _probe.size(); ++i)
 	{
 		_probe[i]->setDisplayValue(displayGraphValue);

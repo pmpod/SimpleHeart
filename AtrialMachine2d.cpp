@@ -15,7 +15,7 @@ AtrialMachine2d::AtrialMachine2d(atrialParameters* definitions, CardiacMesh *gri
 
 	stimulator->setProbeElectrode(m_grid, 0, 4*100+25);// 129);
 	stimulator->setProbeElectrode(m_grid, 1, 246*100-25);// 16257 - 128);
-	stimulator->setProbeElectrode(m_grid, 2, 10+75*100);// 5000);
+	stimulator->setProbeElectrode(m_grid, 2, 10+165*100);// 5000);
 
 	setForwardEulerStrategy();
 	//setAllexandreStrategy();
@@ -85,7 +85,7 @@ double AtrialMachine2d::processStep()
 		m_globalTime = m_strategy->nextStep();
 	}
 
-	//m_grid->calculateElectrogramGrid();
+	m_grid->calculateElectrogramGrid();
 	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(0)->getOscillatorID()]);
 	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(1)->getOscillatorID()]);
 	m_grid->calculateElectrogram(m_grid->m_mesh[stimulator->probeElectrode(2)->getOscillatorID()]);

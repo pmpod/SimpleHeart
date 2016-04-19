@@ -455,6 +455,8 @@ bool ioHandler::saveElectrodeGrid()
 	double *electrode_spacing = (double *)malloc(sizeof(double) * 1);
 	int *electrode_grid_size_X = (INT32 *)malloc(sizeof(INT32) * 1);
 	int *electrode_grid_size_Y = (INT32 *)malloc(sizeof(INT32) * 1);
+
+	double *sampling_frequency = (double *)malloc(sizeof(double) * 1);
 	//TODO Handling multiple cell types with different variables number
 
 	char description[] = "Grid electrode data pack";
@@ -463,6 +465,11 @@ bool ioHandler::saveElectrodeGrid()
 	int type;
 	Oscillator* osc;
 
+	electrode_spacing[0] = m_handle->m_grid->gridElectrode->_spacingXY * m_handle->m_grid->minNodalSpacing();
+	electrode_grid_size_X[0] = m_handle->m_grid->gridElectrode->_numberOfElectrodesX;
+	electrode_grid_size_Y[0] = m_handle->m_grid->gridElectrode->_numberOfElectrodesY;
+	sampling_frequency[0] = 1000;  //XXXXXX
+
 	for (int i = 0; i < meshSize; ++i)
 	{
 		osc = m_handle->m_grid->m_mesh[m_handle->m_grid->gridElectrode->_oscMatrix[i]];
@@ -470,9 +477,9 @@ bool ioHandler::saveElectrodeGrid()
 		position_absolute[meshSize * 1 + i] = osc->m_y;
 		position_absolute[meshSize * 2 + i] = osc->m_z;
 
-		position_relative[meshSize * 0 + i] = m_handle->m_grid->gridElectrode->_spacingXY*static_cast<double>(i % m_handle->m_grid->gridElectrode->_numberOfElectrodesX);
-		position_relative[meshSize * 1 + i] = m_handle->m_grid->gridElectrode->_spacingXY*floor(static_cast<double>(i) / static_cast<double>(m_handle->m_grid->gridElectrode->_numberOfElectrodesY));
-		position_relative[meshSize * 2 + i] = 0;
+		position_relative[meshSize * 0 + i] = electrode_spacing[0] + electrode_spacing[0] * static_cast<double>(i % m_handle->m_grid->gridElectrode->_numberOfElectrodesX);
+		position_relative[meshSize * 1 + i] = electrode_spacing[0] + electrode_spacing[0] * floor(static_cast<double>(i) / static_cast<double>(m_handle->m_grid->gridElectrode->_numberOfElectrodesY));
+		position_relative[meshSize * 2 + i] = 1.0;
 		oscillator_ID[i] = osc->oscillatorID;
 
 		for (int j = 0; j < signalSize; ++j)
@@ -484,9 +491,6 @@ bool ioHandler::saveElectrodeGrid()
 		}
 	}
 
-	electrode_spacing[0] = m_handle->m_grid->gridElectrode->_spacingXY;
-	electrode_grid_size_X[0] = m_handle->m_grid->gridElectrode->_numberOfElectrodesX;
-	electrode_grid_size_Y[0] = m_handle->m_grid->gridElectrode->_numberOfElectrodesY;
 	//[4] Setup the output variables
 	mat_t *mat = Mat_CreateVer(outname, NULL, MAT_FT_DEFAULT);
 	matvar_t *matvar;
@@ -517,6 +521,13 @@ bool ioHandler::saveElectrodeGrid()
 		dims[0] = 1;
 		matvar = Mat_VarCreate("electrode_spacing", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
 			dims, electrode_spacing, 0);
+		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
+		Mat_VarFree(matvar);
+
+		dims[1] = 1;
+		dims[0] = 1;
+		matvar = Mat_VarCreate("sampling_frequency", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
+			dims, sampling_frequency, 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 
@@ -566,7 +577,7 @@ bool ioHandler::saveElectrodeGrid()
 		dims[1] = meshSize;
 		dims[0] = signalSize;
 		matvar = Mat_VarCreate("hilbert_phase", MAT_C_DOUBLE, MAT_T_DOUBLE, 2,
-			dims, electrogram, 0);
+			dims, electrogram , 0);
 		Mat_VarWrite(mat, matvar, MAT_COMPRESSION_ZLIB);
 		Mat_VarFree(matvar);
 

@@ -27,7 +27,7 @@ void ProbeElectrode::reset()
 	maxRRindex = -1;
 	refractoryPeriod = 50; //ms
 	potentialTreshold = 0.3; //mV
-	displayGraphValue = 2;
+	displayGraphValue = 1;
 }
 void ProbeElectrode::setOscillator(Oscillator*osc)
 {
